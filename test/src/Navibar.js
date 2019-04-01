@@ -1,0 +1,69 @@
+import React, { Component } from 'react';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink
+} from 'reactstrap';
+import './Navibar.css';
+
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button
+} from 'reactstrap';
+import { link } from 'fs';
+import { Container } from 'react-grid-system';
+
+class Navibar extends Component {
+    constructor(props) {
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
+    render() {
+        
+        return (
+                <Navbar color="light" light expand="md" >
+                    <NavbarToggler onClick={this.toggle} />
+                    <Collapse isOpen={this.state.isOpen} navbar>
+                        <Nav className="ml-auto" id="nav" navbar>
+                            <NavItem>
+                                <NavLink href="/Event">เหตุการณ์</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/SearchSticker">ค้นหาข้อมูลผู้ขอสติกเกอร์</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/Addsticker">เพิ่มข้อมูลผู้ขอสติกเกอร์</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/Staff">ข้อมูลพนักงาน</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/Rule">กฎองค์กร</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/Area">พื้นที่จอดรถ</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>
+        );
+
+    }
+
+}
+
+export default Navibar;
