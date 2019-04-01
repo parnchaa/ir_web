@@ -6,11 +6,14 @@ import {
 
 import './Stafftable.css'
 
+
+
+
 class Stafftable extends Component {
   render() {
     return (
-      <div className="admintable">
-        <BootstrapTable data={this.props.staffdata} trClassName='formatdatastyle'>
+      <div className="admintable" >
+        <BootstrapTable data={this.props.staffdata} trClassName='formatdatastyle' insertRow={ true }>
           <TableHeaderColumn isKey dataField='firstName'className="headerColumnFormat">
             ชื่อ
           </TableHeaderColumn>

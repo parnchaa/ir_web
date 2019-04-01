@@ -27,4 +27,11 @@
     transform: rotate(360deg);
   }
 }
+.Table-header{
+  font-size: 55px;
+  color: #29A8AB;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  font-family: 'kanit',sans-serif;
+}
 
