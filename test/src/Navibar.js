@@ -3,19 +3,12 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
     NavLink
 } from 'reactstrap';
 import './Navibar.css';
 
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
-} from 'reactstrap';
-import { link } from 'fs';
-import { Container } from 'react-grid-system';
 
 class Navibar extends Component {
     constructor(props) {
@@ -40,7 +33,7 @@ class Navibar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" id="nav" navbar>
                             <NavItem>
-                                <NavLink href="/Event">เหตุการณ์</NavLink>
+                                <NavLink href="/">เหตุการณ์</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/SearchSticker">ค้นหาข้อมูลผู้ขอสติกเกอร์</NavLink>

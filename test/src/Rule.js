@@ -51,7 +51,6 @@ class Rule extends Component {
                             </FormGroup>
                         </Col>
                         <Col md={3}></Col>
-
                     </Row>
                     <Row Form>
                         <Col>

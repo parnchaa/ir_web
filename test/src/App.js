@@ -4,18 +4,41 @@ import Header from './Header';
 import Navibar from './Navibar';
 import Rule from './Rule';
 import { Container, Row, Col } from 'react-grid-system';
+import Eventtable from './Eventtable';
         
-
+var data = [];
 
 class App extends Component {
+
+  constructor(props){
+    super(props)
+    this.state={
+        problem:[]
+    }
+
+}
+componentDidMount() {
+  fetch('http://localhost:5000/problem ')
+      .then( (response) =>  {
+          return response.json();
+      })
+      .then((myJson) => {
+          this.setState({problem:myJson})
+          // var temp = {day: myJson.date}
+          // data.push(temp)
+          console.log("Problem",this.state.problem)
+      });
+}
 
   render() {
 
     return (
-      <div>
+      <div className="App">
         
         <Header />
         <Navibar />
+        <p className="Table-header">เหตุการณ์</p>
+                <Eventtable data={this.state.problem} />
       </div>
     );
   }
@@ -23,3 +46,13 @@ class App extends Component {
 
 
 export default App;
+
+
+//วิธีใช้ FUnction
+// fetch('wwww',function(res,data){
+
+// })
+
+// fetch('wwww',(res,data) => {
+
+// })
