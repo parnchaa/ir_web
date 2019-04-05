@@ -4,6 +4,7 @@ import {
   TableHeaderColumn
 } from 'react-bootstrap-table';
 
+
 import './Stafftable.css'
 
 class Securityguardtable extends Component {
@@ -17,7 +18,7 @@ class Securityguardtable extends Component {
           <TableHeaderColumn dataField='lastName'className="headerColumnFormat">
             นามสกุล
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='userID'className="headerColumnFormat">
+          <TableHeaderColumn dataField='userID'className="headerColumnFormat" >
             รหัสพนักงาน
           </TableHeaderColumn>
           <TableHeaderColumn className="headerColumnFormat">

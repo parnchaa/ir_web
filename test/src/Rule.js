@@ -3,7 +3,9 @@ import Header from './Header';
 import Navibar from './Navibar';
 import './Rule.css'
 import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
+import Ruletable from './Ruletable'
 
+var ruledata = [];
 
 class Rule extends Component {
     // componentDidMount() {
@@ -15,7 +17,22 @@ class Rule extends Component {
     //             console.log(JSON.stringify(myJson));
     //         });
     // }
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            rule: []
+        }
+    }
+    componentDidMount() {
+        fetch('http://localhost:5000/rule')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                this.setState({ rule: myJson })
+                console.log("rule", this.state.rule)
+            });
+    }
 
     render() {
 
@@ -23,8 +40,10 @@ class Rule extends Component {
             <div>
                 <Header />
                 <Navibar />
-                
-                <Form>
+                <Ruletable ruledata={this.state.rule} />
+
+
+                {/* <Form>
                     <h1>หน่วยงาน:</h1>
                     <Row Form>
                         <Col md={4}>
@@ -66,7 +85,15 @@ class Rule extends Component {
                         </Col>
                     </Row>
 
-                </Form>
+                </Form> */}
+
+                {/* <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form> */}
 
 
 

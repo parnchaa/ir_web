@@ -12,6 +12,7 @@ import SearchSticker from './SearchSticker';
 import Staff from './Staff';
 import Addsticker from './Addsticker';
 
+
 ReactDOM.render(
     <Router history = {browserHistory}>
         <Route path ="/" component={App}/>
