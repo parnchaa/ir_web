@@ -2,21 +2,12 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Navibar from './Navibar';
 import './Rule.css'
-import { Button, Form, FormGroup, Label, Input, FormText, Col, Row } from 'reactstrap';
 import Ruletable from './Ruletable'
 
 var ruledata = [];
 
 class Rule extends Component {
-    // componentDidMount() {
-    //     fetch('http://localhost:5000/')
-    //         .then(function (response) {
-    //             return response.json();
-    //         })
-    //         .then(function (myJson) {
-    //             console.log(JSON.stringify(myJson));
-    //         });
-    // }
+
     constructor(props) {
         super(props)
         this.state = {

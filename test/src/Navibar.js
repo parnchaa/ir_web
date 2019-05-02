@@ -28,7 +28,7 @@ class Navibar extends Component {
     render() {
         
         return (
-                <Navbar color="light" light expand="md" >
+                <Navbar color="light" light expand="md" className="navbar1">
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" id="nav" navbar>
@@ -48,7 +48,7 @@ class Navibar extends Component {
                                 <NavLink href="/Rule">กฎองค์กร</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink href="/Area">พื้นที่จอดรถ</NavLink>
+                                <NavLink href="/Location">พื้นที่จอดรถ</NavLink>
                             </NavItem>
                         </Nav>
                     </Collapse>

@@ -180,15 +180,7 @@
   .react-bs-table .react-bs-container-header .sort-column {
     cursor: pointer;
   }
-  
-  /*inline editor default style*/
-  .react-bs-container .form-control.editor{
-    /*width:100%;
-    top:0;
-    left:0;*/
-    /*height: 100%;
-    position: absolute;*/
-  }
+
   
   .react-bs-container  .textarea-save-btn{
     position: absolute;
@@ -359,6 +351,5 @@
 h2{
   text-align: center;
   color: #29A8AB;
-  margin-bottom: 30px;
   font-family: 'kanit',sans-serif;
 }

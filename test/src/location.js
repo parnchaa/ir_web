@@ -3,7 +3,7 @@ import Header from './Header';
 import Navibar from './Navibar';
 import './Area.css'
 
-class Area extends Component {
+class Location extends Component {
 
     state =
         {
@@ -85,4 +85,4 @@ class Area extends Component {
         );
     }
 }
-export default Area;
+export default Location;

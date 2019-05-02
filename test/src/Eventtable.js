@@ -5,7 +5,6 @@ import {
 } from 'react-bootstrap-table';
 
 import './Table.css'
-import { format } from 'url';
 
 class Eventtable extends Component {
   

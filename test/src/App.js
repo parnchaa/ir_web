@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header';
 import Navibar from './Navibar';
-import Rule from './Rule';
-import { Container, Row, Col } from 'react-grid-system';
 import Eventtable from './Eventtable';
         
 var data = [];
