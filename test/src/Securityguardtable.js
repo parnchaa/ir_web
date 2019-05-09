@@ -62,19 +62,16 @@ class Securityguardtable extends Component {
     return (
       <div className="sgtable">
         <BootstrapTable data={this.props.sgdata} trClassName='formatdatastyle' options={options} insertRow={ true }>
-          <TableHeaderColumn isKey dataField='firstName' className="headerColumnFormat">
+          <TableHeaderColumn isKey dataField='firstName' width='20%' className="headerColumnFormat">
             ชื่อ
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='lastName'className="headerColumnFormat">
+          <TableHeaderColumn dataField='lastName' width='20%' className="headerColumnFormat">
             นามสกุล
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='userID'className="headerColumnFormat" >
-            รหัสพนักงาน
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='userTel' className="headerColumnFormat">
+          <TableHeaderColumn dataField='staffTel' width='20%' className="headerColumnFormat">
             เบอร์โทรศัพท์
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='userEmail' className="headerColumnFormat">
+          <TableHeaderColumn dataField='staffEmail' width='40%' className="headerColumnFormat">
             อีเมล
           </TableHeaderColumn>
         </BootstrapTable>

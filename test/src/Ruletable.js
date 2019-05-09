@@ -51,29 +51,29 @@ class Ruletable extends Component {
     );
   }
 
-  
+
 
   render() {
     const options = {
       afterInsertRow: this.onAfterInsertRow,
       insertModalHeader: this.createCustomModalHeader,
       insertModalFooter: this.createCustomModalFooter,
-      
+
     };
     return (
       <div className="ruletable">
         <BootstrapTable data={this.props.ruledata} trClassName='formatdatastyle' insertRow={true} options={options}>
-          <TableHeaderColumn isKey dataField='ruleID' className="headerColumnFormat">
-            ID
-            </TableHeaderColumn>
-          <TableHeaderColumn dataField='ruleName' className="headerColumnFormat">
+          <TableHeaderColumn isKey dataField='ruleName'width='25%' className="headerColumnFormat" >
             กฎ
             </TableHeaderColumn>
-          <TableHeaderColumn dataField='maxWarnning' className="headerColumnFormat" >
+          <TableHeaderColumn dataField='maxWarning' width='11%'className="headerColumnFormat" >
             จำนวนครั้งที่เตือน
             </TableHeaderColumn>
-          <TableHeaderColumn dataField='price' className="headerColumnFormat">
+          <TableHeaderColumn dataField='price' width='8%'className="headerColumnFormat">
             ราคา
+            </TableHeaderColumn>
+          <TableHeaderColumn dataField='ruleDetails' width='56%'className="headerColumnFormat">
+            รายละเอียด
             </TableHeaderColumn>
         </BootstrapTable>
 

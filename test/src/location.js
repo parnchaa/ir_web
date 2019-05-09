@@ -2,16 +2,32 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Navibar from './Navibar';
 import './Area.css'
+import LT from './LocationTable'
+
+var locationdata = [];
 
 class Location extends Component {
 
     state =
         {
-            locationID: '',
+            
             locationName: '',
-            locationCode: ''
+            locationCode: '',
+            location1:[]
         }
 
+
+    componentDidMount(){
+        fetch('http://localhost:5000/location')
+            .then((response) => {
+                return response.json();
+            })
+            .then((myJson) => {
+                // console.log(myJson)
+                this.setState({ location1: myJson })
+                console.log("location1", this.state.location1)
+            });
+    }
     handleChange = (event) => {
         event.preventDefault();
         console.log(event.target.name);
@@ -26,7 +42,7 @@ class Location extends Component {
         event.preventDefault();
         this.onAfterInsertRow();
         this.setState({
-            locationID: '',
+           
             locationName: '',
             locationCode: ''
         })
@@ -35,7 +51,7 @@ class Location extends Component {
     onAfterInsertRow = () => {
         const url = 'http://localhost:5000/addlocation';
         const bodyData = JSON.stringify({
-            locationID: this.state.locationID,
+            
             locationName: this.state.locationName,
             locationCode: this.state.locationCode
         });
@@ -54,19 +70,15 @@ class Location extends Component {
         const options = {
             afterInsertRow: this.onAfterInsertRow
         };
-
+        
         return (
             <div>
                 <Header />
                 <Navibar />
                 <div className="wrapper">
                     <div className="form-wrapper">
-                        <form onSubmit={this.handlesubmit} Validate options={options}>
+                        <form onSubmit={this.handlesubmit}  options={options}>
                             <h1>เพิ่มพื้นที่</h1>
-                            <div className="locationID">
-                                <label htmlFor="locationID">หมายเลขพื้นที่: </label>
-                            </div>
-                            <input type="text" placeholder="หมายเลขพื้นที่" name='locationID' onChange={event => this.handleChange(event)} value={this.state.locationID} />
                             <div className="locationName">
                                 <label htmlFor="locationName">พื้นที่: </label>
                             </div>
@@ -79,8 +91,11 @@ class Location extends Component {
                                 <button onClick={event => this.handleSubmit(event)} type="submit">เพิ่มพื้นที่</button>
                             </div>
                         </form>
+                       
                     </div>
                 </div>
+                <LT locationdata={this.state.location1}/>
+                
             </div >
         );
     }

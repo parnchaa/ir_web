@@ -44,7 +44,7 @@ class Staff extends Component {
                 <h2>Administrator</h2>
                 <Stafftable staffdata={this.state.staff1} />
                 <h2>Securityguard</h2>
-                <Securityguardtable sgdata={this.state.securityguard}></Securityguardtable>
+                <Securityguardtable sgdata={this.state.securityguard}/>
 
 
 
