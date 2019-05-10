@@ -9,6 +9,13 @@ import './Stafftable.css'
 
 class Securityguardtable extends Component {
 
+  createCustomInsertButton = (openModal) => {
+    return (
+      <button class="btn btn-outline-info" style={ {fontFamily:'kanit', width:'10%', height:'40px',fontSize:'14pt',marginLeft:'7px', marginBottom:'8px'} }
+       onClick={ openModal }>เพิ่มพนักงานรักษาความปลอดภัย</button>
+    );
+  }
+
   onAfterInsertRow = (Data) => {
     console.log(Data)
     const Url='http://localhost:5000/addsecurityguard';
@@ -57,7 +64,9 @@ class Securityguardtable extends Component {
     const options = {
       afterInsertRow: this.onAfterInsertRow,
       insertModalHeader: this.createCustomModalHeader,
-      insertModalFooter: this.createCustomModalFooter
+      insertModalFooter: this.createCustomModalFooter,
+      insertBtn: this.createCustomInsertButton
+
     };
     return (
       <div className="sgtable">

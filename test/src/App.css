@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 
 
 
@@ -33,5 +31,6 @@
   padding: 10px;
   background-color: rgb(255, 255, 255);
   font-family: 'kanit',sans-serif;
+  text-align: center;
 }
 
