@@ -59,9 +59,6 @@ class Eventtable extends Component {
           <TableHeaderColumn dataField='allegation' className="headerColumnFormat">
             ข้อหา
           </TableHeaderColumn>
-          <TableHeaderColumn dataField='countProblems' width='8 %' className="headerColumnFormat">
-            เตือนครั้งที่
-          </TableHeaderColumn>
           <TableHeaderColumn dataField='firstName' width='7%' className="headerColumnFormat">
             ผู้แจ้ง
           </TableHeaderColumn>

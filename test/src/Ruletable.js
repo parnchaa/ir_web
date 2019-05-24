@@ -95,7 +95,7 @@ class Ruletable extends Component {
           <TableHeaderColumn isKey dataField='ruleName'width='25%' className="headerColumnFormat" >
             กฎ
             </TableHeaderColumn>
-          <TableHeaderColumn dataField='maxWarning' width='11%'className="headerColumnFormat" >
+          <TableHeaderColumn dataField='maxWarning' width='12%'className="headerColumnFormat" >
             จำนวนครั้งที่เตือน
             </TableHeaderColumn>
           <TableHeaderColumn dataField='price' width='8%'className="headerColumnFormat">
