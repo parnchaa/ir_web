@@ -18,7 +18,7 @@ class Location extends Component {
 
 
     componentDidMount(){
-        fetch('http://localhost:5000/location')
+        fetch('http://54.169.164.58:5000/location')
             .then((response) => {
                 return response.json();
             })
@@ -49,7 +49,7 @@ class Location extends Component {
     }
 
     onAfterInsertRow = () => {
-        const url = 'http://localhost:5000/addlocation';
+        const url = 'http://54.169.164.58:5000/addlocation';
         const bodyData = JSON.stringify({
             
             locationName: this.state.locationName,

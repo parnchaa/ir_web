@@ -16,7 +16,7 @@ class App extends Component {
 
   }
   componentDidMount() {
-    fetch('http://localhost:5000/problem ')
+    fetch('http://54.169.164.58:5000/problem ')
       .then((response) => {
         return response.json();
       })
