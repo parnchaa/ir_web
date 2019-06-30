@@ -18,7 +18,7 @@ class Staff extends Component {
     }
 
     componentDidMount() {
-        fetch('http://54.169.164.58:5000/staff')
+        fetch('http://localhost:5000/staff')
             .then((response) => {
                 return response.json();
             })
@@ -26,7 +26,7 @@ class Staff extends Component {
                 this.setState({ staff1: myJson })
                 console.log("staff1", this.state.staff1)
             });
-        fetch('http://54.169.164.58:5000/securityguard')
+        fetch('http://localhost:5000/securityguard')
             .then((response) => {
                 return response.json();
             })

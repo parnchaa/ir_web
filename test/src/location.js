@@ -49,7 +49,7 @@ class Location extends Component {
     }
 
     onAfterInsertRow = () => {
-        const url = 'http://54.169.164.58:5000/addlocation';
+        const url = 'http://localhost:5000/addlocation';
         const bodyData = JSON.stringify({
             
             locationName: this.state.locationName,

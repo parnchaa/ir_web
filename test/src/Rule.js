@@ -15,7 +15,7 @@ class Rule extends Component {
         }
     }
     componentDidMount() {
-        fetch('http://54.169.164.58:5000/rule')
+        fetch('http://localhost:5000/rule')
             .then((response) => {
                 return response.json();
             })

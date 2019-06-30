@@ -16,7 +16,7 @@ class Ruletable extends Component {
 
   onAfterInsertRow = (Data) => {
     console.log(Data)
-    const Url = 'http://54.169.164.58:5000/addrule';
+    const Url = 'http://localhost:5000/addrule';
 
     const othepram = {
       headers: {

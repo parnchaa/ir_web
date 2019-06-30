@@ -17,7 +17,7 @@ class Stafftable extends Component {
 
   onAfterInsertRow = (Data) => {
     console.log(Data)
-    const Url = 'http://54.169.164.58:5000/addstaff';
+    const Url = 'http://localhost:5000/addstaff';
 
     const othepram = {
       headers: {
