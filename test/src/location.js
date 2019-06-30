@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Navibar from './Navibar';
-import './Area.css'
-import LT from './LocationTable'
+import './location.css'
 
 var locationdata = [];
 
@@ -10,24 +9,38 @@ class Location extends Component {
 
     state =
         {
-            
             locationName: '',
             locationCode: '',
-            location1:[]
+            location:[]
         }
 
 
     componentDidMount(){
-        fetch('http://54.169.164.58:5000/location')
+        fetch('http://localhost:5000/location')
             .then((response) => {
                 return response.json();
             })
-            .then((myJson) => {
+            .then((location) => {
                 // console.log(myJson)
-                this.setState({ location1: myJson })
-                console.log("location1", this.state.location1)
+                this.setState({ location})
+                console.log("location", this.state.location)
             });
     }
+
+    locationTable() {
+        return this.state.location.map((location) => {
+            const { locationName, locationCode} = location
+            return (
+                <tr>
+                    <td>{locationName}</td>
+                    <td>{locationCode}</td>
+                    
+                </tr>
+            )
+        }
+        )
+    }
+
     handleChange = (event) => {
         event.preventDefault();
         console.log(event.target.name);
@@ -94,7 +107,12 @@ class Location extends Component {
                        
                     </div>
                 </div>
-                <LT locationdata={this.state.location1}/>
+                <h2>Location</h2>
+                <table >
+                    <tbody className='location'>
+                        {this.locationTable()}
+                    </tbody>
+                </table>
                 
             </div >
         );

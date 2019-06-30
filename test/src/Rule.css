@@ -3,3 +3,12 @@ Form{
  margin-left: 10%
 }
 
+.ruleTable{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.ruleTable td, .ruleTable th{
+    border: 1px solid black;
+  
+  }

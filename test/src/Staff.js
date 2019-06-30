@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Navibar from './Navibar';
-import './Table.css'
-import Stafftable from './Stafftable';
-import Securityguardtable from './Securityguardtable';
+import './Staff.css'
 
 var staffdata = [];
 var sgdata = [];
@@ -13,7 +11,8 @@ class Staff extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            staff1: []
+            staff: [],
+            securityguard: []
         }
     }
 
@@ -22,32 +21,69 @@ class Staff extends Component {
             .then((response) => {
                 return response.json();
             })
-            .then((myJson) => {
-                this.setState({ staff1: myJson })
-                console.log("staff1", this.state.staff1)
+            .then((staff) => {
+                this.setState({ staff })
+                console.log("staff1", this.state.staff)
             });
         fetch('http://localhost:5000/securityguard')
             .then((response) => {
                 return response.json();
             })
-            .then((myJson) => {
-                this.setState({ securityguard: myJson })
+            .then((securityguard) => {
+                this.setState({ securityguard })
                 console.log("securityguard", this.state.securityguard)
             });
     }
+
+    staffTable() {
+        return this.state.staff.map((staff) => {
+            const { firstName, lastName, staffEmail, staffTel } = staff
+            return (
+                <tr>
+                    <td>{firstName}</td>
+                    <td>{lastName}</td>
+                    <td>{staffEmail}</td>
+                    <td>{staffTel}</td>
+                </tr>
+            )
+        }
+        )
+    }
+
+    securityguardTable() {
+        return this.state.securityguard.map((securityguard) => {
+            const { firstName, lastName, staffEmail, staffTel } = securityguard
+            return (
+                <tr>
+                    <td>{firstName}</td>
+                    <td>{lastName}</td>
+                    <td>{staffEmail}</td>
+                    <td>{staffTel}</td>
+                </tr>
+            )
+        }
+        )
+    }
+
+
     render() {
 
         return (
             <div>
                 <Header />
                 <Navibar />
-                <h2>Administrator</h2>
-                <Stafftable staffdata={this.state.staff1} />
-                <h2>Securityguard</h2>
-                <Securityguardtable sgdata={this.state.securityguard}/>
-
-
-
+                <h2>Admin</h2>
+                <table >
+                    <tbody className='staffTable'>
+                        {this.staffTable()}
+                    </tbody>
+                </table>
+                <h2>securityguard</h2>
+                <table >
+                    <tbody className='staffTable'>
+                        {this.securityguardTable()}
+                    </tbody>
+                </table>
             </div>
 
         );

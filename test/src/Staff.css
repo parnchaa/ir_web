@@ -4,3 +4,13 @@ h2{
     margin-bottom: 30px;
     font-family: 'kanit',sans-serif;
 }
+
+.staffTable{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.staffTable td, .staffTable th{
+    border: 1px solid black;
+  
+  }

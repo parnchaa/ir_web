@@ -1,4 +1,14 @@
-Form{
+.location{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.location td, .location th{
+    border: 1px solid black;
+  
+  }
+
+  Form{
     margin-top: 20px;
     margin-left: 10%;
    }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './Header';
 import Navibar from './Navibar';
-import Eventtable from './Eventtable';
 
 var data = [];
 
@@ -20,27 +19,48 @@ class App extends Component {
       .then((response) => {
         return response.json();
       })
-      .then((myJson) => {
-        myJson.forEach(e => {
-          var cutDate = e.dateOfProblem.substr(0, 10)
-          e.dateOfProblem = cutDate
-        });
-        this.setState({ problem: myJson })
-        // // var temp = {day: myJson.date}
-        // // data.push(temp)
-        // console.log("Problem",this.state.problem)
+      .then((problem) => {
+        this.setState({ problem })
+        console.log("ttt", this.state.problem)
+        console.log("ttt", this.state.problem.map)
+
       });
   }
 
-  render() {
+  problemTable() {
+    return this.state.problem.map((pro) => {
+      const { problemID, dateOfProblem, timeOfProblem, scene, licensePlate, allegation, firstName, problemDetails } = pro
+      return (
+        <tr key={problemID}>
+          <td>{problemID}</td>
+          <td>{dateOfProblem}</td>
+          <td>{timeOfProblem}</td>
+          <td>{scene}</td>
+          <td>{licensePlate}</td>
+          <td>{allegation}</td>
+          <td>{firstName}</td>
+          <td>{problemDetails}</td>
 
+        </tr>
+      )
+    }
+
+    )
+  }
+
+
+  render() {
     return (
       <div className="App">
 
         <Header />
         <Navibar />
         <p className="Table-header">เหตุการณ์</p>
-        <Eventtable data={this.state.problem} />
+        <table >
+          <tbody className='pro'>
+            {this.problemTable()}
+          </tbody>
+        </table>
       </div>
     );
   }
