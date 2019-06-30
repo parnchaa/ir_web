@@ -43,12 +43,13 @@ class Location extends Component {
 
     handleChange = (event) => {
         event.preventDefault();
-        console.log(event.target.name);
-        console.log(event.target.value);
+        
         this.setState({
             [event.target.name]: event.target.value
 
         })
+        console.log("rr",event.target.name);
+        console.log("rr",event.target.value);
     }
 
     handleSubmit = (event) => {
