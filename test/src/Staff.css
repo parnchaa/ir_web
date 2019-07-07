@@ -6,11 +6,79 @@ h2{
 }
 
 .staffTable{
-    border: 1px solid black;
+    text-align: left;
+    color: #29A8AB;
+    border: 1px solid white;
     border-collapse: collapse;
+    width: 83.33%;
+    margin-left: 8.33%;
+    margin-right: 8.33%;
+    margin-bottom: 5%;
+    margin-top: 1%;
+
+
 }
 
 .staffTable td, .staffTable th{
-    border: 1px solid black;
+    border: 1px solid #ddd;
+     padding: 15px;
+
   
   }
+.addStaff{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border-color: #ffffff;
+    margin-left: 8.33%;
+    padding: 1%;
+}
+.addSecurityguard{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border-color: #ffffff;
+    margin-left: 8.33%;
+    padding: 1%;
+}
+/* .modalAddstaff{
+    margin-left: 5%;
+    margin-right: 5%; 
+
+
+}*/
+.tableModal{
+    font-family: 'kanit',sans-serif;
+    border:"0";
+    width:"100%";
+    padding: 90%
+}
+
+.modalAdd{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border-color: #ffffff;
+    margin-right: 1%;
+}
+.modalcancle{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color:#CD5C5C	;
+    border-radius: 8px;
+    border-color: #ffffff;
+
+}
+
+#Modal{
+    padding: 100px;
+    width: 100%;
+    margin: 100px
+}

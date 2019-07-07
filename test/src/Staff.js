@@ -79,8 +79,8 @@ class Staff extends Component {
             [event.target.name]: event.target.value
 
         })
-        console.log("rr",event.target.name);
-        console.log("rr",event.target.value);
+        console.log("rr", event.target.name);
+        console.log("rr", event.target.value);
     }
 
     handleSubmitAdmin = (event) => {
@@ -91,7 +91,7 @@ class Staff extends Component {
             lastName: '',
             staffEmail: '',
             staffTel: '',
-            openAdd:false
+            openAdd: false
         })
     }
 
@@ -99,9 +99,9 @@ class Staff extends Component {
         const url = 'http://localhost:5000/addstaff';
         const bodyData = JSON.stringify({
             firstName: this.state.firstName,
-            lastName:this.state.lastName,
-            staffEmail:this.state.staffEmail,
-            staffTel:this.state.staffTel
+            lastName: this.state.lastName,
+            staffEmail: this.state.staffEmail,
+            staffTel: this.state.staffTel
         });
         console.log(bodyData)
         const othepram = {
@@ -115,7 +115,7 @@ class Staff extends Component {
             .then(data => console.log(data))
     }
 
-    
+
 
     handleSubmitSecurity = (event) => {
         event.preventDefault();
@@ -125,16 +125,16 @@ class Staff extends Component {
             lastName: '',
             staffEmail: '',
             staffTel: '',
-            openAddSecurityguard:false
+            openAddSecurityguard: false
         })
     }
     onAfterInsertSecurity = () => {
         const url = 'http://localhost:5000/addsecurityguard';
-        const bodyData = JSON.stringify({           
+        const bodyData = JSON.stringify({
             firstName: this.state.firstName,
-            lastName:this.state.lastName,
-            staffEmail:this.state.staffEmail,
-            staffTel:this.state.staffTel
+            lastName: this.state.lastName,
+            staffEmail: this.state.staffEmail,
+            staffTel: this.state.staffTel
         });
         console.log(bodyData)
         const othepram = {
@@ -174,46 +174,79 @@ class Staff extends Component {
                 <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
                     <h2>Add Staff</h2>
                     <form onSubmit={this.handleSubmitAdmin}>
-                        <label htmlFor="firstName">FirstName: </label >
-                        <input type="text" name='firstName' onChange={event => this.handleChange(event)} value={this.state.firstName} />
-                        <label htmlFor="lastName">LastName: </label>
-                        <input type="text" name='lastName' onChange={event => this.handleChange(event)} value={this.state.lastName} />
-                        <label htmlFor="staffTel">Phone number: </label>
-                        <input type="text" name='staffTel' onChange={event => this.handleChange(event)} value={this.state.staffTel} />
-                        <label htmlFor="staffEmail">Email: </label>
-                        <input type="text" name='staffEmail' onChange={event => this.handleChange(event)} value={this.state.staffEmail} />
-                        
-                        <div></div>
+                        <table className='tableModal'>
+                            <tr>
+                                <td>
+                                    <label htmlFor="firstName">FirstName: </label >
+                                </td>
+                                <td>
+                                    <input type="text" name='firstName' onChange={event => this.handleChange(event)} value={this.state.firstName} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label htmlFor="lastName">LastName: </label>
+                                </td>
+                                <td>
+                                    <input type="text" name='lastName' onChange={event => this.handleChange(event)} value={this.state.lastName} />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <label htmlFor="staffTel">Phone number: </label>
+                                </td>
+                                <td>
+                                    <input type="text" name='staffTel' onChange={event => this.handleChange(event)} value={this.state.staffTel} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label htmlFor="staffEmail">Email: </label>
+                                </td>
+                                <td>
+                                    <input type="text" name='staffEmail' onChange={event => this.handleChange(event)} value={this.state.staffEmail} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button className='modalAdd' onClick={event => this.handleSubmitAdmin(event)} type="submit">Add</button>
+                                    <button className='modalcancle' onClick={this.onCloseAddModal}>Cancel</button>
+                                </td>
+                            </tr>
+                        </table>
                     </form>
-                    <button onClick={event => this.handleSubmitAdmin(event)} type="submit">Add</button>
-                    <button onClick={this.onCloseAddModal}>Cancel</button>
+
+
+
                 </Modal>
-                <table >
-                    <tbody className='staffTable'>
+
+                <table className='staffTable'>
+                    <tbody>
                         {this.staffTable()}
                     </tbody>
                 </table>
 
-                <h2>securityguard</h2>
-                <button className='addSecurityguard' onClick={this.onOpenAddSecurityguardModal}>AddSecurityguard </button>
-                <Modal open={this.state.openAddSecurityguard} onClose={this.onCloseAddSecurityguardModal} center>
+                <h2>Security Guard</h2>
+                <button className='addSecurityguard' onClick={this.onOpenAddSecurityguardModal}>Add Securityguard </button>
+                <Modal className={Modal=customStyles.customModal} open={this.state.openAddSecurityguard} onClose={this.onCloseAddSecurityguardModal} center>
                     <h2>AddSecurityguard </h2>
                     <form>
                         <p>FirstName: </p>
-                        <input type="text" name='firstName' onChange={event => this.handleChange(event)} value={this.state.firstName}/>
+                        <input type="text" name='firstName' onChange={event => this.handleChange(event)} value={this.state.firstName} />
                         <p>LastName: </p>
-                        <input type="text" name='lastName' onChange={event => this.handleChange(event)} value={this.state.lastName}/>
+                        <input type="text" name='lastName' onChange={event => this.handleChange(event)} value={this.state.lastName} />
                         <p>Email: </p>
-                        <input type="text" name='staffTel' onChange={event => this.handleChange(event)} value={this.state.staffTel}/>
+                        <input type="text" name='staffTel' onChange={event => this.handleChange(event)} value={this.state.staffTel} />
                         <p>Phone number: </p>
-                        <input type="text" name='staffEmail' onChange={event => this.handleChange(event)} value={this.state.staffEmail}/>
+                        <input type="text" name='staffEmail' onChange={event => this.handleChange(event)} value={this.state.staffEmail} />
                         <div></div>
                     </form>
                     <button onClick={event => this.handleSubmitSecurity(event)}>Add</button>
                     <button onClick={this.onCloseAddSecurityguardModal}>Cancel</button>
                 </Modal>
-                <table >
-                    <tbody className='staffTable'>
+                <table className='staffTable'>
+                    <tbody>
                         {this.securityguardTable()}
                     </tbody>
                 </table>
