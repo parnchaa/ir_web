@@ -56,11 +56,17 @@ class App extends Component {
         <Header />
         <Navibar />
         <p className="Table-header">เหตุการณ์</p>
-        <table >
-          <tbody className='pro'>
-            {this.problemTable()}
-          </tbody>
-        </table>
+
+        {
+          this.state.problem.length > 0 ?
+            <table >
+              <tbody className='pro'>
+                {this.problemTable()}
+              </tbody>
+            </table> :
+            <h1>เปิดเซิฟดิ้...</h1>
+        }
+
       </div>
     );
   }

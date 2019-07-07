@@ -115,9 +115,7 @@ class Staff extends Component {
             .then(data => console.log(data))
     }
 
-    validateAdmin =()=>{
-        
-    }
+    
 
     handleSubmitSecurity = (event) => {
         event.preventDefault();
