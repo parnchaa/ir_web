@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import Header from './Header';
 import Navibar from './Navibar';
 import './Rule.css'
-
-var ruledata = [];
+import Modal from 'react-responsive-modal';
+import axios from "axios";
 
 class Rule extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            rule: []
+            rule: [],
+            openDelete: false
         }
     }
     componentDidMount() {
@@ -19,43 +20,92 @@ class Rule extends Component {
                 return response.json();
             })
             .then((rule) => {
-                this.setState({ rule})
+                this.setState({ rule })
                 console.log("rule", this.state.rule)
             });
     }
 
-    ruleTable() {
-        return this.state.rule.map((rule) => {
-            const { ruleName, price, maxWarning, ruleDetails } = rule
-            return (
-                <tr>
-                    <td>{ruleName}</td>
-                    <td>{price}</td>
-                    <td>{maxWarning}</td>
-                    <td>{ruleDetails}</td>
-                </tr>
-            )
-        }
-        )
+    onOpenDeleteModal = (ruleID) => (e) => {
+        this.setState({
+            openDelete: true,
+            openRuleID: ruleID
+        });
+    };
+
+    onCloseDeleteModal = () => {
+        this.setState({ openDelete: false });
+    };
+
+    submitDeleteTask = () => {
+        this.deleteFetch()
+        this.onCloseDeleteModal()
     }
 
-    render() {
+    deleteFetch = () => {
+        const url = 'http://localhost:5000/deleteRule';
+        const bodyData = JSON.stringify({
+            ruleID: this.state.openRuleID
+        });
+        console.log(bodyData)
+        const othepram = {
+            headers: {
+                "content-type": "application/json; charset=UTF-8"
+            },
+            body: bodyData,
+            method: "POST"
+        };
+        console.log('aaa',othepram)
+        fetch(url, othepram)
+            .then(data => console.log(data))
+    }
 
+    ruleTable() {
         return (
             <div>
-                <Header />
-                <Navibar />
-                <table >
-                    <tbody className='ruleTable'>
-                        {this.ruleTable()}
-                    </tbody>
-                </table>
-
+                <Modal className='Modal' open={this.state.openDelete} onClose={this.onCloseDeleteModal} center>
+                    <h2 className='deleteTitle'>Delete!!!</h2>
+                    <div>
+                        <button onClick={event => { this.submitDeleteTask(this.state.openRuleId) }}>Delete</button>
+                        <button onClick={this.onCloseDeleteModal}>Cancel</button>
+                    </div>
+                </Modal>
+                {
+                // const {ruleName, price, maxWarning, ruleDetails } = rule
+                 this.state.rule.map((rule) => {
+                return(
+                    <tr>
+                    <td>{rule.ruleName}</td>
+                    <td>{rule.price}</td>
+                    <td>{rule.maxWarning}</td>
+                    <td>{rule.ruleDetails}</td>
+                    <td><button className='deleteModalButton' onClick={this.onOpenDeleteModal(rule.ruleID)}>Delete</button></td>
+                </tr>
+                )
+                })
+            }
             </div>
+        )
+        
+        
+}
 
-        );
+render() {
 
-    }
+    return (
+        <div>
+            <Header />
+            <Navibar />
+            <table >
+                <tbody className='ruleTable'>
+                    {this.ruleTable()}
+                </tbody>
+            </table>
+
+        </div>
+
+    );
+
+}
 
 }
 
