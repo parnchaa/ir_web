@@ -4,9 +4,6 @@ import Navibar from './Navibar';
 import './Staff.css'
 import Modal from 'react-responsive-modal';
 
-var staffdata = [];
-var sgdata = [];
-
 class Staff extends Component {
 
     constructor(props) {
@@ -229,7 +226,7 @@ class Staff extends Component {
 
                 <h2>Security Guard</h2>
                 <button className='addSecurityguard' onClick={this.onOpenAddSecurityguardModal}>Add Securityguard </button>
-                <Modal className={Modal=customStyles.customModal} open={this.state.openAddSecurityguard} onClose={this.onCloseAddSecurityguardModal} center>
+                <Modal  open={this.state.openAddSecurityguard} onClose={this.onCloseAddSecurityguardModal} center>
                     <h2>AddSecurityguard </h2>
                     <form>
                         <p>FirstName: </p>
