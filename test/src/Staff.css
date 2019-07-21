@@ -65,21 +65,65 @@ h2{
     font-family: 'kanit',sans-serif;
     background-color: #29A8AB;
     border-radius: 8px;
+    border: none;
     border-color: #ffffff;
-    margin-right: 1%;
+    /* margin-right: 2%; */
+    width: 75px;
+    height: 40px;
+    margin-left: 20%;
+    font-size: 15pt;
 }
-.modalcancle{
+.modalcancel{
     text-align: center;
     color: #ffffff;
     font-family: 'kanit',sans-serif;
     background-color:#CD5C5C	;
     border-radius: 8px;
+    border: none;
     border-color: #ffffff;
+    width: 75px;
+    height: 40px;
+    margin-left: 7%;
+    font-size: 15pt;
+}
 
+.modalAdd:hover{
+    background-color: white;
+    border: 2px solid #29A8AB;
+    color: #29A8AB;
+}
+
+.modalcancel:hover{
+    background-color: white;
+    border: 2px solid #CD5C5C;
+    color: #CD5C5C;
 }
 
 #Modal{
     padding: 100px;
     width: 100%;
     margin: 100px
+}
+
+.addModal{
+    display: flex;
+    margin-bottom: 0.4rem;
+}
+
+.addModal input{
+    height: 2.3rem;
+
+}
+
+.formAdd{
+    width: 450px;
+}
+
+.formAdd input{
+    position: absolute;
+    left: 50%;
+}
+
+.formAdd button{
+    margin-top: 13px;
 }
