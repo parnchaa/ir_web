@@ -121,9 +121,13 @@ h2{
 
 .formAdd input{
     position: absolute;
-    left: 50%;
+    left: 43%;
 }
 
 .formAdd button{
     margin-top: 13px;
+}
+
+.title{
+    font-size: 32pt;
 }

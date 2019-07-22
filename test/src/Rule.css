@@ -1,14 +1,35 @@
-Form{
- margin-top: 20px;
- margin-left: 10%
+.ruleCard{
+    border: none;
+    border-radius: 4px;
+    background-color: #29A8AB;
+    margin-left: 40%;
+    padding: 0.7rem 0.7rem;
+    margin-bottom: 1rem;
+    font-family: 'kanit',sans-serif;
+}
+
+.title{
+    font-size: 20pt;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+.priceMaxWarning{
+    display: flex;
+    font-size: 17pt;
+    color: white;
+}
+
+.price{
+    margin-right: 2rem;
 }
 
 .ruleTable{
-    border: 1px solid black;
-    border-collapse: collapse;
+    width: 70%;
 }
 
-.ruleTable td, .ruleTable th{
-    border: 1px solid black;
-  
-  }
+.detail{
+    font-size: 12pt;
+    color: white;
+    margin-bottom: 1rem;
+}

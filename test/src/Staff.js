@@ -159,13 +159,13 @@ class Staff extends Component {
         <Navibar />
         <h2>Admin</h2>
         <button className="addStaff" onClick={this.onOpenAddModal}>
-          Add Admin
+          เพิ่ม
         </button>
         <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
-          <h2>Add Staff</h2>
+          <h2 className='title'>เพิ่มแอดมิน</h2>
           <form className='formAdd' onSubmit={this.handleSubmitAdmin}>
             <div className='addModal'>
-            <label htmlFor="firstName">FirstName: </label>
+            <label htmlFor="firstName">ชื่อ: </label>
             <input
               type="text"
               name="firstName"
@@ -174,7 +174,7 @@ class Staff extends Component {
             />
             </div>
             <div className='addModal'>
-            <label htmlFor="lastName">LastName: </label>
+            <label htmlFor="lastName">นามสกุล: </label>
             <input
               type="text"
               name="lastName"
@@ -183,7 +183,7 @@ class Staff extends Component {
             />
             </div>
             <div className='addModal'>
-            <label htmlFor="staffTel">Phone number: </label>
+            <label htmlFor="staffTel">เบอร์โทรศัพท์: </label>
             <input
               type="text"
               name="staffTel"
@@ -192,7 +192,7 @@ class Staff extends Component {
             />
             </div>
             <div className='addModal'>
-            <label htmlFor="staffEmail">Email: </label>
+            <label htmlFor="staffEmail">อีเมล: </label>
             <input
               type="text"
               name="staffEmail"
@@ -205,10 +205,10 @@ class Staff extends Component {
               onClick={event => this.handleSubmitAdmin(event)}
               type="submit"
             >
-              Add
+              เพิ่ม
             </button>
             <button className="modalcancel" onClick={this.onCloseAddModal}>
-              Cancel
+              ยกเลิก
             </button>
           </form>
         </Modal>
