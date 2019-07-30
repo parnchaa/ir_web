@@ -1,0 +1,30 @@
+.header{
+    background-color: #DDDDDD;
+    display: flex;
+    font-family: 'kanit',sans-serif;
+}
+
+.logo{
+    width: 8rem;
+    height: 8rem;
+    margin-left: 20%;
+    padding: 0.4rem 0rem;
+}
+
+.irName{
+    position: relative;
+    font-size: 3rem;
+    padding-top:2rem; 
+    margin-left: 3rem;
+    color: #29A8AB;
+}
+
+.profile{
+    position: absolute;
+    right: 0;
+}
+
+.profilePic{
+    width: 5rem;
+    height: 5rem;
+}

@@ -3,8 +3,6 @@ import './App.css';
 import Header from './Header';
 import Navibar from './Navibar';
 
-var data = [];
-
 class App extends Component {
 
   constructor(props) {
@@ -21,9 +19,6 @@ class App extends Component {
       })
       .then((problem) => {
         this.setState({ problem })
-        console.log("ttt", this.state.problem)
-        console.log("ttt", this.state.problem.map)
-
       });
   }
 
@@ -71,16 +66,4 @@ class App extends Component {
     );
   }
 }
-
-
 export default App;
-
-
-//วิธีใช้ FUnction
-// fetch('wwww',function(res,data){
-
-// })
-
-// fetch('wwww',(res,data) => {
-
-// })

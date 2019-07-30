@@ -23,7 +23,7 @@ class SearchSticker extends Component {
       })
       .then(carOwner => {
         this.setState({ carOwner });
-        console.log("carOwner", this.state.carOwner);
+        console.log(carOwner,'cc')
       });
   }
 
@@ -94,6 +94,7 @@ class SearchSticker extends Component {
       return (
         <div>
           <Modal
+            className='editCarowner'
             open={this.state.openEdit}
             onClose={this.onCloseEditModal}
             center
@@ -142,23 +143,38 @@ class SearchSticker extends Component {
             </button>
             <button onClick={this.onCloseEditModal}>Cancel</button>
           </Modal>
-          <tr>
-            <td>{carOwnerFirstName}</td>
-            <td>{carOwnerLastName}</td>
-            <td>{carOwnerEmail}</td>
-            <td>{carOwnerTel}</td>
-            <td>{carOwnerAddress}</td>
-            <td>{registerDate}</td>
-            <td>{expiredDate}</td>
-            <td>
+
+          <div className='carOwnerTask'>
+              <div className='carOwnerName'>
+                <div className='fieldName'>ชื่อ: </div>
+                <div>{carOwnerFirstName}</div>
+                <div className='fieldName'>นามสกุล: </div>
+                <div>{carOwnerLastName}</div>
+              </div>
+              <div className='carOwnerEmailTel'>
+                <div className='fieldName'>อีเมล: </div>
+                <div>{carOwnerEmail}</div>
+                <div className='fieldName'>เบอร์โทรศัพท์: </div>
+                <div>{carOwnerTel}</div>
+              </div>
+              <div className='carOwnerAddress'>
+                <div className='fieldName'>ที่อยู่: </div>
+                <div>{carOwnerAddress}</div>
+              </div>
+              <div className='carOwnerDate'>
+                <div className='fieldName'>วันที่ต่อสัญญา: </div>
+                <div>{registerDate}</div>
+                <div className='fieldName'>วันหมดอายุ: </div>
+                <div>{expiredDate}</div>
+              </div>
               <button
                 className="EditModalButton"
                 onClick={this.onOpenEditModal(carOwner)}
               >
                 Edit
               </button>
-            </td>
-          </tr>
+          </div>
+          
         </div>
       );
     });

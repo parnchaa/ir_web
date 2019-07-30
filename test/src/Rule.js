@@ -3,7 +3,7 @@ import Header from "./Header";
 import Navibar from "./Navibar";
 import "./Rule.css";
 import Modal from "react-responsive-modal";
-import axios from "axios";
+import deletePic from './picture/delete.png';
 
 class Rule extends Component {
   constructor(props) {
@@ -78,22 +78,21 @@ class Rule extends Component {
             <button onClick={this.onCloseDeleteModal}>Cancel</button>
           </div>
         </Modal>
-        {// const {ruleName, price, maxWarning, ruleDetails } = rule
-        this.state.rule.map(rule => {
+        {this.state.rule.map(rule => {
           return (
             <div className="ruleCard">
-              <div className='title'>{rule.ruleName}</div>
-              <div className='priceMaxWarning'>
-                <p className='price'>ค่าปรับ {rule.price}</p>
+              <div className="Title">{rule.ruleName}</div>
+              <div className="priceMaxWarning">
+                <p className="price">ค่าปรับ {rule.price}</p>
                 <p>จำนานครั้งที่เตือน {rule.maxWarning}</p>
               </div>
-              <div className='detail'>{rule.ruleDetails}</div>
+              <div className="detail">{rule.ruleDetails}</div>
               <div>
                 <button
                   className="deleteModalButton"
                   onClick={this.onOpenDeleteModal(rule.ruleID)}
                 >
-                  Delete
+                  <img src={deletePic} className='deletePic'></img>
                 </button>
               </div>
             </div>
@@ -108,7 +107,7 @@ class Rule extends Component {
       <div>
         <Header />
         <Navibar />
-          <div className="ruleTable">{this.ruleTable()}</div>
+        <div className="ruleTable">{this.ruleTable()}</div>
       </div>
     );
   }

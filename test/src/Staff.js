@@ -157,48 +157,48 @@ class Staff extends Component {
       <div>
         <Header />
         <Navibar />
-        <h2>Admin</h2>
-        <button className="addStaff" onClick={this.onOpenAddModal}>
+        <h2 className='title'>Admin</h2>
+        <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่ม
         </button>
-        <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
-          <h2 className='title'>เพิ่มแอดมิน</h2>
-          <form className='formAdd' onSubmit={this.handleSubmitAdmin}>
-            <div className='addModal'>
-            <label htmlFor="firstName">ชื่อ: </label>
-            <input
-              type="text"
-              name="firstName"
-              onChange={event => this.handleChange(event)}
-              value={this.state.firstName}
-            />
+        <Modal className='addStaff' open={this.state.openAdd} onClose={this.onCloseAddModal} center>
+          <p className='modalTitle'>เพิ่มแอดมิน</p>
+          <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
+            <div className="addModal">
+              <label htmlFor="firstName">ชื่อ: </label>
+              <input
+                type="text"
+                name="firstName"
+                onChange={event => this.handleChange(event)}
+                value={this.state.firstName}
+              />
             </div>
-            <div className='addModal'>
-            <label htmlFor="lastName">นามสกุล: </label>
-            <input
-              type="text"
-              name="lastName"
-              onChange={event => this.handleChange(event)}
-              value={this.state.lastName}
-            />
+            <div className="addModal">
+              <label htmlFor="lastName">นามสกุล: </label>
+              <input
+                type="text"
+                name="lastName"
+                onChange={event => this.handleChange(event)}
+                value={this.state.lastName}
+              />
             </div>
-            <div className='addModal'>
-            <label htmlFor="staffTel">เบอร์โทรศัพท์: </label>
-            <input
-              type="text"
-              name="staffTel"
-              onChange={event => this.handleChange(event)}
-              value={this.state.staffTel}
-            />
+            <div className="addModal">
+              <label htmlFor="staffTel">เบอร์โทรศัพท์: </label>
+              <input
+                type="text"
+                name="staffTel"
+                onChange={event => this.handleChange(event)}
+                value={this.state.staffTel}
+              />
             </div>
-            <div className='addModal'>
-            <label htmlFor="staffEmail">อีเมล: </label>
-            <input
-              type="text"
-              name="staffEmail"
-              onChange={event => this.handleChange(event)}
-              value={this.state.staffEmail}
-            />
+            <div className="addModal">
+              <label htmlFor="staffEmail">อีเมล: </label>
+              <input
+                type="text"
+                name="staffEmail"
+                onChange={event => this.handleChange(event)}
+                value={this.state.staffEmail}
+              />
             </div>
             <button
               className="modalAdd"
