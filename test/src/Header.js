@@ -14,12 +14,19 @@ class Header extends Component{
             <img src={irp} className='logo'></img>
           </div>
           <div className='irName'>IR-Parking</div>
-          <div className='profile'>
+          <table className='profile'>
+            <td className='profilePicBox'>
             <img src={profile} className='profilePic'></img>
-            <div>
-              
-            </div>
-          </div>
+            </td>
+            <td className='profileInfo'>
+              <tr>name</tr>
+              <tr>role</tr>
+            </td>
+            <td className='profileInfo'>
+              <tr>surname</tr>
+              <tr>logout</tr>
+            </td>
+          </table>
         </div>
       );
     }

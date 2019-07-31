@@ -10,13 +10,10 @@ class SearchSticker extends Component {
     this.state = {
       carOwner: [],
       openEdit: false,
-      carOwnerFirstName:'',
-      carOwnerLastName:'',
-      carOwnerEmail:'',
-      carOwnerTel:''
+      
     };
   }
-  componentDidMount() {
+  getData() {
     fetch("http://localhost:5000/carOwner")
       .then(response => {
         return response.json();
@@ -28,7 +25,6 @@ class SearchSticker extends Component {
   }
 
   handleChange = (event) => {
-    event.preventDefault();
     this.setState({
         [event.target.name]: event.target.value
 
@@ -38,26 +34,21 @@ class SearchSticker extends Component {
 }
 
   handleEditCarOwner = event => {
-    event.preventDefault();
     this.onAfterEditCarOwner();
-    this.setState({
-      carOwnerFirstName: "",
-      carOwnerLastName: "",
-      carOwnerEmail: "",
-      carOwnerTel: "",
-      openEdit: false
-    });
+    this.onCloseEditModal();
   };
 
   onAfterEditCarOwner = () => {
+    const {openCarOwnerID,carOwnerFirstName,carOwnerLastName,carOwnerEmail,carOwnerTel} = this.state
     const url = 'http://localhost:5000/editCarOwner';
     const bodyData = JSON.stringify({
-      carOwnerFirstName: this.state.carOwnerFirstName,
-      carOwnerLastName: this.state.carOwnerLastName,
-      carOwnerEmail: this.state.carOwnerEmail,
-      carOwnerTel: this.state.carOwnerTel
+      carOwnerID: openCarOwnerID,
+      carOwnerFirstName: carOwnerFirstName,
+      carOwnerLastName: carOwnerLastName,
+      carOwnerEmail: carOwnerEmail,
+      carOwnerTel: carOwnerTel
     });
-    console.log(bodyData)
+    console.log(bodyData,'bodyData')
     const othepram = {
         headers: {
             "content-type": "application/json; charset=UTF-8"
@@ -67,12 +58,23 @@ class SearchSticker extends Component {
     };
     fetch(url, othepram)
         .then(data => console.log(data))
+        .then(response => {
+          this.getData();
+        })
+        .catch(error => {});
 }
 
-  onOpenEditModal = ruleID => e => {
+  onOpenEditModal = carOwnerID => e => {
+    const eachCarOwnerID = this.state.carOwner.find(Id=>{
+      return Id.carOwnerID === carOwnerID
+    })
     this.setState({
       openEdit: true,
-      openRuleID: ruleID
+      openCarOwnerID: carOwnerID,
+      carOwnerFirstName: eachCarOwnerID.carOwnerFirstName,
+      carOwnerLastName: eachCarOwnerID.carOwnerLastName,
+      carOwnerEmail: eachCarOwnerID.carOwnerEmail,
+      carOwnerTel: eachCarOwnerID.carOwnerTel
     });
   };
 
@@ -80,9 +82,14 @@ class SearchSticker extends Component {
     this.setState({ openEdit: false });
   };
 
+  componentWillMount(){
+    this.getData()
+  }
+
   carOwnerTable() {
     return this.state.carOwner.map(carOwner => {
       const {
+        carOwnerID,
         carOwnerFirstName,
         carOwnerLastName,
         carOwnerTel,
@@ -107,7 +114,7 @@ class SearchSticker extends Component {
                   type="text"
                   name="carOwnerFirstName"
                   onChange={event => this.handleChange(event)}
-                  value={carOwnerFirstName}
+                  value={this.state.carOwnerFirstName}
                 />
               </div>
               <div className='editModal'>
@@ -116,7 +123,7 @@ class SearchSticker extends Component {
                   type="text"
                   name="carOwnerLastName"
                   onChange={event => this.handleChange(event)}
-                  value={carOwnerLastName}
+                  value={this.state.carOwnerLastName}
                 />
               </div>
               <div className='editModal'>
@@ -125,7 +132,7 @@ class SearchSticker extends Component {
                   type="text"
                   name="carOwnerEmail"
                   onChange={event => this.handleChange(event)}
-                  value={carOwnerEmail}
+                  value={this.state.carOwnerEmail}
                 />
               </div>
               <div className='editModal'>
@@ -134,7 +141,7 @@ class SearchSticker extends Component {
                   type="text"
                   name="carOwnerTel"
                   onChange={event => this.handleChange(event)}
-                  value={carOwnerTel}
+                  value={this.state.carOwnerTel}
                 />
               </div>
             </form>
@@ -163,13 +170,13 @@ class SearchSticker extends Component {
               </div>
               <div className='carOwnerDate'>
                 <div className='fieldName'>วันที่ต่อสัญญา: </div>
-                <div>{registerDate}</div>
+                <div>{registerDate.substr(0,10)}</div>
                 <div className='fieldName'>วันหมดอายุ: </div>
-                <div>{expiredDate}</div>
+                <div>{expiredDate.substr(0,10)}</div>
               </div>
               <button
                 className="EditModalButton"
-                onClick={this.onOpenEditModal(carOwner)}
+                onClick={this.onOpenEditModal(carOwnerID)}
               >
                 Edit
               </button>

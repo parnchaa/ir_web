@@ -22,9 +22,21 @@
 .profile{
     position: absolute;
     right: 0;
+    width: 30%;
+    margin: 1.4rem 1.4em;
+    color: #29A8AB;
+    font-family: 'kanit',sans-serif;
+}
+
+.profilePicBox{
+    width: 6rem;
 }
 
 .profilePic{
     width: 5rem;
     height: 5rem;
+}
+
+.profileInfo{
+    font-size: 1.2rem;
 }
