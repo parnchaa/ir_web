@@ -1,67 +1,63 @@
-import React, { Component } from 'react';
-import './App.css';
-import Header from './Header';
-import Navibar from './Navibar';
+import React, { Component } from "react";
+import "./App.css";
+import Header from "./Header";
+import Navibar from "./Navibar";
 
 class App extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       problem: []
-    }
-
+    };
   }
   componentDidMount() {
-    fetch('http://localhost:5000/problem ')
-      .then((response) => {
+    fetch("http://localhost:5000/problem ")
+      .then(response => {
         return response.json();
       })
-      .then((problem) => {
-        this.setState({ problem })
+      .then(problem => {
+        this.setState({ problem });
       });
   }
 
   problemTable() {
-    return this.state.problem.map((pro) => {
-      const { problemID, dateOfProblem, timeOfProblem, scene, licensePlate, allegation, firstName, problemDetails } = pro
+    return this.state.problem.map(pro => {
+      const {
+        problemID,
+        dateOfProblem,
+        timeOfProblem,
+        scene,
+        licensePlate,
+        allegation,
+        firstName,
+        problemDetails
+      } = pro;
       return (
-        <tr key={problemID}>
+        <tr className='eventTable-Row' key={problemID}>
           <td>{problemID}</td>
-          <td>{dateOfProblem}</td>
+          <td>{dateOfProblem.substr(0,10)}</td>
           <td>{timeOfProblem}</td>
           <td>{scene}</td>
           <td>{licensePlate}</td>
           <td>{allegation}</td>
           <td>{firstName}</td>
           <td>{problemDetails}</td>
-
         </tr>
-      )
-    }
-
-    )
+      );
+    });
   }
-
 
   render() {
     return (
       <div className="App">
-
         <Header />
         <Navibar />
         <p className="Table-header">เหตุการณ์</p>
-
-        {
-          this.state.problem.length > 0 ?
-            <table >
-              <tbody className='pro'>
-                {this.problemTable()}
-              </tbody>
-            </table> :
-            <h1>เปิดเซิฟดิ้...</h1>
-        }
-
+        {this.state.problem.length > 0 ? (
+          <table className='eventTable'>{this.problemTable()}</table>
+        ) : (
+          <h1>เปิดเซิฟดิ้...</h1>
+        )}
       </div>
     );
   }

@@ -34,3 +34,13 @@
 .carOwnerDate{
     display: flex;
 }
+
+.EditModalButton{
+    color: white;
+    font-size: 1rem;
+    background-color: #29A8AB;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    box-shadow: 3px 2px rgba(0, 0, 0, 0.1);
+    margin-left: 1%;
+}

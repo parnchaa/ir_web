@@ -15,7 +15,7 @@ class Location extends Component {
         }
 
 
-    componentDidMount(){
+    getData(){
         fetch('http://localhost:5000/location')
             .then((response) => {
                 return response.json();
@@ -34,7 +34,6 @@ class Location extends Component {
                 <tr>
                     <td>{locationName}</td>
                     <td>{locationCode}</td>
-                    
                 </tr>
             )
         }
@@ -79,7 +78,16 @@ class Location extends Component {
         };
         fetch(url, othepram)
             .then(data => console.log(data))
+            .then(response => {
+                this.getData();
+              })
+              .catch(error => {});
     }
+ 
+    componentDidMount(){
+        this.getData()
+    }
+
     render() {
         const options = {
             afterInsertRow: this.onAfterInsertRow

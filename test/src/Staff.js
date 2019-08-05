@@ -3,6 +3,7 @@ import Header from "./Header";
 import Navibar from "./Navibar";
 import "./Staff.css";
 import Modal from "react-responsive-modal";
+import deletePic from "./picture/delete.png";
 
 class Staff extends Component {
   constructor(props) {
@@ -15,11 +16,12 @@ class Staff extends Component {
       staffEmail: "",
       staffTel: "",
       openAdd: false,
-      openAddSecurityguard: false
+      openAddSecurityguard: false,
+      openDelete: false
     };
   }
 
-  componentDidMount() {
+  getData() {
     fetch("http://localhost:5000/staff")
       .then(response => {
         return response.json();
@@ -39,17 +41,47 @@ class Staff extends Component {
   }
 
   staffTable() {
-    return this.state.staff.map(staff => {
-      const { firstName, lastName, staffEmail, staffTel } = staff;
-      return (
-        <tr>
-          <td>{firstName}</td>
-          <td>{lastName}</td>
-          <td>{staffEmail}</td>
-          <td>{staffTel}</td>
-        </tr>
-      );
-    });
+    return (
+      <div>
+        <Modal
+          className="Modal"
+          open={this.state.openDelete}
+          onClose={this.onCloseDeleteModal}
+          center
+        >
+          <h2 className="deleteTitle">Delete!!!</h2>
+          <div>ลบจริงดิ?</div>
+          <div>
+            <button
+              onClick={event => {
+                this.submitDeleteTask(this.state.openStaffId);
+              }}
+            >
+              Delete
+            </button>
+            <button onClick={this.onCloseDeleteModal}>Cancel</button>
+          </div>
+        </Modal>
+        {this.state.staff.map(staff => {
+          const { firstName, lastName, staffEmail, staffTel, staffID } = staff;
+          return (
+            <tr>
+              <td>{firstName}</td>
+              <td>{lastName}</td>
+              <td>{staffEmail}</td>
+              <td>{staffTel}</td>
+              <button
+                className="deleteModalButton"
+                onClick={this.onOpenDeleteModal(staffID)}
+              >
+                <img src={deletePic} className="deletePic" />
+              </button>
+            </tr>
+          )
+        })}
+        
+      </div>
+    );
   }
 
   onOpenAddModal = () => {
@@ -138,6 +170,44 @@ class Staff extends Component {
     fetch(url, othepram).then(data => console.log(data));
   };
 
+  onOpenDeleteModal = staffID => e => {
+    this.setState({
+      openDelete: true,
+      openStaffID: staffID
+    });
+  };
+
+  onCloseDeleteModal = () => {
+    this.setState({ openDelete: false });
+  };
+
+  submitDeleteTask = () => {
+    this.deleteFetch();
+    this.onCloseDeleteModal();
+  };
+
+  deleteFetch = () => {
+    const url = "http://localhost:5000/deleteStaff";
+    const bodyData = JSON.stringify({
+      staffID: this.state.openStaffID
+    });
+    console.log(bodyData);
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    console.log("aaa", othepram);
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
+  };
+
   securityguardTable() {
     return this.state.securityguard.map(securityguard => {
       const { firstName, lastName, staffEmail, staffTel } = securityguard;
@@ -152,17 +222,26 @@ class Staff extends Component {
     });
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
   render() {
     return (
       <div>
         <Header />
         <Navibar />
-        <h2 className='title'>Admin</h2>
+        <h2 className="title">Admin</h2>
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่ม
         </button>
-        <Modal className='addStaff' open={this.state.openAdd} onClose={this.onCloseAddModal} center>
-          <p className='modalTitle'>เพิ่มแอดมิน</p>
+        <Modal
+          className="addStaff"
+          open={this.state.openAdd}
+          onClose={this.onCloseAddModal}
+          center
+        >
+          <p className="modalTitle">เพิ่มแอดมิน</p>
           <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
             <div className="addModal">
               <label htmlFor="firstName">ชื่อ: </label>

@@ -39,14 +39,15 @@ class SearchSticker extends Component {
   };
 
   onAfterEditCarOwner = () => {
-    const {openCarOwnerID,carOwnerFirstName,carOwnerLastName,carOwnerEmail,carOwnerTel} = this.state
+    const {openCarOwnerID,carOwnerFirstName,carOwnerLastName,carOwnerEmail,carOwnerTel,carOwnerAddress} = this.state
     const url = 'http://localhost:5000/editCarOwner';
     const bodyData = JSON.stringify({
       carOwnerID: openCarOwnerID,
       carOwnerFirstName: carOwnerFirstName,
       carOwnerLastName: carOwnerLastName,
       carOwnerEmail: carOwnerEmail,
-      carOwnerTel: carOwnerTel
+      carOwnerTel: carOwnerTel,
+      carOwnerAddress:carOwnerAddress
     });
     console.log(bodyData,'bodyData')
     const othepram = {
@@ -74,7 +75,8 @@ class SearchSticker extends Component {
       carOwnerFirstName: eachCarOwnerID.carOwnerFirstName,
       carOwnerLastName: eachCarOwnerID.carOwnerLastName,
       carOwnerEmail: eachCarOwnerID.carOwnerEmail,
-      carOwnerTel: eachCarOwnerID.carOwnerTel
+      carOwnerTel: eachCarOwnerID.carOwnerTel,
+      carOwnerAddress: eachCarOwnerID.carOwnerAddress
     });
   };
 
@@ -142,6 +144,15 @@ class SearchSticker extends Component {
                   name="carOwnerTel"
                   onChange={event => this.handleChange(event)}
                   value={this.state.carOwnerTel}
+                />
+              </div>
+              <div className='editModal'>
+                <p>Address: </p>
+                <input
+                  type="text"
+                  name="carOwnerAddress"
+                  onChange={event => this.handleChange(event)}
+                  value={this.state.carOwnerAddress}
                 />
               </div>
             </form>
