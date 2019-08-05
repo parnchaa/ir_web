@@ -137,3 +137,46 @@
 .title{
     font-size: 32pt;
 }
+.ModalName{
+    display: flex;
+    margin-bottom: 0.4rem;
+
+}
+.ModalName input{
+    height: 2.3rem;
+
+}
+.ModalSurname{
+    display: flex;
+    margin-bottom: 0.4rem;
+
+}
+.ModalSurname input{
+    height: 2.3rem;
+
+}
+.ModalEmail{
+    display: flex;
+    margin-bottom: 0.4rem;
+
+}
+.ModalEmail input{
+    height: 2.3rem;
+
+}
+.ModalTel{
+    display: flex;
+    margin-bottom: 0.4rem;
+}
+.ModalTel input{
+    height: 2.3rem;
+
+}
+.formAddSecure input{
+    position: absolute;
+    left: 43%;
+}
+
+.modalButton{
+   padding: 0.5rem 20%;
+}

@@ -50,7 +50,7 @@ class Staff extends Component {
           center
         >
           <h2 className="deleteTitle">Delete!!!</h2>
-          <div>ลบจริงดิ?</div>
+          <div>ลบหรา?</div>
           <div>
             <button
               onClick={event => {
@@ -231,12 +231,11 @@ class Staff extends Component {
       <div>
         <Header />
         <Navibar />
-        <h2 className="title">Admin</h2>
+        <h2 className="title">แอดมิน</h2>
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
-          เพิ่ม
+          เพิ่มแอดมิน
         </button>
         <Modal
-          className="addStaff"
           open={this.state.openAdd}
           onClose={this.onCloseAddModal}
           center
@@ -271,7 +270,7 @@ class Staff extends Component {
               />
             </div>
             <div className="addModal">
-              <label htmlFor="staffEmail">อีเมล: </label>
+              <label htmlFor="staffEmail">อีเมล์: </label>
               <input
                 type="text"
                 name="staffEmail"
@@ -295,55 +294,67 @@ class Staff extends Component {
         <table className="staffTable">
           <tbody>{this.staffTable()}</tbody>
         </table>
-
-        <h2>Security Guard</h2>
+        <h2 className="title">พนักงานรักษาความปลอดภัย</h2>
         <button
           className="addSecurityguard"
           onClick={this.onOpenAddSecurityguardModal}
         >
-          Add Securityguard{" "}
+          เพิ่มพนักงานรักษาความปลอดภัย
         </button>
         <Modal
           open={this.state.openAddSecurityguard}
           onClose={this.onCloseAddSecurityguardModal}
           center
         >
-          <h2>AddSecurityguard </h2>
-          <form>
-            <p>FirstName: </p>
+          <p className='modalTitle'>เพิ่มพนักงานรักษาความปลอดภัย</p>
+          <form className='formAddSecure'>
+
+           <div className='ModalName' >
+           <label>ชื่อ: </label>
             <input
               type="text"
               name="firstName"
               onChange={event => this.handleChange(event)}
               value={this.state.firstName}
             />
-            <p>LastName: </p>
+           </div>
+
+           <div className='ModalSurname' >
+               <label>นามสกุล: </label>
             <input
               type="text"
               name="lastName"
               onChange={event => this.handleChange(event)}
               value={this.state.lastName}
             />
-            <p>Email: </p>
+            </div>
+            
+            <div className='ModalEmail' >
+            <label>อีเมล์: </label>
             <input
               type="text"
               name="staffTel"
               onChange={event => this.handleChange(event)}
               value={this.state.staffTel}
             />
-            <p>Phone number: </p>
+            </div>
+          
+            <div className='ModalTel' >
+            <label>เบอร์โทรศัพท์: </label>
             <input
               type="text"
               name="staffEmail"
               onChange={event => this.handleChange(event)}
               value={this.state.staffEmail}
             />
-            <div />
+            </div>
           </form>
-          <button onClick={event => this.handleSubmitSecurity(event)}>
-            Add
+          <div className='modalButton'>
+          <button className='modalAdd' onClick={event => this.handleSubmitSecurity(event)}>
+            เพิ่ม
           </button>
-          <button onClick={this.onCloseAddSecurityguardModal}>Cancel</button>
+          <button className='modalcancel' onClick={this.onCloseAddSecurityguardModal}>ยกเลิก</button>
+          </div>
         </Modal>
         <table className="staffTable">
           <tbody>{this.securityguardTable()}</tbody>
