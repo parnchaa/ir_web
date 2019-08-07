@@ -8,6 +8,8 @@
     margin-right: 8.33%;
     margin-bottom: 5%;
     margin-top: 1%;
+    font-family: 'kanit',sans-serif;
+
 }
 
 .title{
@@ -15,6 +17,8 @@
     color: #29A8AB;
     margin-bottom: 30px;
     font-family: 'kanit',sans-serif;
+    font-size: 32pt;
+
 }
 
 .staffTable td, .staffTable th{
@@ -134,9 +138,6 @@
     margin-top: 13px;
 }
 
-.title{
-    font-size: 32pt;
-}
 .ModalName{
     display: flex;
     margin-bottom: 0.4rem;
@@ -179,4 +180,13 @@
 
 .modalButton{
    padding: 0.5rem 20%;
+}
+.staffTable th{
+    font-family: 'kanit',sans-serif;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.staffTable{
+    font-size: 1.5rem;
+
 }

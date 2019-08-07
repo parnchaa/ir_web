@@ -103,15 +103,14 @@ class SearchSticker extends Component {
       return (
         <div>
           <Modal
-            className='editCarowner'
             open={this.state.openEdit}
             onClose={this.onCloseEditModal}
             center
           >
-            <h2>Edit CarOwner </h2>
-            <form>
+            <h2 className='titleEdit'>แก้ไขข้อมูลเจ้าของรถ</h2>
+           <form className='formAddEdit'>
               <div className='editModal'>
-                <p>FirstName: </p>
+                <p>ชื่อ : </p>
                 <input
                   type="text"
                   name="carOwnerFirstName"
@@ -119,8 +118,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerFirstName}
                 />
               </div>
+
               <div className='editModal'>
-                <p>LastName: </p>
+                <p>นามสกุล : </p>
                 <input
                   type="text"
                   name="carOwnerLastName"
@@ -128,8 +128,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerLastName}
                 />
               </div>
+
               <div className='editModal'>
-                <p>Email: </p>
+                <p>อีเมล์ : </p>
                 <input
                   type="text"
                   name="carOwnerEmail"
@@ -137,8 +138,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerEmail}
                 />
               </div>
+
               <div className='editModal'>
-                <p>Phone number: </p>
+                <p>เบอร์โทรศัพท์ : </p>
                 <input
                   type="text"
                   name="carOwnerTel"
@@ -146,8 +148,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerTel}
                 />
               </div>
+
               <div className='editModal'>
-                <p>Address: </p>
+                <p>ที่อยู่ : </p>
                 <input
                   type="text"
                   name="carOwnerAddress"
@@ -155,6 +158,7 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerAddress}
                 />
               </div>
+
             </form>
             <button className='buttonUpdate' onClick={event => this.handleEditCarOwner(event)}>
               Update
@@ -164,25 +168,25 @@ class SearchSticker extends Component {
 
           <div className='carOwnerTask'>
               <div className='carOwnerName'>
-                <div className='fieldName'>ชื่อ: </div>
+                <div className='fieldName'>ชื่อ : </div>
                 <div>{carOwnerFirstName}</div>
-                <div className='fieldName'>นามสกุล: </div>
+                <div className='fieldName'>นามสกุล : </div>
                 <div>{carOwnerLastName}</div>
               </div>
               <div className='carOwnerEmailTel'>
-                <div className='fieldName'>อีเมล: </div>
+                <div className='fieldName'>อีเมล์ : </div>
                 <div>{carOwnerEmail}</div>
-                <div className='fieldName'>เบอร์โทรศัพท์: </div>
+                <div className='fieldName'>เบอร์โทรศัพท์ : </div>
                 <div>{carOwnerTel}</div>
               </div>
               <div className='carOwnerAddress'>
-                <div className='fieldName'>ที่อยู่: </div>
+                <div className='fieldName'>ที่อยู่ : </div>
                 <div>{carOwnerAddress}</div>
               </div>
               <div className='carOwnerDate'>
-                <div className='fieldName'>วันที่ต่อสัญญา: </div>
+                <div className='fieldName'>วันที่ต่อสัญญา : </div>
                 <div>{registerDate.substr(0,10)}</div>
-                <div className='fieldName'>วันหมดอายุ: </div>
+                <div className='fieldName'>วันหมดอายุ : </div>
                 <div>{expiredDate.substr(0,10)}</div>
               </div>
               <button

@@ -111,7 +111,7 @@ class Location extends Component {
                         </form>
                     </div>
                 </div>
-                <h2>Location</h2>
+                <h2 className='titleLocation'>Location</h2>
                 <table >
                     <tbody className='location'>
                         {this.locationTable()}

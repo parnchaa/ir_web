@@ -292,6 +292,10 @@ class Staff extends Component {
         </Modal>
 
         <table className="staffTable">
+          <th>ชื่อ</th>
+          <th>นามสกุล</th>
+          <th>อีเมล์</th>
+          <th>เบอร์โทร</th>
           <tbody>{this.staffTable()}</tbody>
         </table>
         <h2 className="title">พนักงานรักษาความปลอดภัย</h2>
@@ -357,6 +361,10 @@ class Staff extends Component {
           </div>
         </Modal>
         <table className="staffTable">
+          <th>ชื่อ</th>
+          <th>นามสกุล</th>
+          <th>อีเมล์</th>
+          <th>เบอร์โทร</th>
           <tbody>{this.securityguardTable()}</tbody>
         </table>
       </div>

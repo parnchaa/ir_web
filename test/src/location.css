@@ -1,11 +1,20 @@
 .location{
-    border: 1px solid black;
+  text-align: left;
+    color: #29A8AB;
+    border: 1px solid white;
     border-collapse: collapse;
+    width: 90%;
+    margin-left: 8.33%;
+    margin-right: 8.33%;
+    margin-bottom: 5%;
+    margin-top: 1%;
+    font-family: 'kanit',sans-serif;
+
 }
 
 .location td, .location th{
-    border: 1px solid black;
-  
+  border: 1px solid #ddd;
+  padding: 15px;  
   }
 
   Form{
@@ -90,3 +99,10 @@ h1{
     font-family: 'kanit',sans-serif;
     font-weight: 500;
   }
+.titleLocation{
+    text-align: center;
+    color: #29A8AB;
+    margin-bottom: 30px;
+    font-family: 'kanit',sans-serif;
+    font-size: 32pt;
+}
