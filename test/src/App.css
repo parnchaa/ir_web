@@ -7,24 +7,15 @@
   text-align: center;
 }
 
-.pro{
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-.eventTable-Row{
-  width: 80%;
-  color: #29A8AB;
-  font-size: 1rem;
-  border: 1px solid #29A8AB;
-  
-}
-
 .eventTable td{
   border: 1px solid #29A8AB;
-  padding: 0.5rem;
+  padding: 0.8rem;
 }
 
 .eventTable{
-  margin: 0 10%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #29A8AB;
+  font-size: 1rem;
+  border: 1px solid #29A8AB;
 }

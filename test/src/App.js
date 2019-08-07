@@ -33,7 +33,7 @@ class App extends Component {
         problemDetails
       } = pro;
       return (
-        <tr className='eventTable-Row' key={problemID}>
+        <tr key={problemID}>
           <td>{problemID}</td>
           <td>{dateOfProblem.substr(0,10)}</td>
           <td>{timeOfProblem}</td>

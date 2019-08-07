@@ -3,17 +3,13 @@ import Header from './Header';
 import Navibar from './Navibar';
 import './location.css'
 
-var locationdata = [];
-
 class Location extends Component {
-
     state =
         {
             locationName: '',
             locationCode: '',
             location:[]
         }
-
 
     getData(){
         fetch('http://localhost:5000/location')
@@ -113,7 +109,6 @@ class Location extends Component {
                                 <button onClick={event => this.handleSubmit(event)} type="submit">เพิ่มพื้นที่</button>
                             </div>
                         </form>
-                       
                     </div>
                 </div>
                 <h2>Location</h2>

@@ -1,5 +1,6 @@
 .editModal{
     display: flex;
+    font-family: 'kanit',sans-serif;
 }
 
 .carOwnerTask{
@@ -11,8 +12,10 @@
     font-family: 'kanit',sans-serif;
     color: #29A8AB;
     font-size: 1.3rem;
-    margin-left: 10%;
     position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carOwnerTask div{
@@ -43,4 +46,7 @@
     border-radius: 4px;
     box-shadow: 3px 2px rgba(0, 0, 0, 0.1);
     margin-left: 1%;
+}
+.editCarowner{
+    font-family: 'kanit',sans-serif;
 }
