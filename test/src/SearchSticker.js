@@ -156,10 +156,10 @@ class SearchSticker extends Component {
                 />
               </div>
             </form>
-            <button onClick={event => this.handleEditCarOwner(event)}>
+            <button className='buttonUpdate' onClick={event => this.handleEditCarOwner(event)}>
               Update
             </button>
-            <button onClick={this.onCloseEditModal}>Cancel</button>
+            <button className='buttonCancel' onClick={this.onCloseEditModal}>Cancel</button>
           </Modal>
 
           <div className='carOwnerTask'>
