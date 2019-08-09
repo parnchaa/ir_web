@@ -9,9 +9,13 @@
     margin-bottom: 5%;
     margin-top: 1%;
     font-family: 'kanit',sans-serif;
-
+      }
+.staffbodytable{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
 }
-
 .title{
     text-align: center;
     color: #29A8AB;
@@ -23,7 +27,7 @@
 
 .staffTable td, .staffTable th{
     border: 1px solid #ddd;
-     padding: 15px;
+    padding: 15px;
   }
   
 .addStaffButton{

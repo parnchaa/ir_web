@@ -1,16 +1,15 @@
 .location{
-  text-align: left;
+  /* text-align: left; */
     color: #29A8AB;
     border: 1px solid white;
     border-collapse: collapse;
-    width: 90%;
-    margin-left: 8.33%;
+    /* width: 90%;   */
+    /* margin-left: 8.33%;
     margin-right: 8.33%;
     margin-bottom: 5%;
-    margin-top: 1%;
+    margin-top: 1%; */
     font-family: 'kanit',sans-serif;
-
-}
+   }
 
 .location td, .location th{
   border: 1px solid #ddd;
@@ -105,4 +104,14 @@ h1{
     margin-bottom: 30px;
     font-family: 'kanit',sans-serif;
     font-size: 32pt;
+}
+.inputlocationname{
+  font-family: 'kanit',sans-serif;
+
+}
+.locationtable{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }

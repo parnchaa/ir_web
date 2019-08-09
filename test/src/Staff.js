@@ -70,12 +70,12 @@ class Staff extends Component {
               <td>{lastName}</td>
               <td>{staffEmail}</td>
               <td>{staffTel}</td>
-              <button
+             {/* <td> <button
                 className="deleteModalButton"
                 onClick={this.onOpenDeleteModal(staffID)}
               >
                 <img src={deletePic} className="deletePic" />
-              </button>
+              </button></td> */}
             </tr>
           )
         })}

@@ -100,11 +100,11 @@ class Location extends Component {
                             <div className="locationName">
                                 <label htmlFor="locationName">พื้นที่: </label>
                             </div>
-                            <input type="text" placeholder="พื้นที่" name='locationName' onChange={event => this.handleChange(event)} value={this.state.locationName}/>
+                            <input class="inputlocationname" type="text" placeholder="พื้นที่" name='locationName' onChange={event => this.handleChange(event)} value={this.state.locationName}/>
                             <div className="locationCode">
                                 <label htmlFor="locationCode">โค้ด: </label>
                             </div>
-                            <input type="text" placeholder="โค้ด" name='locationCode' onChange={event => this.handleChange(event)} value={this.state.locationCode}/>
+                            <input class="inputlocationname" type="text" placeholder="โค้ด" name='locationCode' onChange={event => this.handleChange(event)} value={this.state.locationCode}/>
                             <div className="addarea">
                                 <button onClick={event => this.handleSubmit(event)} type="submit">เพิ่มพื้นที่</button>
                             </div>
@@ -112,12 +112,11 @@ class Location extends Component {
                     </div>
                 </div>
                 <h2 className='titleLocation'>Location</h2>
-                <table >
+                <table class="locationtable">
                     <tbody className='location'>
                         {this.locationTable()}
                     </tbody>
-                </table>
-                
+                </table>    
             </div >
         );
     }
