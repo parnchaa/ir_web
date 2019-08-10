@@ -1,64 +1,77 @@
-.staffTable{
-    text-align: left;
-    color: #29A8AB;
-    border: 1px solid white;
-    border-collapse: collapse;
-    width: 90%;
-    margin-left: 8.33%;
-    margin-right: 8.33%;
-    margin-bottom: 5%;
-    margin-top: 1%;
-    font-family: 'kanit',sans-serif;
-      }
-.staffbodytable{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
-}
-.title{
-    text-align: center;
-    color: #29A8AB;
-    margin-bottom: 30px;
-    font-family: 'kanit',sans-serif;
-    font-size: 32pt;
-
+.staffTable {
+  text-align: left;
+  color: #29a8ab;
+  border: 1px solid white;
+  border-collapse: collapse;
+  width: fit-content;
+  /* margin-left: 8.33%;
+  margin-right: 8.33%;
+  margin-bottom: 5%;
+  margin-top: 1%; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "kanit", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 2rem;
 }
 
-.staffTable td, .staffTable th{
-    border: 1px solid #ddd;
-    padding: 15px;
-  }
-  
-.addStaffButton{
-    text-align: center;
-    color: #ffffff;
-    font-family: 'kanit',sans-serif;
-    background-color: #29A8AB;
-    border-radius: 8px;
-    border-color: #ffffff;
-    margin-left: 8.33%;
-    padding: 1%;
+.staffTable th {
+  font-family: "kanit", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
 }
 
-.modalTitle{
-    text-align: center;
-    color: #29A8AB;
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    font-family: 'kanit',sans-serif;
+.staffbodytable {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+.title {
+  text-align: center;
+  color: #29a8ab;
+  margin: 2.5rem 2rem;
+  font-family: "kanit", sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
-.addSecurityguard{
-    text-align: center;
-    color: #ffffff;
-    font-family: 'kanit',sans-serif;
-    background-color: #29A8AB;
-    border-radius: 8px;
-    border-color: #ffffff;
-    margin-left: 8.33%;
-    padding: 1%;
+.staffTable td,
+.staffTable th {
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+.addStaffButton {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #29a8ab;
+  border-radius: 8px;
+  border-color: #ffffff;
+  margin-left: 8.33%;
+  padding: 1%;
+}
+
+.modalTitle {
+  text-align: center;
+  color: #29a8ab;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  font-family: "kanit", sans-serif;
+}
+
+.addSecurityguard {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #29a8ab;
+  border-radius: 8px;
+  border-color: #ffffff;
+  margin-left: 8.33%;
+  padding: 1%;
 }
 /* .modalAddstaff{
     margin-left: 5%;
@@ -66,131 +79,114 @@
 
 
 }*/
-.tableModal{
-    font-family: 'kanit',sans-serif;
-    border:"0";
-    width:"100%";
-    padding: 90%
+.tableModal {
+  font-family: "kanit", sans-serif;
+  border: "0";
+  width: "100%";
+  padding: 90%;
 }
 
-.modalAdd{
-    text-align: center;
-    color: #ffffff;
-    font-family: 'kanit',sans-serif;
-    background-color: #29A8AB;
-    border-radius: 8px;
-    border: none;
-    border-color: #ffffff;
-    /* margin-right: 2%; */
-    width: 75px;
-    height: 40px;
-    margin-left: 20%;
-    font-size: 15pt;
+.modalAdd {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #29a8ab;
+  border-radius: 8px;
+  border: none;
+  border-color: #ffffff;
+  /* margin-right: 2%; */
+  width: 75px;
+  height: 40px;
+  margin-left: 20%;
+  font-size: 15pt;
 }
-.modalcancel{
-    text-align: center;
-    color: #ffffff;
-    font-family: 'kanit',sans-serif;
-    background-color:#CD5C5C	;
-    border-radius: 8px;
-    border: none;
-    border-color: #ffffff;
-    width: 75px;
-    height: 40px;
-    margin-left: 7%;
-    font-size: 15pt;
-}
-
-.modalAdd:hover{
-    background-color: white;
-    border: 2px solid #29A8AB;
-    color: #29A8AB;
+.modalcancel {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #cd5c5c;
+  border-radius: 8px;
+  border: none;
+  border-color: #ffffff;
+  width: 75px;
+  height: 40px;
+  margin-left: 7%;
+  font-size: 15pt;
 }
 
-.modalcancel:hover{
-    background-color: white;
-    border: 2px solid #CD5C5C;
-    color: #CD5C5C;
+.modalAdd:hover {
+  background-color: white;
+  border: 2px solid #29a8ab;
+  color: #29a8ab;
 }
 
-#Modal{
-    padding: 100px;
-    width: 100%;
-    margin: 100px
+.modalcancel:hover {
+  background-color: white;
+  border: 2px solid #cd5c5c;
+  color: #cd5c5c;
 }
 
-.addModal{
-    display: flex;
-    margin-bottom: 0.4rem;
+#Modal {
+  padding: 100px;
+  width: 100%;
+  margin: 100px;
 }
 
-.addModal input{
-    height: 2.3rem;
-
+.addModal {
+  display: flex;
+  margin-bottom: 0.4rem;
 }
 
-.formAdd{
-    width: 450px;
+.addModal input {
+  height: 2.3rem;
 }
 
-.formAdd input{
-    position: absolute;
-    left: 43%;
+.formAdd {
+  width: 450px;
 }
 
-.formAdd button{
-    margin-top: 13px;
+.formAdd input {
+  position: absolute;
+  left: 43%;
 }
 
-.ModalName{
-    display: flex;
-    margin-bottom: 0.4rem;
-
-}
-.ModalName input{
-    height: 2.3rem;
-
-}
-.ModalSurname{
-    display: flex;
-    margin-bottom: 0.4rem;
-
-}
-.ModalSurname input{
-    height: 2.3rem;
-
-}
-.ModalEmail{
-    display: flex;
-    margin-bottom: 0.4rem;
-
-}
-.ModalEmail input{
-    height: 2.3rem;
-
-}
-.ModalTel{
-    display: flex;
-    margin-bottom: 0.4rem;
-}
-.ModalTel input{
-    height: 2.3rem;
-
-}
-.formAddSecure input{
-    position: absolute;
-    left: 43%;
+.formAdd button {
+  margin-top: 13px;
 }
 
-.modalButton{
-   padding: 0.5rem 20%;
+.ModalName {
+  display: flex;
+  margin-bottom: 0.4rem;
 }
-.staffTable th{
-    font-family: 'kanit',sans-serif;
-    font-size: 1.5rem;
-    text-align: center;
+.ModalName input {
+  height: 2.3rem;
 }
-.staffTable{
-    font-size: 1.5rem;
+.ModalSurname {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalSurname input {
+  height: 2.3rem;
+}
+.ModalEmail {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalEmail input {
+  height: 2.3rem;
+}
+.ModalTel {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalTel input {
+  height: 2.3rem;
+}
+.formAddSecure input {
+  position: absolute;
+  left: 43%;
+}
 
+.modalButton {
+  padding: 0.5rem 20%;
 }
