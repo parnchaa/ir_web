@@ -11,7 +11,8 @@ class Rule extends Component {
     this.state = {
       rule: [],
       openDelete: false,
-      openEdit: false
+      openEdit: false,
+      openAdd: false
     };
   }
   getData() {
@@ -118,6 +119,50 @@ onAfterEditRule=()=>{
       this.getData();
     })
     .catch(error => {});
+  };
+
+  handleSubmitAdmin = event => {
+    event.preventDefault();
+    this.onAfterAddRule();
+    this.setState({
+      ruleName: "",
+      price: "",
+      maxWarning: "",
+      ruleDetails: "",
+      openAdd: false
+    });
+  };
+
+  onAfterAddRule= () => {
+    const url = "http://localhost:5000/addrule";
+    const bodyData = JSON.stringify({
+      ruleName: this.state.ruleName,
+      price: this.state.price,
+      maxWarning: this.state.maxWarning,
+      ruleDetails: this.state.ruleDetails
+    });
+    console.log(bodyData);
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
+  };
+
+  onOpenAddModal = () => {
+    this.setState({ openAdd: true });
+  };
+
+  onCloseAddModal = () => {
+    this.setState({ openAdd: false });
   };
 
   componentDidMount(){
@@ -230,6 +275,61 @@ onAfterEditRule=()=>{
       <div>
         <Header />
         <Navibar />
+        <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
+          <p className="modalTitle">เพิ่มกฏ</p>
+          <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
+            <div className="addModal">
+              <label htmlFor="ruleName">ชื่อกฏ: </label>
+              <input
+                type="text"
+                name="ruleName"
+                onChange={event => this.handleChange(event)}
+                value={this.state.ruleName}
+              />
+            </div>
+            <div className="addModal">
+              <label htmlFor="price">ค่าปรับ: </label>
+              <input
+                type="text"
+                name="price"
+                onChange={event => this.handleChange(event)}
+                value={this.state.price}
+              />
+            </div>
+            <div className="addModal">
+              <label htmlFor="maxWarning">จำนานครั้งที่เตือน: </label>
+              <input
+                type="text"
+                name="maxWarning"
+                onChange={event => this.handleChange(event)}
+                value={this.state.maxWarning}
+              />
+            </div>
+            <div className="addModal">
+              <label htmlFor="ruleDetails">รายละเอียด: </label>
+              <input
+                type="text"
+                name="ruleDetails"
+                onChange={event => this.handleChange(event)}
+                value={this.state.ruleDetails}
+              />
+            </div>
+            <button
+              className="modalAdd"
+              onClick={event => this.handleSubmitAdmin(event)}
+              type="submit"
+            >
+              เพิ่ม
+            </button>
+            <button className="modalcancel" onClick={this.onCloseAddModal}>
+              ยกเลิก
+            </button>
+          </form>
+        </Modal>
+
+        <button className="addRuleButton" onClick={this.onOpenAddModal}>
+          เพิ่มกฏ
+        </button>
         <div className="ruleTable">{this.ruleTable()}</div>
       </div>
     );
