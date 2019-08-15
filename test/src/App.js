@@ -54,7 +54,16 @@ class App extends Component {
         <Navibar />
         <p className="Table-header">เหตุการณ์</p>
         {this.state.problem.length > 0 ? (
-          <table className='eventTable'>{this.problemTable()}</table>
+          <table className='eventTable'>
+          <th></th>
+          <th>วัน</th>
+          <th>เวลา</th>
+          <th>สถานที่</th>
+          <th>ป้ายทะเบียน</th>
+          <th>ข้อหา</th>
+          <th>ผู้แจ้ง</th>
+          <th>รายละเอียด</th>
+          {this.problemTable()}</table>
         ) : (
           <h1>เปิดเซิฟดิ้...</h1>
         )}
