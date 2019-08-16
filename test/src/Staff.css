@@ -190,14 +190,35 @@
 .modalButton {
   padding: 0.5rem 20%;
 }
-.Modal{
+.ModalDelete{
   text-align: center;
-  color: #ffffff;
+  color: #29a8ab;
   font-family: "kanit", sans-serif;
-  background-color: #29a8ab;
-  border-radius: 8px;
-  border-color: #ffffff;
-  margin-left: 8.33%;
-  padding: 1%; 
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 15pt;
 
+  
+}
+.ModalDelete button{
+  text-align: center;
+  font-family: "kanit", sans-serif;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  border-color: #ffffff;
+  font-size: 15pt;
+}
+.ButtonDelete{
+  background-color: #29a8ab;
+  color: #ffffff; 
+}
+.ButtonCancel{
+  background-color: #CD5C5C;
+  color: #ffffff; 
 }

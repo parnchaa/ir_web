@@ -221,23 +221,25 @@ class Staff extends Component {
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่มแอดมิน
         </button>
+       
         <Modal
-          className="Modal"
+          // className="Modal"
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
           center
         >
-          <h2>Delete!!!</h2>
-          <div>ลบหรา?</div>
-          <div>
-            <button
+          <div className="ModalDelete">
+          <h2>ลบแอดมิน</h2>
+          <div>ยืนยันการลบแอดมิน</div>
+            <button className="ButtonDelete"
               onClick={event => {
                 this.submitDeleteTask(this.state.openStaffId);
               }}
             >
               Delete
             </button>
-            <button onClick={this.onCloseDeleteModal}>Cancel</button>
+            <button className="ButtonCancel"
+             onClick={this.onCloseDeleteModal}>Cancel</button>
           </div>
         </Modal>
         <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
