@@ -26,13 +26,6 @@ class Rule extends Component {
       });
   }
 
-  onOpenDeleteModal = ruleID => e => {
-    this.setState({
-      openDelete: true,
-      openRuleID: ruleID
-    });
-  };
-
   onOpenEditModal = ruleID => e => {
     const eachRuleID = this.state.rule.find(Id => {
       return Id.ruleID === ruleID;
@@ -93,6 +86,13 @@ onAfterEditRule=()=>{
 
   onCloseDeleteModal = () => {
     this.setState({ openDelete: false });
+  };
+
+  onOpenDeleteModal = ruleID => e => {
+    this.setState({
+      openDelete: true,
+      openRuleID: ruleID
+    });
   };
 
   submitDeleteTask = () => {

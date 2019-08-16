@@ -9,22 +9,22 @@
 
 .eventTable td{
   border: 1px solid #29A8AB;
-  padding: 0.8rem;
+  padding: 0.7rem;
 }
 
 .eventTable{
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
   color: #29A8AB;
   font-size: 1.2rem;
-  border: 1px solid #29A8AB;
   font-family: 'kanit',sans-serif;
 
 }
 
 .eventTable th{
   text-align: center;
-  padding: 1rem 2rem;
+  padding: 0.7rem 1.6rem;
   border: 1px solid #29A8AB;
   font-size: 1.4rem
 }
