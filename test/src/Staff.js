@@ -227,7 +227,7 @@ class Staff extends Component {
           onClose={this.onCloseDeleteModal}
           center
         >
-          <h2 className="deleteTitle">Delete!!!</h2>
+          <h2>Delete!!!</h2>
           <div>ลบหรา?</div>
           <div>
             <button
