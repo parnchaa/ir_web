@@ -95,7 +95,7 @@ class Location extends Component {
                 <Navibar />
                 <div className="wrapper">
                     <div className="form-wrapper">
-                        <form onSubmit={this.handlesubmit}  options={options}>
+                        <form className='locationForm' onSubmit={this.handlesubmit}  options={options}>
                             <h1>เพิ่มพื้นที่</h1>
                             <div className="locationName">
                                 <label htmlFor="locationName">พื้นที่: </label>

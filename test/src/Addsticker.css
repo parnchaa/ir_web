@@ -1,0 +1,36 @@
+.addStickerForm{
+    /* border: 1px solid black; */
+}
+
+.formRow{
+    display: flex;
+}
+
+.eachField{
+    display: flex;
+    margin-right: 2rem;
+    margin: 0.5rem 1rem;
+}
+
+.eachField label{
+    width: 160px;
+}
+
+.eachField input{
+    padding: 0.3rem 0.3rem;
+    margin: 0.3rem 0rem;
+    border-radius: 4px;
+    border: 1px solid rgba(177, 173, 173,0.8);
+}
+
+.addressInput{
+    height: 5rem;
+}
+
+.addSticker{
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto; */
+    display: flex;
+    justify-content: center;
+}

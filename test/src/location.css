@@ -16,11 +16,11 @@
   padding: 15px;  
   }
 
-  Form{
+  .locationForm{
     margin-top: 20px;
     margin-left: 10%;
    }
-input {
+.locationForm input {
     padding: 4px 4px;
     border-radius: 5px;
     outline: none;

@@ -83,7 +83,8 @@ class App extends Component {
         licensePlate,
         allegation,
         firstName,
-        problemDetails
+        problemDetails,
+        evidenceImage
       } = pro;
       return (  
         <tr key={problemID}>
@@ -95,6 +96,7 @@ class App extends Component {
           <td>{allegation}</td>
           <td>{firstName}</td>
           <td>{problemDetails}</td>
+          <td>{evidenceImage}</td>
           <button
             className="deleteModalButton"
             onClick={this.onOpenDeleteModal(pro.problemID)}
