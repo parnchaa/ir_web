@@ -25,6 +25,9 @@
 
 .addressInput{
     height: 5rem;
+    width: 40%;
+    display: block;
+    word-wrap: break-word;          
 }
 
 .addSticker{
@@ -33,4 +36,21 @@
     margin-right: auto; */
     display: flex;
     justify-content: center;
+    font-family: 'kanit',sans-serif;
+}
+.buttonAddsticker{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border: none;
+    border-color: #ffffff;
+    height: 40px;
+    font-size: 15pt;
+    width: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
 }

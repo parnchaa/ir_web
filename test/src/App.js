@@ -134,9 +134,8 @@ class App extends Component {
           </div>
         </Modal>
         <p className="Table-header">เหตุการณ์</p>
-       
           <table className="eventTable">
-            <th />
+           <th>ลำดับ</th>
             <th>วัน</th>
             <th>เวลา</th>
             <th>สถานที่</th>
@@ -144,10 +143,10 @@ class App extends Component {
             <th>ข้อหา</th>
             <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
-           <tbody> {this.problemTable()}</tbody>
+            <tbody> {this.problemTable()}</tbody>
           </table>
-        
-      </div>
+          </div>
+      
     );
   }
 }

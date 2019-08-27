@@ -165,35 +165,34 @@ class SearchSticker extends Component {
             </button>
             <button className='buttonCancel' onClick={this.onCloseEditModal}>Cancel</button>
           </Modal>
-
           <div className='carOwnerTask'>
               <div className='carOwnerName'>
-                <div className='fieldName'>ชื่อ : </div>
-                <div>{carOwnerFirstName}</div>
-                <div className='fieldName'>นามสกุล : </div>
-                <div>{carOwnerLastName}</div>
+                <div >ชื่อ : </div>
+                <div className='fieldName'>{carOwnerFirstName}</div>
+                <div >นามสกุล : </div>
+                <div className='fieldName'>{carOwnerLastName}</div>
               </div>
               <div className='carOwnerEmailTel'>
-                <div className='fieldName'>อีเมล์ : </div>
-                <div>{carOwnerEmail}</div>
-                <div className='fieldName'>เบอร์โทรศัพท์ : </div>
-                <div>{carOwnerTel}</div>
+                <div >อีเมล์ : </div>
+                <div className='fieldName'>{carOwnerEmail}</div>
+                <div >เบอร์โทรศัพท์ : </div>
+                <div className='fieldName'>{carOwnerTel}</div>
               </div>
               <div className='carOwnerAddress'>
-                <div className='fieldName'>ที่อยู่ : </div>
-                <div>{carOwnerAddress}</div>
+                <div>ที่อยู่ : </div>
+                <div className='fieldName'>{carOwnerAddress}</div>
               </div>
               <div className='carOwnerDate'>
-                <div className='fieldName'>วันที่ต่อสัญญา : </div>
-                <div>{registerDate.substr(0,10)}</div>
-                <div className='fieldName'>วันหมดอายุ : </div>
-                <div>{expiredDate.substr(0,10)}</div>
+                <div >วันที่ต่อสัญญา : </div>
+                <div className='fieldName'>{registerDate.substr(0,10)}</div>
+                <div >วันหมดอายุ : </div>
+                <div className='fieldName'>{expiredDate.substr(0,10)}</div>
               </div>
               <button
                 className="EditModalButton"
                 onClick={this.onOpenEditModal(carOwnerID)}
               >
-                Edit
+                แก้ไขข้อมูล
               </button>
           </div>
           

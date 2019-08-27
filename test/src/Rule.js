@@ -254,7 +254,7 @@ onAfterEditRule=()=>{
                   className="editButton"
                   onClick={this.onOpenEditModal(rule.ruleID)}
                 >
-                  Edit
+                  แก้ไข
                 </button>
                 <button
                   className="deleteModalButton"
