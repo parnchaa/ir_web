@@ -327,11 +327,16 @@ onAfterEditRule=()=>{
           </form>
         </Modal>
 
+      <div> 
+        
+        <p className="Table-header">กฎองค์กร
         <button className="addRuleButton" onClick={this.onOpenAddModal}>
-          เพิ่มกฏ
-        </button>
+          เพิ่มกฏ 
+        </button></p>
         <div className="ruleTable">{this.ruleTable()}</div>
       </div>
+      </div>
+      
     );
   }
 }

@@ -217,7 +217,7 @@ class Staff extends Component {
       <div>
         <Header />
         <Navibar />
-        <h2 className="title">แอดมิน</h2>
+        <h2 className="Table-header">แอดมิน</h2>
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่มแอดมิน
         </button>
@@ -302,7 +302,7 @@ class Staff extends Component {
           <tbody>{this.staffTable()}</tbody>
         </table>
 
-        <h2 className="title">พนักงานรักษาความปลอดภัย</h2>
+        <h2 className="Table-header">พนักงานรักษาความปลอดภัย</h2>
         <button
           className="addSecurityguard"
           onClick={this.onOpenAddSecurityguardModal}
