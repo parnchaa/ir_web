@@ -119,19 +119,21 @@ class App extends Component {
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
           center
-        >
-          <h2 className="deleteTitle">Delete!!!</h2>
-          <div>ลบจริงดิ?</div>
+        ><div className="ModalDelete">
+          <h2>ลบเหตการณ์</h2>
+          <div>ยืนยันการลบเหตการณ์</div>
           <div>
-            <button
+            <button className="ButtonDelete"
               onClick={event => {
                 this.submitDeleteTask(this.state.openRuleId);
               }}
             >
-              Delete
+              ลบ
             </button>
-            <button onClick={this.onCloseDeleteModal}>Cancel</button>
+            <button className="ButtonCancel" onClick={this.onCloseDeleteModal}>ยกเลิก</button>
           </div>
+          </div>
+
         </Modal>
         <p className="Table-header">เหตุการณ์</p>
           <table className="eventTable">
