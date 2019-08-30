@@ -13,7 +13,7 @@
 }
 
 .carOwnerTask{
-    width: 80%;
+    width: 50%;
     padding: 1rem;
     border: 0.3rem solid #29A8AB;
     border-radius: 0.9rem;
@@ -33,23 +33,30 @@
 
 .carOwnerAddress{
     display: flex;
+    font-weight:600;
+
 }
 
 .carOwnerName{
     display: flex;
+    font-weight:600;
 }
 
 .carOwnerEmailTel{
     display: flex;
+    font-weight:600;
+
 }
 
 .carOwnerDate{
     display: flex;
+    font-weight:600;
+
 }
 
 .EditModalButton{
     color: white;
-    font-size: 1rem;
+    font-size: 1.2rem;
     background-color: #29A8AB;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
@@ -97,4 +104,10 @@
     font-family: 'kanit',sans-serif;
     font-size: 32pt;
 
+}
+.fieldName{
+    font-family: 'kanit',sans-serif;
+    color:#29A8AB;
+    font-size: 1.3rem;
+    font-weight: 300;
 }

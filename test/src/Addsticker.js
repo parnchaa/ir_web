@@ -11,7 +11,7 @@ class Addsticker extends Component{
          <div>
             <Header/>
             <Navibar/>
-            <div>เพิ่มข้อมูลผู้ขอสติกเกอร์</div>
+            <div className="Table-header">เพิ่มข้อมูลผู้ขอสติกเกอร์</div>
             <div className='addSticker'>
                 <form className='addStickerForm'>
                     <div className='formRow'>
@@ -58,7 +58,8 @@ class Addsticker extends Component{
                         <input type='text' placeholder='รุ่นรถ'></input>
                     </div>
                     </div>
-                    <button>เพิ่ม</button>
+                     <button className="buttonAddsticker" >เพิ่ม</button>
+                   
                 </form>
             </div>
 

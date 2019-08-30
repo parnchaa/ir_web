@@ -68,3 +68,19 @@
 .eachEditInput{
     display: flex;
 }
+.addRuleButton{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border: none;
+    border-color: #ffffff;
+    height: 40px;
+    font-size: 15pt;
+    width: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: 25%;
+    /* margin-bottom: 3rem; */
+}
