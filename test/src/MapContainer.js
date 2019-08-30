@@ -1,5 +1,5 @@
 /* global google */
-import React, { Component } from "react";
+import React, { Component,useState } from "react";
 import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
 import { compose, withProps } from "recompose";
 // import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
@@ -43,15 +43,15 @@ const MapWithADrawingManager = compose(
           position: google.maps.ControlPosition.TOP_CENTER,
           drawingModes: [google.maps.drawing.OverlayType.POLYGON]
         },
-        circleOptions: {
-          fillColor: `#ffff00`,
-          fillOpacity: 1,
-          strokeWeight: 5,
-          clickable: false,
-          editable: true,
-          zIndex: 1
+        polygonOptions: {
+            strokeWeight: 1,
+            strokeColor: '#ff0000',
+            // onPolygonComplete: MapContainer.onPolygonComplete,
+            // getPath: props.paths
         }
-      }}
+      }
+    }
+    // onPolygonComplete={MapContainer.onPolygonComplete}
     />
   </GoogleMap>
 ));
@@ -65,6 +65,17 @@ export class MapContainer extends Component {
     this.delayedShowMarker();
   }
 
+  onPolygonComplete = poly => {
+    const polyArray = poly.getPath().getArray();
+    let paths = [];
+    polyArray.forEach(function(path){
+      paths.push({latitude:path.lat(), longitude: path.lng()});
+      console.log(paths,'polyArray')
+    });
+    console.log(paths,'polyArray')
+
+ }
+
   delayedShowMarker = () => {
     setTimeout(() => {
       this.setState({ isMarkerShown: true });
@@ -76,6 +87,7 @@ export class MapContainer extends Component {
     this.delayedShowMarker();
   };
   render() {
+    // console.log(this.paths,'polyArray')
     return (
       <div>
         <MapWithADrawingManager
