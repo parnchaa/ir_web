@@ -11,7 +11,8 @@ class App extends Component {
     super(props);
     this.state = {
       problem: [],
-      openDelete: false
+      openDelete: false,
+      openImg: false
     };
   }
 
@@ -51,15 +52,14 @@ class App extends Component {
     .catch(error => {});
   };
 
-  onOpenDeleteModal = problemID => e => {
-    this.setState({
-      openDelete: true,
-      openProblemID: problemID
-    });
-  };
+ 
 
   onCloseDeleteModal = () => {
     this.setState({ openDelete: false });
+  };
+
+  onCloseImgModal = () => {
+    this.setState({ openImg: false });
   };
 
   componentDidMount() {
@@ -69,6 +69,13 @@ class App extends Component {
   onOpenDeleteModal = problemID => e => {
     this.setState({
       openDelete: true,
+      openProblemID: problemID
+    });
+  };
+
+  onOpenImgModal = problemID => e => {
+    this.setState({
+      openImg: true,
       openProblemID: problemID
     });
   };
@@ -86,8 +93,8 @@ class App extends Component {
         problemDetails,
         evidenceImage
       } = pro;
-      return (  
-        <tr key={problemID}>
+      return (            
+        <tr key={problemID} className='eachRowTable'>
           <td>{problemID}</td>
           <td>{dateOfProblem.substr(0, 10)}</td>
           <td>{timeOfProblem}</td>
@@ -96,14 +103,27 @@ class App extends Component {
           <td>{allegation}</td>
           <td>{firstName}</td>
           <td>{problemDetails}</td>
-          <td><img src={evidenceImage} className='evidenceImg'></img></td>
+          {/* <td><img src={evidenceImage} className='evidenceImg'></img></td> */}
+          <button
+            className='evidenceImageButton'
+            onClick={this.onOpenImgModal(pro.problemID)}
+          >
+          </button>
+          <Modal
+          className="Modal"
+          open={this.state.openImg}
+          onClose={this.onCloseImgModal}
+          center
+        >
+          <h2 className="deleteTitle">รูปหลักฐาน</h2>
+          <img src={evidenceImage} className='evidenceImg'></img>
+        </Modal>  
           <button
             className="deleteModalButton"
             onClick={this.onOpenDeleteModal(pro.problemID)}
           >
             <img src={deletePic} className="deletePic" />
-          </button>
-          
+          </button>  
         </tr>
       );
     });
@@ -125,7 +145,7 @@ class App extends Component {
           <div>
             <button
               onClick={event => {
-                this.submitDeleteTask(this.state.openRuleId);
+                this.submitDeleteTask(this.state.openProblemID);
               }}
             >
               Delete
@@ -133,6 +153,7 @@ class App extends Component {
             <button onClick={this.onCloseDeleteModal}>Cancel</button>
           </div>
         </Modal>
+
         <p className="Table-header">เหตุการณ์</p>
           <table className="eventTable">
            <th>ลำดับ</th>
