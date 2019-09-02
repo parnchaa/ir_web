@@ -173,11 +173,11 @@ onAfterEditRule=()=>{
     return (
       <div>
         <Modal className='modal' open={this.state.openEdit} onClose={this.onCloseEditModal} center>
-          <h2>Edit</h2>
+          <h2 className="titleEdit">แก้ไขกฎ</h2>
           <div>
-            <form className='editForm'>
-              <div className='eachEditInput'>
-                <p>rulename:</p>
+            <form className='formAddEdit'>
+              <div className='editModal'>
+                <p>ชื่อกฎ :</p>
                 <input
                   type="text"
                   name="ruleName"
@@ -185,8 +185,8 @@ onAfterEditRule=()=>{
                   value={this.state.ruleName}
                 />
               </div>
-              <div className='eachEditInput'>
-                <p>maxWarning:</p>
+              <div className='editModal'>
+                <p>จำนวนเตือนสูงสุด:</p>
                 <input
                   type="text"
                   name="maxWarning"
@@ -194,8 +194,8 @@ onAfterEditRule=()=>{
                   value={this.state.maxWarning}
                 />
               </div>
-              <div className='eachEditInput'>
-                <p>price:</p>
+              <div className='editModal'>
+                <p>ค่าปรับ:</p>
                 <input
                   type="text"
                   name="price"
@@ -203,8 +203,8 @@ onAfterEditRule=()=>{
                   value={this.state.price}
                 />
               </div>
-              <div className='eachEditInput'>
-                <p>ruleDetails:</p>
+              <div className='editModal'>
+                <p>รายละเอียดกฎ:</p>
                 <input
                   type="text"
                   name="ruleDetails"
@@ -213,10 +213,10 @@ onAfterEditRule=()=>{
                 />
               </div>
             </form>
-            <button onClick={event => this.handleEditRule(event)}>
-              Update
+            <button className='buttonUpdate' onClick={event => this.handleEditRule(event)}>
+              แก้ไข
             </button>
-            <button onClick={this.onCloseEditModal}>Cancel</button>
+            <button  className='buttonCancel' onClick={this.onCloseEditModal}>ยกเลิก</button>
           </div>
         </Modal>
 
@@ -225,18 +225,20 @@ onAfterEditRule=()=>{
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
           center
-        >
-          <h2 className="deleteTitle">Delete!!!</h2>
-          <div>ลบจริงดิ?</div>
+        ><div className="ModalDelete">
+          <h2 >ลบกฎองค์กร</h2>
+          <div>ยืนยันการลบกฎองค์กร</div>
           <div>
-            <button
+            <button className="ButtonDelete"
               onClick={event => {
                 this.submitDeleteTask(this.state.openRuleId);
               }}
             >
               Delete
             </button>
-            <button onClick={this.onCloseDeleteModal}>Cancel</button>
+            <button className="ButtonCancel"
+            onClick={this.onCloseDeleteModal}>Cancel</button>
+          </div>
           </div>
         </Modal>
 
