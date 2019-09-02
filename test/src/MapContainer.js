@@ -45,9 +45,8 @@ const MapWithADrawingManager = compose(
         },
         polygonOptions: {
             strokeWeight: 1,
-            strokeColor: '#ff0000',
-            // onPolygonComplete: MapContainer.onPolygonComplete,
-            // getPath: props.paths
+            strokeColor: '#ff0-000',
+            onPolygonComplete: MapContainer.onPolygonComplete
         }
       }
     }
