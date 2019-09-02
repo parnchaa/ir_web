@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./Header";
 import Navibar from "./Navibar";
 import deletePic from "./picture/delete.png";
+import ImgPic from "./picture/more.png"
 import Modal from "react-responsive-modal";
 
 
@@ -96,7 +97,7 @@ class App extends Component {
       return (            
         <tr key={problemID} className='eachRowTable'>
           <td>{problemID}</td>
-          <td>{dateOfProblem.substr(0, 10)}</td>
+          <td id='dateColumn'>{dateOfProblem.substr(0, 10)}</td>
           <td>{timeOfProblem}</td>
           <td>{scene}</td>
           <td>{licensePlate}</td>
@@ -104,11 +105,14 @@ class App extends Component {
           <td>{firstName}</td>
           <td>{problemDetails}</td>
           {/* <td><img src={evidenceImage} className='evidenceImg'></img></td> */}
+          <td>
           <button
             className='evidenceImageButton'
             onClick={this.onOpenImgModal(pro.problemID)}
           >
+            <img src={ImgPic} className="Imgbutton"></img>
           </button>
+          </td>
           <Modal
           className="Modal"
           open={this.state.openImg}
@@ -117,7 +121,8 @@ class App extends Component {
         >
           <h2 className="deleteTitle">รูปหลักฐาน</h2>
           <img src={evidenceImage} className='evidenceImg'></img>
-        </Modal>  
+        </Modal> 
+
           <button
             className="deleteModalButton"
             onClick={this.onOpenDeleteModal(pro.problemID)}
@@ -159,13 +164,14 @@ class App extends Component {
         <p className="Table-header">เหตุการณ์</p>
           <table className="eventTable">
            <th>ลำดับ</th>
-            <th>วัน</th>
+            <th >วัน</th>
             <th>เวลา</th>
             <th>สถานที่</th>
             <th>ป้ายทะเบียน</th>
             <th>ข้อหา</th>
             <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
+            <th>รูปเหตุการณ์</th>
             <tbody> {this.problemTable()}</tbody>
           </table>
           </div>

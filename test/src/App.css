@@ -36,6 +36,17 @@
   height: 200px;
 }
 
-.eachRowTable td{
-  
+.Imgbutton{
+  width: 1rem;
+  height: 1rem;
+}
+
+.evidenceImageButton{
+  border: none;
+  background-color: transparent;
+  padding: 1rem 3.5rem;
+}
+
+#dateColumn{
+  width:10% ;
 }
