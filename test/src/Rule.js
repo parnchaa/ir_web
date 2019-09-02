@@ -178,7 +178,7 @@ onAfterEditRule=()=>{
             <form className='formAddEdit'>
               <div className='editModal'>
                 <p>ชื่อกฎ :</p>
-                <input
+                <input className="inputModal"
                   type="text"
                   name="ruleName"
                   onChange={event => this.handleChange(event)}
@@ -187,7 +187,7 @@ onAfterEditRule=()=>{
               </div>
               <div className='editModal'>
                 <p>จำนวนเตือนสูงสุด:</p>
-                <input
+                <input className="inputModal"
                   type="text"
                   name="maxWarning"
                   onChange={event => this.handleChange(event)}
@@ -196,7 +196,7 @@ onAfterEditRule=()=>{
               </div>
               <div className='editModal'>
                 <p>ค่าปรับ:</p>
-                <input
+                <input className="inputModal"
                   type="text"
                   name="price"
                   onChange={event => this.handleChange(event)}
@@ -205,7 +205,7 @@ onAfterEditRule=()=>{
               </div>
               <div className='editModal'>
                 <p>รายละเอียดกฎ:</p>
-                <input
+                <input className="inputModal"
                   type="text"
                   name="ruleDetails"
                   onChange={event => this.handleChange(event)}
@@ -234,10 +234,10 @@ onAfterEditRule=()=>{
                 this.submitDeleteTask(this.state.openRuleId);
               }}
             >
-              Delete
+              ลบ
             </button>
             <button className="ButtonCancel"
-            onClick={this.onCloseDeleteModal}>Cancel</button>
+            onClick={this.onCloseDeleteModal}>ยกเลิก</button>
           </div>
           </div>
         </Modal>
@@ -282,7 +282,7 @@ onAfterEditRule=()=>{
           <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
             <div className="addModal">
               <label htmlFor="ruleName">ชื่อกฏ: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="ruleName"
                 onChange={event => this.handleChange(event)}
@@ -291,7 +291,7 @@ onAfterEditRule=()=>{
             </div>
             <div className="addModal">
               <label htmlFor="price">ค่าปรับ: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="price"
                 onChange={event => this.handleChange(event)}
@@ -300,7 +300,7 @@ onAfterEditRule=()=>{
             </div>
             <div className="addModal">
               <label htmlFor="maxWarning">จำนานครั้งที่เตือน: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="maxWarning"
                 onChange={event => this.handleChange(event)}
@@ -309,7 +309,7 @@ onAfterEditRule=()=>{
             </div>
             <div className="addModal">
               <label htmlFor="ruleDetails">รายละเอียด: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="ruleDetails"
                 onChange={event => this.handleChange(event)}

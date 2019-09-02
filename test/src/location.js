@@ -101,7 +101,7 @@ class Location extends Component {
                 <label htmlFor="locationName">พื้นที่: </label>
               </div>
               <input
-                class="inputlocationname"
+                className="inputModal"
                 type="text"
                 placeholder="พื้นที่"
                 name="locationName"
@@ -112,7 +112,7 @@ class Location extends Component {
                 <label htmlFor="locationCode">โค้ด: </label>
               </div>
               <input
-                class="inputlocationname"
+className="inputModal"
                 type="text"
                 placeholder="โค้ด"
                 name="locationCode"

@@ -145,6 +145,7 @@ class App extends Component {
             <th>ข้อหา</th>
             <th>ผู้แจ้ง</th>
             <th>รายละเอียด</th>
+            <th>ภาพเหตการณ์</th>
             <tbody> {this.problemTable()}</tbody>
           </table>
           </div>

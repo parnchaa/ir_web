@@ -236,10 +236,10 @@ class Staff extends Component {
                 this.submitDeleteTask(this.state.openStaffId);
               }}
             >
-              Delete
+              ลบ
             </button>
             <button className="ButtonCancel"
-             onClick={this.onCloseDeleteModal}>Cancel</button>
+             onClick={this.onCloseDeleteModal}>ยกเลิก</button>
           </div>
         </Modal>
         <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
@@ -247,7 +247,7 @@ class Staff extends Component {
           <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
             <div className="addModal">
               <label htmlFor="firstName">ชื่อ: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="firstName"
                 onChange={event => this.handleChange(event)}
@@ -256,7 +256,7 @@ class Staff extends Component {
             </div>
             <div className="addModal">
               <label htmlFor="lastName">นามสกุล: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="lastName"
                 onChange={event => this.handleChange(event)}
@@ -265,7 +265,7 @@ class Staff extends Component {
             </div>
             <div className="addModal">
               <label htmlFor="staffTel">เบอร์โทรศัพท์: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="staffTel"
                 onChange={event => this.handleChange(event)}
@@ -274,7 +274,7 @@ class Staff extends Component {
             </div>
             <div className="addModal">
               <label htmlFor="staffEmail">อีเมล์: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="staffEmail"
                 onChange={event => this.handleChange(event)}
@@ -318,7 +318,7 @@ class Staff extends Component {
           <form className="formAddSecure">
             <div className="ModalName">
               <label>ชื่อ: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="firstName"
                 onChange={event => this.handleChange(event)}
@@ -328,7 +328,7 @@ class Staff extends Component {
 
             <div className="ModalSurname">
               <label>นามสกุล: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="lastName"
                 onChange={event => this.handleChange(event)}
@@ -338,7 +338,7 @@ class Staff extends Component {
 
             <div className="ModalEmail">
               <label>อีเมล์: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="staffTel"
                 onChange={event => this.handleChange(event)}
@@ -348,7 +348,7 @@ class Staff extends Component {
 
             <div className="ModalTel">
               <label>เบอร์โทรศัพท์: </label>
-              <input
+              <input className="inputModal"
                 type="text"
                 name="staffEmail"
                 onChange={event => this.handleChange(event)}
