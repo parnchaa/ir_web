@@ -3,9 +3,8 @@ import "./App.css";
 import Header from "./Header";
 import Navibar from "./Navibar";
 import deletePic from "./picture/delete.png";
-import ImgPic from "./picture/more.png"
+import ImgPic from "./picture/more.png";
 import Modal from "react-responsive-modal";
-
 
 class App extends Component {
   constructor(props) {
@@ -46,14 +45,13 @@ class App extends Component {
       method: "POST"
     };
     console.log("aaa", othepram);
-    fetch(url, othepram).then(data => console.log(data))
-    .then(response => {
-      this.getData();
-    })
-    .catch(error => {});
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
   };
-
- 
 
   onCloseDeleteModal = () => {
     this.setState({ openDelete: false });
@@ -94,10 +92,10 @@ class App extends Component {
         problemDetails,
         evidenceImage
       } = pro;
-      return (            
-        <tr key={problemID} className='eachRowTable'>
+      return (
+        <tr key={problemID} className="eachRowTable">
           <td>{problemID}</td>
-          <td id='dateColumn'>{dateOfProblem.substr(0, 10)}</td>
+          <td id="dateColumn">{dateOfProblem.substr(0, 10)}</td>
           <td>{timeOfProblem}</td>
           <td>{scene}</td>
           <td>{licensePlate}</td>
@@ -106,29 +104,29 @@ class App extends Component {
           <td>{problemDetails}</td>
           {/* <td><img src={evidenceImage} className='evidenceImg'></img></td> */}
           <td>
-          <button
-            className='evidenceImageButton'
-            onClick={this.onOpenImgModal(pro.problemID)}
-          >
-            <img src={ImgPic} className="Imgbutton"></img>
-          </button>
+            <button
+              className="evidenceImageButton"
+              onClick={this.onOpenImgModal(pro.problemID)}
+            >
+              <img src={ImgPic} className="Imgbutton"></img>
+            </button>
           </td>
           <Modal
-          className="Modal"
-          open={this.state.openImg}
-          onClose={this.onCloseImgModal}
-          center
-        >
-          <h2 className="deleteTitle">รูปหลักฐาน</h2>
-          <img src={evidenceImage} className='evidenceImg'></img>
-        </Modal> 
+            className="Modal"
+            open={this.state.openImg}
+            onClose={this.onCloseImgModal}
+            center
+          >
+            <h2 className="deleteTitle">รูปหลักฐาน</h2>
+            <img src={evidenceImage} className="evidenceImg"></img>
+          </Modal>
 
           <button
             className="deleteModalButton"
             onClick={this.onOpenDeleteModal(pro.problemID)}
           >
             <img src={deletePic} className="deletePic" />
-          </button>  
+          </button>
         </tr>
       );
     });
@@ -144,38 +142,43 @@ class App extends Component {
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
           center
-        ><div className="ModalDelete">
-          <h2>ลบเหตการณ์</h2>
-          <div>ยืนยันการลบเหตการณ์</div>
-          <div>
-            <button className="ButtonDelete"
-              onClick={event => {
-                this.submitDeleteTask(this.state.openProblemID);
-              }}
-            >
-              ลบ
-            </button>
-            <button className="ButtonCancel" onClick={this.onCloseDeleteModal}>ยกเลิก</button>
+        >
+          <div className="ModalDelete">
+            <h2>ลบเหตการณ์</h2>
+            <div>ยืนยันการลบเหตการณ์</div>
+            <div>
+              <button
+                className="ButtonDelete"
+                onClick={event => {
+                  this.submitDeleteTask(this.state.openProblemID);
+                }}
+              >
+                ลบ
+              </button>
+              <button
+                className="ButtonCancel"
+                onClick={this.onCloseDeleteModal}
+              >
+                ยกเลิก
+              </button>
+            </div>
           </div>
-          </div>
-
         </Modal>
 
         <p className="Table-header">เหตุการณ์</p>
-          <table className="eventTable">
-           <th>ลำดับ</th>
-            <th >วัน</th>
-            <th>เวลา</th>
-            <th>สถานที่</th>
-            <th>ป้ายทะเบียน</th>
-            <th>ข้อหา</th>
-            <th>ผู้แจ้ง</th>
-            <th>รายละเอียด</th>
-            <th>ภาพเหตการณ์</th>
-            <tbody> {this.problemTable()}</tbody>
-          </table>
-          </div>
-      
+        <table className="eventTable">
+          <th>ลำดับ</th>
+          <th>วัน</th>
+          <th>เวลา</th>
+          <th>สถานที่</th>
+          <th>ป้ายทะเบียน</th>
+          <th>ข้อหา</th>
+          <th>ผู้แจ้ง</th>
+          <th>รายละเอียด</th>
+          <th>ภาพเหตการณ์</th>
+          <tbody> {this.problemTable()}</tbody>
+        </table>
+      </div>
     );
   }
 }
