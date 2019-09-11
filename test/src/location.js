@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header";
 import Navibar from "./Navibar";
-import MapContainer from "./MapContainer"
+import MapContainer from "./MapContainer";
 import "./location.css";
 
 class Location extends Component {
@@ -112,7 +112,7 @@ class Location extends Component {
                 <label htmlFor="locationCode">โค้ด: </label>
               </div>
               <input
-className="inputModal"
+                className="inputModal"
                 type="text"
                 placeholder="โค้ด"
                 name="locationCode"
@@ -134,9 +134,9 @@ className="inputModal"
         <table class="locationtable">
           <tbody className="location">{this.locationTable()}</tbody>
         </table>
-        <MapContainer/>
+        <MapContainer location={this.state.locationName}/>
       </div>
     );
   }
 }
-export default Location ;
+export default Location;

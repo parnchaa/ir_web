@@ -18,7 +18,7 @@ const MapWithADrawingManager = compose(
         style={{
           height: `500px`,
           width: "80%",
-          marginTop:'30px',
+          marginTop: "30px",
           marginBottom: "50px",
           display: "block",
           marginLeft: "auto",
@@ -44,28 +44,62 @@ const MapWithADrawingManager = compose(
           drawingModes: [google.maps.drawing.OverlayType.POLYGON]
         },
         polygonOptions: {
-            strokeWeight: 1,
-            strokeColor: '#ff0-000',
+          strokeWeight: 1,
+          strokeColor: "#ff0-000"
         }
-      }
-    }
-    onPolygonComplete={(value) => console.log(getPaths(value))}  
-/>
+      }}
+      onPolygonComplete={value => console.log(getPaths(value))}
+    />
   </GoogleMap>
 ));
 
-function getPaths (polygon){
-  var allPaths = (polygon.getPath().getArray());
+function getPaths(polygon) {
+  var allPaths = polygon.getPath().getArray();
   var realPath = JSON.stringify({
     allPaths
-  })
-  console.log(realPath,'allPaths');
+  });
+  console.log(realPath, "realPath");
+  // if (realPath) {
+    // addLabelName();
+    var labelName = prompt("Input", '')
+    // return(labelName)
+  // }
+  console.log(labelName, "labelName");
+    const url = 'http://localhost:5000/addLocationLabel';
+    const bodyData = JSON.stringify({
+      locationName: labelName,
+      locationCode: realPath
+    });
+    console.log(bodyData,'bodyData')
+    const othepram = {
+        headers: {
+            "content-type": "application/json; charset=UTF-8"
+        },
+        body: bodyData,
+        method: "POST"
+    };
+    fetch(url, othepram)
+        .then(data => console.log(data))
+        // .then(response => {
+        //   this.getData();
+        // })
+        .catch(error => {});
+
+
 }
 
+// function addLabelName() {
+//   var labelName = prompt("Input", '')
+//   return(labelName)
+// }
+
 export class MapContainer extends Component {
-  state = {
-    isMarkerShown: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isMarkerShown: false,
+    };
+  }
 
   componentDidMount() {
     this.delayedShowMarker();
