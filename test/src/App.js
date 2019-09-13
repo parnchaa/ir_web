@@ -117,7 +117,7 @@ class App extends Component {
             onClose={this.onCloseImgModal}
             center
           >
-            <h2 className="deleteTitle">รูปหลักฐาน</h2>
+            <h2 className="inputModal">รูปหลักฐาน</h2>
             <img src={evidenceImage} className="evidenceImg"></img>
           </Modal>
 
