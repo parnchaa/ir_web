@@ -70,45 +70,45 @@ class Addsticker extends Component{
                     <div className='formRow'>
                     <div className='eachField'>
                         <label>ชื่อ:</label>
-                        <input type='text' placeholder='ชื่อ' name="carOwnerFname"  onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='ชื่อ' name="carOwnerFname" value={this.state.carOwnerFname}  onChange={event => this.handleChange(event)}></input>
                     </div>
                     <div className='eachField'>
                         {/* <label>นามสกุล:</label> */}
-                        <input type='text' placeholder='นามสกุล' name='carOwnerLname' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='นามสกุล' name='carOwnerLname' value={this.state.carOwnerLname} onChange={event => this.handleChange(event)}></input>
                     </div>
                     </div>
                     
                     <div className='eachField'>
                         <label>เบอร์โทรศัพท์:</label>
-                        <input type='text' placeholder='เบอร์โทรศัพท์' name='carOwnerTel' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='เบอร์โทรศัพท์' name='carOwnerTel' value={this.state.carOwnerTel} onChange={event => this.handleChange(event)}></input>
                     </div>
                     <div className='eachField'>
                         <label>อีเมล:</label>
-                        <input type='text'  placeholder='อีเมล' name='carOwnerEmail' onChange={event => this.handleChange(event)}></input>
+                        <input type='text'  placeholder='อีเมล' name='carOwnerEmail' value={this.state.carOwnerEmail} onChange={event => this.handleChange(event)}></input>
                     </div>
                     
                     <div className='eachField'>
                         <label>ที่อยู่:</label>
-                        <input type='text' className='addressInput' name='carOwmerAddress' placeholder='ที่อยู่' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' className='addressInput' name='carOwmerAddress' value={this.state.carOwmerAddress} placeholder='ที่อยู่' onChange={event => this.handleChange(event)}></input>
                     </div>
                     <div className='formRow'>
                     <div className='eachField'>
                         <label>ทะเบียนรถ:</label>
-                        <input type='text' placeholder='ทะเบียนรถ' name='licensePlate' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='ทะเบียนรถ' name='licensePlate' value={this.state.licensePlate} onChange={event => this.handleChange(event)}></input>
                     </div>
                     <div className='eachField'>
                         <label>สีรถ:</label>
-                        <input type='text' placeholder='สีรถ' name='carColor' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='สีรถ' name='carColor' value={this.state.carColor}  onChange={event => this.handleChange(event)}></input>
                     </div>
                     </div>
                     <div className='formRow'>
                     <div className='eachField'>
                         <label>ยี่ห้อรถ:</label>
-                        <input type='text' placeholder='ยี่ห้อรถ' name='brandCar' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='ยี่ห้อรถ' name='brandCar' value={this.state.brandCar} onChange={event => this.handleChange(event)}></input>
                     </div>
                     <div className='eachField'>
                         <label>รุ่นรถ:</label>
-                        <input type='text' placeholder='รุ่นรถ' name='modelCar' onChange={event => this.handleChange(event)}></input>
+                        <input type='text' placeholder='รุ่นรถ' name='modelCar' value={this.state.modelCar} onChange={event => this.handleChange(event)}></input>
                     </div>
                     </div>
                      <button className="buttonAddsticker" onClick={event => this.onAfterAddStaff(event)} >เพิ่ม</button>
