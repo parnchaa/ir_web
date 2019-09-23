@@ -4,6 +4,8 @@ import Navibar from "./Navibar";
 import "./Staff.css";
 import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
+import * as firebase from "firebase";
+import ApiKeys from "./ApiKeys";
 
 
 class Staff extends Component {
@@ -16,10 +18,17 @@ class Staff extends Component {
       lastName: "",
       staffEmail: "",
       staffTel: "",
+      staffPassword: "",
       openAdd: false,
       openAddSecurityguard: false,
-      openDelete: false
+      openDelete: false,
+      securityguardImage: "",
+      securityguardImages: "",
+      securityguardImageName: ""
     };
+    if (!firebase.apps.length) {
+      firebase.initializeApp(ApiKeys.FirebaseConfig);
+    }
   }
 
   getData() {
@@ -102,24 +111,81 @@ class Staff extends Component {
       .catch(error => {});
   };
 
+  uploadImages = async (event, securityguardImageName) => {
+    const response = await fetch(event);
+    const blob = await response.blob();
+
+    var ref = firebase
+      .storage()
+      .ref()
+      .child("securityguardImages/" + securityguardImageName);
+    return ref.put(blob);
+    console.log("success");
+  };
+
+  confirmUploadImage = () => {
+    this.uploadImages(
+      this.state.securityguardImages,
+      this.state.securityguardImageName
+    )
+      .then(() => {
+        console.log("Upload Success !!");
+        //get url ของรูปมาถ้า Upload สำเร็จ (ต้องเอา url ของรูปมาเก็บใน state แล้วนำมา show **ตอนนี้ยังไม่ได้ทำ)
+        firebase
+          .storage()
+          .ref()
+          .child("securityguardImages/" + this.state.securityguardImageName)
+          .getDownloadURL()
+          .then(imageURL => {
+            this.setState({
+              securityguardImage: imageURL
+            });
+            if (this.state.securityguardImage != "") {
+              console.log("imageURL: " + this.state.securityguardImage);
+            } else {
+              console.log("upload failed");
+            }
+          });
+      })
+      .catch(error => {
+        console.log("Fail to upload" + error);
+      });
+  };
+
+  fileSelectedHandler = event => {
+    this.setState({
+      securityguardImages: URL.createObjectURL(event.target.files[0]),
+      securityguardImageName: event.target.files[0].name
+    });
+  };
+
   handleSubmitSecurity = event => {
-    event.preventDefault();
-    this.onAfterInsertSecurity();
+    this.confirmUploadImage()
+    console.log(this.state.securityguardImage, "ออกดิไอควย");
+    this.onAfterInsertSecurity()
+    // if (this.state.securityguardImage !== "") {
+    //   this.onAfterInsertSecurity();
+    // }
     this.setState({
       firstName: "",
       lastName: "",
       staffEmail: "",
       staffTel: "",
+      staffPassword: "",
+      staffImages:"",
       openAddSecurityguard: false
     });
   };
+
   onAfterInsertSecurity = () => {
     const url = "http://localhost:5000/addsecurityguard";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       staffEmail: this.state.staffEmail,
-      staffTel: this.state.staffTel
+      staffTel: this.state.staffTel,
+      staffPassword: this.state.staffPassword,
+      staffImages: this.state.securityguardImage
     });
     console.log(bodyData);
     const othepram = {
@@ -228,7 +294,7 @@ class Staff extends Component {
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่มแอดมิน
         </button>
-       
+
         <Modal
           // className="Modal"
           open={this.state.openDelete}
@@ -236,17 +302,25 @@ class Staff extends Component {
           center
         >
           <div className="ModalDelete">
+<<<<<<< HEAD
           <h2>ลบพนักงาน</h2>
           <div>ยืนยันการลบ</div>
             <button className="ButtonDelete"
+=======
+            <h2>ลบแอดมิน</h2>
+            <div>ยืนยันการลบแอดมิน</div>
+            <button
+              className="ButtonDelete"
+>>>>>>> delete
               onClick={event => {
                 this.submitDeleteTask(this.state.openStaffId);
               }}
             >
               ลบ
             </button>
-            <button className="ButtonCancel"
-             onClick={this.onCloseDeleteModal}>ยกเลิก</button>
+            <button className="ButtonCancel" onClick={this.onCloseDeleteModal}>
+              ยกเลิก
+            </button>
           </div>
         </Modal>
         <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
@@ -254,7 +328,8 @@ class Staff extends Component {
           <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
             <div className="addModal">
               <label htmlFor="firstName">ชื่อ: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="firstName"
                 onChange={event => this.handleChange(event)}
@@ -263,7 +338,8 @@ class Staff extends Component {
             </div>
             <div className="addModal">
               <label htmlFor="lastName">นามสกุล: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="lastName"
                 onChange={event => this.handleChange(event)}
@@ -272,7 +348,8 @@ class Staff extends Component {
             </div>
             <div className="addModal">
               <label htmlFor="staffTel">เบอร์โทรศัพท์: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="staffTel"
                 onChange={event => this.handleChange(event)}
@@ -281,7 +358,8 @@ class Staff extends Component {
             </div>
             <div className="addModal">
               <label htmlFor="staffEmail">อีเมล์: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="staffEmail"
                 onChange={event => this.handleChange(event)}
@@ -325,7 +403,8 @@ class Staff extends Component {
           <form className="formAddSecure">
             <div className="ModalName">
               <label>ชื่อ: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="firstName"
                 onChange={event => this.handleChange(event)}
@@ -335,7 +414,8 @@ class Staff extends Component {
 
             <div className="ModalSurname">
               <label>นามสกุล: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="lastName"
                 onChange={event => this.handleChange(event)}
@@ -345,7 +425,19 @@ class Staff extends Component {
 
             <div className="ModalEmail">
               <label>อีเมล์: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
+                type="text"
+                name="staffEmail"
+                onChange={event => this.handleChange(event)}
+                value={this.state.staffEmail}
+              />
+            </div>
+
+            <div className="ModalTel">
+              <label>เบอร์โทรศัพท์: </label>
+              <input
+                className="inputModal"
                 type="text"
                 name="staffTel"
                 onChange={event => this.handleChange(event)}
@@ -353,15 +445,32 @@ class Staff extends Component {
               />
             </div>
 
-            <div className="ModalTel">
-              <label>เบอร์โทรศัพท์: </label>
-              <input className="inputModal"
-                type="text"
-                name="staffEmail"
+            <div className="staffPassword">
+              <label>รหัสผ่าน: </label>
+              <input
+                className="inputModal"
+                type="password"
+                name="staffPassword"
                 onChange={event => this.handleChange(event)}
-                value={this.state.staffEmail}
+                value={this.state.staffPassword}
               />
             </div>
+
+            <label htmlFor="upload-photo" className="upload-picture">
+              Browse...
+            </label>
+            <input
+              type="file"
+              name="photo"
+              id="upload-photo"
+              onChange={this.fileSelectedHandler}
+            />
+            {/* <button
+              className="upload-picture"
+              onClick={this.confirmUploadImage}
+            >
+              Upload
+            </button> */}
           </form>
           <div className="modalButton">
             <button

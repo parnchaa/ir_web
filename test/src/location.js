@@ -23,7 +23,7 @@ class Location extends Component {
       .then(location => {
         // console.log(myJson)
         this.setState({ location });
-        console.log("location", this.state.location);
+        // console.log("location", this.state.location);
       });
   }
 
@@ -121,6 +121,12 @@ class Location extends Component {
         </tr>
       );
     });
+  }
+
+  componentDidUpdate(nextState){
+    if(nextState !== this.state.location){
+      this.componentDidMount()
+    }
   }
 
   render() {

@@ -73,10 +73,15 @@ class App extends Component {
   };
 
   onOpenImgModal = problemID => e => {
+    const eachproblemID = this.state.problem.find(Id => {
+      return Id.problemID === problemID;
+    });
     this.setState({
       openImg: true,
-      openProblemID: problemID
+      openProblemID: problemID,
+      evidenceImage: eachproblemID.evidenceImage
     });
+    console.log(this.state.evidenceImage,'evidenceImage')
   };
 
   problemTable() {
@@ -89,8 +94,7 @@ class App extends Component {
         licensePlate,
         allegation,
         firstName,
-        problemDetails,
-        evidenceImage
+        problemDetails
       } = pro;
       return (
         <tr key={problemID} className="eachRowTable">
@@ -106,11 +110,12 @@ class App extends Component {
           <td>
             <button
               className="evidenceImageButton"
-              onClick={this.onOpenImgModal(pro.problemID)}
+              onClick={this.onOpenImgModal(problemID)}
             >
               <img src={ImgPic} className="Imgbutton"></img>
             </button>
           </td>
+
           <Modal
             className="Modal"
             open={this.state.openImg}
@@ -118,12 +123,12 @@ class App extends Component {
             center
           >
             <h2 className="inputModal">รูปหลักฐาน</h2>
-            <img src={evidenceImage} className="evidenceImg"></img>
+            <img src={this.state.evidenceImage} className="evidenceImg"></img>
           </Modal>
 
           <button
             className="deleteModalButton"
-            onClick={this.onOpenDeleteModal(pro.problemID)}
+            onClick={this.onOpenDeleteModal(problemID)}
           >
             <img src={deletePic} className="deletePic" />
           </button>

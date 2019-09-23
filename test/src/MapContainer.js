@@ -1,12 +1,24 @@
 /* global google */
 import React, { Component } from "react";
-import { GoogleMap, withGoogleMap, withScriptjs } from "react-google-maps";
+import {
+  GoogleMap,
+  withGoogleMap,
+  withScriptjs,
+  Polygon
+} from "react-google-maps";
 import { compose, withProps } from "recompose";
 // import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
 
 const {
   DrawingManager
 } = require("react-google-maps/lib/components/drawing/DrawingManager");
+
+// var triangleCoords = [
+//   { lat: 25.774, lng: -80.19 },
+//   { lat: 18.466, lng: -66.118 },
+//   { lat: 32.321, lng: -64.757 },
+//   { lat: 25.774, lng: -80.19 }
+// ];
 
 const MapWithADrawingManager = compose(
   withProps({
@@ -34,7 +46,9 @@ const MapWithADrawingManager = compose(
   <GoogleMap
     defaultZoom={20}
     defaultCenter={new google.maps.LatLng(13.652507, 100.493619)}
+    // defaultCenter={new google.maps.LatLng(25.774, -80.19)}
   >
+    {/* {showPolygon()} */}
     <DrawingManager
       defaultDrawingMode={false}
       defaultOptions={{
@@ -53,51 +67,62 @@ const MapWithADrawingManager = compose(
   </GoogleMap>
 ));
 
+// function showPolygon() {
+//   fetch("http://localhost:5000/locationCode")
+//     .then(response => {
+//       return response.json();
+//     })
+//     .then(response => {
+//       var oldPolygon = response;
+//       console.log(oldPolygon, "oldPolygon");
+//       return oldPolygon.map(oldPolygon => {
+//         return (
+//           <Polygon
+//             paths={oldPolygon}
+//             strokeColor="#F5B041"
+//             strokeOpacity={1}
+//             strokeWeight={1}
+//             fillColor="#F9E79F"
+//             fillOpacity={0.5}
+//           ></Polygon>
+//         );
+//       });
+      
+//     });
+// }
+
 function getPaths(polygon) {
   var allPaths = polygon.getPath().getArray();
-  var realPath = JSON.stringify({
+  var polygonPath = JSON.stringify({
     allPaths
   });
-  console.log(realPath, "realPath");
-  // if (realPath) {
-    // addLabelName();
-    var labelName = prompt("Input", '')
-    // return(labelName)
-  // }
-  console.log(labelName, "labelName");
-    const url = 'http://localhost:5000/addLocationLabel';
-    const bodyData = JSON.stringify({
-      locationName: labelName,
-      locationCode: realPath
-    });
-    console.log(bodyData,'bodyData')
-    const othepram = {
-        headers: {
-            "content-type": "application/json; charset=UTF-8"
-        },
-        body: bodyData,
-        method: "POST"
-    };
-    fetch(url, othepram)
-        .then(data => console.log(data))
-        // .then(response => {
-        //   this.getData();
-        // })
-        .catch(error => {});
-
-
+  // var aaa = polygonPath.substr(12,polygonPath.length)
+  console.log(polygonPath, "polygonPath");
+  var labelName = prompt("Input", "");
+  // console.log(labelName, "labelName");
+  const url = "http://localhost:5000/addLocationLabel";
+  const bodyData = JSON.stringify({
+    locationName: labelName,
+    locationCode: polygonPath
+  });
+  // console.log(bodyData, "bodyData");
+  const othepram = {
+    headers: {
+      "content-type": "application/json; charset=UTF-8"
+    },
+    body: bodyData,
+    method: "POST"
+  };
+  fetch(url, othepram)
+    .then(data => console.log(data))
+    .catch(error => {});
 }
-
-// function addLabelName() {
-//   var labelName = prompt("Input", '')
-//   return(labelName)
-// }
 
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMarkerShown: false,
+      isMarkerShown: false
     };
   }
 
@@ -115,6 +140,7 @@ export class MapContainer extends Component {
     this.setState({ isMarkerShown: false });
     this.delayedShowMarker();
   };
+
   render() {
     return (
       <div>

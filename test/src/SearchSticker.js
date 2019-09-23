@@ -9,8 +9,11 @@ class SearchSticker extends Component {
     super(props);
     this.state = {
       carOwner: [],
+      searchCarOwner:[],
+      choosedData:[],
       openEdit: false,
-      
+      searchValue:""
+
     };
   }
   getData() {
@@ -22,6 +25,16 @@ class SearchSticker extends Component {
         this.setState({ carOwner });
         console.log(carOwner,'cc')
       });
+  }
+
+  getSearchValue(){
+    fetch("http://localhost:5000/getSearchValue/" + this.state.searchValue) 
+      .then((response) => {
+        return response.json();
+      })
+      .then((responseJson) =>{
+        this.setState({searchCarOwner: responseJson})
+      })
   }
 
   handleChange = (event) => {
@@ -84,12 +97,48 @@ class SearchSticker extends Component {
     this.setState({ openEdit: false });
   };
 
-  componentWillMount(){
-    this.getData()
+  // componentWillMount(){
+    
+  // }
+
+  // componentDidUpdate(prevState){
+  //   if(prevState.searchValue !== ""){
+  //     // this.filterSticker()
+  //   }
+  // }
+
+  onKeyPress = (event) => {
+    if(event.key === 'Enter'){
+      console.log('Adding....') 
+      this.getSearchValue()
+      // this.carOwnerTable() 
+    }
+  } 
+
+  filterSticker = (event) => {
+    this.setState({
+      searchValue: event.target.value
+    })
+    console.log(this.state.searchValue,'kkk')
   }
 
+  // checkData(){
+  //   if(this.state.searchValue !== ""){
+  //     this.setState({
+  //       choosedData: this.state.searchCarOwner
+  //     })
+  //   }
+  //   if(this.state.searchValue === ""){
+  //     this.getData()
+  //     this.setState({
+  //       choosedData: this.state.carOwner
+  //     })
+  //   }
+  // }
+
   carOwnerTable() {
-    return this.state.carOwner.map(carOwner => {
+    // this.checkData()
+    return this.state.searchCarOwner.map(carOwner => {
       const {
         carOwnerID,
         carOwnerFirstName,
@@ -206,9 +255,17 @@ class SearchSticker extends Component {
       <div>
         <Header />
         <Navibar />
+        <input
+            placeholder="Search"
+            name="searchValue"
+            value={this.state.searchValue}
+            onChange={event => this.filterSticker(event)}
+            onKeyPress= {event=> this.onKeyPress(event)}
+        />
         <table className="table">
           <tbody>{this.carOwnerTable()}</tbody>
         </table>
+        
       </div>
     );
   }
