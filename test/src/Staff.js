@@ -5,6 +5,7 @@ import "./Staff.css";
 import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
 
+
 class Staff extends Component {
   constructor(props) {
     super(props);
@@ -196,14 +197,20 @@ class Staff extends Component {
 
   securityguardTable() {
     return this.state.securityguard.map(securityguard => {
-      const { firstName, lastName, staffEmail, staffTel } = securityguard;
+      const { firstName, lastName, staffEmail, staffTel, staffID  } = securityguard;
       return (
         <tr>
           <td>{firstName}</td>
           <td>{lastName}</td>
           <td>{staffEmail}</td>
           <td>{staffTel}</td>
-        </tr>
+          <button
+            className="deleteModalButton"
+            onClick={this.onOpenDeleteModal(staffID)}
+          >
+            <img src={deletePic} className="deletePic" />
+          </button>
+          </tr>
       );
     });
   }
@@ -229,8 +236,8 @@ class Staff extends Component {
           center
         >
           <div className="ModalDelete">
-          <h2>ลบแอดมิน</h2>
-          <div>ยืนยันการลบแอดมิน</div>
+          <h2>ลบพนักงาน</h2>
+          <div>ยืนยันการลบ</div>
             <button className="ButtonDelete"
               onClick={event => {
                 this.submitDeleteTask(this.state.openStaffId);

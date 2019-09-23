@@ -3,12 +3,16 @@ import Header from "./Header";
 import Navibar from "./Navibar";
 import MapContainer from "./MapContainer";
 import "./location.css";
+import deletePic from "./picture/delete.png";
+import Modal from "react-responsive-modal";
+
 
 class Location extends Component {
   state = {
     locationName: "",
     locationCode: "",
-    location: []
+    location: [],
+    openDelete: false
   };
 
   getData() {
@@ -21,18 +25,6 @@ class Location extends Component {
         this.setState({ location });
         console.log("location", this.state.location);
       });
-  }
-
-  locationTable() {
-    return this.state.location.map(location => {
-      const { locationName, locationCode } = location;
-      return (
-        <tr>
-          <td>{locationName}</td>
-          <td>{locationCode}</td>
-        </tr>
-      );
-    });
   }
 
   handleChange = event => {
@@ -79,6 +71,57 @@ class Location extends Component {
   componentDidMount() {
     this.getData();
   }
+  onOpenDeleteModalLocation = locationID => e => {
+    this.setState({
+      openDelete: true,
+      openLocationID: locationID
+    });
+  };
+  onCloseDeleteModalLocation = () => {
+    this.setState({ openDelete: false });
+  };
+
+  submitDeleteTaskLocation = () => {
+    this.deleteFetch();
+    this.onCloseDeleteModalLocation();
+  };
+
+  deleteFetch = () => {
+    const url = "http://localhost:5000/deleteLocation";
+    const bodyData = JSON.stringify({
+      locationID: this.state.openLocationID
+    });
+    console.log(bodyData);
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    console.log("aaa", othepram);
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
+  };
+  locationTable() {
+    return this.state.location.map(location => {
+      const { locationName, locationCode,locationID,openLocationID } = location;
+      return (
+        <tr>
+          <td>{locationName}</td>
+          <td>{locationCode}</td>
+          <button className="deleteModalButton"
+          onClick={this.onOpenDeleteModalLocation(locationID)}>
+            <img src={deletePic} className="deletePic" />
+          </button>
+        </tr>
+      );
+    });
+  }
 
   render() {
     const options = {
@@ -89,52 +132,38 @@ class Location extends Component {
       <div>
         <Header />
         <Navibar />
-        <div className="wrapper">
-          <div className="form-wrapper">
-            <form
-              className="locationForm"
-              onSubmit={this.handlesubmit}
-              options={options}
-            >
-              <h1>เพิ่มพื้นที่</h1>
-              <div className="locationName">
-                <label htmlFor="locationName">พื้นที่: </label>
-              </div>
-              <input
-                className="inputModal"
-                type="text"
-                placeholder="พื้นที่"
-                name="locationName"
-                onChange={event => this.handleChange(event)}
-                value={this.state.locationName}
-              />
-              <div className="locationCode">
-                <label htmlFor="locationCode">โค้ด: </label>
-              </div>
-              <input
-                className="inputModal"
-                type="text"
-                placeholder="โค้ด"
-                name="locationCode"
-                onChange={event => this.handleChange(event)}
-                value={this.state.locationCode}
-              />
-              <div className="addarea">
-                <button
-                  onClick={event => this.handleSubmit(event)}
-                  type="submit"
-                >
-                  เพิ่มพื้นที่
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <h2 className="titleLocation">Location</h2>
+        
+        <h2 className="Table-header">สถานที่จอดรถ</h2>
         <table class="locationtable">
-          <tbody className="location">{this.locationTable()}</tbody>
+        <Modal
+       open={this.state.openDelete}
+       onClose={this.onCloseDeleteModalLocation}
+       center
+     >
+       <div className="ModalDelete">
+       <h2>ลบสถานที่</h2>
+       <div>ยืนยันการลบ</div>
+         <button className="ButtonDelete"
+           onClick={event => {
+             this.submitDeleteTaskLocation(this.state.openLocationID);
+           }}
+         >
+           ลบ
+         </button>
+         <button className="ButtonCancel"
+          onClick={this.onCloseDeleteModalLocation}>ยกเลิก</button>
+       </div>
+     </Modal>
+        
+          <tbody className="location">
+          <th>ชื่อสถานที่</th>
+          <th>รหัสสถานที่</th>
+          {this.locationTable()}
+          </tbody>
+         
         </table>
         <MapContainer location={this.state.locationName}/>
+               
       </div>
     );
   }
