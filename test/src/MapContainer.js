@@ -48,7 +48,7 @@ const MapWithADrawingManager = compose(
     defaultCenter={new google.maps.LatLng(13.652507, 100.493619)}
     // defaultCenter={new google.maps.LatLng(25.774, -80.19)}
   >
-    {showPolygon()}
+    {/* {showPolygon()} */}
     <DrawingManager
       defaultDrawingMode={false}
       defaultOptions={{
@@ -67,43 +67,43 @@ const MapWithADrawingManager = compose(
   </GoogleMap>
 ));
 
-function showPolygon() {
-  fetch("http://localhost:5000/locationCode")
-    .then(response => {
-      return response.json();
-    })
-    .then(response => {
-      var oldPolygon = response;
-      console.log(oldPolygon, "oldPolygon");
-      return oldPolygon.map(oldPolygon => {
-        return (
-          <Polygon
-            paths={oldPolygon}
-            strokeColor="#F5B041"
-            strokeOpacity={1}
-            strokeWeight={1}
-            fillColor="#F9E79F"
-            fillOpacity={0.5}
-          ></Polygon>
-        );
-      });
+// function showPolygon() {
+//   fetch("http://localhost:5000/locationCode")
+//     .then(response => {
+//       return response.json();
+//     })
+//     .then(response => {
+//       var oldPolygon = response;
+//       console.log(oldPolygon, "oldPolygon");
+//       return oldPolygon.map(oldPolygon => {
+//         return (
+//           <Polygon
+//             paths={oldPolygon}
+//             strokeColor="#F5B041"
+//             strokeOpacity={1}
+//             strokeWeight={1}
+//             fillColor="#F9E79F"
+//             fillOpacity={0.5}
+//           ></Polygon>
+//         );
+//       });
       
-    });
-}
+//     });
+// }
 
 function getPaths(polygon) {
   var allPaths = polygon.getPath().getArray();
   var polygonPath = JSON.stringify({
     allPaths
   });
-  var aaa = polygonPath.substr(12,polygonPath.length)
-  console.log(aaa, "aaa");
+  // var aaa = polygonPath.substr(12,polygonPath.length)
+  console.log(polygonPath, "polygonPath");
   var labelName = prompt("Input", "");
   // console.log(labelName, "labelName");
   const url = "http://localhost:5000/addLocationLabel";
   const bodyData = JSON.stringify({
     locationName: labelName,
-    locationCode: aaa
+    locationCode: polygonPath
   });
   // console.log(bodyData, "bodyData");
   const othepram = {
