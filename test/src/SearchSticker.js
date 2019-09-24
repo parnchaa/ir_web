@@ -134,11 +134,14 @@ class SearchSticker extends Component {
     //         choosedData: this.state.carOwner
     //       })
     //     }
-    // let tableData = ""
-    // if(this.state.searchValue ){
-
-    // }
-    return this.state.carOwner.map(carOwner => {
+    let tableData = ""
+    if(this.state.searchValue === ""){
+      tableData = this.state.carOwner
+    }
+    if(this.state.searchValue !== ""){
+      tableData = this.state.searchCarOwner
+    }
+    return tableData.map(carOwner => {
       const {
         carOwnerID,
         carOwnerFirstName,
