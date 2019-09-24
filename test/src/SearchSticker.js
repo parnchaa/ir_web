@@ -13,9 +13,9 @@ class SearchSticker extends Component {
       choosedData:[],
       openEdit: false,
       searchValue:""
-
     };
   }
+
   getData() {
     fetch("http://localhost:5000/carOwner")
       .then(response => {
@@ -97,9 +97,9 @@ class SearchSticker extends Component {
     this.setState({ openEdit: false });
   };
 
-  // componentWillMount(){
-    
-  // }
+  componentWillMount(){
+   this.getData() 
+  }
 
   // componentDidUpdate(prevState){
   //   if(prevState.searchValue !== ""){
@@ -122,23 +122,23 @@ class SearchSticker extends Component {
     console.log(this.state.searchValue,'kkk')
   }
 
-  // checkData(){
-  //   if(this.state.searchValue !== ""){
-  //     this.setState({
-  //       choosedData: this.state.searchCarOwner
-  //     })
-  //   }
-  //   if(this.state.searchValue === ""){
-  //     this.getData()
-  //     this.setState({
-  //       choosedData: this.state.carOwner
-  //     })
-  //   }
-  // }
-
   carOwnerTable() {
-    // this.checkData()
-    return this.state.searchCarOwner.map(carOwner => {
+    // if(this.state.searchValue !== ""){
+    //       this.setState({
+    //         choosedData: this.state.searchCarOwner
+    //       })
+    //     }
+    //     if(this.state.searchValue === ""){
+    //       this.getData()
+    //       this.setState({
+    //         choosedData: this.state.carOwner
+    //       })
+    //     }
+    // let tableData = ""
+    // if(this.state.searchValue ){
+
+    // }
+    return this.state.carOwner.map(carOwner => {
       const {
         carOwnerID,
         carOwnerFirstName,
