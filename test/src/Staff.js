@@ -6,6 +6,7 @@ import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
 import * as firebase from "firebase";
 import ApiKeys from "./ApiKeys";
+import addButton from "./picture/plus.png";
 
 
 class Staff extends Component {
@@ -295,6 +296,7 @@ class Staff extends Component {
           เพิ่มแอดมิน
         </button>
 
+
         <Modal
           // className="Modal"
           open={this.state.openDelete}
@@ -302,16 +304,9 @@ class Staff extends Component {
           center
         >
           <div className="ModalDelete">
-<<<<<<< HEAD
           <h2>ลบพนักงาน</h2>
           <div>ยืนยันการลบ</div>
             <button className="ButtonDelete"
-=======
-            <h2>ลบแอดมิน</h2>
-            <div>ยืนยันการลบแอดมิน</div>
-            <button
-              className="ButtonDelete"
->>>>>>> delete
               onClick={event => {
                 this.submitDeleteTask(this.state.openStaffId);
               }}
