@@ -452,7 +452,7 @@ class Staff extends Component {
             </div>
 
             <label htmlFor="upload-photo" className="upload-picture">
-              Browse...
+              เลือกรูป
             </label>
             <input
               type="file"
