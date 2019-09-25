@@ -122,7 +122,7 @@ class App extends Component {
             onClose={this.onCloseImgModal}
             center
           >
-            <h2 className="inputModal">รูปหลักฐาน</h2>
+            <h2 className="ModalEvidence">รูปหลักฐาน</h2>
             <img src={this.state.evidenceImage} className="evidenceImg"></img>
           </Modal>
 
@@ -142,7 +142,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Navibar />
-        <Modal
+        <Modal 
           className="Modal"
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
@@ -180,7 +180,7 @@ class App extends Component {
           <th>ข้อหา</th>
           <th>ผู้แจ้ง</th>
           <th>รายละเอียด</th>
-          <th>ภาพเหตการณ์</th>
+          <th>หลักฐาน</th>
           <tbody> {this.problemTable()}</tbody>
         </table>
       </div>

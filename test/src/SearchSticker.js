@@ -162,6 +162,7 @@ class SearchSticker extends Component {
       return (
         <div>
           <Modal
+            classNames='ModalEditSicker'
             open={this.state.openEdit}
             onClose={this.onCloseEditModal}
             center

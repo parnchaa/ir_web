@@ -32,8 +32,10 @@
 }
 
 .evidenceImg{
-  width: 200px;
-  height: 200px;
+  width: 400px;
+  height: 300px;
+  
+ 
 }
 
 .Imgbutton{
@@ -49,4 +51,17 @@
 
 #dateColumn{
   width:10% ;
+}
+.ModalEvidence{
+  height: 2.3rem;
+  font-family: 'kanit',sans-serif;
+  font-size: 30pt;
+  margin-bottom:30px;
+  margin-top:30px;
+  text-align: center;
+  color: #29A8AB;
+  width: 350px;
+}
+.closebutton{
+  color: #29A8AB;
 }
