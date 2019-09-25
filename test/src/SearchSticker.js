@@ -14,7 +14,8 @@ class SearchSticker extends Component {
       searchCarOwner:[],
       choosedData:[],
       openEdit: false,
-      searchValue:""
+      searchValue:"",
+      pageStatus:""
     };
   }
 
@@ -37,6 +38,7 @@ class SearchSticker extends Component {
       .then((responseJson) =>{
         this.setState({searchCarOwner: responseJson})
       })
+      .catch(error=>{this.getData()})
   }
 
   handleChange = (event) => {
@@ -75,7 +77,12 @@ class SearchSticker extends Component {
     fetch(url, othepram)
         .then(data => console.log(data))
         .then(response => {
-          this.getData();
+          if(this.state.searchValue === ""){
+            this.getData();
+          }
+          else if(this.state.searchValue !== ""){
+            this.getSearchValue()
+          }
         })
         .catch(error => {});
 }
