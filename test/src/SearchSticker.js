@@ -3,6 +3,8 @@ import Header from "./Header";
 import Navibar from "./Navibar";
 import "./SearchSticker.css";
 import Modal from "react-responsive-modal";
+import search from "./picture/search.png";
+
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -259,13 +261,18 @@ class SearchSticker extends Component {
       <div>
         <Header />
         <Navibar />
-        <input
-            placeholder="Search"
+        <div>
+          <input className="InputSearch"
+           placeholder="ค้นหาชื่อ,นามสกุล"
             name="searchValue"
             value={this.state.searchValue}
             onChange={event => this.filterSticker(event)}
             onKeyPress= {event=> this.onKeyPress(event)}
-        />
+            />
+            <img src={search} className="search" />
+</div>
+
+          <h2 className="Table-header">ข้อมูลผู้ขอสติกเกอร์</h2>
         <table className="table">
           <tbody>{this.carOwnerTable()}</tbody>
         </table>
