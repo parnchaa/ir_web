@@ -21,6 +21,9 @@
     margin: 0.3rem 0rem;
     border-radius: 4px;
     border: 1px solid rgba(177, 173, 173,0.8);
+    font-family: 'kanit',sans-serif;
+    color: #29A8AB;
+
 }
 
 .addressInput{
@@ -53,4 +56,10 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 3rem;
+}
+.error{
+    color: red;
+    font-family: 'kanit',sans-serif;
+    font-size: 10pt;
+
 }

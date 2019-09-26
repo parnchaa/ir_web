@@ -121,33 +121,33 @@ class Addsticker extends Component {
     const phoneno = /^0[0-9]{8,9}$/i;
     switch (name) {
       case "carOwnerFname":
-        errors.carOwnerFname = value.length < 2 ? "ใส่ชื่อดิไอสัส" : "";
+        errors.carOwnerFname = value.length < 2 ? "กรุณากรอกชื่อ เช่น สมชาย" : "";
         break;
       case "carOwnerLname":
-        errors.carOwnerLname = value.length < 2 ? "ใส่นามสกุลดิไอสัส" : "";
+        errors.carOwnerLname = value.length < 2 ? "กรุณากรอกนามสกุล เช่น ใจดี " : "";
         break;
       case "carOwnerTel":
-        errors.carOwnerTel = phoneno.test(value) ? "" : "ใส่เบอร์ดีๆดิ้สัส";
+        errors.carOwnerTel = phoneno.test(value) ? "" : "กรุณากรอกเบอร์โทรให้ถูกต้อง เช่น 0812345678";
         break;
       case "carOwnerEmail":
         errors.carOwnerEmail = validEmailRegex.test(value)
           ? ""
-          : "ใส่เมลดีๆดิ้สัส";
+          : "กรุณากรอกอีเมล์ให้ถูกต้อง เช่น somchai@gmail.com";
         break;
       case "carOwnerAddress":
-        errors.carOwnerAddress = value.length < 10 ? "ใส่ที่อยู่ดีๆดิ้สัส" : "";
+        errors.carOwnerAddress = value.length < 10 ? "กรุณาใส่ที่อยู่ให้ถูกต้อง" : "";
         break;
       case "licensePlate":
-        errors.licensePlate = value.length < 3 ? "ใส่ดีๆดิ้สัส" : "";
+        errors.licensePlate = value.length < 3 ? "กรุณากรอกทะเบียนรถให้ถูกต้อง เช่น 1กข2345" : "";
         break;
       case "carColor":
-        errors.carColor = value.length < 2 ? "ใส่ดีๆดิ้สัส" : "";
+        errors.carColor = value.length < 2 ? "กรุณากรอกสีรถยนต์ให้ถูกต้อง เช่น ดำ" : "";
         break;
       case "brandCar":
-        errors.brandCar = value.length < 2 ? "ใส่ดีๆดิ้สัส" : "";
+        errors.brandCar = value.length < 2 ? "กรุณากรอกชื่อยี่ห้อรถให้ถูกต้อง เช่น เบนซ์" : "";
         break;
       case "modelCar":
-        errors.modelCar = value.length < 2 ? "ใส่ดีๆดิ้สัส" : "";
+        errors.modelCar = value.length < 2 ? "กรุณากรอกรุ่นรถยนต์ให้ถูกต้อง เช่น C250" : "";
         break;
     }
 
@@ -242,6 +242,7 @@ class Addsticker extends Component {
                 onChange={event => this.handleChange(event)}
               ></input>
               {errors.carOwnerAddress.length > 0 && (
+                  
                   <p className="error">{errors.carOwnerAddress}</p>
               )}
                 </div>
