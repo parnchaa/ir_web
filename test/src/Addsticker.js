@@ -9,7 +9,7 @@ class Addsticker extends Component {
     carOwnerLname: "",
     carOwnerTel: "",
     carOwnerEmail: "",
-    carOwmerAddress: "",
+    carOwnerAddress: "",
     licensePlate: "",
     carColor: "",
     brandCar: "",
@@ -19,7 +19,7 @@ class Addsticker extends Component {
       carOwnerLname: "",
       carOwnerTel: "",
       carOwnerEmail: "",
-      carOwmerAddress: "",
+      carOwnerAddress: "",
       licensePlate: "",
       carColor: "",
       brandCar: "",
@@ -34,7 +34,7 @@ class Addsticker extends Component {
       carOwnerLname,
       carOwnerTel,
       carOwnerEmail,
-      carOwmerAddress,
+      carOwnerAddress,
       licensePlate,
       carColor,
       brandCar,
@@ -46,7 +46,7 @@ class Addsticker extends Component {
       carOwnerLname !== "" &&
       carOwnerTel !== "" &&
       carOwnerEmail !== "" &&
-      carOwmerAddress !== "" &&
+      carOwnerAddress !== "" &&
       licensePlate !== "" &&
       carColor !== "" &&
       brandCar !== "" &&
@@ -55,7 +55,7 @@ class Addsticker extends Component {
       if (this.validateForm(this.state.errors)) {
         //   this.onAfterAddStaff()
         console.log("Valid Form");
-      }else{
+      } else {
         console.error("Invalid Form");
       }
     } else {
@@ -79,7 +79,7 @@ class Addsticker extends Component {
       carOwnerLname,
       carOwnerTel,
       carOwnerEmail,
-      carOwmerAddress,
+      carOwnerAddress,
       licensePlate,
       carColor,
       brandCar,
@@ -91,7 +91,7 @@ class Addsticker extends Component {
       carOwnerLname: carOwnerLname,
       carOwnerTel: carOwnerTel,
       carOwnerEmail: carOwnerEmail,
-      carOwmerAddress: carOwmerAddress,
+      carOwnerAddress: carOwnerAddress,
       licensePlate: licensePlate,
       carColor: carColor,
       brandCar: brandCar,
@@ -134,8 +134,8 @@ class Addsticker extends Component {
           ? ""
           : "ใส่เมลดีๆดิ้สัส";
         break;
-      case "carOwmerAddress":
-        errors.carOwmerAddress = value.length < 10 ? "ใส่ที่อยู่ดีๆดิ้สัส" : "";
+      case "carOwnerAddress":
+        errors.carOwnerAddress = value.length < 10 ? "ใส่ที่อยู่ดีๆดิ้สัส" : "";
         break;
       case "licensePlate":
         errors.licensePlate = value.length < 3 ? "ใส่ดีๆดิ้สัส" : "";
@@ -159,6 +159,7 @@ class Addsticker extends Component {
 
   render() {
     console.log("name:" + this.state.carOwnerFname);
+    const {errors} = this.state;
     return (
       <div>
         <Header />
@@ -169,6 +170,7 @@ class Addsticker extends Component {
             <div className="formRow">
               <div className="eachField">
                 <label>ชื่อ:</label>
+                <div>
                 <input
                   type="text"
                   placeholder="ชื่อ"
@@ -176,9 +178,13 @@ class Addsticker extends Component {
                   value={this.state.carOwnerFname}
                   onChange={event => this.handleChange(event)}
                 ></input>
+                {errors.carOwnerFname.length > 0 && (
+                  <p className="error">{errors.carOwnerFname}</p>
+                )}
+                </div>
               </div>
               <div className="eachField">
-                {/* <label>นามสกุล:</label> */}
+                <div>
                 <input
                   type="text"
                   placeholder="นามสกุล"
@@ -186,11 +192,16 @@ class Addsticker extends Component {
                   value={this.state.carOwnerLname}
                   onChange={event => this.handleChange(event)}
                 ></input>
+                {errors.carOwnerLname.length > 0 && (
+                  <p className="error">{errors.carOwnerLname}</p>
+                )}
+                </div>
               </div>
             </div>
 
             <div className="eachField">
               <label>เบอร์โทรศัพท์:</label>
+              <div>
               <input
                 type="text"
                 placeholder="เบอร์โทรศัพท์"
@@ -198,9 +209,14 @@ class Addsticker extends Component {
                 value={this.state.carOwnerTel}
                 onChange={event => this.handleChange(event)}
               ></input>
+              {errors.carOwnerTel.length > 0 && (
+                  <p className="error">{errors.carOwnerTel}</p>
+                )}
+                </div>
             </div>
             <div className="eachField">
               <label>อีเมล:</label>
+              <div>
               <input
                 type="text"
                 placeholder="อีเมล"
@@ -208,22 +224,32 @@ class Addsticker extends Component {
                 value={this.state.carOwnerEmail}
                 onChange={event => this.handleChange(event)}
               ></input>
+              {errors.carOwnerEmail.length > 0 && (
+                  <p className="error">{errors.carOwnerEmail}</p>
+                )}
+                </div>
             </div>
 
             <div className="eachField">
               <label>ที่อยู่:</label>
+              
               <input
                 type="text"
                 className="addressInput"
-                name="carOwmerAddress"
-                value={this.state.carOwmerAddress}
+                name="carOwnerAddress"
+                value={this.state.carOwnerAddress}
                 placeholder="ที่อยู่"
                 onChange={event => this.handleChange(event)}
               ></input>
-            </div>
+              {errors.carOwnerAddress.length > 0 && (
+                  <p className="error">{errors.carOwnerAddress}</p>
+              )}
+                </div>
+            
             <div className="formRow">
               <div className="eachField">
                 <label>ทะเบียนรถ:</label>
+                <div>
                 <input
                   type="text"
                   placeholder="ทะเบียนรถ"
@@ -231,9 +257,14 @@ class Addsticker extends Component {
                   value={this.state.licensePlate}
                   onChange={event => this.handleChange(event)}
                 ></input>
+                {errors.licensePlate.length > 0 && (
+                  <p className="error">{errors.licensePlate}</p>
+                )}
+                </div>
               </div>
               <div className="eachField">
                 <label>สีรถ:</label>
+                <div>
                 <input
                   type="text"
                   placeholder="สีรถ"
@@ -241,11 +272,16 @@ class Addsticker extends Component {
                   value={this.state.carColor}
                   onChange={event => this.handleChange(event)}
                 ></input>
+                {errors.carColor.length > 0 && (
+                  <p className="error">{errors.carColor}</p>
+                )}
+                </div>
               </div>
             </div>
             <div className="formRow">
               <div className="eachField">
                 <label>ยี่ห้อรถ:</label>
+                <div>
                 <input
                   type="text"
                   placeholder="ยี่ห้อรถ"
@@ -253,9 +289,14 @@ class Addsticker extends Component {
                   value={this.state.brandCar}
                   onChange={event => this.handleChange(event)}
                 ></input>
+                {errors.brandCar.length > 0 && (
+                  <p className="error">{errors.brandCar}</p>
+                )}
+                </div>
               </div>
               <div className="eachField">
                 <label>รุ่นรถ:</label>
+                <div>
                 <input
                   type="text"
                   placeholder="รุ่นรถ"
@@ -263,6 +304,10 @@ class Addsticker extends Component {
                   value={this.state.modelCar}
                   onChange={event => this.handleChange(event)}
                 ></input>
+                {errors.modelCar.length > 0 && (
+                  <p className="error">{errors.modelCar}</p>
+                )}
+                </div>
               </div>
             </div>
             <button

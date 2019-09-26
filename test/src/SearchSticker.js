@@ -5,17 +5,23 @@ import "./SearchSticker.css";
 import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
 
-
 class SearchSticker extends Component {
   constructor(props) {
     super(props);
     this.state = {
       carOwner: [],
-      searchCarOwner:[],
-      choosedData:[],
+      searchCarOwner: [],
+      choosedData: [],
       openEdit: false,
-      searchValue:"",
-      pageStatus:""
+      searchValue: "",
+      pageStatus: "",
+      errors: {
+        carOwnerFirstName: "",
+        carOwnerLastName: "",
+        carOwnerTel: "",
+        carOwnerEmail: "",
+        carOwnerAddress: ""
+      }
     };
   }
 
@@ -26,71 +32,136 @@ class SearchSticker extends Component {
       })
       .then(carOwner => {
         this.setState({ carOwner });
-        console.log(carOwner,'cc')
+        console.log(carOwner, "cc");
       });
   }
 
-  getSearchValue(){
-    fetch("http://localhost:5000/getSearchValue/" + this.state.searchValue) 
-      .then((response) => {
+  getSearchValue() {
+    fetch("http://localhost:5000/getSearchValue/" + this.state.searchValue)
+      .then(response => {
         return response.json();
       })
-      .then((responseJson) =>{
-        this.setState({searchCarOwner: responseJson})
+      .then(responseJson => {
+        this.setState({ searchCarOwner: responseJson });
       })
-      .catch(error=>{this.getData()})
+      .catch(error => {
+        this.getData();
+      });
   }
 
-  handleChange = (event) => {
-    this.setState({
-        [event.target.name]: event.target.value
-
-    })
+  handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+    const validEmailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const phoneno = /^0[0-9]{8,9}$/i;
+    switch (name) {
+      case "carOwnerFname":
+        errors.carOwnerFname = value.length < 2 ? "ใส่ชื่อดิไอสัส" : "";
+        break;
+      case "carOwnerLname":
+        errors.carOwnerLname = value.length < 2 ? "ใส่นามสกุลดิไอสัส" : "";
+        break;
+      case "carOwnerTel":
+        errors.carOwnerTel = phoneno.test(value) ? "" : "ใส่เบอร์ดีๆดิ้สัส";
+        break;
+      case "carOwnerEmail":
+        errors.carOwnerEmail = validEmailRegex.test(value)
+          ? ""
+          : "ใส่เมลดีๆดิ้สัส";
+        break;
+      case "carOwmerAddress":
+        errors.carOwnerAddress = value.length < 10 ? "ใส่ที่อยู่ดีๆดิ้สัส" : "";
+        break;
+    }
+    this.setState({ errors, [name]: value }, () => {
+      console.log(errors);
+    });
     console.log("rr", event.target.name);
     console.log("rr", event.target.value);
-}
+  };
 
   handleEditCarOwner = event => {
-    this.onAfterEditCarOwner();
-    this.onCloseEditModal();
+    event.preventDefault();
+    const {
+      carOwnerFname,
+      carOwnerLname,
+      carOwnerTel,
+      carOwnerEmail,
+      carOwnerAddress
+    } = this.state;
+
+    if (
+      carOwnerFname !== "" &&
+      carOwnerLname !== "" &&
+      carOwnerTel !== "" &&
+      carOwnerEmail !== "" &&
+      carOwnerAddress !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+        //   this.onAfterAddStaff()
+        console.log("Valid Form");
+        this.onCloseEditModal();
+      }else{
+        console.error("Invalid Form");
+      }
+    } else {
+      console.log("pls fill");
+    }
+    
+  };
+
+  validateForm = errors => {
+    let valid = true;
+    Object.values(errors).forEach(
+      // if we have an error string set valid to false
+      val => val.length > 0 && (valid = false)
+    );
+    return valid;
   };
 
   onAfterEditCarOwner = () => {
-    const {openCarOwnerID,carOwnerFirstName,carOwnerLastName,carOwnerEmail,carOwnerTel,carOwnerAddress} = this.state
-    const url = 'http://localhost:5000/editCarOwner';
+    const {
+      openCarOwnerID,
+      carOwnerFirstName,
+      carOwnerLastName,
+      carOwnerEmail,
+      carOwnerTel,
+      carOwnerAddress
+    } = this.state;
+    const url = "http://localhost:5000/editCarOwner";
     const bodyData = JSON.stringify({
       carOwnerID: openCarOwnerID,
       carOwnerFirstName: carOwnerFirstName,
       carOwnerLastName: carOwnerLastName,
       carOwnerEmail: carOwnerEmail,
       carOwnerTel: carOwnerTel,
-      carOwnerAddress:carOwnerAddress
+      carOwnerAddress: carOwnerAddress
     });
-    console.log(bodyData,'bodyData')
+    console.log(bodyData, "bodyData");
     const othepram = {
-        headers: {
-            "content-type": "application/json; charset=UTF-8"
-        },
-        body: bodyData,
-        method: "POST"
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
     };
     fetch(url, othepram)
-        .then(data => console.log(data))
-        .then(response => {
-          if(this.state.searchValue === ""){
-            this.getData();
-          }
-          else if(this.state.searchValue !== ""){
-            this.getSearchValue()
-          }
-        })
-        .catch(error => {});
-}
+      .then(data => console.log(data))
+      .then(response => {
+        if (this.state.searchValue === "") {
+          this.getData();
+        } else if (this.state.searchValue !== "") {
+          this.getSearchValue();
+        }
+      })
+      .catch(error => {});
+  };
 
   onOpenEditModal = carOwnerID => e => {
-    const eachCarOwnerID = this.state.carOwner.find(Id=>{
-      return Id.carOwnerID === carOwnerID
-    })
+    const eachCarOwnerID = this.state.carOwner.find(Id => {
+      return Id.carOwnerID === carOwnerID;
+    });
     this.setState({
       openEdit: true,
       openCarOwnerID: carOwnerID,
@@ -106,49 +177,33 @@ class SearchSticker extends Component {
     this.setState({ openEdit: false });
   };
 
-  componentWillMount(){
-   this.getData() 
+  componentWillMount() {
+    this.getData();
   }
 
-  // componentDidUpdate(prevState){
-  //   if(prevState.searchValue !== ""){
-  //     // this.filterSticker()
-  //   }
-  // }
 
-  onKeyPress = (event) => {
-    if(event.key === 'Enter'){
-      console.log('Adding....') 
-      this.getSearchValue()
-      // this.carOwnerTable() 
+
+  onKeyPress = event => {
+    if (event.key === "Enter") {
+      console.log("Adding....");
+      this.getSearchValue();
     }
-  } 
+  };
 
-  filterSticker = (event) => {
+  filterSticker = event => {
     this.setState({
       searchValue: event.target.value
-    })
-    console.log(this.state.searchValue,'kkk')
-  }
+    });
+    console.log(this.state.searchValue, "kkk");
+  };
 
   carOwnerTable() {
-    // if(this.state.searchValue !== ""){
-    //       this.setState({
-    //         choosedData: this.state.searchCarOwner
-    //       })
-    //     }
-    //     if(this.state.searchValue === ""){
-    //       this.getData()
-    //       this.setState({
-    //         choosedData: this.state.carOwner
-    //       })
-    //     }
-    let tableData = ""
-    if(this.state.searchValue === ""){
-      tableData = this.state.carOwner
+    let tableData = "";
+    if (this.state.searchValue === "") {
+      tableData = this.state.carOwner;
     }
-    if(this.state.searchValue !== ""){
-      tableData = this.state.searchCarOwner
+    if (this.state.searchValue !== "") {
+      tableData = this.state.searchCarOwner;
     }
     return tableData.map(carOwner => {
       const {
@@ -164,14 +219,14 @@ class SearchSticker extends Component {
       return (
         <div>
           <Modal
-            classNames='ModalEditSicker'
+            classNames="ModalEditSicker"
             open={this.state.openEdit}
             onClose={this.onCloseEditModal}
             center
           >
-            <h2 className='titleEdit'>แก้ไขข้อมูลเจ้าของรถ</h2>
-           <form className='formAddEdit'>
-              <div className='editModal'>
+            <h2 className="titleEdit">แก้ไขข้อมูลเจ้าของรถ</h2>
+            <form className="formAddEdit">
+              <div className="editModal">
                 <p>ชื่อ : </p>
                 <input
                   type="text"
@@ -180,8 +235,8 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerFirstName}
                 />
               </div>
-          
-              <div className='editModal'>
+
+              <div className="editModal">
                 <p>นามสกุล : </p>
                 <input
                   type="text"
@@ -191,7 +246,7 @@ class SearchSticker extends Component {
                 />
               </div>
 
-              <div className='editModal'>
+              <div className="editModal">
                 <p>อีเมล์ : </p>
                 <input
                   type="text"
@@ -201,7 +256,7 @@ class SearchSticker extends Component {
                 />
               </div>
 
-              <div className='editModal'>
+              <div className="editModal">
                 <p>เบอร์โทรศัพท์ : </p>
                 <input
                   type="text"
@@ -211,7 +266,7 @@ class SearchSticker extends Component {
                 />
               </div>
 
-              <div className='editModal'>
+              <div className="editModal">
                 <p>ที่อยู่ : </p>
                 <input
                   type="text"
@@ -220,44 +275,48 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerAddress}
                 />
               </div>
-
             </form>
-            <button className='buttonUpdate' onClick={event => this.handleEditCarOwner(event)}>
+            <button
+              className="buttonUpdate"
+              onClick={event => this.handleEditCarOwner(event)}
+            >
               แก้ไข
             </button>
-            <button className='buttonCancel' onClick={this.onCloseEditModal}>ยกเลิก</button>
+            <button className="buttonCancel" onClick={this.onCloseEditModal}>
+              ยกเลิก
+            </button>
           </Modal>
-          <div className='carOwnerTask'>
-              <div className='carOwnerName'>
-                <div >ชื่อ : </div>
-                <div className='fieldName'>{carOwnerFirstName}</div>
-                <div >นามสกุล : </div>
-                <div className='fieldName'>{carOwnerLastName}</div>
-              </div>
-              <div className='carOwnerEmailTel'>
-                <div >อีเมล์ : </div>
-                <div className='fieldName'>{carOwnerEmail}</div>
-                <div >เบอร์โทรศัพท์ : </div>
-                <div className='fieldName'>{carOwnerTel}</div>
-              </div>
-              <div className='carOwnerAddress'>
-                <div>ที่อยู่ : </div>
-                <div className='fieldName'>{carOwnerAddress}</div>
-              </div>
-              <div className='carOwnerDate'>
-                <div >วันที่ต่อสัญญา : </div>
-                <div className='fieldName'>{registerDate.substr(0,10)}</div>
-                <div >วันหมดอายุ : </div>
-                <div className='fieldName'>{expiredDate.substr(0,10)}</div>
-              </div>
-              <button
-                className="EditModalButton"
-                onClick={this.onOpenEditModal(carOwnerID)}
-              >
-                แก้ไขข้อมูล
-              </button>
+
+          <div className="carOwnerTask">
+            <div className="carOwnerName">
+              <div>ชื่อ : </div>
+              <div className="fieldName">{carOwnerFirstName}</div>
+              <div>นามสกุล : </div>
+              <div className="fieldName">{carOwnerLastName}</div>
+            </div>
+            <div className="carOwnerEmailTel">
+              <div>อีเมล์ : </div>
+              <div className="fieldName">{carOwnerEmail}</div>
+              <div>เบอร์โทรศัพท์ : </div>
+              <div className="fieldName">{carOwnerTel}</div>
+            </div>
+            <div className="carOwnerAddress">
+              <div>ที่อยู่ : </div>
+              <div className="fieldName">{carOwnerAddress}</div>
+            </div>
+            <div className="carOwnerDate">
+              <div>วันที่ต่อสัญญา : </div>
+              <div className="fieldName">{registerDate.substr(0, 10)}</div>
+              <div>วันหมดอายุ : </div>
+              <div className="fieldName">{expiredDate.substr(0, 10)}</div>
+            </div>
+            <button
+              className="EditModalButton"
+              onClick={this.onOpenEditModal(carOwnerID)}
+            >
+              แก้ไขข้อมูล
+            </button>
           </div>
-          
         </div>
       );
     });
@@ -269,21 +328,21 @@ class SearchSticker extends Component {
         <Header />
         <Navibar />
         <div>
-          <input className="InputSearch"
-           placeholder="ค้นหาชื่อ,นามสกุล"
+          <input
+            className="InputSearch"
+            placeholder="ค้นหาชื่อ,นามสกุล"
             name="searchValue"
             value={this.state.searchValue}
             onChange={event => this.filterSticker(event)}
-            onKeyPress= {event=> this.onKeyPress(event)}
-            />
-            <img src={search} className="search" />
-</div>
+            onKeyPress={event => this.onKeyPress(event)}
+          />
+          <img src={search} className="search" />
+        </div>
 
-          <h2 className="Table-header">ข้อมูลผู้ขอสติกเกอร์</h2>
+        <h2 className="Table-header">ข้อมูลผู้ขอสติกเกอร์</h2>
         <table className="table">
           <tbody>{this.carOwnerTable()}</tbody>
         </table>
-        
       </div>
     );
   }
