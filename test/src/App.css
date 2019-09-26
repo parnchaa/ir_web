@@ -55,10 +55,11 @@
 .ModalEvidence{
   height: 2.3rem;
   font-family: 'kanit',sans-serif;
-  font-size: 30pt;
+  font-size: 24pt;
   margin-bottom:30px;
   margin-top:30px;
   text-align: center;
+  padding-left: 52px;
   color: #29A8AB;
   width: 350px;
 }

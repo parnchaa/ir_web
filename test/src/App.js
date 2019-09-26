@@ -98,7 +98,7 @@ class App extends Component {
       } = pro;
       return (
         <tr key={problemID} className="eachRowTable">
-          <td>{problemID}</td>
+          {/* <td>{problemID}</td> */}
           <td id="dateColumn">{dateOfProblem.substr(0, 10)}</td>
           <td>{timeOfProblem}</td>
           <td>{scene}</td>
@@ -172,7 +172,7 @@ class App extends Component {
 
         <p className="Table-header">เหตุการณ์</p>
         <table className="eventTable">
-          <th>ลำดับ</th>
+          {/* <th>ลำดับ</th> */}
           <th>วัน</th>
           <th>เวลา</th>
           <th>สถานที่</th>
