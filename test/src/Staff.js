@@ -8,7 +8,6 @@ import * as firebase from "firebase";
 import ApiKeys from "./ApiKeys";
 import addButton from "./picture/plus.png";
 
-
 class Staff extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +24,14 @@ class Staff extends Component {
       openDelete: false,
       securityguardImage: "",
       securityguardImages: "",
-      securityguardImageName: ""
+      securityguardImageName: "",
+      errors: {
+        firstName: "",
+        lastName: "",
+        staffEmail: "",
+        staffTel: "",
+        staffPassword: ""
+      }
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -56,7 +62,13 @@ class Staff extends Component {
   };
 
   onCloseAddModal = () => {
-    this.setState({ openAdd: false });
+    this.setState({
+      openAdd: false,
+      firstName: "",
+      lastName: "",
+      staffEmail: "",
+      staffTel: ""
+    });
   };
 
   onOpenAddSecurityguardModal = () => {
@@ -64,28 +76,82 @@ class Staff extends Component {
   };
 
   onCloseAddSecurityguardModal = () => {
-    this.setState({ openAddSecurityguard: false });
-  };
-
-  handleChange = event => {
-    event.preventDefault();
     this.setState({
-      [event.target.name]: event.target.value
-    });
-    console.log("rr", event.target.name);
-    console.log("rr", event.target.value);
-  };
-
-  handleSubmitAdmin = event => {
-    event.preventDefault();
-    this.onAfterInsertAdmin();
-    this.setState({
+      openAddSecurityguard: false,
       firstName: "",
       lastName: "",
       staffEmail: "",
       staffTel: "",
-      openAdd: false
+      staffPassword: ""
     });
+  };
+
+  handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+    const validEmailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    const phoneno = /^0[0-9]{8,9}$/i;
+    const strongRegex = /^(?=.*[a-z])(?=.*[0-9])(?=.{8,})/i;
+    switch (name) {
+      case "firstName":
+        errors.firstName = value.length < 2 ? "กรุณากรอกชื่อ เช่น สมชาย" : "";
+        break;
+      case "lastName":
+        errors.lastName = value.length < 2 ? "กรุณากรอกนามสกุล เช่น ใจดี " : "";
+        break;
+      case "staffEmail":
+        errors.staffEmail = validEmailRegex.test(value)
+          ? ""
+          : "กรุณากรอกอีเมล์ให้ถูกต้อง เช่น somchai@gmail.com";
+        break;
+      case "staffTel":
+        errors.staffTel = phoneno.test(value)
+          ? ""
+          : "กรุณากรอกเบอร์โทรให้ถูกต้อง เช่น 0812345678";
+        break;
+      case "staffPassword":
+        errors.staffPassword = strongRegex.test(value)
+          ? ""
+          : "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว";
+        break;
+    }
+    this.setState({ errors, [name]: value }, () => {
+      console.log(errors);
+    });
+    console.log("rr", name);
+    console.log("rr", value);
+  };
+
+  validateForm = errors => {
+    let valid = true;
+    Object.values(errors).forEach(
+      // if we have an error string set valid to false
+      val => val.length > 0 && (valid = false)
+    );
+    return valid;
+  };
+
+  handleSubmitAdmin = event => {
+    event.preventDefault();
+    const { firstName, lastName, staffEmail, staffTel } = this.state;
+
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      staffEmail !== "" &&
+      staffTel !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+        this.onAfterInsertAdmin();
+        console.log("Valid Form");
+        this.onCloseAddSecurityguardModal();
+      } else {
+        console.error("Invalid Form");
+      }
+    } else {
+      console.log("pls fill");
+    }
   };
 
   onAfterInsertAdmin = () => {
@@ -161,21 +227,32 @@ class Staff extends Component {
   };
 
   handleSubmitSecurity = event => {
-    this.confirmUploadImage()
-    console.log(this.state.securityguardImage, "ออกดิไอควย");
-    this.onAfterInsertSecurity()
-    // if (this.state.securityguardImage !== "") {
-    //   this.onAfterInsertSecurity();
-    // }
-    this.setState({
-      firstName: "",
-      lastName: "",
-      staffEmail: "",
-      staffTel: "",
-      staffPassword: "",
-      staffImages:"",
-      openAddSecurityguard: false
-    });
+    this.confirmUploadImage();
+    event.preventDefault();
+    const {
+      firstName,
+      lastName,
+      staffEmail,
+      staffTel,
+      staffPassword
+    } = this.state;
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      staffEmail !== "" &&
+      staffTel !== "" &&
+      staffPassword !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+        this.onAfterInsertSecurity();
+        console.log("Valid Form");
+        this.onCloseAddModal();
+      } else {
+        console.error("Invalid Form");
+      }
+    } else {
+      console.log("pls fill");
+    }
   };
 
   onAfterInsertSecurity = () => {
@@ -264,7 +341,13 @@ class Staff extends Component {
 
   securityguardTable() {
     return this.state.securityguard.map(securityguard => {
-      const { firstName, lastName, staffEmail, staffTel, staffID  } = securityguard;
+      const {
+        firstName,
+        lastName,
+        staffEmail,
+        staffTel,
+        staffID
+      } = securityguard;
       return (
         <tr>
           <td>{firstName}</td>
@@ -277,7 +360,7 @@ class Staff extends Component {
           >
             <img src={deletePic} className="deletePic" />
           </button>
-          </tr>
+        </tr>
       );
     });
   }
@@ -287,6 +370,7 @@ class Staff extends Component {
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div>
         <Header />
@@ -296,7 +380,6 @@ class Staff extends Component {
           เพิ่มแอดมิน
         </button>
 
-
         <Modal
           // className="Modal"
           open={this.state.openDelete}
@@ -304,9 +387,10 @@ class Staff extends Component {
           center
         >
           <div className="ModalDelete">
-          <h2>ลบพนักงาน</h2>
-          <div>ยืนยันการลบ</div>
-            <button className="ButtonDelete"
+            <h2>ลบพนักงาน</h2>
+            <div>ยืนยันการลบ</div>
+            <button
+              className="ButtonDelete"
               onClick={event => {
                 this.submitDeleteTask(this.state.openStaffId);
               }}
@@ -331,6 +415,9 @@ class Staff extends Component {
                 value={this.state.firstName}
               />
             </div>
+            {errors.firstName.length > 0 && (
+              <p className="error">{errors.firstName}</p>
+            )}
             <div className="addModal">
               <label htmlFor="lastName">นามสกุล: </label>
               <input
@@ -341,6 +428,9 @@ class Staff extends Component {
                 value={this.state.lastName}
               />
             </div>
+            {errors.lastName.length > 0 && (
+              <p className="error">{errors.lastName}</p>
+            )}
             <div className="addModal">
               <label htmlFor="staffTel">เบอร์โทรศัพท์: </label>
               <input
@@ -351,6 +441,9 @@ class Staff extends Component {
                 value={this.state.staffTel}
               />
             </div>
+            {errors.staffTel.length > 0 && (
+              <p className="error">{errors.staffTel}</p>
+            )}
             <div className="addModal">
               <label htmlFor="staffEmail">อีเมล์: </label>
               <input
@@ -361,6 +454,9 @@ class Staff extends Component {
                 value={this.state.staffEmail}
               />
             </div>
+            {errors.staffEmail.length > 0 && (
+              <p className="error">{errors.staffEmail}</p>
+            )}
             <button
               className="modalAdd"
               onClick={event => this.handleSubmitAdmin(event)}
@@ -406,6 +502,9 @@ class Staff extends Component {
                 value={this.state.firstName}
               />
             </div>
+            {errors.firstName.length > 0 && (
+              <p className="error">{errors.firstName}</p>
+            )}
 
             <div className="ModalSurname">
               <label>นามสกุล: </label>
@@ -417,6 +516,9 @@ class Staff extends Component {
                 value={this.state.lastName}
               />
             </div>
+            {errors.lastName.length > 0 && (
+              <p className="error">{errors.lastName}</p>
+            )}
 
             <div className="ModalEmail">
               <label>อีเมล์: </label>
@@ -428,6 +530,9 @@ class Staff extends Component {
                 value={this.state.staffEmail}
               />
             </div>
+            {errors.staffEmail.length > 0 && (
+              <p className="error">{errors.staffEmail}</p>
+            )}
 
             <div className="ModalTel">
               <label>เบอร์โทรศัพท์: </label>
@@ -439,6 +544,9 @@ class Staff extends Component {
                 value={this.state.staffTel}
               />
             </div>
+            {errors.staffTel.length > 0 && (
+              <p className="error">{errors.staffTel}</p>
+            )}
 
             <div className="staffPassword">
               <label>รหัสผ่าน: </label>
@@ -450,6 +558,9 @@ class Staff extends Component {
                 value={this.state.staffPassword}
               />
             </div>
+            {errors.staffPassword.length > 0 && (
+              <p className="error">{errors.staffPassword}</p>
+            )}
 
             <label htmlFor="upload-photo" className="upload-picture">
               เลือกรูป

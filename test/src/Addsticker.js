@@ -138,16 +138,16 @@ class Addsticker extends Component {
         errors.carOwnerAddress = value.length < 10 ? "กรุณาใส่ที่อยู่ให้ถูกต้อง" : "";
         break;
       case "licensePlate":
-        errors.licensePlate = value.length < 3 ? "กรุณากรอกทะเบียนรถให้ถูกต้อง เช่น 1กข2345" : "";
+        errors.licensePlate = value.length < 3 ? "กรุณากรอกทะเบียนรถให้ถูกต้อง" : "";
         break;
       case "carColor":
-        errors.carColor = value.length < 2 ? "กรุณากรอกสีรถยนต์ให้ถูกต้อง เช่น ดำ" : "";
+        errors.carColor = value.length < 2 ? "กรุณากรอกสีรถยนต์ให้ถูกต้อง" : "";
         break;
       case "brandCar":
-        errors.brandCar = value.length < 2 ? "กรุณากรอกชื่อยี่ห้อรถให้ถูกต้อง เช่น เบนซ์" : "";
+        errors.brandCar = value.length < 2 ? "กรุณากรอกชื่อยี่ห้อรถให้ถูกต้อง" : "";
         break;
       case "modelCar":
-        errors.modelCar = value.length < 2 ? "กรุณากรอกรุ่นรถยนต์ให้ถูกต้อง เช่น C250" : "";
+        errors.modelCar = value.length < 2 ? "กรุณากรอกรุ่นรถยนต์ให้ถูกต้อง" : "";
         break;
     }
 

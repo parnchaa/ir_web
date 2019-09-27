@@ -56,20 +56,27 @@ class SearchSticker extends Component {
     const validEmailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     const phoneno = /^0[0-9]{8,9}$/i;
     switch (name) {
-      case "carOwnerFname":
-        errors.carOwnerFirstName = value.length < 2 ? "ใส่ชื่อดิไอสัส" : "";
+      case "carOwnerFirstName":
+        errors.carOwnerFirstName =
+          value.length < 2 ? "กรุณากรอกชื่อ เช่น สมชาย" : "";
         break;
       case "carOwnerLastName":
-        errors.carOwnerLname = value.length < 2 ? "ใส่นามสกุลดิไอสัส" : "";
+        errors.carOwnerLastName =
+          value.length < 2 ? "กรุณากรอกนามสกุล เช่น ใจดี " : "";
         break;
       case "carOwnerTel":
-        errors.carOwnerTel = phoneno.test(value) ? "" : "ใส่เบอร์ดีๆดิ้สัส";
+        errors.carOwnerTel = phoneno.test(value)
+          ? ""
+          : "กรุณากรอกเบอร์โทรให้ถูกต้อง เช่น 0812345678";
         break;
       case "carOwnerEmail":
-        errors.carOwnerEmail = validEmailRegex.test(value)? "" : "ใส่เมลดีๆดิ้สัส";
+        errors.carOwnerEmail = validEmailRegex.test(value)
+          ? ""
+          : "กรุณากรอกอีเมล์ให้ถูกต้อง เช่น somchai@gmail.com";
         break;
-      case "carOwmerAddress":
-        errors.carOwnerAddress = value.length < 10 ? "ใส่ที่อยู่ดีๆดิ้สัส" : "";
+      case "carOwnerAddress":
+        errors.carOwnerAddress =
+          value.length < 10 ? "กรุณาใส่ที่อยู่ให้ถูกต้อง" : "";
         break;
     }
     this.setState({ errors, [name]: value }, () => {
@@ -106,16 +113,15 @@ class SearchSticker extends Component {
       carOwnerAddress !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
-          this.onAfterAddStaff()
+        this.onAfterEditCarOwner();
         console.log("Valid Form");
         this.onCloseEditModal();
-      }else{
+      } else {
         console.error("Invalid Form");
       }
     } else {
       console.log("pls fill");
     }
-    
   };
 
   onAfterEditCarOwner = () => {
@@ -175,11 +181,9 @@ class SearchSticker extends Component {
     this.setState({ openEdit: false });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.getData();
   }
-
-
 
   onKeyPress = event => {
     if (event.key === "Enter") {
@@ -197,12 +201,14 @@ class SearchSticker extends Component {
 
   carOwnerTable() {
     let tableData = "";
+    const { errors } = this.state;
     if (this.state.searchValue === "") {
       tableData = this.state.carOwner;
     }
     if (this.state.searchValue !== "") {
       tableData = this.state.searchCarOwner;
     }
+
     return tableData.map(carOwner => {
       const {
         carOwnerID,
@@ -233,6 +239,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerFirstName}
                 />
               </div>
+              {errors.carOwnerFirstName.length > 0 && (
+                <p className="error">{errors.carOwnerFirstName}</p>
+              )}
 
               <div className="editModal">
                 <p>นามสกุล : </p>
@@ -243,6 +252,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerLastName}
                 />
               </div>
+              {errors.carOwnerLastName.length > 0 && (
+                <p className="error">{errors.carOwnerLastName}</p>
+              )}
 
               <div className="editModal">
                 <p>อีเมล์ : </p>
@@ -253,6 +265,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerEmail}
                 />
               </div>
+              {errors.carOwnerEmail.length > 0 && (
+                <p className="error">{errors.carOwnerEmail}</p>
+              )}
 
               <div className="editModal">
                 <p>เบอร์โทรศัพท์ : </p>
@@ -263,6 +278,9 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerTel}
                 />
               </div>
+              {errors.carOwnerTel.length > 0 && (
+                <p className="error">{errors.carOwnerTel}</p>
+              )}
 
               <div className="editModal">
                 <p>ที่อยู่ : </p>
@@ -273,16 +291,20 @@ class SearchSticker extends Component {
                   value={this.state.carOwnerAddress}
                 />
               </div>
+              {errors.carOwnerAddress.length > 0 && (
+                <p className="error">{errors.carOwnerAddress}</p>
+              )}
+
+              <button
+                className="buttonUpdate"
+                onClick={event => this.handleEditCarOwner(event)}
+              >
+                แก้ไข
+              </button>
+              <button className="buttonCancel" onClick={this.onCloseEditModal}>
+                ยกเลิก
+              </button>
             </form>
-            <button
-              className="buttonUpdate"
-              onClick={event => this.handleEditCarOwner(event)}
-            >
-              แก้ไข
-            </button>
-            <button className="buttonCancel" onClick={this.onCloseEditModal}>
-              ยกเลิก
-            </button>
           </Modal>
 
           <div className="carOwnerTask">

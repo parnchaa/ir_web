@@ -8,7 +8,7 @@
 .editModal input{
     height: 2.3rem;
     font-family: 'kanit',sans-serif;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.5rem;
     color: #29A8AB;
 }
 
@@ -76,6 +76,7 @@
     height: 40px;
     margin-left: 25%;
     font-size: 15pt;
+    margin-top: 2rem;
 }
 .buttonCancel{
     text-align: center;
@@ -89,6 +90,7 @@
     height: 40px;
     margin-left: 7%;
     font-size: 15pt;
+    margin-top: 2rem;
 }
 .formAddEdit input{
     position: absolute;
