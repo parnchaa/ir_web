@@ -160,7 +160,7 @@ class Staff extends Component {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertAdmin();
         console.log("Valid Form");
-        this.onCloseAddSecurityguardModal();
+        this.onCloseAddModal();
       } else {
         console.error("Invalid Form");
       }
@@ -261,7 +261,7 @@ class Staff extends Component {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertSecurity();
         console.log("Valid Form");
-        this.onCloseAddModal();
+        this.onCloseAddSecurityguardModal();
       } else {
         console.error("Invalid Form");
       }
