@@ -53,7 +53,7 @@ class Addsticker extends Component {
       modelCar !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
-          this.onAfterAddStaff()
+          this.onAfterAddCarOwner()
         console.log("Valid Form");
       } else {
         console.error("Invalid Form");
@@ -72,7 +72,7 @@ class Addsticker extends Component {
     return valid;
   };
 
-  onAfterAddStaff = event => {
+  onAfterAddCarOwner = event => {
     console.log("ddd");
     const {
       carOwnerFname,
@@ -107,9 +107,20 @@ class Addsticker extends Component {
     };
     fetch(url, othepram)
       .then(data => console.log(data))
-      //   .then(response => {
-      //     this.getData();
-      //   })
+        .then(response => {
+          alert("เพิ่มข้อมูลผู้ขอสติกเกอร์สำเร็จ")
+          this.setState({
+            carOwnerFname: "",
+            carOwnerLname: "",
+            carOwnerTel: "",
+            carOwnerEmail: "",
+            carOwnerAddress: "",
+            licensePlate: "",
+            carColor: "",
+            brandCar: "",
+            modelCar: ""
+          })
+        })
       .catch(error => {});
   };
 

@@ -569,6 +569,7 @@ class Staff extends Component {
                 className="inputModal"
                 type="password"
                 name="staffPassword"
+                placeholder="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว"
                 onChange={event => this.handleChange(event)}
                 value={this.state.staffPassword}
               />

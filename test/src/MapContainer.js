@@ -3,8 +3,7 @@ import React, { Component } from "react";
 import {
   GoogleMap,
   withGoogleMap,
-  withScriptjs,
-  Polygon
+  withScriptjs
 } from "react-google-maps";
 import { compose, withProps } from "recompose";
 // import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
@@ -98,24 +97,26 @@ function getPaths(polygon) {
   });
   // var aaa = polygonPath.substr(12,polygonPath.length)
   console.log(polygonPath, "polygonPath");
-  var labelName = prompt("Input", "");
-  // console.log(labelName, "labelName");
-  const url = "http://localhost:5000/addLocationLabel";
-  const bodyData = JSON.stringify({
-    locationName: labelName,
-    locationCode: polygonPath
-  });
-  // console.log(bodyData, "bodyData");
-  const othepram = {
-    headers: {
-      "content-type": "application/json; charset=UTF-8"
-    },
-    body: bodyData,
-    method: "POST"
-  };
-  fetch(url, othepram)
-    .then(data => console.log(data))
-    .catch(error => {});
+  var labelName = prompt("Input")
+  if(labelName !== null){
+    const url = "http://localhost:5000/addLocationLabel";
+    const bodyData = JSON.stringify({
+      locationName: labelName,
+      locationCode: polygonPath
+    });
+    // console.log(bodyData, "bodyData");
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .catch(error => {});
+  }  // console.log(labelName, "labelName");
+ 
 }
 
 export class MapContainer extends Component {
