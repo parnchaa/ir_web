@@ -53,7 +53,7 @@ class Addsticker extends Component {
       modelCar !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
-        //   this.onAfterAddStaff()
+          this.onAfterAddStaff()
         console.log("Valid Form");
       } else {
         console.error("Invalid Form");

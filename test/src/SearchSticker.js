@@ -178,7 +178,15 @@ class SearchSticker extends Component {
   };
 
   onCloseEditModal = () => {
-    this.setState({ openEdit: false });
+    this.setState({ openEdit: false,
+      errors: {
+        carOwnerFirstName: "",
+        carOwnerLastName: "",
+        carOwnerTel: "",
+        carOwnerEmail: "",
+        carOwnerAddress: ""
+      }
+    });
   };
 
   componentDidMount() {

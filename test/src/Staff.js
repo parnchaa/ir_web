@@ -58,7 +58,15 @@ class Staff extends Component {
   }
 
   onOpenAddModal = () => {
-    this.setState({ openAdd: true });
+    this.setState({ openAdd: true,
+      errors: {
+        firstName: "",
+        lastName: "",
+        staffEmail: "",
+        staffTel: "",
+        staffPassword: ""
+      }
+     });
   };
 
   onCloseAddModal = () => {
@@ -67,12 +75,20 @@ class Staff extends Component {
       firstName: "",
       lastName: "",
       staffEmail: "",
-      staffTel: ""
+      staffTel: "",
     });
   };
 
   onOpenAddSecurityguardModal = () => {
-    this.setState({ openAddSecurityguard: true });
+    this.setState({ openAddSecurityguard: true,
+      errors: {
+        firstName: "",
+        lastName: "",
+        staffEmail: "",
+        staffTel: "",
+        staffPassword: ""
+      }
+     });
   };
 
   onCloseAddSecurityguardModal = () => {
@@ -135,7 +151,6 @@ class Staff extends Component {
   handleSubmitAdmin = event => {
     event.preventDefault();
     const { firstName, lastName, staffEmail, staffTel } = this.state;
-
     if (
       firstName !== "" &&
       lastName !== "" &&

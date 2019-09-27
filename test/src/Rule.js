@@ -12,7 +12,13 @@ class Rule extends Component {
       rule: [],
       openDelete: false,
       openEdit: false,
-      openAdd: false
+      openAdd: false,
+      errors: {
+        ruleName: "",
+        maxWarning: "",
+        price: "",
+        ruleDetails: ""
+      }
     };
   }
   getData() {
@@ -40,23 +46,70 @@ class Rule extends Component {
     });
   };
 
-  handleChange = (event) => {
-    this.setState({
-        [event.target.name]: event.target.value
+  validateForm = errors => {
+    let valid = true;
+    Object.values(errors).forEach(
+      // if we have an error string set valid to false
+      val => val.length > 0 && (valid = false)
+    );
+    return valid;
+  };
 
-    })
-    console.log("rr", event.target.name);
-    console.log("rr", event.target.value);
-}
+  handleChange = event => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    let errors = this.state.errors;
+    const checkNum = /^(?=.*[0-9])(?=.{1,})/i;
+    switch (name) {
+      case "ruleName":
+        errors.ruleName =
+          value.length < 2
+            ? "กรุณากรอกชื่อกฎ เช่น จอดรถผิดพื้นที่ที่กำหนด"
+            : "";
+        break;
+      case "price":
+        errors.price = checkNum.test(value) ? "" : "ค่าปรับต้องเป็นตัวเลข";
+        break;
+      case "maxWarning":
+        errors.maxWarning = checkNum.test(value)
+          ? ""
+          : "จำนานครั้งที่เตือนต้องเป็นตัวเลข";
+        break;
+      case "ruleDetails":
+        errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
+        break;
+    }
+    this.setState({ errors, [name]: value }, () => {
+      console.log(errors);
+    });
+    console.log("rr", name);
+    console.log("rr", value);
+  };
 
-handleEditRule = event => {
-  this.onAfterEditRule();
-  this.onCloseEditModal();
-};
+  handleEditRule = event => {
+    event.preventDefault();
+    const { ruleName, maxWarning, price, ruleDetails } = this.state;
+    if (
+      ruleName !== "" &&
+      maxWarning !== "" &&
+      price !== "" &&
+      ruleDetails !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+        this.onAfterEditRule();
+        console.log("Valid Form");
+        this.onCloseEditModal();
+      } else {
+        console.error("Invalid Form");
+      }
+    } else {
+      console.log("pls fill");
+    }
+  };
 
-onAfterEditRule=()=>{
-  const {openRuleID,ruleName,maxWarning,price,ruleDetails} = this.state
-    const url = 'http://localhost:5000/editRule';
+  onAfterEditRule = () => {
+    const { openRuleID, ruleName, maxWarning, price, ruleDetails } = this.state;
+    const url = "http://localhost:5000/editRule";
     const bodyData = JSON.stringify({
       ruleID: openRuleID,
       ruleName: ruleName,
@@ -64,24 +117,31 @@ onAfterEditRule=()=>{
       price: price,
       ruleDetails: ruleDetails
     });
-    console.log(bodyData,'bodyData')
+    console.log(bodyData, "bodyData");
     const othepram = {
-        headers: {
-            "content-type": "application/json; charset=UTF-8"
-        },
-        body: bodyData,
-        method: "POST"
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
     };
     fetch(url, othepram)
-        .then(data => console.log(data))
-        .then(response => {
-          this.getData();
-        })
-        .catch(error => {});
-}
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
+  };
 
   onCloseEditModal = () => {
-    this.setState({ openEdit: false });
+    this.setState({ openEdit: false,
+      errors: {
+        ruleName: "",
+        maxWarning: "",
+        price: "",
+        ruleDetails: ""
+      }
+    });
   };
 
   onCloseDeleteModal = () => {
@@ -114,26 +174,35 @@ onAfterEditRule=()=>{
       method: "POST"
     };
     console.log("aaa", othepram);
-    fetch(url, othepram).then(data => console.log(data))
-    .then(response => {
-      this.getData();
-    })
-    .catch(error => {});
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
   };
 
-  handleSubmitAdmin = event => {
+  handleAddRule = event => {
     event.preventDefault();
-    this.onAfterAddRule();
-    this.setState({
-      ruleName: "",
-      price: "",
-      maxWarning: "",
-      ruleDetails: "",
-      openAdd: false
-    });
+    const { ruleName, price, maxWarning, ruleDetails } = this.state;
+    if (
+      ruleName !== "" &&
+      price !== "" &&
+      maxWarning !== "" &&
+      ruleDetails !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+          this.onAfterAddRule()
+        console.log("Valid Form");
+      } else {
+        console.error("Invalid Form");
+      }
+    } else {
+      console.log("pls fill");
+    }
   };
 
-  onAfterAddRule= () => {
+  onAfterAddRule = () => {
     const url = "http://localhost:5000/addrule";
     const bodyData = JSON.stringify({
       ruleName: this.state.ruleName,
@@ -158,65 +227,104 @@ onAfterEditRule=()=>{
   };
 
   onOpenAddModal = () => {
-    this.setState({ openAdd: true });
+    this.setState({ openAdd: true,
+      ruleName: "",
+      maxWarning: "",
+      price: "",
+      ruleDetails: ""
+    });
   };
 
   onCloseAddModal = () => {
-    this.setState({ openAdd: false });
+    this.setState({ openAdd: false,
+      errors: {
+        ruleName: "",
+        maxWarning: "",
+        price: "",
+        ruleDetails: ""
+      }
+    });
   };
 
-  componentDidMount(){
-    this.getData()
+  componentDidMount() {
+    this.getData();
   }
 
   ruleTable() {
+    const { errors } = this.state;
     return (
       <div>
-        <Modal className='modal' open={this.state.openEdit} onClose={this.onCloseEditModal} center>
+        <Modal
+          className="modal"
+          open={this.state.openEdit}
+          onClose={this.onCloseEditModal}
+          center
+        >
           <h2 className="titleEdit">แก้ไขกฎ</h2>
           <div>
-            <form className='formAddEdit'>
-              <div className='editModal'>
+            <form className="formAddEdit">
+              <div className="editModal">
                 <p>ชื่อกฎ :</p>
-                <input className="inputModal"
+                <input
+                  className="inputModal"
                   type="text"
                   name="ruleName"
                   onChange={event => this.handleChange(event)}
                   value={this.state.ruleName}
                 />
               </div>
-              <div className='editModal'>
+              {errors.ruleName.length > 0 && (
+                <p className="error">{errors.ruleName}</p>
+              )}
+              <div className="editModal">
                 <p>จำนวนเตือนสูงสุด:</p>
-                <input className="inputModal"
+                <input
+                  className="inputModal"
                   type="text"
                   name="maxWarning"
                   onChange={event => this.handleChange(event)}
                   value={this.state.maxWarning}
                 />
               </div>
-              <div className='editModal'>
+              {errors.maxWarning.length > 0 && (
+                <p className="error">{errors.maxWarning}</p>
+              )}
+              <div className="editModal">
                 <p>ค่าปรับ:</p>
-                <input className="inputModal"
+                <input
+                  className="inputModal"
                   type="text"
                   name="price"
                   onChange={event => this.handleChange(event)}
                   value={this.state.price}
                 />
               </div>
-              <div className='editModal'>
+              {errors.price.length > 0 && (
+                <p className="error">{errors.price}</p>
+              )}
+              <div className="editModal">
                 <p>รายละเอียดกฎ:</p>
-                <input className="inputModal"
+                <input
+                  className="inputModal"
                   type="text"
                   name="ruleDetails"
                   onChange={event => this.handleChange(event)}
                   value={this.state.ruleDetails}
                 />
               </div>
+              {errors.ruleDetails.length > 0 && (
+                <p className="error">{errors.ruleDetails}</p>
+              )}
             </form>
-            <button className='buttonUpdate' onClick={event => this.handleEditRule(event)}>
+            <button
+              className="buttonUpdate"
+              onClick={event => this.handleEditRule(event)}
+            >
               แก้ไข
             </button>
-            <button  className='buttonCancel' onClick={this.onCloseEditModal}>ยกเลิก</button>
+            <button className="buttonCancel" onClick={this.onCloseEditModal}>
+              ยกเลิก
+            </button>
           </div>
         </Modal>
 
@@ -225,20 +333,26 @@ onAfterEditRule=()=>{
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
           center
-        ><div className="ModalDelete">
-          <h2 >ลบกฎองค์กร</h2>
-          <div>ยืนยันการลบกฎองค์กร</div>
-          <div>
-            <button className="ButtonDelete"
-              onClick={event => {
-                this.submitDeleteTask(this.state.openRuleId);
-              }}
-            >
-              ลบ
-            </button>
-            <button className="ButtonCancel"
-            onClick={this.onCloseDeleteModal}>ยกเลิก</button>
-          </div>
+        >
+          <div className="ModalDelete">
+            <h2>ลบกฎองค์กร</h2>
+            <div>ยืนยันการลบกฎองค์กร</div>
+            <div>
+              <button
+                className="ButtonDelete"
+                onClick={event => {
+                  this.submitDeleteTask(this.state.openRuleId);
+                }}
+              >
+                ลบ
+              </button>
+              <button
+                className="ButtonCancel"
+                onClick={this.onCloseDeleteModal}
+              >
+                ยกเลิก
+              </button>
+            </div>
           </div>
         </Modal>
 
@@ -273,52 +387,67 @@ onAfterEditRule=()=>{
   }
 
   render() {
+    const { errors } = this.state;
     return (
       <div>
         <Header />
         <Navibar />
         <Modal open={this.state.openAdd} onClose={this.onCloseAddModal} center>
           <p className="modalTitle">เพิ่มกฏ</p>
-          <form className="formAdd" onSubmit={this.handleSubmitAdmin}>
+          <form className="formAdd" onSubmit={this.handleAddRule}>
             <div className="addModal">
               <label htmlFor="ruleName">ชื่อกฏ: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="ruleName"
                 onChange={event => this.handleChange(event)}
                 value={this.state.ruleName}
               />
             </div>
+            {errors.ruleName.length > 0 && (
+              <p className="error">{errors.ruleName}</p>
+            )}
             <div className="addModal">
               <label htmlFor="price">ค่าปรับ: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="price"
                 onChange={event => this.handleChange(event)}
                 value={this.state.price}
               />
             </div>
+            {errors.price.length > 0 && <p className="error">{errors.price}</p>}
             <div className="addModal">
               <label htmlFor="maxWarning">จำนานครั้งที่เตือน: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="maxWarning"
                 onChange={event => this.handleChange(event)}
                 value={this.state.maxWarning}
               />
             </div>
+            {errors.maxWarning.length > 0 && (
+              <p className="error">{errors.maxWarning}</p>
+            )}
             <div className="addModal">
               <label htmlFor="ruleDetails">รายละเอียด: </label>
-              <input className="inputModal"
+              <input
+                className="inputModal"
                 type="text"
                 name="ruleDetails"
                 onChange={event => this.handleChange(event)}
                 value={this.state.ruleDetails}
               />
             </div>
+            {errors.ruleDetails.length > 0 && (
+              <p className="error">{errors.ruleDetails}</p>
+            )}
             <button
               className="modalAdd"
-              onClick={event => this.handleSubmitAdmin(event)}
+              onClick={event => this.handleAddRule(event)}
               type="submit"
             >
               เพิ่ม
@@ -329,16 +458,16 @@ onAfterEditRule=()=>{
           </form>
         </Modal>
 
-      <div> 
-        
-        <p className="Table-header">กฎองค์กร
-        <button className="addRuleButton" onClick={this.onOpenAddModal}>
-          เพิ่มกฏ 
-        </button></p>
-        <div className="ruleTable">{this.ruleTable()}</div>
+        <div>
+          <p className="Table-header">
+            กฎองค์กร
+            <button className="addRuleButton" onClick={this.onOpenAddModal}>
+              เพิ่มกฏ
+            </button>
+          </p>
+          <div className="ruleTable">{this.ruleTable()}</div>
+        </div>
       </div>
-      </div>
-      
     );
   }
 }
