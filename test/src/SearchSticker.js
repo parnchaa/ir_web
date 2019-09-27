@@ -57,18 +57,16 @@ class SearchSticker extends Component {
     const phoneno = /^0[0-9]{8,9}$/i;
     switch (name) {
       case "carOwnerFname":
-        errors.carOwnerFname = value.length < 2 ? "ใส่ชื่อดิไอสัส" : "";
+        errors.carOwnerFirstName = value.length < 2 ? "ใส่ชื่อดิไอสัส" : "";
         break;
-      case "carOwnerLname":
+      case "carOwnerLastName":
         errors.carOwnerLname = value.length < 2 ? "ใส่นามสกุลดิไอสัส" : "";
         break;
       case "carOwnerTel":
         errors.carOwnerTel = phoneno.test(value) ? "" : "ใส่เบอร์ดีๆดิ้สัส";
         break;
       case "carOwnerEmail":
-        errors.carOwnerEmail = validEmailRegex.test(value)
-          ? ""
-          : "ใส่เมลดีๆดิ้สัส";
+        errors.carOwnerEmail = validEmailRegex.test(value)? "" : "ใส่เมลดีๆดิ้สัส";
         break;
       case "carOwmerAddress":
         errors.carOwnerAddress = value.length < 10 ? "ใส่ที่อยู่ดีๆดิ้สัส" : "";
@@ -77,38 +75,8 @@ class SearchSticker extends Component {
     this.setState({ errors, [name]: value }, () => {
       console.log(errors);
     });
-    console.log("rr", event.target.name);
-    console.log("rr", event.target.value);
-  };
-
-  handleEditCarOwner = event => {
-    event.preventDefault();
-    const {
-      carOwnerFname,
-      carOwnerLname,
-      carOwnerTel,
-      carOwnerEmail,
-      carOwnerAddress
-    } = this.state;
-
-    if (
-      carOwnerFname !== "" &&
-      carOwnerLname !== "" &&
-      carOwnerTel !== "" &&
-      carOwnerEmail !== "" &&
-      carOwnerAddress !== ""
-    ) {
-      if (this.validateForm(this.state.errors)) {
-        //   this.onAfterAddStaff()
-        console.log("Valid Form");
-        this.onCloseEditModal();
-      }else{
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
-    
+    console.log("rr", name);
+    console.log("rr", value);
   };
 
   validateForm = errors => {
@@ -118,6 +86,36 @@ class SearchSticker extends Component {
       val => val.length > 0 && (valid = false)
     );
     return valid;
+  };
+
+  handleEditCarOwner = event => {
+    event.preventDefault();
+    const {
+      carOwnerFirstName,
+      carOwnerLastName,
+      carOwnerTel,
+      carOwnerEmail,
+      carOwnerAddress
+    } = this.state;
+
+    if (
+      carOwnerFirstName !== "" &&
+      carOwnerLastName !== "" &&
+      carOwnerTel !== "" &&
+      carOwnerEmail !== "" &&
+      carOwnerAddress !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+          this.onAfterAddStaff()
+        console.log("Valid Form");
+        this.onCloseEditModal();
+      }else{
+        console.error("Invalid Form");
+      }
+    } else {
+      console.log("pls fill");
+    }
+    
   };
 
   onAfterEditCarOwner = () => {
