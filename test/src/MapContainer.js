@@ -99,7 +99,7 @@ function getPaths(polygon) {
   console.log(polygonPath, "polygonPath");
   var labelName = prompt("Input")
   if(labelName !== null){
-    const url = "http://localhost:5000/addLocationLabel";
+    const url = "http://18.136.208.201:5000/addLocationLabel";
     const bodyData = JSON.stringify({
       locationName: labelName,
       locationCode: polygonPath

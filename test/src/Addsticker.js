@@ -85,7 +85,7 @@ class Addsticker extends Component {
       brandCar,
       modelCar
     } = this.state;
-    const url = "http://localhost:5000/addSticker";
+    const url = "http://18.136.208.201:5000/addSticker";
     const bodyData = JSON.stringify({
       carOwnerFname: carOwnerFname,
       carOwnerLname: carOwnerLname,

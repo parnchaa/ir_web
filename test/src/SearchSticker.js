@@ -26,7 +26,7 @@ class SearchSticker extends Component {
   }
 
   getData() {
-    fetch("http://localhost:5000/carOwner")
+    fetch("http://18.136.208.201:5000/carOwner")
       .then(response => {
         return response.json();
       })
@@ -37,7 +37,7 @@ class SearchSticker extends Component {
   }
 
   getSearchValue() {
-    fetch("http://localhost:5000/getSearchValue/" + this.state.searchValue)
+    fetch("http://18.136.208.201:5000/getSearchValue/" + this.state.searchValue)
       .then(response => {
         return response.json();
       })
@@ -133,7 +133,7 @@ class SearchSticker extends Component {
       carOwnerTel,
       carOwnerAddress
     } = this.state;
-    const url = "http://localhost:5000/editCarOwner";
+    const url = "http://18.136.208.201:5000/editCarOwner";
     const bodyData = JSON.stringify({
       carOwnerID: openCarOwnerID,
       carOwnerFirstName: carOwnerFirstName,

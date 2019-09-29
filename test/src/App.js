@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   getData() {
-    fetch("http://localhost:5000/problem ")
+    fetch("http://18.136.208.201:5000/problem ")
       .then(response => {
         return response.json();
       })
@@ -32,7 +32,7 @@ class App extends Component {
   };
 
   deleteFetch = () => {
-    const url = "http://localhost:5000/deleteEvent";
+    const url = "http://18.136.208.201:5000/deleteEvent";
     const bodyData = JSON.stringify({
       problemID: this.state.openProblemID
     });
