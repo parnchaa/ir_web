@@ -130,6 +130,9 @@ class Addsticker extends Component {
     let errors = this.state.errors;
     const validEmailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     const phoneno = /^0[0-9]{8,9}$/i;
+    const checkLicensePlate = /^([ก-ฮ]{2})+([0-9]{1,4})$/i
+    const checkLicensePlate2 = /^([0-9]{1})+([ก-ฮ]{2})([0-9]{1,4})$/i
+
     switch (name) {
       case "carOwnerFname":
         errors.carOwnerFname = value.length < 2 ? "กรุณากรอกชื่อ เช่น สมชาย" : "";
@@ -149,7 +152,7 @@ class Addsticker extends Component {
         errors.carOwnerAddress = value.length < 10 ? "กรุณาใส่ที่อยู่ให้ถูกต้อง" : "";
         break;
       case "licensePlate":
-        errors.licensePlate = value.length < 3 ? "กรุณากรอกทะเบียนรถให้ถูกต้อง" : "";
+        errors.licensePlate = checkLicensePlate.test(value) || checkLicensePlate2.test(value) ? "" : "กรุณากรอกทะเบียนรถให้ถูกต้อง";
         break;
       case "carColor":
         errors.carColor = value.length < 2 ? "กรุณากรอกสีรถยนต์ให้ถูกต้อง" : "";
