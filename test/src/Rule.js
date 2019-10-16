@@ -22,7 +22,7 @@ class Rule extends Component {
     };
   }
   getData() {
-    fetch("http://18.136.208.201:5000/rule")
+    fetch("http://localhost:5000/rule")
       .then(response => {
         return response.json();
       })
@@ -109,7 +109,7 @@ class Rule extends Component {
 
   onAfterEditRule = () => {
     const { openRuleID, ruleName, maxWarning, price, ruleDetails } = this.state;
-    const url = "http://18.136.208.201:5000/editRule";
+    const url = "http://localhost:5000/editRule";
     const bodyData = JSON.stringify({
       ruleID: openRuleID,
       ruleName: ruleName,
@@ -161,7 +161,7 @@ class Rule extends Component {
   };
 
   deleteFetch = () => {
-    const url = "http://18.136.208.201:5000/deleteRule";
+    const url = "http://localhost:5000/deleteRule";
     const bodyData = JSON.stringify({
       ruleID: this.state.openRuleID
     });
@@ -194,6 +194,7 @@ class Rule extends Component {
       if (this.validateForm(this.state.errors)) {
           this.onAfterAddRule()
         console.log("Valid Form");
+        this.onCloseAddModal()
       } else {
         console.error("Invalid Form");
       }
@@ -203,7 +204,7 @@ class Rule extends Component {
   };
 
   onAfterAddRule = () => {
-    const url = "http://18.136.208.201:5000/addrule";
+    const url = "http://localhost:5000/addrule";
     const bodyData = JSON.stringify({
       ruleName: this.state.ruleName,
       price: this.state.price,

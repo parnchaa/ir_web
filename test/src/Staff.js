@@ -39,7 +39,7 @@ class Staff extends Component {
   }
 
   getData() {
-    fetch("http://18.136.208.201:5000/staff")
+    fetch("http://localhost:5000/staff")
       .then(response => {
         return response.json();
       })
@@ -47,7 +47,7 @@ class Staff extends Component {
         this.setState({ staff });
         console.log("staff1", this.state.staff);
       });
-    fetch("http://18.136.208.201:5000/securityguard")
+    fetch("http://localhost:5000/securityguard")
       .then(response => {
         return response.json();
       })
@@ -170,7 +170,7 @@ class Staff extends Component {
   };
 
   onAfterInsertAdmin = () => {
-    const url = "http://18.136.208.201:5000/addstaff";
+    const url = "http://localhost:5000/addstaff";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -271,7 +271,7 @@ class Staff extends Component {
   };
 
   onAfterInsertSecurity = () => {
-    const url = "http://18.136.208.201:5000/addsecurityguard";
+    const url = "http://localhost:5000/addsecurityguard";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -313,7 +313,7 @@ class Staff extends Component {
   };
 
   deleteFetch = () => {
-    const url = "http://18.136.208.201:5000/deleteStaff";
+    const url = "http://localhost:5000/deleteStaff";
     const bodyData = JSON.stringify({
       staffID: this.state.openStaffID
     });

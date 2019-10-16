@@ -15,7 +15,7 @@ class Location extends Component {
   };
 
   getData() {
-    fetch("http://18.136.208.201:5000/location")
+    fetch("http://localhost:5000/location")
       .then(response => {
         return response.json();
       })
@@ -86,7 +86,7 @@ class Location extends Component {
   };
 
   deleteFetch = () => {
-    const url = "http://18.136.208.201:5000/deleteLocation";
+    const url = "http://localhost:5000/deleteLocation";
     const bodyData = JSON.stringify({
       locationID: this.state.openLocationID
     });
