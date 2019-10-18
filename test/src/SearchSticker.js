@@ -13,6 +13,7 @@ class SearchSticker extends Component {
       searchCarOwner: [],
       choosedData: [],
       openEdit: false,
+      openExtend: false,
       searchValue: "",
       pageStatus: "",
       errors: {
@@ -189,6 +190,21 @@ class SearchSticker extends Component {
     });
   };
 
+  onOpenExtendModel = carOwnerID =>{
+    const eachCarOwnerID = this.state.carOwner.find(Id => {
+      return Id.carOwnerID === carOwnerID;
+    }); 
+    this.setState({
+      openExtend: true
+    })
+  }
+
+  onCloseExtendModel = () =>{
+    this.setState({
+      openExtend: false
+    })
+  }
+
   componentDidMount() {
     this.getData();
   }
@@ -344,6 +360,25 @@ class SearchSticker extends Component {
             >
               แก้ไขข้อมูล
             </button>
+
+            <Modal
+            //  classNames="ModalEditSicker"
+             open={this.state.openExtend}
+             onClose={this.onCloseExtendModel}
+             center
+          >
+            <h2>ต่อสัญญา</h2>
+            <select>
+              <option>6 เดือน</option>
+              <option>1 ปี</option>
+            </select>
+          </Modal>
+          
+            {/* <button
+              // onClick={this.onOpenExtendModel(carOwnerID)}
+            >
+              ต่อสัญญา
+            </button> */}
           </div>
         </div>
       );
