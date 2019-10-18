@@ -24,7 +24,7 @@ class Header extends Component{
             </td>
             <td className='profileInfo'>
               <tr>surname</tr>
-              <tr>logout</tr>
+              <tr><button className='logout'>logout</button></tr>
             </td>
           </table>
         </div>

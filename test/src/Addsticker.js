@@ -248,7 +248,7 @@ class Addsticker extends Component {
               <label>ที่อยู่:</label>
               
               <input
-                type="text"
+                type="textarea"
                 className="addressInput"
                 name="carOwnerAddress"
                 value={this.state.carOwnerAddress}
