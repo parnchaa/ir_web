@@ -91,20 +91,16 @@ const MapWithADrawingManager = compose(
 // }
 
 function getPaths(polygon) {
-  var allPaths = polygon.getPath().getArray();
-  var polygonPath = JSON.stringify({
-    allPaths
-  });
-  // var aaa = polygonPath.substr(12,polygonPath.length)
-  console.log(polygonPath, "polygonPath");
-  var labelName = prompt("Input")
+  var allPaths = JSON.stringify(polygon.getPath().getArray()) ;
+
+  var labelName = prompt("โปรดกรอกชื่อสถานที่")
   if(labelName !== null){
     const url = "http://localhost:5000/addLocationLabel";
     const bodyData = JSON.stringify({
       locationName: labelName,
-      locationCode: polygonPath
+      locationCode: allPaths
     });
-    // console.log(bodyData, "bodyData");
+
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -114,8 +110,7 @@ function getPaths(polygon) {
     };
     fetch(url, othepram)
       .then(data => console.log(data))
-      .catch(error => {});
-  }  // console.log(labelName, "labelName");
+  }  
  
 }
 
