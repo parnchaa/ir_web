@@ -90,40 +90,41 @@ const MapWithADrawingManager = compose(
 //     });
 // }
 
+
+let location = []
+
 function getPaths(polygon) {
   var allPaths = JSON.stringify(polygon.getPath().getArray()) ;
 
   var labelName = prompt("โปรดกรอกชื่อสถานที่")
+
   if(labelName !== null){
-    const url = "http://localhost:5000/addLocationLabel";
-    const bodyData = JSON.stringify({
+    let setLocation = {
       locationName: labelName,
       locationCode: allPaths
-    });
+    }
+    let jsonLocationStringify = JSON.stringify(setLocation)
+    let jsonLocation = JSON.parse(jsonLocationStringify)
+    
+    location.push(jsonLocation)
+  }
 
-    const othepram = {
-      headers: {
-        "content-type": "application/json; charset=UTF-8"
-      },
-      body: bodyData,
-      method: "POST"
-    };
-    fetch(url, othepram)
-      .then(data => console.log(data))
-  }  
- 
 }
 
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isMarkerShown: false
+      isMarkerShown: false,
+      stickerColor: [],
+      stickerID: 0,
+      stickerText:''
     };
   }
 
   componentDidMount() {
     this.delayedShowMarker();
+    this.getColorOfSticker();
   }
 
   delayedShowMarker = () => {
@@ -137,13 +138,103 @@ export class MapContainer extends Component {
     this.delayedShowMarker();
   };
 
+  getColorOfSticker = () =>{
+    fetch("http://localhost:5000/stickerColor")
+      .then(response => {
+        return response.json();
+      })
+      .then(stickerColor => {
+        this.setState({
+          stickerColor: stickerColor
+        })
+      });
+  }
+
+  createStickerOptions = () => {
+    let stickerOptions = []
+    let {stickerColor} = this.state
+
+    for (let i = 0; i < stickerColor.length; i++) {
+      stickerOptions.push(<option value = {stickerColor[i].stickerID}>{stickerColor[i].value}</option>)
+    }
+
+    return stickerOptions
+  }
+
+  getStickerID = () =>{
+    let sticker = document.getElementById('sticker')
+    let stickerID = sticker.value
+    let stickerText = sticker.options[sticker.selectedIndex].text
+    
+    this.setState({
+      stickerID: stickerID,
+      stickerText: stickerText
+    })
+  }
+
+  recordLocation = () => {
+    
+    let locationNameReceive = location[0].locationName,
+    locationCodeReceive = location[0].locationCode,
+    stickerIDForUse = this.state.stickerID;
+    
+    
+    if (location.length !== 0 ) {
+      const url = "http://localhost:5000/addLocationLabel";
+
+      const bodyData = JSON.stringify({
+        locationName: locationNameReceive ,
+        locationCode: locationCodeReceive,
+        stickerID: stickerIDForUse
+      });
+
+      const othepram = {
+        headers: {
+          "content-type": "application/json; charset=UTF-8"
+        },
+        body: bodyData,
+        method: "POST"
+      };
+
+      fetch(url, othepram)
+        .then(data => console.log(data))
+    }
+    
+    location = []
+
+  }
+
   render() {
+
     return (
       <div>
+        <div className="chooseStickerColor">
+          <h2>เลือกสีสติ๊กเกอร์</h2>
+          <h6>โปรดเลือกสีของสติ๊กเกอร์ให้ตรงสถานที่ และกฎขององค์กรที่กำหนดไว้</h6>
+          <select onChange={this.getStickerID} id="sticker">
+            <option selected  disabled>โปรดเลือกสีสติ๊กเกอร์...</option>
+            {this.createStickerOptions()}
+          </select>
+        </div>
         <MapWithADrawingManager
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
         />
+        {location.length == 0 ?
+          null
+          :
+          <div>
+            <div>
+              <h5>ชื่อสถานที่: </h5>
+              <p>{location[0].locationName}</p>
+            </div>
+            <div>
+              <h5>สีสติ๊กเกอร์: </h5>
+              <p>{this.state.stickerText}</p>
+            </div>
+          </div>
+        }
+        <button onClick={this.recordLocation}>บันทึกสถานที่</button>
       </div>
     );
   }
