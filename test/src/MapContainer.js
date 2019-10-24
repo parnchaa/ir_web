@@ -6,6 +6,8 @@ import {
   withScriptjs
 } from "react-google-maps";
 import { compose, withProps } from "recompose";
+import Modal from "react-responsive-modal";
+
 // import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
 
 const {
@@ -118,7 +120,8 @@ export class MapContainer extends Component {
       isMarkerShown: false,
       stickerColor: [],
       stickerID: 0,
-      stickerText:''
+      stickerText:'',
+      openSave: true
     };
   }
 
@@ -201,7 +204,14 @@ export class MapContainer extends Component {
     }
     
     location = []
+    this.onCloseSave()
+    
+  }
 
+  onCloseSave = () =>{
+    this.setState({
+      openSave: false
+    })
   }
 
   render() {
@@ -223,7 +233,12 @@ export class MapContainer extends Component {
         {location.length == 0 ?
           null
           :
-          <div>
+          <Modal
+            // className="modal"
+            open={this.state.openSave}
+            onClose={this.onCloseSave}
+            center
+          >
             <div>
               <h5>ชื่อสถานที่: </h5>
               <p>{location[0].locationName}</p>
@@ -232,9 +247,9 @@ export class MapContainer extends Component {
               <h5>สีสติ๊กเกอร์: </h5>
               <p>{this.state.stickerText}</p>
             </div>
-          </div>
+            <button onClick={this.recordLocation}>บันทึกสถานที่</button>
+          </Modal>
         }
-        <button onClick={this.recordLocation}>บันทึกสถานที่</button>
       </div>
     );
   }
