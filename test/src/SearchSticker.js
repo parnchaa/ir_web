@@ -4,6 +4,7 @@ import Navibar from "./Navibar";
 import "./SearchSticker.css";
 import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
+import moment from 'moment'
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class SearchSticker extends Component {
       openExtend: false,
       searchValue: "",
       pageStatus: "",
-      selectExtendValue:"",
+      selectExtendValue:"1",
       errors: {
         carOwnerFirstName: "",
         carOwnerLastName: "",
@@ -84,14 +85,11 @@ class SearchSticker extends Component {
     this.setState({ errors, [name]: value }, () => {
       console.log(errors);
     });
-    console.log("rr", name);
-    console.log("rr", value);
   };
 
   validateForm = errors => {
     let valid = true;
     Object.values(errors).forEach(
-      // if we have an error string set valid to false
       val => val.length > 0 && (valid = false)
     );
     return valid;
@@ -144,7 +142,6 @@ class SearchSticker extends Component {
       carOwnerTel: carOwnerTel,
       carOwnerAddress: carOwnerAddress
     });
-    console.log(bodyData, "bodyData");
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -166,37 +163,37 @@ class SearchSticker extends Component {
 
   handleSubmitExtend= event => {
     const{expiredDate,selectExtendValue}= this.state
-    var extendOneYear = expiredDate.toString().substr(0,10)
-    var ex = new Date(extendOneYear)
-    var yyyy = ex.getFullYear()
-    var mm = ex.getMonth()+1
-    var dd = ex.getDate()
-    if(selectExtendValue === "2"){
-      var extendedYear = yyyy+1
-      // var extended = extendedYear+"-"+mm+"-"+dd
-      var extended = extendedYear+'-'+mm+'-'+dd
-      this.setState({
-        expiredDate: extended
-      })
-      console.log(extended,'bb')
-      console.log(expiredDate,'ee')
-      this.onAfterExtendLicense()
+    var ex = new Date(expiredDate)
+    var yyyy = ex.getFullYear(ex)
+    var mm = ex.getMonth(ex)+1
+    var dd = ex.getDate(ex)
+    var extended
+    if(selectExtendValue === "1"){
+      var extendedM= ex.setMonth(ex.getMonth()+6)
+      var extendedMonth = moment(extendedM).format()
+      extended = extendedMonth
+      this.onAfterExtendLicense(extended)
       this.onCloseExtendModel()
     }
-    console.log(extendedYear,'extendedYear')
+    else if(selectExtendValue === "2"){
+      var extendedY = yyyy+1
+      var extendedYear = extendedY+'-'+mm+'-'+dd
+      extended = extendedYear
+      this.onAfterExtendLicense(extended)
+      this.onCloseExtendModel()
+    }
+    
   }
 
-  onAfterExtendLicense = () => {
+  onAfterExtendLicense = (extended) => {
     const {
-      expiredDate,
       openExtendId
     } = this.state;
     const url = "http://localhost:5000/extendLicense";
     const bodyData = JSON.stringify({
       carOwnerID: openExtendId,
-      expiredDate: expiredDate
+      expiredDate: extended
     });
-    console.log(bodyData, "bodyData");
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"

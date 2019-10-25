@@ -66,7 +66,6 @@ class Addsticker extends Component {
   validateForm = errors => {
     let valid = true;
     Object.values(errors).forEach(
-      // if we have an error string set valid to false
       val => val.length > 0 && (valid = false)
     );
     return valid;
@@ -93,7 +92,6 @@ class Addsticker extends Component {
     var nextYear = today.getFullYear()+1
     var currentDate = curYear+'-'+curMonth+'-'+curDate
     var expireDate = nextYear+'-'+curMonth+'-'+curDate
-    console.log(currentDate,'curdate')
     const bodyData = JSON.stringify({
       carOwnerFname: carOwnerFname,
       carOwnerLname: carOwnerLname,
@@ -107,7 +105,6 @@ class Addsticker extends Component {
       registerDate: currentDate,
       expireDate: expireDate
     });
-    console.log(bodyData, "bodyData");
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -188,11 +185,9 @@ class Addsticker extends Component {
     this.setState({ errors, [name]: value }, () => {
       console.log(errors);
     });
-    console.log(value);
   };
 
   render() {
-    console.log("name:" + this.state.carOwnerFname);
     const { errors } = this.state;
     return (
       <div>
