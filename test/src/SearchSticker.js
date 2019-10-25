@@ -16,6 +16,7 @@ class SearchSticker extends Component {
       openExtend: false,
       searchValue: "",
       pageStatus: "",
+      selectExtendValue:"",
       errors: {
         carOwnerFirstName: "",
         carOwnerLastName: "",
@@ -163,6 +164,60 @@ class SearchSticker extends Component {
       .catch(error => {});
   };
 
+  handleSubmitExtend= event => {
+    const{expiredDate,selectExtendValue}= this.state
+    var extendOneYear = expiredDate.toString().substr(0,10)
+    var ex = new Date(extendOneYear)
+    var yyyy = ex.getFullYear()
+    var mm = ex.getMonth()+1
+    var dd = ex.getDate()
+    if(selectExtendValue === "2"){
+      var extendedYear = yyyy+1
+      // var extended = extendedYear+"-"+mm+"-"+dd
+      var extended = extendedYear+'-'+mm+'-'+dd
+      this.setState({
+        expiredDate: extended
+      })
+      console.log(extended,'bb')
+      console.log(expiredDate,'ee')
+      this.onAfterExtendLicense()
+      this.onCloseExtendModel()
+    }
+    console.log(extendedYear,'extendedYear')
+  }
+
+  onAfterExtendLicense = () => {
+    const {
+      expiredDate,
+      openExtendId
+    } = this.state;
+    const url = "http://localhost:5000/extendLicense";
+    const bodyData = JSON.stringify({
+      carOwnerID: openExtendId,
+      expiredDate: expiredDate
+    });
+    console.log(bodyData, "bodyData");
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+          this.getData();
+      })
+      .catch(error => {});
+  };
+
+  selectExtendValue(e){
+    this.setState({
+      selectExtendValue: e.target.value
+    })
+  }
+
   onOpenEditModal = carOwnerID => e => {
     const eachCarOwnerID = this.state.carOwner.find(Id => {
       return Id.carOwnerID === carOwnerID;
@@ -179,7 +234,8 @@ class SearchSticker extends Component {
   };
 
   onCloseEditModal = () => {
-    this.setState({ openEdit: false,
+    this.setState({
+      openEdit: false,
       errors: {
         carOwnerFirstName: "",
         carOwnerLastName: "",
@@ -190,20 +246,22 @@ class SearchSticker extends Component {
     });
   };
 
-  onOpenExtendModel = carOwnerID =>{
+  onOpenExtendModel = carOwnerID => e => {
     const eachCarOwnerID = this.state.carOwner.find(Id => {
       return Id.carOwnerID === carOwnerID;
-    }); 
+    });
     this.setState({
-      openExtend: true
-    })
-  }
+      openExtend: true,
+      openExtendId: carOwnerID,
+      expiredDate: eachCarOwnerID.expiredDate
+    });
+  };
 
-  onCloseExtendModel = () =>{
+  onCloseExtendModel = () => {
     this.setState({
       openExtend: false
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.getData();
@@ -224,165 +282,159 @@ class SearchSticker extends Component {
   };
 
   carOwnerTable() {
-    let tableData = "";
     const { errors } = this.state;
+    let tableData = "";
     if (this.state.searchValue === "") {
       tableData = this.state.carOwner;
     }
     if (this.state.searchValue !== "") {
       tableData = this.state.searchCarOwner;
     }
-
-    return tableData.map(carOwner => {
-      const {
-        carOwnerID,
-        carOwnerFirstName,
-        carOwnerLastName,
-        carOwnerTel,
-        carOwnerEmail,
-        carOwnerAddress,
-        registerDate,
-        expiredDate
-      } = carOwner;
-      return (
-        <div>
-          <Modal
-            classNames="ModalEditSicker"
-            open={this.state.openEdit}
-            onClose={this.onCloseEditModal}
-            center
-          >
-            <h2 className="titleEdit">แก้ไขข้อมูลเจ้าของรถ</h2>
-            <form className="formAddEdit">
-              <div className="editModal">
-                <p>ชื่อ : </p>
-                <input
-                  type="text"
-                  name="carOwnerFirstName"
-                  onChange={event => this.handleChange(event)}
-                  value={this.state.carOwnerFirstName}
-                />
-              </div>
-              {errors.carOwnerFirstName.length > 0 && (
-                <p className="error">{errors.carOwnerFirstName}</p>
-              )}
-
-              <div className="editModal">
-                <p>นามสกุล : </p>
-                <input
-                  type="text"
-                  name="carOwnerLastName"
-                  onChange={event => this.handleChange(event)}
-                  value={this.state.carOwnerLastName}
-                />
-              </div>
-              {errors.carOwnerLastName.length > 0 && (
-                <p className="error">{errors.carOwnerLastName}</p>
-              )}
-
-              <div className="editModal">
-                <p>อีเมล์ : </p>
-                <input
-                  type="text"
-                  name="carOwnerEmail"
-                  onChange={event => this.handleChange(event)}
-                  value={this.state.carOwnerEmail}
-                />
-              </div>
-              {errors.carOwnerEmail.length > 0 && (
-                <p className="error">{errors.carOwnerEmail}</p>
-              )}
-
-              <div className="editModal">
-                <p>เบอร์โทรศัพท์ : </p>
-                <input
-                  type="text"
-                  name="carOwnerTel"
-                  onChange={event => this.handleChange(event)}
-                  value={this.state.carOwnerTel}
-                />
-              </div>
-              {errors.carOwnerTel.length > 0 && (
-                <p className="error">{errors.carOwnerTel}</p>
-              )}
-
-              <div className="editModal">
-                <p>ที่อยู่ : </p>
-                <input
-                  type="text"
-                  name="carOwnerAddress"
-                  onChange={event => this.handleChange(event)}
-                  value={this.state.carOwnerAddress}
-                />
-              </div>
-              {errors.carOwnerAddress.length > 0 && (
-                <p className="error">{errors.carOwnerAddress}</p>
-              )}
-
-              <button
-                className="buttonUpdate"
-                onClick={event => this.handleEditCarOwner(event)}
-              >
-                แก้ไข
-              </button>
-              <button className="buttonCancel" onClick={this.onCloseEditModal}>
-                ยกเลิก
-              </button>
-            </form>
-          </Modal>
-
-          <div className="carOwnerTask">
-            <div className="carOwnerName">
-              <div>ชื่อ : </div>
-              <div className="fieldName">{carOwnerFirstName}</div>
-              <div>นามสกุล : </div>
-              <div className="fieldName">{carOwnerLastName}</div>
+    return (
+      <div>
+        <Modal
+          classNames="ModalEditSicker"
+          open={this.state.openEdit}
+          onClose={this.onCloseEditModal}
+          center
+        >
+          <h2 className="titleEdit">แก้ไขข้อมูลเจ้าของรถ</h2>
+          <form className="formAddEdit">
+            <div className="editModal">
+              <p>ชื่อ : </p>
+              <input
+                type="text"
+                name="carOwnerFirstName"
+                onChange={event => this.handleChange(event)}
+                value={this.state.carOwnerFirstName}
+              />
             </div>
-            <div className="carOwnerEmailTel">
-              <div>อีเมล์ : </div>
-              <div className="fieldName">{carOwnerEmail}</div>
-              <div>เบอร์โทรศัพท์ : </div>
-              <div className="fieldName">{carOwnerTel}</div>
+            {errors.carOwnerFirstName.length > 0 && (
+              <p className="error">{errors.carOwnerFirstName}</p>
+            )}
+
+            <div className="editModal">
+              <p>นามสกุล : </p>
+              <input
+                type="text"
+                name="carOwnerLastName"
+                onChange={event => this.handleChange(event)}
+                value={this.state.carOwnerLastName}
+              />
             </div>
-            <div className="carOwnerAddress">
-              <div>ที่อยู่ : </div>
-              <div className="fieldName">{carOwnerAddress}</div>
+            {errors.carOwnerLastName.length > 0 && (
+              <p className="error">{errors.carOwnerLastName}</p>
+            )}
+
+            <div className="editModal">
+              <p>อีเมล์ : </p>
+              <input
+                type="text"
+                name="carOwnerEmail"
+                onChange={event => this.handleChange(event)}
+                value={this.state.carOwnerEmail}
+              />
             </div>
-            <div className="carOwnerDate">
-              <div>วันที่ต่อสัญญา : </div>
-              <div className="fieldName">{registerDate.substr(0, 10)}</div>
-              <div>วันหมดอายุ : </div>
-              <div className="fieldName">{expiredDate.substr(0, 10)}</div>
+            {errors.carOwnerEmail.length > 0 && (
+              <p className="error">{errors.carOwnerEmail}</p>
+            )}
+
+            <div className="editModal">
+              <p>เบอร์โทรศัพท์ : </p>
+              <input
+                type="text"
+                name="carOwnerTel"
+                onChange={event => this.handleChange(event)}
+                value={this.state.carOwnerTel}
+              />
             </div>
+            {errors.carOwnerTel.length > 0 && (
+              <p className="error">{errors.carOwnerTel}</p>
+            )}
+
+            <div className="editModal">
+              <p>ที่อยู่ : </p>
+              <input
+                type="text"
+                name="carOwnerAddress"
+                onChange={event => this.handleChange(event)}
+                value={this.state.carOwnerAddress}
+              />
+            </div>
+            {errors.carOwnerAddress.length > 0 && (
+              <p className="error">{errors.carOwnerAddress}</p>
+            )}
+
             <button
-              className="EditModalButton"
-              onClick={this.onOpenEditModal(carOwnerID)}
+              className="buttonUpdate"
+              onClick={event => this.handleEditCarOwner(event)}
             >
-              แก้ไขข้อมูล
+              แก้ไข
             </button>
+            <button className="buttonCancel" onClick={this.onCloseEditModal}>
+              ยกเลิก
+            </button>
+          </form>
+        </Modal>
 
-            <Modal
-            //  classNames="ModalEditSicker"
-             open={this.state.openExtend}
-             onClose={this.onCloseExtendModel}
-             center
-          >
-            <h2>ต่อสัญญา</h2>
-            <select>
-              <option>6 เดือน</option>
-              <option>1 ปี</option>
-            </select>
-          </Modal>
-          
-            {/* <button
-              // onClick={this.onOpenExtendModel(carOwnerID)}
-            >
-              ต่อสัญญา
-            </button> */}
-          </div>
-        </div>
-      );
-    });
+        <Modal
+          //  classNames="ModalEditSicker"
+          open={this.state.openExtend}
+          onClose={this.onCloseExtendModel}
+          center
+        >
+          <h2>ต่อสัญญา</h2>
+          <select onChange={e=>this.selectExtendValue(e)}>
+            <option value='1'>6 เดือน</option>
+            <option value='2'>1 ปี</option>
+          </select>
+          <button onClick={event=>this.handleSubmitExtend(event)}>ยืนยัน</button>
+        </Modal>
+
+        {this.state.carOwner.map(carOwner => {
+          return (
+            <div className="carOwnerTask">
+              <div className="carOwnerName">
+                <div>ชื่อ : </div>
+                <div className="fieldName">{carOwner.carOwnerFirstName}</div>
+                <div>นามสกุล : </div>
+                <div className="fieldName">{carOwner.carOwnerLastName}</div>
+              </div>
+              <div className="carOwnerEmailTel">
+                <div>อีเมล์ : </div>
+                <div className="fieldName">{carOwner.carOwnerEmail}</div>
+                <div>เบอร์โทรศัพท์ : </div>
+                <div className="fieldName">{carOwner.carOwnerTel}</div>
+              </div>
+              <div className="carOwnerAddress">
+                <div>ที่อยู่ : </div>
+                <div className="fieldName">{carOwner.carOwnerAddress}</div>
+              </div>
+              <div className="carOwnerDate">
+                <div>วันที่ต่อสัญญา : </div>
+                <div className="fieldName">
+                  {carOwner.registerDate.substr(0, 10)}
+                </div>
+                <div>วันหมดอายุ : </div>
+                <div className="fieldName">
+                  {carOwner.expiredDate.substr(0, 10)}
+                </div>
+              </div>
+              <button
+                className="EditModalButton"
+                onClick={this.onOpenEditModal(carOwner.carOwnerID)}
+              >
+                แก้ไขข้อมูล
+              </button>
+
+              <button onClick={this.onOpenExtendModel(carOwner.carOwnerID)}>
+                ต่อสัญญา
+              </button>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   render() {

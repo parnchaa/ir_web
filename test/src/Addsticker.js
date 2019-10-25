@@ -87,8 +87,8 @@ class Addsticker extends Component {
     } = this.state;
     const url = "http://localhost:5000/addSticker";
     var today = new Date();
-    var curDate = today.getUTCDate();
-    var curMonth = today.getUTCMonth() + 1;
+    var curDate = today.getDate()+1;
+    var curMonth = today.getMonth() + 1;
     var curYear = today.getFullYear()
     var nextYear = today.getFullYear()+1
     var currentDate = curYear+'-'+curMonth+'-'+curDate
