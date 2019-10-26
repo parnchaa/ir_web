@@ -389,6 +389,10 @@ class SearchSticker extends Component {
         </Modal>
 
         {this.state.carOwner.map(carOwner => {
+          if(carOwner.carOwnerID === 1){
+            return null
+          }
+          else{
           return (
             <div className="carOwnerTask">
               <div className="carOwnerName">
@@ -429,6 +433,7 @@ class SearchSticker extends Component {
               </button>
             </div>
           );
+          }
         })}
       </div>
     );
