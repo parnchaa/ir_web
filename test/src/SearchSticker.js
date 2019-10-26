@@ -4,7 +4,13 @@ import Navibar from "./Navibar";
 import "./SearchSticker.css";
 import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
+<<<<<<< Updated upstream
 import moment from 'moment'
+=======
+import folder from "./picture/folder.png";
+import edit from "./picture/edit.png";
+
+>>>>>>> Stashed changes
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -428,10 +434,23 @@ class SearchSticker extends Component {
                 ต่อสัญญา
               </button>
             </div>
+<<<<<<< Updated upstream
           );
         })}
       </div>
     );
+=======
+            <button
+              className="EditModalButton"
+              onClick={this.onOpenEditModal(carOwnerID)}
+            >
+              <img src={edit} className='iconleftButton'/>แก้ไขข้อมูล
+            </button>
+          </div>
+        </div>
+      );
+    });
+>>>>>>> Stashed changes
   }
 
   render() {
@@ -451,7 +470,7 @@ class SearchSticker extends Component {
           <img src={search} className="search" />
         </div>
 
-        <h2 className="Table-header">ข้อมูลผู้ขอสติกเกอร์</h2>
+        <div className="Table-header">ข้อมูลผู้ขอสติกเกอร์<img src={folder} className='Headicon'/></div>
         <table className="table">
           <tbody>{this.carOwnerTable()}</tbody>
         </table>
@@ -459,5 +478,6 @@ class SearchSticker extends Component {
     );
   }
 }
+
 
 export default SearchSticker;

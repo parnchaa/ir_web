@@ -47,4 +47,19 @@
 .logout {
     color: red;
     border: none;
-        }
+}
+.Headicon{
+    width: 65px;
+    height: 55px;
+    padding-left: 10px;
+}
+.iconButton{
+    width: 20px;
+    height:18px;
+    padding-left: 5px;
+}
+.iconleftButton{
+    width: 20px;
+    height:18px;
+    padding-right: 5px;
+}

@@ -4,6 +4,9 @@ import Navibar from "./Navibar";
 import "./Rule.css";
 import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
+import edit from "./picture/edit.png";
+import amonestation from "./picture/amonestation.png";
+
 
 class Rule extends Component {
   constructor(props) {
@@ -371,7 +374,9 @@ class Rule extends Component {
                   className="editButton"
                   onClick={this.onOpenEditModal(rule.ruleID)}
                 >
+                  {/* <img src={edit} className='iconleftButton'/> */}
                   แก้ไข
+
                 </button>
                 <button
                   className="deleteModalButton"
@@ -461,7 +466,7 @@ class Rule extends Component {
 
         <div>
           <p className="Table-header">
-            กฎองค์กร
+            กฎองค์กร <img src={amonestation} className="Headicon"/>
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>

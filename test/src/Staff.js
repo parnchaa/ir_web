@@ -6,6 +6,10 @@ import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
 import * as firebase from "firebase";
 import ApiKeys from "./ApiKeys";
+import admin  from "./picture/admin.png";
+import securityguard  from "./picture/securityguard.png";
+
+
 import addButton from "./picture/plus.png";
 
 class Staff extends Component {
@@ -390,7 +394,7 @@ class Staff extends Component {
       <div>
         <Header />
         <Navibar />
-        <h2 className="Table-header">แอดมิน</h2>
+        <div className="Table-header">แอดมิน<img src={admin} className='Headicon'/></div>
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่มแอดมิน
         </button>
@@ -493,7 +497,7 @@ class Staff extends Component {
           <tbody>{this.staffTable()}</tbody>
         </table>
 
-        <h2 className="Table-header">พนักงานรักษาความปลอดภัย</h2>
+        <div className="Table-header">พนักงานรักษาความปลอดภัย<img src={securityguard} className="Headicon" /></div>
         <button
           className="addSecurityguard"
           onClick={this.onOpenAddSecurityguardModal}
