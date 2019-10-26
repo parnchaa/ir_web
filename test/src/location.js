@@ -11,7 +11,7 @@ class Location extends Component {
     locationName: "",
     locationCode: "",
     location: [],
-    openDelete: false
+    openDelete: false,
   };
 
   getData() {
@@ -70,6 +70,7 @@ class Location extends Component {
   componentDidMount() {
     this.getData();
   }
+  
   onOpenDeleteModalLocation = locationID => e => {
     this.setState({
       openDelete: true,
@@ -172,13 +173,13 @@ class Location extends Component {
         <h2 className="Table-header">สถานที่จอดรถ</h2>
         <table class="locationtable">
           
-
           <tbody className="location">
             <th>ชื่อสถานที่</th>
             <th>รหัสสถานที่</th>
             {this.locationTable()}
           </tbody>
         </table>
+
         <MapContainer location={this.state.locationName} />
       </div>
     );
