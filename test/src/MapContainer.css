@@ -5,3 +5,27 @@
     width: 50%;
     height: 80%;
 }
+.Subtext{
+    font-family: 'kanit',sans-serif;
+    color:#29A8AB;
+    text-align: center;
+    font-size: 1.5rem;
+}
+.chooseStickerColor{
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+.SelectSticker{
+    font-family: 'kanit',sans-serif;
+    color:#29A8AB;
+    text-align: center;
+    font-size: 1.2rem;
+    width: 10%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #29A8AB 1px;
+    border-top: none;
+}

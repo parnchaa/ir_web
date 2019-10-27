@@ -6,9 +6,6 @@ import deletePic from "./picture/delete.png";
 import ImgPic from "./picture/more.png";
 import Modal from "react-responsive-modal";
 import {Link,Switch,Route} from 'react-router-dom'
-import Login from './Login'
-import Admin from './Admin'
-import Logout from './components/Logout'
 
 
 
@@ -146,12 +143,7 @@ class App extends Component {
   render() {
     return (
            <div className="App">
-             <Switch>
-               <Route exact path="/" Component={Login}/>
-               <Route path="/Admin" Component={Admin}/>
-               <Route path="/Logout" Component={Logout}/>
-
-             </Switch>
+            
         <Header />
         <Navibar />
         <Modal 

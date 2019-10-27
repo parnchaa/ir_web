@@ -7,6 +7,7 @@ import {
 } from "react-google-maps";
 import { compose, withProps } from "recompose";
 import Modal from "react-responsive-modal";
+import "./MapContainer.css";
 
 // import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
 
@@ -219,10 +220,10 @@ export class MapContainer extends Component {
     return (
       <div>
         <div className="chooseStickerColor">
-          <h2>เลือกสีสติ๊กเกอร์</h2>
-          <h6>โปรดเลือกสีของสติ๊กเกอร์ให้ตรงสถานที่ และกฎขององค์กรที่กำหนดไว้</h6>
-          <select onChange={this.getStickerID} id="sticker">
-            <option selected  disabled>โปรดเลือกสีสติ๊กเกอร์...</option>
+          <h2 className="titleEdit">เลือกสีสติ๊กเกอร์</h2>
+          <p className="Subtext">โปรดเลือกสีของสติ๊กเกอร์ให้ตรงสถานที่ และกฎขององค์กรที่กำหนดไว้</p>
+          <select className="SelectSticker" onChange={this.getStickerID} id="sticker">
+            <option selected  disabled>เลือกสีสติ๊กเกอร์</option>
             {this.createStickerOptions()}
           </select>
         </div>
