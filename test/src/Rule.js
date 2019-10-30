@@ -13,6 +13,7 @@ class Rule extends Component {
       openDelete: false,
       openEdit: false,
       openAdd: false,
+      openAddS: false,
       errors: {
         ruleName: "",
         maxWarning: "",
@@ -247,6 +248,13 @@ class Rule extends Component {
     });
   };
 
+  onOpenAddStickerModal = () => {
+    this.setState({ openAddS: true,
+      typeOfSticker:"",
+      colorOfSticker:""
+    });
+  };
+
   componentDidMount() {
     this.getData();
   }
@@ -464,6 +472,9 @@ class Rule extends Component {
             กฎองค์กร
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
+            </button>
+            <button className="addRuleButton" onClick={this.onOpenAddStickerModal}>
+              เพิ่มสติ๊กเกอร์
             </button>
           </p>
           <div className="ruleTable">{this.ruleTable()}</div>

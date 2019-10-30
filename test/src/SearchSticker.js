@@ -173,6 +173,7 @@ class SearchSticker extends Component {
       var extendedMonth = moment(extendedM).format()
       extended = extendedMonth
       this.onAfterExtendLicense(extended)
+      alert("คุณได้ต่อสัญญาสำเร็จ")
       this.onCloseExtendModel()
     }
     else if(selectExtendValue === "2"){
@@ -180,6 +181,7 @@ class SearchSticker extends Component {
       var extendedYear = extendedY+'-'+mm+'-'+dd
       extended = extendedYear
       this.onAfterExtendLicense(extended)
+      alert("คุณได้ต่อสัญญาสำเร็จ")
       this.onCloseExtendModel()
     }
     
