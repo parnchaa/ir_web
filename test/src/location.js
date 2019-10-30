@@ -5,6 +5,7 @@ import MapContainer from "./MapContainer";
 import "./location.css";
 import deletePic from "./picture/delete.png";
 import Modal from "react-responsive-modal";
+import map from "./picture/map.png";
 
 class Location extends Component {
   state = {
@@ -170,7 +171,7 @@ class Location extends Component {
         <Header />
         <Navibar />
 
-        <h2 className="Table-header">สถานที่จอดรถ</h2>
+        <h2 className="Table-header">สถานที่จอดรถ <img src={map} className="Headicon"/></h2>
         <table class="locationtable">
           
           <tbody className="location">

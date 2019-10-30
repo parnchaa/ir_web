@@ -5,6 +5,9 @@ import Navibar from "./Navibar";
 import deletePic from "./picture/delete.png";
 import ImgPic from "./picture/more.png";
 import Modal from "react-responsive-modal";
+import {Link,Switch,Route} from 'react-router-dom'
+
+
 
 class App extends Component {
   constructor(props) {
@@ -139,7 +142,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+           <div className="App">
+            
         <Header />
         <Navibar />
         <Modal 
@@ -183,6 +187,7 @@ class App extends Component {
           <th>หลักฐาน</th>
           <tbody> {this.problemTable()}</tbody>
         </table>
+        
       </div>
     );
   }

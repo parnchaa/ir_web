@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Header from "./Header";
 import Navibar from "./Navibar";
 import "./Addsticker.css";
+import plusButton from './picture/plusButton.png';
+import adduser from './picture/adduser.png';
+
+
 
 class Addsticker extends Component {
   state = {
@@ -193,7 +197,8 @@ class Addsticker extends Component {
       <div>
         <Header />
         <Navibar />
-        <div className="Table-header">เพิ่มข้อมูลผู้ขอสติกเกอร์</div>
+        <div className="Table-header">เพิ่มข้อมูลผู้ขอสติกเกอร์<img src={adduser} className='Headicon'/>
+</div>
         <div className="addSticker">
           <form className="addStickerForm">
             <div className="formRow">
@@ -263,7 +268,7 @@ class Addsticker extends Component {
               <label>ที่อยู่:</label>
 
               <input
-                type="text"
+                type="textarea"
                 className="addressInput"
                 name="carOwnerAddress"
                 value={this.state.carOwnerAddress}
@@ -344,6 +349,7 @@ class Addsticker extends Component {
               onClick={event => this.handleSubmit(event)}
             >
               เพิ่ม
+              <img src={plusButton} className='iconButton'/>
             </button>
           </form>
         </div>

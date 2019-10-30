@@ -5,9 +5,10 @@
 }
 
 .logo{
-    width: 8rem;
-    height: 8rem;
-    margin-left: 20%;
+    width: 6rem;
+    height: 6rem;
+    margin-left: 40%;
+    margin-top: 1rem;
     padding: 0.4rem 0rem;
 }
 
@@ -16,6 +17,9 @@
     font-size: 3rem;
     padding-top:2rem; 
     margin-left: 3rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
     color: #29A8AB;
 }
 
@@ -39,4 +43,23 @@
 
 .profileInfo{
     font-size: 1.2rem;
+}
+.logout {
+    color: red;
+    border: none;
+}
+.Headicon{
+    width: 65px;
+    height: 55px;
+    padding-left: 10px;
+}
+.iconButton{
+    width: 20px;
+    height:18px;
+    padding-left: 5px;
+}
+.iconleftButton{
+    width: 20px;
+    height:18px;
+    padding-right: 5px;
 }

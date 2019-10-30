@@ -24,12 +24,16 @@ class Header extends Component{
             </td>
             <td className='profileInfo'>
               <tr>surname</tr>
-              <tr>logout</tr>
+              <tr><div>
+                <button className='logout'>logout</button>
+                </div>
+                </tr>
             </td>
           </table>
         </div>
       );
     }
   }
+  
 
   export default Header;

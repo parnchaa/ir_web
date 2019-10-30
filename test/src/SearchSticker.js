@@ -5,6 +5,9 @@ import "./SearchSticker.css";
 import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
 import moment from 'moment'
+import folder from "./picture/folder.png";
+import edit from "./picture/edit.png";
+
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -376,18 +379,20 @@ class SearchSticker extends Component {
           </form>
         </Modal>
 
-        <Modal
-          //  classNames="ModalEditSicker"
+        <Modal 
+          classNames="ModalEditSicker"
           open={this.state.openExtend}
           onClose={this.onCloseExtendModel}
           center
         >
-          <h2>ต่อสัญญา</h2>
-          <select onChange={e=>this.selectExtendValue(e)}>
+          <h2 className="titleEdit">ต่อสัญญาสติกเกอร์</h2>
+         <div>
+          <select className="SelectTime" onChange={e=>this.selectExtendValue(e)}>
             <option value='1'>6 เดือน</option>
             <option value='2'>1 ปี</option>
           </select>
-          <button onClick={event=>this.handleSubmitExtend(event)}>ยืนยัน</button>
+          </div>
+          <button className="ButtonSubmit" onClick={event=>this.handleSubmitExtend(event)}>ยืนยัน</button>
         </Modal>
 
         {this.state.carOwner.map(carOwner => {
@@ -423,17 +428,18 @@ class SearchSticker extends Component {
                   {carOwner.expiredDate.substr(0, 10)}
                 </div>
               </div>
+             <div className="LineButton">
+              <button className="RenewContractButton" onClick={this.onOpenExtendModel(carOwner.carOwnerID)}>
+                ต่อสัญญา
+              </button>
               <button
                 className="EditModalButton"
                 onClick={this.onOpenEditModal(carOwner.carOwnerID)}
               >
                 แก้ไขข้อมูล
               </button>
-
-              <button onClick={this.onOpenExtendModel(carOwner.carOwnerID)}>
-                ต่อสัญญา
-              </button>
-            </div>
+              </div>
+                </div>
           );
           }
         })}
@@ -458,7 +464,7 @@ class SearchSticker extends Component {
           <img src={search} className="search" />
         </div>
 
-        <h2 className="Table-header">ข้อมูลผู้ขอสติกเกอร์</h2>
+        <div className="Table-header">ข้อมูลผู้ขอสติกเกอร์<img src={folder} className='Headicon'/></div>
         <table className="table">
           <tbody>{this.carOwnerTable()}</tbody>
         </table>
@@ -466,5 +472,6 @@ class SearchSticker extends Component {
     );
   }
 }
+
 
 export default SearchSticker;
