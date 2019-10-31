@@ -33,7 +33,7 @@ class Navibar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" id="nav" navbar>
                             <NavItem>
-                                <NavLink href="/">เหตุการณ์</NavLink>
+                                <NavLink href="/Event">เหตุการณ์</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="/SearchSticker">ค้นหาข้อมูลผู้ขอสติกเกอร์</NavLink>

@@ -81,6 +81,7 @@ class login extends Component {
     .then(json=>{
         console.log(json)
         localStorage.setItem('tk',json)
+        window.location.href="/Event"
     })
   };
 
