@@ -170,10 +170,10 @@ class Location extends Component {
       <div>
         <Header />
         <Navibar />
-
+        <MapContainer location={this.state.locationName} />
         <h2 className="Table-header">สถานที่จอดรถ <img src={map} className="Headicon"/></h2>
+        
         <table class="locationtable">
-          
           <tbody className="location">
             <th>ชื่อสถานที่</th>
             <th>รหัสสถานที่</th>
@@ -181,7 +181,7 @@ class Location extends Component {
           </tbody>
         </table>
 
-        <MapContainer location={this.state.locationName} />
+       
       </div>
     );
   }

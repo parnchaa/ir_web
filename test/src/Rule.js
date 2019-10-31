@@ -7,7 +7,6 @@ import deletePic from "./picture/delete.png";
 import edit from "./picture/edit.png";
 import amonestation from "./picture/amonestation.png";
 
-
 class Rule extends Component {
   constructor(props) {
     super(props);
@@ -17,11 +16,15 @@ class Rule extends Component {
       openEdit: false,
       openAdd: false,
       openAddS: false,
+      typeOfSticker:"",
+      colorOfSticker:'',
       errors: {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: ""
+        ruleDetails: "",
+        typeOfSticker:"",
+        colorOfSticker:""
       }
     };
   }
@@ -82,6 +85,12 @@ class Rule extends Component {
       case "ruleDetails":
         errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
         break;
+        case "typeOfSticker":
+        errors.typeOfSticker = value.length < 2 ? "กรุณากรอกชื่อสติกเกอร์" : "";
+        break;
+        case "colorOfSticker":
+        errors.colorOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียด" : "";
+        break;
     }
     this.setState({ errors, [name]: value }, () => {
       console.log(errors);
@@ -138,7 +147,8 @@ class Rule extends Component {
   };
 
   onCloseEditModal = () => {
-    this.setState({ openEdit: false,
+    this.setState({
+      openEdit: false,
       errors: {
         ruleName: "",
         maxWarning: "",
@@ -196,9 +206,9 @@ class Rule extends Component {
       ruleDetails !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
-          this.onAfterAddRule()
+        this.onAfterAddRule();
         console.log("Valid Form");
-        this.onCloseAddModal()
+        this.onCloseAddModal();
       } else {
         console.error("Invalid Form");
       }
@@ -232,7 +242,23 @@ class Rule extends Component {
   };
 
   onOpenAddModal = () => {
-    this.setState({ openAdd: true,
+    this.setState({
+      openAdd: true,
+      errors: {
+        ruleName: "",
+        maxWarning: "",
+        price: "",
+        ruleDetails: "",
+        typeOfSticker:"",
+        colorOfSticker:""
+      }
+      
+    });
+  };
+
+  onCloseAddModal = () => {
+    this.setState({
+      openAdd: false,
       ruleName: "",
       maxWarning: "",
       price: "",
@@ -240,21 +266,66 @@ class Rule extends Component {
     });
   };
 
-  onCloseAddModal = () => {
-    this.setState({ openAdd: false,
-      errors: {
-        ruleName: "",
-        maxWarning: "",
-        price: "",
-        ruleDetails: ""
+  handleAddSticker = event => {
+    event.preventDefault();
+    const { typeOfSticker, colorOfSticker } = this.state;
+    if (
+      typeOfSticker !== "" &&
+      colorOfSticker !== ""
+    ) {
+      if (this.validateForm(this.state.errors)) {
+        this.onAfterAddSticker();
+        console.log("Valid Form");
+        this.onCloseAddStickerModal();
+      } else {
+        console.error("Invalid Form");
       }
+    } else {
+      console.log("pls fill");
+    }
+  };
+
+  onAfterAddSticker = () => {
+    const url = "http://localhost:5000/addSticker";
+    const bodyData = JSON.stringify({
+      typeOfSticker: this.state.typeOfSticker,
+      colorOfSticker: this.state.colorOfSticker
     });
+    console.log(bodyData);
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    fetch(url, othepram)
+      .then(data => console.log(data))
+      .then(response => {
+        this.getData();
+      })
+      .catch(error => {});
   };
 
   onOpenAddStickerModal = () => {
     this.setState({ openAddS: true,
-      typeOfSticker:"",
-      colorOfSticker:""
+      errors: {
+        ruleName: "",
+        maxWarning: "",
+        price: "",
+        ruleDetails: "",
+        typeOfSticker:"",
+        colorOfSticker:""
+      }
+  });
+  };
+
+  onCloseAddStickerModal = () => {
+    this.setState({
+      openAddS: false,
+        typeOfSticker: "",
+        colorOfSticker: ""
+      
     });
   };
 
@@ -384,7 +455,6 @@ class Rule extends Component {
                 >
                   {/* <img src={edit} className='iconleftButton'/> */}
                   แก้ไข
-
                 </button>
                 <button
                   className="deleteModalButton"
@@ -472,13 +542,59 @@ class Rule extends Component {
           </form>
         </Modal>
 
+        <Modal open={this.state.openAddS} onClose={this.onCloseAddStickerModal} center>
+          <p className="modalTitle">เพิ่มสติกเกอร์</p>
+          <form className="formAdd" onSubmit={this.handleAddSticker}>
+          <div className="addModal">
+              <label htmlFor="colorOfSticker">สีสติกเกอร์: </label>
+              <input
+                className="inputModal"
+                type="text"
+                name="colorOfSticker"
+                onChange={event => this.handleChange(event)}
+                value={this.state.colorOfSticker}
+              />
+            </div>
+            {errors.colorOfSticker.length > 0 && (
+              <p className="error">{errors.colorOfSticker}</p>
+            )}
+            <div className="addModal">
+              <label htmlFor="typeOfSticker">รายละเอียดสติกเกอร์: </label>
+              <input
+                className="inputModal"
+                type="text"
+                name="typeOfSticker"
+                onChange={event => this.handleChange(event)}
+                value={this.state.typeOfSticker}
+              />
+            </div>
+            {errors.typeOfSticker.length > 0 && (
+              <p className="error">{errors.typeOfSticker}</p>
+            )}
+            
+            <button
+              className="modalAdd"
+              onClick={event => this.handleAddSticker(event)}
+              type="submit"
+            >
+              เพิ่ม
+            </button>
+            <button className="modalcancel" onClick={this.onCloseAddStickerModal}>
+              ยกเลิก
+            </button>
+          </form>
+        </Modal>
+
         <div>
           <p className="Table-header">
-            กฎองค์กร <img src={amonestation} className="Headicon"/>
+            กฎองค์กร <img src={amonestation} className="Headicon" />
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>
-            <button className="addRuleButton" onClick={this.onOpenAddStickerModal}>
+            <button
+              className="addRuleButton"
+              onClick={this.onOpenAddStickerModal}
+            >
               เพิ่มสติ๊กเกอร์
             </button>
           </p>
