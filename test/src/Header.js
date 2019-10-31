@@ -40,7 +40,7 @@ checkToken = () => {
 
 logout(){
   localStorage.removeItem('tk')
-  window.location.href="/login"
+  window.location.href="/"
 }
 
 componentDidMount(){
