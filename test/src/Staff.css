@@ -230,3 +230,15 @@
   margin-bottom: 0.4rem;
   color: #29A8AB;
 }
+
+.loader_spinner{
+  position: relative;
+  left: 43%;
+}
+
+.loader_waiting{
+  color: #29A8AB;
+  position: absolute;
+  left: 49%;
+  bottom: 12.5%;
+}
