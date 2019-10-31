@@ -8,9 +8,11 @@ import * as firebase from "firebase";
 import ApiKeys from "./ApiKeys";
 import admin  from "./picture/admin.png";
 import securityguard  from "./picture/securityguard.png";
+import Loader from 'react-loader-spinner'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 
-import addButton from "./picture/plus.png";
+// import addButton from "./picture/plus.png";
 
 class Staff extends Component {
   constructor(props) {
@@ -35,7 +37,8 @@ class Staff extends Component {
         staffEmail: "",
         staffTel: "",
         staffPassword: ""
-      }
+      },
+      spinner: false
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -153,13 +156,15 @@ class Staff extends Component {
   };
 
   handleSubmitAdmin = event => {
+    // this.confirmUploadImage();
     event.preventDefault();
-    const { firstName, lastName, staffEmail, staffTel } = this.state;
+    const { firstName, lastName, staffEmail, staffTel, securityguardImage } = this.state;
     if (
       firstName !== "" &&
       lastName !== "" &&
       staffEmail !== "" &&
-      staffTel !== ""
+      staffTel !== "" &&
+      securityguardImage !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertAdmin();
@@ -179,7 +184,8 @@ class Staff extends Component {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       staffEmail: this.state.staffEmail,
-      staffTel: this.state.staffTel
+      staffTel: this.state.staffTel,
+      staffImages: this.state.securityguardImage
     });
     console.log(bodyData);
     const othepram = {
@@ -210,6 +216,7 @@ class Staff extends Component {
   };
 
   confirmUploadImage = () => {
+    this.setState({spinner: true})
     this.uploadImages(
       this.state.securityguardImages,
       this.state.securityguardImageName
@@ -227,6 +234,7 @@ class Staff extends Component {
               securityguardImage: imageURL
             });
             if (this.state.securityguardImage != "") {
+              this.setState({spinner: false})
               console.log("imageURL: " + this.state.securityguardImage);
             } else {
               console.log("upload failed");
@@ -243,24 +251,27 @@ class Staff extends Component {
       securityguardImages: URL.createObjectURL(event.target.files[0]),
       securityguardImageName: event.target.files[0].name
     });
+    this.confirmUploadImage();
   };
 
   handleSubmitSecurity = event => {
-    this.confirmUploadImage();
+    // this.confirmUploadImage();
     event.preventDefault();
     const {
       firstName,
       lastName,
       staffEmail,
       staffTel,
-      staffPassword
+      staffPassword,
+      securityguardImage
     } = this.state;
     if (
       firstName !== "" &&
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      staffPassword !== ""
+      staffPassword !== "" &&
+      securityguardImage !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertSecurity();
@@ -398,7 +409,6 @@ class Staff extends Component {
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่มแอดมิน
         </button>
-
         <Modal
           // className="Modal"
           open={this.state.openDelete}
@@ -476,6 +486,30 @@ class Staff extends Component {
             {errors.staffEmail.length > 0 && (
               <p className="error">{errors.staffEmail}</p>
             )}
+            <label htmlFor="upload-photo" className="upload-picture">
+              เลือกรูป
+            </label>
+            <input
+              type="file"
+              name="photo"
+              id="upload-photo"
+              onChange={this.fileSelectedHandler}
+            />
+            <Loader
+            className = "loader_spinner"
+            type="Oval"
+            color="#29A8AB"
+            height={25}
+            width={25}
+            visible={this.state.spinner}
+          />
+          {this.state.spinner ? 
+          <p className="loader_waiting">กรุณารอสักครู่...</p>
+          :
+          null
+          }
+          </form>
+          <div className="modalButton">
             <button
               className="modalAdd"
               onClick={event => this.handleSubmitAdmin(event)}
@@ -486,7 +520,8 @@ class Staff extends Component {
             <button className="modalcancel" onClick={this.onCloseAddModal}>
               ยกเลิก
             </button>
-          </form>
+          </div>
+          
         </Modal>
 
         <table className="staffTable">
@@ -573,7 +608,7 @@ class Staff extends Component {
                 className="inputModal"
                 type="password"
                 name="staffPassword"
-                placeholder="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว"
+                // placeholder="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว"
                 onChange={event => this.handleChange(event)}
                 value={this.state.staffPassword}
               />
@@ -591,12 +626,19 @@ class Staff extends Component {
               id="upload-photo"
               onChange={this.fileSelectedHandler}
             />
-            {/* <button
-              className="upload-picture"
-              onClick={this.confirmUploadImage}
-            >
-              Upload
-            </button> */}
+            <Loader
+            className = "loader_spinner"
+            type="Oval"
+            color="#29A8AB"
+            height={25}
+            width={25}
+            visible={this.state.spinner}
+          />
+          {this.state.spinner ? 
+          <p className="loader_waiting">กรุณารอสักครู่...</p>
+          :
+          null
+          }
           </form>
           <div className="modalButton">
             <button

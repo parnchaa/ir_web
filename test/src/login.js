@@ -79,9 +79,12 @@ class login extends Component {
     fetch(url, othepram)
     .then(res=>res.json())
     .then(json=>{
-        console.log(json)
-        localStorage.setItem('tk',json)
-        window.location.href="/Event"
+        if (json === "wrong") {
+          alert("อีเมล์หรือรหัสผ่านไม่ถูกต้อง")
+        }else{
+          localStorage.setItem('tk',json)
+          window.location.href="/Event"
+        }
     })
   };
 
