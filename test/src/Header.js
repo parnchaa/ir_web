@@ -56,10 +56,11 @@ logout(){
 
 componentDidMount(){
   this.checkToken()
+  console.log(this.state.decoded.staffImages,'tt')
 }
 
     render() {
-      const {firstName,lastName,role} = this.state.decoded
+      const {firstName,lastName,role,staffImages} = this.state.decoded
         return (
           <div className='header'>
             <div>
@@ -68,7 +69,7 @@ componentDidMount(){
             <div className='irName'>IR-Parking</div>
             <table className='profile'>
               <td className='profilePicBox'>
-              <img src={profile} className='profilePic'></img>
+              <img src={staffImages} className='profilePic'></img>
               </td>
               <td className='profileInfo'>
                 <tr>{firstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lastName}</tr>

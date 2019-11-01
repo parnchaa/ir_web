@@ -6,6 +6,7 @@ import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
 import edit from "./picture/edit.png";
 import amonestation from "./picture/amonestation.png";
+import * as jwt_decode from "jwt-decode";
 
 class Rule extends Component {
   constructor(props) {
@@ -16,15 +17,16 @@ class Rule extends Component {
       openEdit: false,
       openAdd: false,
       openAddS: false,
-      typeOfSticker:"",
-      colorOfSticker:'',
+      typeOfSticker: "",
+      colorOfSticker: "",
+      decoded: "",
       errors: {
         ruleName: "",
         maxWarning: "",
         price: "",
         ruleDetails: "",
-        typeOfSticker:"",
-        colorOfSticker:""
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
     };
   }
@@ -38,6 +40,15 @@ class Rule extends Component {
         console.log("rule", this.state.rule);
       });
   }
+
+  checkToken = () => {
+    // let token = localStorage.getItem('sc');
+    let detailtk = localStorage.getItem("tk");
+
+    var decoded = jwt_decode(detailtk);
+    console.log(decoded, "decoded");
+    this.setState({ decoded });
+  };
 
   onOpenEditModal = ruleID => e => {
     const eachRuleID = this.state.rule.find(Id => {
@@ -85,10 +96,10 @@ class Rule extends Component {
       case "ruleDetails":
         errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
         break;
-        case "typeOfSticker":
+      case "typeOfSticker":
         errors.typeOfSticker = value.length < 2 ? "กรุณากรอกชื่อสติกเกอร์" : "";
         break;
-        case "colorOfSticker":
+      case "colorOfSticker":
         errors.colorOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียด" : "";
         break;
     }
@@ -249,10 +260,9 @@ class Rule extends Component {
         maxWarning: "",
         price: "",
         ruleDetails: "",
-        typeOfSticker:"",
-        colorOfSticker:""
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
-      
     });
   };
 
@@ -269,10 +279,7 @@ class Rule extends Component {
   handleAddSticker = event => {
     event.preventDefault();
     const { typeOfSticker, colorOfSticker } = this.state;
-    if (
-      typeOfSticker !== "" &&
-      colorOfSticker !== ""
-    ) {
+    if (typeOfSticker !== "" && colorOfSticker !== "") {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
         console.log("Valid Form");
@@ -308,29 +315,32 @@ class Rule extends Component {
   };
 
   onOpenAddStickerModal = () => {
-    this.setState({ openAddS: true,
+    this.setState({
+      openAddS: true,
       errors: {
         ruleName: "",
         maxWarning: "",
         price: "",
         ruleDetails: "",
-        typeOfSticker:"",
-        colorOfSticker:""
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
-  });
+    });
   };
 
   onCloseAddStickerModal = () => {
     this.setState({
       openAddS: false,
-        typeOfSticker: "",
-        colorOfSticker: ""
-      
+      typeOfSticker: "",
+      colorOfSticker: ""
     });
   };
 
   componentDidMount() {
     this.getData();
+    this.checkToken()
+    console.log(this.state.decoded.role,'this.state.decoded.staffRole')
+
   }
 
   ruleTable() {
@@ -542,10 +552,14 @@ class Rule extends Component {
           </form>
         </Modal>
 
-        <Modal open={this.state.openAddS} onClose={this.onCloseAddStickerModal} center>
+        <Modal
+          open={this.state.openAddS}
+          onClose={this.onCloseAddStickerModal}
+          center
+        >
           <p className="modalTitle">เพิ่มสติกเกอร์</p>
           <form className="formAdd" onSubmit={this.handleAddSticker}>
-          <div className="addModal">
+            <div className="addModal">
               <label htmlFor="colorOfSticker">สีสติกเกอร์: </label>
               <input
                 className="inputModal"
@@ -571,7 +585,7 @@ class Rule extends Component {
             {errors.typeOfSticker.length > 0 && (
               <p className="error">{errors.typeOfSticker}</p>
             )}
-            
+
             <button
               className="modalAdd"
               onClick={event => this.handleAddSticker(event)}
@@ -579,7 +593,10 @@ class Rule extends Component {
             >
               เพิ่ม
             </button>
-            <button className="modalcancel" onClick={this.onCloseAddStickerModal}>
+            <button
+              className="modalcancel"
+              onClick={this.onCloseAddStickerModal}
+            >
               ยกเลิก
             </button>
           </form>
@@ -591,12 +608,14 @@ class Rule extends Component {
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>
-            <button
-              className="addRuleButton"
-              onClick={this.onOpenAddStickerModal}
-            >
-              เพิ่มสติ๊กเกอร์
-            </button>
+            {this.state.decoded.role === "Administrator" ? null : 
+              <button
+                className="addRuleButton"
+                onClick={this.onOpenAddStickerModal}
+              >
+                เพิ่มสติ๊กเกอร์
+              </button>
+            }
           </p>
           <div className="ruleTable">{this.ruleTable()}</div>
         </div>
