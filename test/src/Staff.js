@@ -6,11 +6,10 @@ import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
 import * as firebase from "firebase";
 import ApiKeys from "./ApiKeys";
-import admin  from "./picture/admin.png";
-import securityguard  from "./picture/securityguard.png";
-import Loader from 'react-loader-spinner'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-
+import admin from "./picture/admin.png";
+import securityguard from "./picture/securityguard.png";
+import Loader from "react-loader-spinner";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 // import addButton from "./picture/plus.png";
 
@@ -38,7 +37,8 @@ class Staff extends Component {
         staffTel: "",
         staffPassword: ""
       },
-      spinner: false
+      spinner: false,
+      role:''
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -64,8 +64,19 @@ class Staff extends Component {
       });
   }
 
+  checkToken = () => {
+    
+    let userData = JSON.parse(localStorage.getItem("tk"))
+    let tkRole = userData[0].staffRole
+
+    this.setState({
+      role: tkRole
+    })
+  };
+
   onOpenAddModal = () => {
-    this.setState({ openAdd: true,
+    this.setState({
+      openAdd: true,
       errors: {
         firstName: "",
         lastName: "",
@@ -73,7 +84,7 @@ class Staff extends Component {
         staffTel: "",
         staffPassword: ""
       }
-     });
+    });
   };
 
   onCloseAddModal = () => {
@@ -82,12 +93,13 @@ class Staff extends Component {
       firstName: "",
       lastName: "",
       staffEmail: "",
-      staffTel: "",
+      staffTel: ""
     });
   };
 
   onOpenAddSecurityguardModal = () => {
-    this.setState({ openAddSecurityguard: true,
+    this.setState({
+      openAddSecurityguard: true,
       errors: {
         firstName: "",
         lastName: "",
@@ -95,7 +107,7 @@ class Staff extends Component {
         staffTel: "",
         staffPassword: ""
       }
-     });
+    });
   };
 
   onCloseAddSecurityguardModal = () => {
@@ -157,7 +169,13 @@ class Staff extends Component {
 
   handleSubmitAdmin = event => {
     event.preventDefault();
-    const { firstName, lastName, staffEmail, staffTel, securityguardImage } = this.state;
+    const {
+      firstName,
+      lastName,
+      staffEmail,
+      staffTel,
+      securityguardImage
+    } = this.state;
     if (
       firstName !== "" &&
       lastName !== "" &&
@@ -216,7 +234,7 @@ class Staff extends Component {
   };
 
   confirmUploadImage = () => {
-    this.setState({spinner: true})
+    this.setState({ spinner: true });
     this.uploadImages(
       this.state.securityguardImages,
       this.state.securityguardImageName
@@ -234,7 +252,7 @@ class Staff extends Component {
               securityguardImage: imageURL
             });
             if (this.state.securityguardImage != "") {
-              this.setState({spinner: false})
+              this.setState({ spinner: false });
               console.log("imageURL: " + this.state.securityguardImage);
             } else {
               console.log("upload failed");
@@ -396,6 +414,7 @@ class Staff extends Component {
 
   componentDidMount() {
     this.getData();
+    this.checkToken();
   }
 
   render() {
@@ -404,11 +423,16 @@ class Staff extends Component {
       <div>
         <Header />
         <Navibar />
-        <div className="Table-header title_haeder">แอดมิน<img src={admin} className='Headicon'/></div>
+        <div className="Table-header title_haeder">
+          แอดมิน
+          <img src={admin} className="Headicon" />
+        </div>
         <div className="button-add">
-        <button className="addStaffButton" onClick={this.onOpenAddModal}>
-          เพิ่มแอดมิน
-        </button>
+          {this.state.role === "Administrator" ? null : (
+            <button className="addStaffButton" onClick={this.onOpenAddModal}>
+              เพิ่มแอดมิน
+            </button>
+          )}
         </div>
         <Modal
           // className="Modal"
@@ -511,18 +535,16 @@ class Staff extends Component {
               onChange={this.fileSelectedHandler}
             />
             <Loader
-            className = "loader_spinner"
-            type="Oval"
-            color="#29A8AB"
-            height={25}
-            width={25}
-            visible={this.state.spinner}
-          />
-          {this.state.spinner ? 
-          <p className="loader_waiting">กรุณารอสักครู่...</p>
-          :
-          null
-          }
+              className="loader_spinner"
+              type="Oval"
+              color="#29A8AB"
+              height={25}
+              width={25}
+              visible={this.state.spinner}
+            />
+            {this.state.spinner ? (
+              <p className="loader_waiting">กรุณารอสักครู่...</p>
+            ) : null}
           </form>
           <div className="modalButton">
             <button
@@ -536,7 +558,6 @@ class Staff extends Component {
               ยกเลิก
             </button>
           </div>
-          
         </Modal>
 
         <table className="staffTable">
@@ -547,14 +568,17 @@ class Staff extends Component {
           <tbody>{this.staffTable()}</tbody>
         </table>
 
-        <div className="Table-header title-haeder">พนักงานรักษาความปลอดภัย<img src={securityguard} className="Headicon" /></div>
+        <div className="Table-header title-haeder">
+          พนักงานรักษาความปลอดภัย
+          <img src={securityguard} className="Headicon" />
+        </div>
         <div className="button-add">
-        <button
-          className="addSecurityguard"
-          onClick={this.onOpenAddSecurityguardModal}
-        >
-          เพิ่มพนักงานรักษาความปลอดภัย
-        </button>
+          <button
+            className="addSecurityguard"
+            onClick={this.onOpenAddSecurityguardModal}
+          >
+            เพิ่มพนักงานรักษาความปลอดภัย
+          </button>
         </div>
         <Modal
           open={this.state.openAddSecurityguard}
@@ -605,7 +629,7 @@ class Staff extends Component {
               <p className="error">{errors.staffTel}</p>
             )}
 
-          <div className="ModalEmail">
+            <div className="ModalEmail">
               <label>อีเมล์: </label>
               <input
                 className="inputModal"
@@ -644,18 +668,16 @@ class Staff extends Component {
               onChange={this.fileSelectedHandler}
             />
             <Loader
-            className = "loader_spinner"
-            type="Oval"
-            color="#29A8AB"
-            height={25}
-            width={25}
-            visible={this.state.spinner}
-          />
-          {this.state.spinner ? 
-          <p className="loader_waiting">กรุณารอสักครู่...</p>
-          :
-          null
-          }
+              className="loader_spinner"
+              type="Oval"
+              color="#29A8AB"
+              height={25}
+              width={25}
+              visible={this.state.spinner}
+            />
+            {this.state.spinner ? (
+              <p className="loader_waiting">กรุณารอสักครู่...</p>
+            ) : null}
           </form>
           <div className="modalButton">
             <button

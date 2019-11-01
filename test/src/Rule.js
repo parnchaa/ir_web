@@ -16,16 +16,17 @@ class Rule extends Component {
       openEdit: false,
       openAdd: false,
       openAddS: false,
-      typeOfSticker:"",
-      colorOfSticker:'',
+      typeOfSticker: "",
+      colorOfSticker: "",
       errors: {
         ruleName: "",
         maxWarning: "",
         price: "",
         ruleDetails: "",
-        typeOfSticker:"",
-        colorOfSticker:""
-      }
+        typeOfSticker: "",
+        colorOfSticker: ""
+      },
+      role: ''
     };
   }
   getData() {
@@ -38,6 +39,17 @@ class Rule extends Component {
         console.log("rule", this.state.rule);
       });
   }
+
+  checkToken = () => {
+    
+    let userData = JSON.parse(localStorage.getItem("tk"))
+    let tkRole = userData[0].staffRole
+
+    this.setState({
+      role: tkRole
+    })
+
+  };
 
   onOpenEditModal = ruleID => e => {
     const eachRuleID = this.state.rule.find(Id => {
@@ -85,10 +97,10 @@ class Rule extends Component {
       case "ruleDetails":
         errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
         break;
-        case "typeOfSticker":
+      case "typeOfSticker":
         errors.typeOfSticker = value.length < 2 ? "กรุณากรอกชื่อสติกเกอร์" : "";
         break;
-        case "colorOfSticker":
+      case "colorOfSticker":
         errors.colorOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียด" : "";
         break;
     }
@@ -153,7 +165,9 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: ""
+        ruleDetails: "",
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
     });
   };
@@ -249,10 +263,9 @@ class Rule extends Component {
         maxWarning: "",
         price: "",
         ruleDetails: "",
-        typeOfSticker:"",
-        colorOfSticker:""
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
-      
     });
   };
 
@@ -269,10 +282,7 @@ class Rule extends Component {
   handleAddSticker = event => {
     event.preventDefault();
     const { typeOfSticker, colorOfSticker } = this.state;
-    if (
-      typeOfSticker !== "" &&
-      colorOfSticker !== ""
-    ) {
+    if (typeOfSticker !== "" && colorOfSticker !== "") {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
         console.log("Valid Form");
@@ -308,29 +318,31 @@ class Rule extends Component {
   };
 
   onOpenAddStickerModal = () => {
-    this.setState({ openAddS: true,
+    this.setState({
+      openAddS: true,
       errors: {
         ruleName: "",
         maxWarning: "",
         price: "",
         ruleDetails: "",
-        typeOfSticker:"",
-        colorOfSticker:""
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
-  });
+    });
   };
 
   onCloseAddStickerModal = () => {
     this.setState({
       openAddS: false,
-        typeOfSticker: "",
-        colorOfSticker: ""
-      
+      typeOfSticker: "",
+      colorOfSticker: ""
     });
   };
 
   componentDidMount() {
     this.getData();
+    this.checkToken()
+
   }
 
   ruleTable() {
@@ -542,10 +554,14 @@ class Rule extends Component {
           </form>
         </Modal>
 
-        <Modal open={this.state.openAddS} onClose={this.onCloseAddStickerModal} center>
+        <Modal
+          open={this.state.openAddS}
+          onClose={this.onCloseAddStickerModal}
+          center
+        >
           <p className="modalTitle">เพิ่มสติกเกอร์</p>
           <form className="formAdd" onSubmit={this.handleAddSticker}>
-          <div className="addModal">
+            <div className="addModal">
               <label htmlFor="colorOfSticker">สีสติกเกอร์: </label>
               <input
                 className="inputModal"
@@ -571,7 +587,7 @@ class Rule extends Component {
             {errors.typeOfSticker.length > 0 && (
               <p className="error">{errors.typeOfSticker}</p>
             )}
-            
+
             <button
               className="modalAdd"
               onClick={event => this.handleAddSticker(event)}
@@ -579,7 +595,10 @@ class Rule extends Component {
             >
               เพิ่ม
             </button>
-            <button className="modalcancel" onClick={this.onCloseAddStickerModal}>
+            <button
+              className="modalcancel"
+              onClick={this.onCloseAddStickerModal}
+            >
               ยกเลิก
             </button>
           </form>
@@ -588,20 +607,23 @@ class Rule extends Component {
         <div>
           <p className="Table-header">
             กฎองค์กร <img src={amonestation} className="Headicon" />
+            </p>
+
             <div className="buttonAddStick">
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>
-            <button
-              className="addRuleButton"
-              onClick={this.onOpenAddStickerModal}
-            >
-              เพิ่มสติ๊กเกอร์
-            </button>
-            </div>
-          </p>
+            {this.state.role === "Administrator" ? null : 
+              <button
+                className="addRuleButton"
+                onClick={this.onOpenAddStickerModal}
+              >
+                เพิ่มสติ๊กเกอร์
+              </button>
+            }
           <div className="ruleTable">{this.ruleTable()}</div>
         </div>
+      </div>
       </div>
     );
   }

@@ -25,19 +25,17 @@
 
 .profile{
     position: absolute;
-    right: 60px;
-    margin: 1.4rem 1.4em;
+    right: 100px;
     color: #29A8AB;
     font-family: 'kanit',sans-serif;
 }
 
-.profilePicBox{
-    width: 6rem;
-}
-
 .profilePic{
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 9rem;
+    margin-right: 20px;
+    margin-top: 15px;
 }
 
 .profileInfo{

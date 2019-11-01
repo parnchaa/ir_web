@@ -48,6 +48,7 @@ class SearchSticker extends Component {
         return response.json();
       })
       .then(responseJson => {
+        console.log(responseJson, "responseJson");
         this.setState({ searchCarOwner: responseJson });
       })
       .catch(error => {
@@ -285,7 +286,7 @@ class SearchSticker extends Component {
 
   carOwnerTable() {
     const { errors } = this.state;
-    let tableData = "";
+    let tableData = [];
     if (this.state.searchValue === "") {
       tableData = this.state.carOwner;
     }
@@ -395,8 +396,8 @@ class SearchSticker extends Component {
           <button className="ButtonSubmit" onClick={event=>this.handleSubmitExtend(event)}>ยืนยัน</button>
         </Modal>
 
-        {this.state.carOwner.map(carOwner => {
-          if(carOwner.carOwnerID === 1){
+        {tableData.map(tableData => {
+          if(tableData.carOwnerID === 1){
             return null
           }
           else{
@@ -404,37 +405,37 @@ class SearchSticker extends Component {
             <div className="carOwnerTask">
               <div className="carOwnerName">
                 <div>ชื่อ : </div>
-                <div className="fieldName">{carOwner.carOwnerFirstName}</div>
+                <div className="fieldName">{tableData.carOwnerFirstName}</div>
                 <div>นามสกุล : </div>
-                <div className="fieldName">{carOwner.carOwnerLastName}</div>
+                <div className="fieldName">{tableData.carOwnerLastName}</div>
               </div>
               <div className="carOwnerEmailTel">
                 <div>อีเมล์ : </div>
-                <div className="fieldName">{carOwner.carOwnerEmail}</div>
+                <div className="fieldName">{tableData.carOwnerEmail}</div>
                 <div>เบอร์โทรศัพท์ : </div>
-                <div className="fieldName">{carOwner.carOwnerTel}</div>
+                <div className="fieldName">{tableData.carOwnerTel}</div>
               </div>
               <div className="carOwnerAddress">
                 <div>ที่อยู่ : </div>
-                <div className="fieldName">{carOwner.carOwnerAddress}</div>
+                <div className="fieldName">{tableData.carOwnerAddress}</div>
               </div>
               <div className="carOwnerDate">
                 <div>วันที่ต่อสัญญา : </div>
                 <div className="fieldName">
-                  {carOwner.registerDate.substr(0, 10)}
+                  {tableData.registerDate.substr(0, 10)}
                 </div>
                 <div>วันหมดอายุ : </div>
                 <div className="fieldName">
-                  {carOwner.expiredDate.substr(0, 10)}
+                  {tableData.expiredDate.substr(0, 10)}
                 </div>
               </div>
              <div className="LineButton">
-              <button className="RenewContractButton" onClick={this.onOpenExtendModel(carOwner.carOwnerID)}>
+              <button className="RenewContractButton" onClick={this.onOpenExtendModel(tableData.carOwnerID)}>
                 ต่อสัญญา
               </button>
               <button
                 className="EditModalButton"
-                onClick={this.onOpenEditModal(carOwner.carOwnerID)}
+                onClick={this.onOpenEditModal(tableData.carOwnerID)}
               >
                 แก้ไขข้อมูล
               </button>

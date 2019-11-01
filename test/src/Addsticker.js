@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import Header from "./Header";
 import Navibar from "./Navibar";
 import "./Addsticker.css";
-import plusButton from './picture/plusButton.png';
-import adduser from './picture/adduser.png';
-
-
+import plusButton from "./picture/plusButton.png";
+import adduser from "./picture/adduser.png";
 
 class Addsticker extends Component {
   state = {
@@ -69,9 +67,7 @@ class Addsticker extends Component {
 
   validateForm = errors => {
     let valid = true;
-    Object.values(errors).forEach(
-      val => val.length > 0 && (valid = false)
-    );
+    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
     return valid;
   };
 
@@ -88,14 +84,14 @@ class Addsticker extends Component {
       brandCar,
       modelCar
     } = this.state;
-    const url = "http://localhost:5000/addSticker";
+    const url = "http://localhost:5000/addCarowner";
     var today = new Date();
-    var curDate = today.getDate()+1;
+    var curDate = today.getDate() + 1;
     var curMonth = today.getMonth() + 1;
-    var curYear = today.getFullYear()
-    var nextYear = today.getFullYear()+1
-    var currentDate = curYear+'-'+curMonth+'-'+curDate
-    var expireDate = nextYear+'-'+curMonth+'-'+curDate
+    var curYear = today.getFullYear();
+    var nextYear = today.getFullYear() + 1;
+    var currentDate = curYear + "-" + curMonth + "-" + curDate;
+    var expireDate = nextYear + "-" + curMonth + "-" + curDate;
     const bodyData = JSON.stringify({
       carOwnerFname: carOwnerFname,
       carOwnerLname: carOwnerLname,
@@ -197,8 +193,10 @@ class Addsticker extends Component {
       <div>
         <Header />
         <Navibar />
-        <div className="Table-header">เพิ่มข้อมูลผู้ขอสติกเกอร์<img src={adduser} className='Headicon'/>
-</div>
+        <div className="Table-header">
+          เพิ่มข้อมูลผู้ขอสติกเกอร์
+          <img src={adduser} className="Headicon" />
+        </div>
         <div className="addSticker">
           <form className="addStickerForm">
             <div className="formRow">
@@ -348,7 +346,7 @@ class Addsticker extends Component {
               onClick={event => this.handleSubmit(event)}
             >
               เพิ่ม
-              <img src={plusButton} className='iconButton'/>
+              <img src={plusButton} className="iconButton" />
             </button>
           </form>
         </div>
