@@ -114,12 +114,12 @@ class Location extends Component {
         locationName,
         locationCode,
         locationID,
-        openLocationID
+        colorOfSticker
       } = location;
       return (
         <tr>
           <td>{locationName}</td>
-          <td>{locationCode}</td>
+          <td>{colorOfSticker}</td>
           <Modal
             open={this.state.openDelete}
             onClose={this.onCloseDeleteModalLocation}
@@ -176,7 +176,7 @@ class Location extends Component {
         <table class="locationtable">
           <tbody className="location">
             <th>ชื่อสถานที่</th>
-            <th>รหัสสถานที่</th>
+            <th>สีสติ๊กเกอร์</th>
             {this.locationTable()}
           </tbody>
         </table>

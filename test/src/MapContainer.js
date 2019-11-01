@@ -207,7 +207,7 @@ export class MapContainer extends Component {
     
     location = []
     this.onCloseSave()
-    
+    window.location.reload(false)
   }
 
   onCloseSave = () =>{
