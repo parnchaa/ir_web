@@ -156,7 +156,6 @@ class Staff extends Component {
   };
 
   handleSubmitAdmin = event => {
-    // this.confirmUploadImage();
     event.preventDefault();
     const { firstName, lastName, staffEmail, staffTel, securityguardImage } = this.state;
     if (
@@ -185,6 +184,7 @@ class Staff extends Component {
       lastName: this.state.lastName,
       staffEmail: this.state.staffEmail,
       staffTel: this.state.staffTel,
+      staffPassword: this.state.staffPassword,
       staffImages: this.state.securityguardImage
     });
     console.log(bodyData);
@@ -255,7 +255,6 @@ class Staff extends Component {
   };
 
   handleSubmitSecurity = event => {
-    // this.confirmUploadImage();
     event.preventDefault();
     const {
       firstName,
@@ -405,10 +404,12 @@ class Staff extends Component {
       <div>
         <Header />
         <Navibar />
-        <div className="Table-header">แอดมิน<img src={admin} className='Headicon'/></div>
+        <div className="Table-header title_haeder">แอดมิน<img src={admin} className='Headicon'/></div>
+        <div className="button-add">
         <button className="addStaffButton" onClick={this.onOpenAddModal}>
           เพิ่มแอดมิน
         </button>
+        </div>
         <Modal
           // className="Modal"
           open={this.state.openDelete}
@@ -486,6 +487,20 @@ class Staff extends Component {
             {errors.staffEmail.length > 0 && (
               <p className="error">{errors.staffEmail}</p>
             )}
+            <div className="staffPassword">
+              <label>รหัสผ่าน: </label>
+              <input
+                className="inputModal"
+                type="password"
+                name="staffPassword"
+                // placeholder="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว"
+                onChange={event => this.handleChange(event)}
+                value={this.state.staffPassword}
+              />
+            </div>
+            {errors.staffPassword.length > 0 && (
+              <p className="error">{errors.staffPassword}</p>
+            )}
             <label htmlFor="upload-photo" className="upload-picture">
               เลือกรูป
             </label>
@@ -532,13 +547,15 @@ class Staff extends Component {
           <tbody>{this.staffTable()}</tbody>
         </table>
 
-        <div className="Table-header">พนักงานรักษาความปลอดภัย<img src={securityguard} className="Headicon" /></div>
+        <div className="Table-header title-haeder">พนักงานรักษาความปลอดภัย<img src={securityguard} className="Headicon" /></div>
+        <div className="button-add">
         <button
           className="addSecurityguard"
           onClick={this.onOpenAddSecurityguardModal}
         >
           เพิ่มพนักงานรักษาความปลอดภัย
         </button>
+        </div>
         <Modal
           open={this.state.openAddSecurityguard}
           onClose={this.onCloseAddSecurityguardModal}
@@ -574,20 +591,6 @@ class Staff extends Component {
               <p className="error">{errors.lastName}</p>
             )}
 
-            <div className="ModalEmail">
-              <label>อีเมล์: </label>
-              <input
-                className="inputModal"
-                type="text"
-                name="staffEmail"
-                onChange={event => this.handleChange(event)}
-                value={this.state.staffEmail}
-              />
-            </div>
-            {errors.staffEmail.length > 0 && (
-              <p className="error">{errors.staffEmail}</p>
-            )}
-
             <div className="ModalTel">
               <label>เบอร์โทรศัพท์: </label>
               <input
@@ -600,6 +603,20 @@ class Staff extends Component {
             </div>
             {errors.staffTel.length > 0 && (
               <p className="error">{errors.staffTel}</p>
+            )}
+
+          <div className="ModalEmail">
+              <label>อีเมล์: </label>
+              <input
+                className="inputModal"
+                type="text"
+                name="staffEmail"
+                onChange={event => this.handleChange(event)}
+                value={this.state.staffEmail}
+              />
+            </div>
+            {errors.staffEmail.length > 0 && (
+              <p className="error">{errors.staffEmail}</p>
             )}
 
             <div className="staffPassword">

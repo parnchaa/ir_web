@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import irp from './picture/ir-parking.jpg';
 import profile from './picture/ceo.png';
+import logout from './picture/exit.png'
 import './Header.css'
 // import { url } from 'inspector';
 import * as jwt_decode from 'jwt-decode';
+import Modal from "react-responsive-modal";
 
 class Header extends Component{
   state={
-    decoded:""
+    decoded:"",
+    logout: false
   }
 
 //   getUserData = async () => {
@@ -38,6 +41,14 @@ checkToken = () => {
       this.setState({decoded})
 }
 
+confirmLogout = () =>{
+  this.setState({logout: true})
+}
+
+onCloseConfirmLogout = () =>{
+  this.setState({logout: false})
+}
+
 logout(){
   localStorage.removeItem('tk')
   window.location.href="/"
@@ -60,17 +71,31 @@ componentDidMount(){
               <img src={profile} className='profilePic'></img>
               </td>
               <td className='profileInfo'>
-                <tr>{firstName}</tr>
-                <tr>{role}</tr>
-              </td>
-              <td className='profileInfo'>
-                <tr>{lastName}</tr>
-                <tr><div>
-                  <button className='logout' onClick={this.logout}>logout</button>
-                  </div>
-                  </tr>
+                <tr>{firstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lastName}</tr>
+                <tr className="role">{role}</tr>
               </td>
             </table>
+            <button className='logout' onClick={this.confirmLogout}><img src={logout} className='logoutIcon' alt="ออกจากระบบ" /></button>
+            <Modal
+              open={this.state.logout}
+              onClose={this.onCloseConfirmLogout}
+              center
+            >
+            <div className="ModalDelete">
+              <h4>คุณต้องการออกจากระบบหรือไม่</h4>
+              <button
+                className="ButtonDelete"
+                onClick={this.logout} >
+                ออกจากระบบ
+              </button>
+              <button
+                className="ButtonCancel"
+                onClick={this.onCloseDeleteModalLocation}
+              >
+                ยกเลิก
+              </button>
+            </div>
+            </Modal>
           </div>
         );
       }
