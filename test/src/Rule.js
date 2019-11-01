@@ -165,7 +165,9 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: ""
+        ruleDetails: "",
+        typeOfSticker: "",
+        colorOfSticker: ""
       }
     });
   };
