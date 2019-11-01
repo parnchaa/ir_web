@@ -6,7 +6,6 @@ import Modal from "react-responsive-modal";
 import deletePic from "./picture/delete.png";
 import edit from "./picture/edit.png";
 import amonestation from "./picture/amonestation.png";
-import * as jwt_decode from "jwt-decode";
 
 class Rule extends Component {
   constructor(props) {
@@ -19,7 +18,6 @@ class Rule extends Component {
       openAddS: false,
       typeOfSticker: "",
       colorOfSticker: "",
-      decoded: "",
       errors: {
         ruleName: "",
         maxWarning: "",
@@ -27,7 +25,8 @@ class Rule extends Component {
         ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
-      }
+      },
+      role: ''
     };
   }
   getData() {
@@ -42,12 +41,14 @@ class Rule extends Component {
   }
 
   checkToken = () => {
-    // let token = localStorage.getItem('sc');
-    let detailtk = localStorage.getItem("tk");
+    
+    let userData = JSON.parse(localStorage.getItem("tk"))
+    let tkRole = userData[0].staffRole
 
-    var decoded = jwt_decode(detailtk);
-    console.log(decoded, "decoded");
-    this.setState({ decoded });
+    this.setState({
+      role: tkRole
+    })
+
   };
 
   onOpenEditModal = ruleID => e => {
@@ -339,7 +340,6 @@ class Rule extends Component {
   componentDidMount() {
     this.getData();
     this.checkToken()
-    console.log(this.state.decoded.role,'this.state.decoded.staffRole')
 
   }
 
@@ -608,7 +608,7 @@ class Rule extends Component {
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>
-            {this.state.decoded.role === "Administrator" ? null : 
+            {this.state.role === "Administrator" ? null : 
               <button
                 className="addRuleButton"
                 onClick={this.onOpenAddStickerModal}

@@ -48,6 +48,7 @@ class SearchSticker extends Component {
         return response.json();
       })
       .then(responseJson => {
+        console.log(responseJson, "responseJson");
         this.setState({ searchCarOwner: responseJson });
       })
       .catch(error => {

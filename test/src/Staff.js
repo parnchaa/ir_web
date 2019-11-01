@@ -10,7 +10,6 @@ import admin from "./picture/admin.png";
 import securityguard from "./picture/securityguard.png";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import * as jwt_decode from "jwt-decode";
 
 // import addButton from "./picture/plus.png";
 
@@ -31,7 +30,6 @@ class Staff extends Component {
       securityguardImage: "",
       securityguardImages: "",
       securityguardImageName: "",
-      decoded: "",
       errors: {
         firstName: "",
         lastName: "",
@@ -39,7 +37,8 @@ class Staff extends Component {
         staffTel: "",
         staffPassword: ""
       },
-      spinner: false
+      spinner: false,
+      role:''
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -66,12 +65,13 @@ class Staff extends Component {
   }
 
   checkToken = () => {
-    // let token = localStorage.getItem('sc');
-    let detailtk = localStorage.getItem("tk");
+    
+    let userData = JSON.parse(localStorage.getItem("tk"))
+    let tkRole = userData[0].staffRole
 
-    var decoded = jwt_decode(detailtk);
-    console.log(decoded, "decoded");
-    this.setState({ decoded });
+    this.setState({
+      role: tkRole
+    })
   };
 
   onOpenAddModal = () => {
@@ -428,7 +428,7 @@ class Staff extends Component {
           <img src={admin} className="Headicon" />
         </div>
         <div className="button-add">
-          {this.state.decoded.role === "Administrator" ? null : (
+          {this.state.role === "Administrator" ? null : (
             <button className="addStaffButton" onClick={this.onOpenAddModal}>
               เพิ่มแอดมิน
             </button>

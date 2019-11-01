@@ -4,41 +4,36 @@ import profile from './picture/ceo.png';
 import logout from './picture/exit.png'
 import './Header.css'
 // import { url } from 'inspector';
-import * as jwt_decode from 'jwt-decode';
 import Modal from "react-responsive-modal";
 
 class Header extends Component{
-  state={
-    decoded:"",
-    logout: false
+  constructor(props){
+    super(props);
+    this.state = {
+      logout: false,
+      firstName: '',
+      lastName: '',
+      role:'',
+      staffImages:''
+    }
   }
 
-//   getUserData = async () => {
-//     var token = localStorage.getItem('tk');
-//     let {firstName, lastName} = this.state;
-//     const othepram = {
-//         headers: {
-//             tkAuth: token,
-//             firstName: firstName,
-//             lastName: lastName
-//         },
-//         method: "GET"
-//     };
-//     const data = await Promise.all([
-//         fetch(url+'/userData', othepram)
-//             .then((response) => {
-//                 return response.json();
-//             })
-//     ])
+setProflie = () => {
 
-// }
-checkToken = () => {
-  // let token = localStorage.getItem('sc');
-  let detailtk = localStorage.getItem('tk');
+  let userData = JSON.parse(localStorage.getItem('tk'));
 
-      var decoded = jwt_decode(detailtk)
-      console.log(decoded,'decoded')
-      this.setState({decoded})
+  let tkFirstName = userData[0].firstName
+  let tkLastName = userData[0].lastName
+  let tkRole = userData[0].staffRole
+  let tkImages = userData[0].staffImages
+
+  this.setState({
+    firstName: tkFirstName,
+    lastName: tkLastName,
+    role: tkRole,
+    staffImages: tkImages
+  })
+  
 }
 
 confirmLogout = () =>{
@@ -55,12 +50,11 @@ logout(){
 }
 
 componentDidMount(){
-  this.checkToken()
-  console.log(this.state.decoded.staffImages,'tt')
+  this.setProflie()
 }
 
     render() {
-      const {firstName,lastName,role,staffImages} = this.state.decoded
+      let { firstName, lastName , role , staffImages } = this.state
         return (
           <div className='header'>
             <div>

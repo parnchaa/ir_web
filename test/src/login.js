@@ -78,13 +78,21 @@ class login extends Component {
     };
     fetch(url, othepram)
     .then(res=>res.json())
-    .then(json=>{
-        if (json === "wrong") {
-          alert("อีเมล์หรือรหัสผ่านไม่ถูกต้อง")
-        }else{
-          localStorage.setItem('tk',json)
+    .then((token)=>{
+      if(token === "wrong"){
+        alert("อีเมล์หรือรหัสผ่านไม่ถูกต้อง")
+      }else{
+        fetch("http://localhost:5000/userData/" + this.state.staffEmail,
+        {
+          method: 'GET',
+          headers:{ 'Authorization': token }
+        })
+        .then(res=>res.json())
+        .then((result) => {
+          localStorage.setItem('tk',JSON.stringify(result))
           window.location.href="/Event"
-        }
+        })
+      }
     })
   };
 
