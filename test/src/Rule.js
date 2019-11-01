@@ -588,6 +588,7 @@ class Rule extends Component {
         <div>
           <p className="Table-header">
             กฎองค์กร <img src={amonestation} className="Headicon" />
+            <div className="buttonAddStick">
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>
@@ -597,6 +598,7 @@ class Rule extends Component {
             >
               เพิ่มสติ๊กเกอร์
             </button>
+            </div>
           </p>
           <div className="ruleTable">{this.ruleTable()}</div>
         </div>

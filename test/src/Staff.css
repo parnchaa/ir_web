@@ -55,6 +55,7 @@
   position: absolute;
   right: 10%;
   padding: 1%;
+  border: none;
 }
 
 .modalTitle {
@@ -76,6 +77,7 @@
   position: absolute;
   right: 10%;
   padding: 1%;
+  border: none;
 }
 /* .modalAddstaff{
     margin-left: 5%;

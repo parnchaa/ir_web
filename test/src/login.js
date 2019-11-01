@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import "./login.css";
+import irbackground from "./picture/irbackground.png";
 
 class login extends Component {
   constructor(props) {
@@ -91,28 +93,42 @@ class login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div>
-        <label>email:</label>
-        <input
+      <div className='login'>
+      {/* <div className='Loginpage'> */}
+        <img src={irbackground} className="bg"/>
+        <div className="boxLogin">
+        <div>
+        <label>E-mail:</label>
+        <input  
+          className="emailinput"
           name="staffEmail"
           value={this.state.staffEmail}
           onChange={event => this.handleChange(event)}
         ></input>
+         </div>
         {errors.staffEmail.length > 0 && (
               <p className="error">{errors.staffEmail}</p>
             )}
-        <label>password:</label>
+       
+        <div>
+        <label>Password:</label>
         <input
+        className="emailinput"
           name="staffPassword"
           value={this.state.staffPassword}
           onChange={event => this.handleChange(event)}
         ></input>
+        </div>
         {errors.staffPassword.length > 0 && (
               <p className="error">{errors.staffPassword}</p>
             )}
-        <button onClick={event => this.handlelogin(event)} type="submit">
+            <div className="positionbutton">
+        <button className="buttonLogin" onClick={event => this.handlelogin(event)} type="submit">
           login
         </button>
+        </div>
+        </div>
+      {/* </div> */}
       </div>
     );
   }

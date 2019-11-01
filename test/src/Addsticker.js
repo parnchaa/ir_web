@@ -267,14 +267,13 @@ class Addsticker extends Component {
             <div className="eachField">
               <label>ที่อยู่:</label>
 
-              <input
-                type="textarea"
-                className="addressInput"
+              <textarea className="addressInput"
                 name="carOwnerAddress"
                 value={this.state.carOwnerAddress}
                 placeholder="ที่อยู่"
-                onChange={event => this.handleChange(event)}
-              ></input>
+                rows= "5"
+                onChange={event => this.handleChange(event)}>
+              </textarea>
               {errors.carOwnerAddress.length > 0 && (
                 <p className="error">{errors.carOwnerAddress}</p>
               )}

@@ -235,23 +235,25 @@ export class MapContainer extends Component {
         />
         {location.length == 0 ?
           null
-          :
-          <Modal
-            // className="modal"
+          :<div>
+          <Modal 
+            className="modalLocation"
             open={this.state.openSave}
             onClose={this.onCloseSave}
             center
           >
-            <div>
-              <h5>ชื่อสถานที่: </h5>
+            <p className="titleChooseSticker" >ยืนยันการบันทึกสถานที่</p>
+            <div className="TitletextModal">
+              <p>ชื่อสถานที่ : </p>
               <p>{location[0].locationName}</p>
             </div>
-            <div>
-              <h5>สีสติ๊กเกอร์: </h5>
+            <div className="TitletextModal">
+              <p>สีสติ๊กเกอร์ : </p>
               <p>{this.state.stickerText}</p>
             </div>
-            <button onClick={this.recordLocation}>บันทึกสถานที่</button>
+            <button className="buttonModal" onClick={this.recordLocation}>บันทึกสถานที่</button>
           </Modal>
+          </div>
         }
       </div>
     );

@@ -35,7 +35,13 @@
     display: flex;
     align-items: flex-start;
     word-wrap: break-word; 
-           
+    border-radius: 4px;
+    color: #29A8AB;
+    padding: 0.3rem 0.3rem;
+    margin: 0.3rem 0rem;
+    border: 1px solid rgba(177, 173, 173,0.8);
+    font-family: 'kanit',sans-serif;
+    color: #29A8AB;
 }
 
 .addSticker{

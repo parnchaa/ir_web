@@ -67,6 +67,7 @@
     /* box-shadow: 3px 3px rgba(0, 0, 0, 0.3); */
     width: auto;
     margin: auto;
+    padding: 4px;
 }
 
 .eachEditInput{
@@ -80,11 +81,14 @@
     border-radius: 8px;
     border: none;
     border-color: #ffffff;
-    height: 40px;
     font-size: 15pt;
-    width: 6%;
     display: block;
-    margin-left: auto;
-    margin-right: 25%;
+    padding: 8px;
+    margin-right: 10px;
     /* margin-bottom: 3rem; */
+}
+.buttonAddStick{
+    display: flex;
+    margin-left: 70%;
+
 }
