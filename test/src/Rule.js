@@ -564,7 +564,7 @@ class Rule extends Component {
             <div className="addModal">
               <label htmlFor="colorOfSticker">สีสติกเกอร์: </label>
               <input
-                className="inputModal"
+                className="inputModalSticker"
                 type="text"
                 name="colorOfSticker"
                 onChange={event => this.handleChange(event)}
@@ -577,7 +577,7 @@ class Rule extends Component {
             <div className="addModal">
               <label htmlFor="typeOfSticker">รายละเอียดสติกเกอร์: </label>
               <input
-                className="inputModal"
+                className="inputModalSticker"
                 type="text"
                 name="typeOfSticker"
                 onChange={event => this.handleChange(event)}
@@ -621,8 +621,9 @@ class Rule extends Component {
                 เพิ่มสติ๊กเกอร์
               </button>
             }
+            </div>
           <div className="ruleTable">{this.ruleTable()}</div>
-        </div>
+        
       </div>
       </div>
     );

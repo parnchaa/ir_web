@@ -24,12 +24,12 @@ class login extends Component {
       case "staffEmail":
         errors.staffEmail = validEmailRegex.test(value)
           ? ""
-          : "กรุณากรอกอีเมล์ให้ถูกต้อง เช่น somchai@gmail.com";
+          : "กรุณากรอกอีเมล์ให้ถูกต้อง";
         break;
       case "staffPassword":
         errors.staffPassword = strongRegex.test(value)
           ? ""
-          : "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว";
+          : "กรุณากรอกรหัสให้ถูกต้อง";
         break;
     }
     this.setState({ errors, [name]: value }, () => {

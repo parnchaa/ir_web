@@ -9,6 +9,7 @@
     margin-bottom: 5%;
     margin-top: 1%; */
     font-family: 'kanit',sans-serif;
+    
    }
 
 .location td, .location th{
@@ -113,5 +114,5 @@ h1{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 85%;
+  width: fit-content;
 }

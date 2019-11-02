@@ -83,12 +83,22 @@
     border-color: #ffffff;
     font-size: 15pt;
     display: block;
-    padding: 8px;
+    padding: 13px;
     margin-right: 10px;
-    /* margin-bottom: 3rem; */
+    margin-bottom: 3rem;
+    /* height: 1rem; */
 }
+
+
 .buttonAddStick{
     display: flex;
     margin-left: 70%;
 
+}
+
+.inputModalSticker{
+    display: flex;
+    margin-left: 8%;
+    color: #29A8AB;
+    font-family: 'kanit',sans-serif;
 }
