@@ -375,12 +375,15 @@ class Staff extends Component {
           <td>{lastName}</td>
           <td>{staffEmail}</td>
           <td>{staffTel}</td>
-          <button
+          
+          {this.state.role === "Administrator" ? null : (
+            <button
             className="deleteModalButton"
             onClick={this.onOpenDeleteModal(staffID)}
           >
             <img src={deletePic} className="deletePic" />
           </button>
+          )}
         </tr>
       );
     });

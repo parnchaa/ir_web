@@ -10,6 +10,31 @@
     font-family: 'kanit',sans-serif;
     margin-bottom: 0.5rem;
     color: #29A8AB;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #29A8AB 1px;
+    position: absolute;
+    left: 35%;
+}
+
+.editModal input:focus{
+    outline: none;
+}
+
+.editModal textarea{
+    height: 2.3rem;
+    font-family: 'kanit',sans-serif;
+    margin-bottom: 0.5rem;
+    color: #29A8AB;
+    border: solid #29A8AB 1px;
+    position: absolute;
+    left: 35%;
+    height: 60px;
+}
+
+.editModal textarea:focus{
+    outline: none;
 }
 
 .carOwnerTask{
@@ -94,10 +119,7 @@
     font-size: 15pt;
     margin-top: 2rem;
 }
-.formAddEdit input{
-    position: absolute;
-    left: 35%;
-}
+
 .formAddEdit{
     width: 400px;
 }
@@ -170,6 +192,11 @@
     border-bottom: solid #29A8AB 1px;
     border-top: none;
 }
+
+.SelectTime:focus{
+    outline: none;
+}
+
 .ButtonSubmit{
     font-family: 'kanit',sans-serif;  
     color: white;

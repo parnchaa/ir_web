@@ -154,6 +154,14 @@
 .formAdd input {
   position: absolute;
   left: 43%;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid #29A8AB 1px;
+}
+
+.formAdd input:focus{
+  outline: none;
 }
 
 .formAdd button {
@@ -191,11 +199,21 @@
 .formAddSecure input {
   position: absolute;
   left: 43%;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid #29A8AB 1px;
 }
+
+.formAddSecure input:focus{
+  outline: none;
+}
+
 
 .modalButton {
   padding: 0.5rem 20%;
 }
+
 .ModalDelete{
   text-align: center;
   color: #29a8ab;
@@ -207,8 +225,6 @@
   font-size: 15pt;
   display: block; 
   width: 350px; 
-
-  
 }
 .ModalDelete button{
   text-align: center;
@@ -235,6 +251,7 @@
   font-family: 'kanit',sans-serif;
   margin-bottom: 0.4rem;
   color: #29A8AB;
+  border:1px solid #bbbbbb;
 }
 
 .loader_spinner{

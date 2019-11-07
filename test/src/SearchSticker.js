@@ -357,7 +357,7 @@ class SearchSticker extends Component {
 
             <div className="editModal">
               <p>ที่อยู่ : </p>
-              <input
+              <textarea
                 type="text"
                 name="carOwnerAddress"
                 onChange={event => this.handleChange(event)}
