@@ -144,7 +144,9 @@ export class MapContainer extends Component {
   };
 
   getColorOfSticker = () =>{
-    fetch("http://localhost:5000/stickerColor")
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
+    fetch("http://localhost:5000/stickerColor/" + organizationIDTk)
       .then(response => {
         return response.json();
       })

@@ -46,7 +46,9 @@ class Staff extends Component {
   }
 
   getData() {
-    fetch("http://localhost:5000/staff")
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
+    fetch("http://localhost:5000/staff/"+organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -54,7 +56,7 @@ class Staff extends Component {
         this.setState({ staff });
         console.log("staff1", this.state.staff);
       });
-    fetch("http://localhost:5000/securityguard")
+    fetch("http://localhost:5000/securityguard/"+organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -93,7 +95,8 @@ class Staff extends Component {
       firstName: "",
       lastName: "",
       staffEmail: "",
-      staffTel: ""
+      staffTel: "",
+      staffPassword: ""
     });
   };
 
@@ -174,14 +177,16 @@ class Staff extends Component {
       lastName,
       staffEmail,
       staffTel,
-      securityguardImage
+      securityguardImage,
+      staffPassword
     } = this.state;
     if (
       firstName !== "" &&
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      securityguardImage !== ""
+      // securityguardImage !== "" &&
+      staffPassword !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertAdmin();
@@ -196,6 +201,8 @@ class Staff extends Component {
   };
 
   onAfterInsertAdmin = () => {
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
     const url = "http://localhost:5000/addstaff";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
@@ -203,7 +210,8 @@ class Staff extends Component {
       staffEmail: this.state.staffEmail,
       staffTel: this.state.staffTel,
       staffPassword: this.state.staffPassword,
-      staffImages: this.state.securityguardImage
+      staffImages: this.state.securityguardImage,
+      organizationID: organizationIDTk
     });
     console.log(bodyData);
     const othepram = {
@@ -287,8 +295,8 @@ class Staff extends Component {
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      staffPassword !== "" &&
-      securityguardImage !== ""
+      staffPassword !== "" 
+      // securityguardImage !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertSecurity();
@@ -303,6 +311,8 @@ class Staff extends Component {
   };
 
   onAfterInsertSecurity = () => {
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
     const url = "http://localhost:5000/addsecurityguard";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
@@ -310,7 +320,8 @@ class Staff extends Component {
       staffEmail: this.state.staffEmail,
       staffTel: this.state.staffTel,
       staffPassword: this.state.staffPassword,
-      staffImages: this.state.securityguardImage
+      staffImages: this.state.securityguardImage,
+      organizationID: organizationIDTk
     });
     console.log(bodyData);
     const othepram = {

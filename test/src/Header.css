@@ -40,11 +40,14 @@
 
 .profileInfo{
     font-size: 1.2rem;
+    position: relative;
+    bottom: 1.3rem;
+    
 }
 
-.profileInfo tr.role{
+/* .profileInfo tr.role{
     font-weight: 900;
-}
+} */
 
 .logout {
     border: none;

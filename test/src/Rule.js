@@ -16,8 +16,7 @@ class Rule extends Component {
       openEdit: false,
       openAdd: false,
       openAddS: false,
-      typeOfSticker: "",
-      colorOfSticker: "",
+
       errors: {
         ruleName: "",
         maxWarning: "",
@@ -30,7 +29,9 @@ class Rule extends Component {
     };
   }
   getData() {
-    fetch("http://localhost:5000/rule")
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
+    fetch("http://localhost:5000/rule/"+ organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -230,12 +231,14 @@ class Rule extends Component {
   };
 
   onAfterAddRule = () => {
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
     const url = "http://localhost:5000/addrule";
     const bodyData = JSON.stringify({
       ruleName: this.state.ruleName,
       price: this.state.price,
       maxWarning: this.state.maxWarning,
-      // ruleDetails: this.state.ruleDetails
+      organizationID: organizationIDTk
     });
     console.log(bodyData);
     const othepram = {
@@ -260,7 +263,6 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       }
@@ -272,8 +274,7 @@ class Rule extends Component {
       openAdd: false,
       ruleName: "",
       maxWarning: "",
-      price: "",
-      // ruleDetails: ""
+      price: ""
     });
   };
 
@@ -284,7 +285,7 @@ class Rule extends Component {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
         console.log("Valid Form");
-        this.onCloseAddStickerModal();
+        // this.onCloseAddStickerModal();
       } else {
         console.error("Invalid Form");
       }
@@ -294,25 +295,38 @@ class Rule extends Component {
   };
 
   onAfterAddSticker = () => {
-    const url = "http://localhost:5000/addSticker";
-    const bodyData = JSON.stringify({
-      typeOfSticker: this.state.typeOfSticker,
-      colorOfSticker: this.state.colorOfSticker
-    });
-    console.log(bodyData);
-    const othepram = {
-      headers: {
-        "content-type": "application/json; charset=UTF-8"
-      },
-      body: bodyData,
-      method: "POST"
-    };
-    fetch(url, othepram)
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
+    
+    fetch("http://localhost:5000/ruleId/"+organizationIDTk)
+    .then(response => {
+      return response.json()
+    })
+    .then(ruleID=>{
+      const url = "http://localhost:5000/addSticker";
+      const bodyData = JSON.stringify({
+        typeOfSticker: this.state.typeOfSticker,
+        colorOfSticker: this.state.colorOfSticker,
+        organizationID: organizationIDTk,
+        ruleID: ruleID[0].ruleID
+      });
+      console.log(bodyData);
+      const othepram = {
+        headers: {
+          "content-type": "application/json; charset=UTF-8"
+        },
+        body: bodyData,
+        method: "POST"
+      };
+      fetch(url, othepram)
       .then(data => console.log(data))
       .then(response => {
+        this.onCloseAddStickerModal()
         this.getData();
       })
       .catch(error => {});
+    })
+    
   };
 
   onOpenAddStickerModal = () => {
@@ -322,7 +336,6 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       }
@@ -526,19 +539,6 @@ class Rule extends Component {
             {errors.maxWarning.length > 0 && (
               <p className="error">{errors.maxWarning}</p>
             )}
-            {/* <div className="addModal">
-              <label htmlFor="ruleDetails">รายละเอียด: </label>
-              <input
-                className="inputModal"
-                type="text"
-                name="ruleDetails"
-                onChange={event => this.handleChange(event)}
-                value={this.state.ruleDetails}
-              />
-            </div>
-            {errors.ruleDetails.length > 0 && (
-              <p className="error">{errors.ruleDetails}</p>
-            )} */}
             <button
               className="modalAdd"
               onClick={event => this.handleAddRule(event)}

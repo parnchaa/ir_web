@@ -27,12 +27,14 @@ setProflie = () => {
   let tkLastName = userData[0].lastName
   let tkRole = userData[0].staffRole
   let tkImages = userData[0].staffImages
+  let tkorganizationName = userData[0].organizationName
 
   this.setState({
     firstName: tkFirstName,
     lastName: tkLastName,
     role: tkRole,
-    staffImages: tkImages
+    staffImages: tkImages,
+    organizationName: tkorganizationName
   })
   
 }
@@ -55,7 +57,7 @@ componentDidMount(){
 }
 
     render() {
-      let { firstName, lastName , role , staffImages } = this.state
+      let { firstName, lastName , role , staffImages,organizationName } = this.state
         return (
           <div className='header'>
             <div>
@@ -69,6 +71,7 @@ componentDidMount(){
               <td className='profileInfo'>
                 <tr>{firstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lastName}</tr>
                 <tr className="role">{role}</tr>
+                <tr>องค์กร: {organizationName}</tr>
               </td>
             </table>
             <button className='logout' onClick={this.confirmLogout}><img src={logout} className='logoutIcon' alt="ออกจากระบบ" /></button>

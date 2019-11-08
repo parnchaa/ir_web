@@ -16,7 +16,9 @@ class Location extends Component {
   };
 
   getData() {
-    fetch("http://localhost:5000/location")
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
+    fetch("http://localhost:5000/location/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
