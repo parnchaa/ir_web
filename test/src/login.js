@@ -106,10 +106,11 @@ class login extends Component {
         <img src={irbackground} className="bg"/>
         <div className="boxLogin">
         <div>
-        <label>E-mail:</label>
+        <label>อีเมล์:</label>
         <input  
           className="emailinput"
           name="staffEmail"
+          placeholder="กรอกอีเมล์"
           value={this.state.staffEmail}
           onChange={event => this.handleChange(event)}
         ></input>
@@ -119,11 +120,12 @@ class login extends Component {
             )}
        
         <div>
-        <label>Password:</label>
+        <label>รหัสผ่าน:</label>
         <input
         className="emailinput"
           name="staffPassword"
           type="password"
+          placeholder="กรอกรหัสผ่าน"
           value={this.state.staffPassword}
           onChange={event => this.handleChange(event)}
         ></input>
@@ -133,7 +135,7 @@ class login extends Component {
             )}
             <div className="positionbutton">
         <button className="buttonLogin" onClick={event => this.handlelogin(event)} type="submit">
-          login
+          เข้าสู่ระบบ
         </button>
         </div>
         </div>

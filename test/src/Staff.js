@@ -38,10 +38,13 @@ class Staff extends Component {
         staffPassword: ""
       },
       spinner: false,
-      role:''
+      role:'',
+      typeImage: ''
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
+      console.log("SUCESDSADF");
+      
     }
   }
 
@@ -229,27 +232,28 @@ class Staff extends Component {
       .catch(error => {});
   };
 
-  uploadImages = async (event, securityguardImageName) => {
-    const response = await fetch(event);
+  uploadImages = async (imageURL, imageName, typeImage) => {
+    const response = await fetch(imageURL);
     const blob = await response.blob();
+    
+    console.log(imageURL, imageName, typeImage, " test");
+
+    var metadata = {
+      contentType: typeImage
+    };
 
     var ref = firebase
       .storage()
       .ref()
-      .child("securityguardImages/" + securityguardImageName);
-    return ref.put(blob);
-    console.log("success");
+      .child("securityguardImages/" + imageName);
+    return ref.put(blob, metadata);
   };
 
-  confirmUploadImage = () => {
+  confirmUploadImage = (imageURL, imageName, typeImage) => {
     this.setState({ spinner: true });
-    this.uploadImages(
-      this.state.securityguardImages,
-      this.state.securityguardImageName
-    )
+    console.log(this.state.securityguardImages, this.state.securityguardImageName);
+    this.uploadImages(imageURL, imageName, typeImage)
       .then(() => {
-        console.log("Upload Success !!");
-        //get url ของรูปมาถ้า Upload สำเร็จ (ต้องเอา url ของรูปมาเก็บใน state แล้วนำมา show **ตอนนี้ยังไม่ได้ทำ)
         firebase
           .storage()
           .ref()
@@ -273,11 +277,10 @@ class Staff extends Component {
   };
 
   fileSelectedHandler = event => {
-    this.setState({
-      securityguardImages: URL.createObjectURL(event.target.files[0]),
-      securityguardImageName: event.target.files[0].name
-    });
-    this.confirmUploadImage();
+    let imageURL = URL.createObjectURL(event.target.files[0])
+    let imageName = event.target.files[0].name
+    let typeImage = event.target.files[0].type
+    this.confirmUploadImage(imageURL, imageName, typeImage);
   };
 
   handleSubmitSecurity = event => {
@@ -546,6 +549,7 @@ class Staff extends Component {
               type="file"
               name="photo"
               id="upload-photo"
+              accept="image/*"
               onChange={this.fileSelectedHandler}
             />
             <Loader
