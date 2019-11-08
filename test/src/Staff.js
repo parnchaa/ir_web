@@ -39,7 +39,6 @@ class Staff extends Component {
       },
       spinner: false,
       role:'',
-      typeImage: ''
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
@@ -232,32 +231,29 @@ class Staff extends Component {
       .catch(error => {});
   };
 
-  uploadImages = async (imageURL, imageName, typeImage) => {
+  uploadImages = async (imageURL, imageName) => {
     const response = await fetch(imageURL);
     const blob = await response.blob();
     
-    console.log(imageURL, imageName, typeImage, " test");
+    console.log(imageURL, imageName, " test");
 
-    var metadata = {
-      contentType: typeImage
-    };
 
     var ref = firebase
       .storage()
       .ref()
       .child("securityguardImages/" + imageName);
-    return ref.put(blob, metadata);
+    return ref.put(blob);
   };
 
-  confirmUploadImage = (imageURL, imageName, typeImage) => {
+  confirmUploadImage = (imageURL, imageName) => {
     this.setState({ spinner: true });
-    console.log(this.state.securityguardImages, this.state.securityguardImageName);
-    this.uploadImages(imageURL, imageName, typeImage)
+    console.log(imageURL, imageName, "test2");
+    this.uploadImages(imageURL, imageName)
       .then(() => {
         firebase
           .storage()
           .ref()
-          .child("securityguardImages/" + this.state.securityguardImageName)
+          .child("securityguardImages/" + imageName)
           .getDownloadURL()
           .then(imageURL => {
             this.setState({
@@ -279,8 +275,7 @@ class Staff extends Component {
   fileSelectedHandler = event => {
     let imageURL = URL.createObjectURL(event.target.files[0])
     let imageName = event.target.files[0].name
-    let typeImage = event.target.files[0].type
-    this.confirmUploadImage(imageURL, imageName, typeImage);
+    this.confirmUploadImage(imageURL, imageName);
   };
 
   handleSubmitSecurity = event => {
