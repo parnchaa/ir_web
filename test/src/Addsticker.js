@@ -72,7 +72,8 @@ class Addsticker extends Component {
   };
 
   onAfterAddCarOwner = event => {
-    console.log("ddd");
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
     const {
       carOwnerFname,
       carOwnerLname,
@@ -84,7 +85,6 @@ class Addsticker extends Component {
       brandCar,
       modelCar
     } = this.state;
-    const url = "http://localhost:5000/addCarowner";
     var today = new Date();
     var curDate = today.getDate() + 1;
     var curMonth = today.getMonth() + 1;
@@ -98,12 +98,9 @@ class Addsticker extends Component {
       carOwnerTel: carOwnerTel,
       carOwnerEmail: carOwnerEmail,
       carOwnerAddress: carOwnerAddress,
-      licensePlate: licensePlate,
-      carColor: carColor,
-      brandCar: brandCar,
-      modelCar: modelCar,
       registerDate: currentDate,
-      expireDate: expireDate
+      expireDate: expireDate,
+      organizationID: organizationIDTk
     });
     const othepram = {
       headers: {
@@ -112,23 +109,45 @@ class Addsticker extends Component {
       body: bodyData,
       method: "POST"
     };
-    fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        alert("เพิ่มข้อมูลผู้ขอสติกเกอร์สำเร็จ");
-        this.setState({
-          carOwnerFname: "",
-          carOwnerLname: "",
-          carOwnerTel: "",
-          carOwnerEmail: "",
-          carOwnerAddress: "",
-          licensePlate: "",
-          carColor: "",
-          brandCar: "",
-          modelCar: ""
-        });
-      })
-      .catch(error => {});
+    fetch("http://localhost:5000/addCarowner", othepram).then(data => {
+      if (data != null) {
+        fetch("http://localhost:5000/lastCarOwnerId/" + organizationIDTk)
+        .then(response => {
+          return response.json()
+        })
+        .then(ID =>{
+          console.log(ID);
+          const bodyData2 = JSON.stringify({
+            licensePlate: licensePlate,
+            carColor: carColor,
+            brandCar: brandCar,
+            modelCar: modelCar,
+            carOwnerID: ID[0].lastID,
+            organizationID: organizationIDTk
+          });
+          const othepram2 = {
+            headers: {
+              "content-type": "application/json; charset=UTF-8"
+            },
+            body: bodyData2,
+            method: "POST"
+          };
+          fetch("http://localhost:5000/addCar", othepram2).then(response => {
+            this.setState({
+              carOwnerFname: "",
+              carOwnerLname: "",
+              carOwnerTel: "",
+              carOwnerEmail: "",
+              carOwnerAddress: "",
+              licensePlate: "",
+              carColor: "",
+              brandCar: "",
+              modelCar: ""
+            });
+          });
+        })
+      }
+    });
   };
 
   handleChange = event => {
@@ -265,13 +284,14 @@ class Addsticker extends Component {
             <div className="eachField">
               <label>ที่อยู่:</label>
 
-              <textarea className="addressInput"
+              <textarea
+                className="addressInput"
                 name="carOwnerAddress"
                 value={this.state.carOwnerAddress}
                 placeholder="ที่อยู่"
-                rows= "5"
-                onChange={event => this.handleChange(event)}>
-              </textarea>
+                rows="5"
+                onChange={event => this.handleChange(event)}
+              ></textarea>
               {errors.carOwnerAddress.length > 0 && (
                 <p className="error">{errors.carOwnerAddress}</p>
               )}

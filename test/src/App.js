@@ -15,12 +15,29 @@ class App extends Component {
     this.state = {
       problem: [],
       openDelete: false,
-      openImg: false
+      openImg: false,
+      organizationID:''
     };
   }
 
+  // getUserData = () =>{
+  //   let userData = JSON.parse(localStorage.getItem('tk'));
+
+  //   let organizationIDTk = userData[0].organizationID
+  
+  //   this.setState({
+  //     organizationID: organizationIDTk
+  //   })
+  // }
+
   getData() {
-    fetch("http://localhost:5000/problem ")
+    let userData = JSON.parse(localStorage.getItem('tk'));
+
+    let organizationIDTk = userData[0].organizationID
+    fetch("http://localhost:5000/problem/"+organizationIDTk,
+    {
+      method: 'GET',
+    })
       .then(response => {
         return response.json();
       })
@@ -65,6 +82,7 @@ class App extends Component {
   };
 
   componentDidMount() {
+    // this.getUserData()
     this.getData();
   }
 
@@ -95,7 +113,7 @@ class App extends Component {
         timeOfProblem,
         scene,
         licensePlate,
-        allegation,
+        ruleName,
         firstName,
         problemDetails
       } = pro;
@@ -106,7 +124,7 @@ class App extends Component {
           <td>{timeOfProblem}</td>
           <td>{scene}</td>
           <td>{licensePlate}</td>
-          <td>{allegation}</td>
+          <td>{ruleName}</td>
           <td>{firstName}</td>
           <td>{problemDetails}</td>
           {/* <td><img src={evidenceImage} className='evidenceImg'></img></td> */}

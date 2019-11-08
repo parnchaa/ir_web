@@ -22,7 +22,7 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: "",
+        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       },
@@ -61,7 +61,7 @@ class Rule extends Component {
       ruleName: eachRuleID.ruleName,
       maxWarning: eachRuleID.maxWarning,
       price: eachRuleID.price,
-      ruleDetails: eachRuleID.ruleDetails
+      // ruleDetails: eachRuleID.ruleDetails
     });
   };
 
@@ -94,9 +94,9 @@ class Rule extends Component {
           ? ""
           : "จำนานครั้งที่เตือนต้องเป็นตัวเลข";
         break;
-      case "ruleDetails":
-        errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
-        break;
+      // case "ruleDetails":
+      //   errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
+      //   break;
       case "typeOfSticker":
         errors.typeOfSticker = value.length < 2 ? "กรุณากรอกชื่อสติกเกอร์" : "";
         break;
@@ -113,12 +113,11 @@ class Rule extends Component {
 
   handleEditRule = event => {
     event.preventDefault();
-    const { ruleName, maxWarning, price, ruleDetails } = this.state;
+    const { ruleName, maxWarning, price } = this.state;
     if (
       ruleName !== "" &&
       maxWarning !== "" &&
-      price !== "" &&
-      ruleDetails !== ""
+      price !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterEditRule();
@@ -133,14 +132,14 @@ class Rule extends Component {
   };
 
   onAfterEditRule = () => {
-    const { openRuleID, ruleName, maxWarning, price, ruleDetails } = this.state;
+    const { openRuleID, ruleName, maxWarning, price } = this.state;
     const url = "http://localhost:5000/editRule";
     const bodyData = JSON.stringify({
       ruleID: openRuleID,
       ruleName: ruleName,
       maxWarning: maxWarning,
       price: price,
-      ruleDetails: ruleDetails
+      // ruleDetails: ruleDetails
     });
     console.log(bodyData, "bodyData");
     const othepram = {
@@ -165,7 +164,7 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: "",
+        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       }
@@ -212,12 +211,11 @@ class Rule extends Component {
 
   handleAddRule = event => {
     event.preventDefault();
-    const { ruleName, price, maxWarning, ruleDetails } = this.state;
+    const { ruleName, price, maxWarning } = this.state;
     if (
       ruleName !== "" &&
       price !== "" &&
-      maxWarning !== "" &&
-      ruleDetails !== ""
+      maxWarning !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddRule();
@@ -237,7 +235,7 @@ class Rule extends Component {
       ruleName: this.state.ruleName,
       price: this.state.price,
       maxWarning: this.state.maxWarning,
-      ruleDetails: this.state.ruleDetails
+      // ruleDetails: this.state.ruleDetails
     });
     console.log(bodyData);
     const othepram = {
@@ -262,7 +260,7 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: "",
+        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       }
@@ -275,7 +273,7 @@ class Rule extends Component {
       ruleName: "",
       maxWarning: "",
       price: "",
-      ruleDetails: ""
+      // ruleDetails: ""
     });
   };
 
@@ -324,7 +322,7 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        ruleDetails: "",
+        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       }
@@ -397,7 +395,7 @@ class Rule extends Component {
               {errors.price.length > 0 && (
                 <p className="error">{errors.price}</p>
               )}
-              <div className="editModal">
+              {/* <div className="editModal">
                 <p>รายละเอียดกฎ:</p>
                 <input
                   className="inputModal"
@@ -409,7 +407,7 @@ class Rule extends Component {
               </div>
               {errors.ruleDetails.length > 0 && (
                 <p className="error">{errors.ruleDetails}</p>
-              )}
+              )} */}
             </form>
             <button
               className="buttonUpdate"
@@ -459,7 +457,7 @@ class Rule extends Component {
                 <p className="price">ค่าปรับ {rule.price}</p>
                 <p>จำนานครั้งที่เตือน {rule.maxWarning}</p>
               </div>
-              <div className="detail">{rule.ruleDetails}</div>
+              {/* <div className="detail">{rule.ruleDetails}</div> */}
               <div className="ruleButton">
                 <button
                   className="editButton"
@@ -528,7 +526,7 @@ class Rule extends Component {
             {errors.maxWarning.length > 0 && (
               <p className="error">{errors.maxWarning}</p>
             )}
-            <div className="addModal">
+            {/* <div className="addModal">
               <label htmlFor="ruleDetails">รายละเอียด: </label>
               <input
                 className="inputModal"
@@ -540,7 +538,7 @@ class Rule extends Component {
             </div>
             {errors.ruleDetails.length > 0 && (
               <p className="error">{errors.ruleDetails}</p>
-            )}
+            )} */}
             <button
               className="modalAdd"
               onClick={event => this.handleAddRule(event)}
