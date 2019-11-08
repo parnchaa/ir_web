@@ -58,8 +58,15 @@
     border-top: none;
     width: 120%;
     margin-bottom: 5%;
+    padding-left: 10px;
+    padding-right: 10px;
+
 }
 
 .emailinput:focus{
     outline: none;
+}
+
+.emailinput::placeholder{
+    font-size: 0.9rem;
 }
