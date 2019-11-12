@@ -16,6 +16,7 @@ class Addsticker extends Component {
     carColor: "",
     brandCar: "",
     modelCar: "",
+    sticker:[],
     errors: {
       carOwnerFname: "",
       carOwnerLname: "",
@@ -70,6 +71,21 @@ class Addsticker extends Component {
     Object.values(errors).forEach(val => val.length > 0 && (valid = false));
     return valid;
   };
+
+  getSticker(){
+    let userData = JSON.parse(localStorage.getItem('tk'));
+    let organizationIDTk = userData[0].organizationID
+    fetch("http://localhost:5000/stickerName/"+organizationIDTk,
+    {
+      method: 'GET',
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(sticker => {
+        this.setState({ sticker });
+      });
+  }
 
   onAfterAddCarOwner = event => {
     let userData = JSON.parse(localStorage.getItem("tk"));
@@ -206,8 +222,21 @@ class Addsticker extends Component {
     });
   };
 
+  componentDidMount(){
+    this.getSticker()
+  }
+
   render() {
     const { errors } = this.state;
+    let options = this.state.sticker.map((sticker) =>
+                <option 
+                    key={sticker.stickerID}
+                    value={sticker.stickerID}
+                >
+                    {sticker.typeOfSticker}
+                </option>
+            );
+
     return (
       <div>
         <Header />
@@ -359,6 +388,14 @@ class Addsticker extends Component {
                     <p className="error">{errors.modelCar}</p>
                   )}
                 </div>
+              </div>
+            </div>
+            <div>
+              <label>เลือกสติ๊กเกอร์:</label>
+              <div>
+                <select>
+                {options}
+                </select>
               </div>
             </div>
             <button
