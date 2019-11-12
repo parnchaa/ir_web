@@ -1,3 +1,7 @@
+.tableAll{
+  display: flex;
+}
+
 .location{
   /* text-align: left; */
     color: #29A8AB;
@@ -113,6 +117,39 @@ h1{
 .locationtable{
   display: block;
   margin-left: auto;
+  /* margin-right: auto; */
+  width: fit-content;
+}
+
+.stickerTable{
+  display: block;
+  margin-left: 10%;
   margin-right: auto;
   width: fit-content;
 }
+
+.sticker{
+  /* text-align: left; */
+    color: #29A8AB;
+    border: 1px solid white;
+    border-collapse: collapse;
+    /* width: 90%;   */
+    /* margin-left: 8.33%;
+    margin-right: 8.33%;
+    margin-bottom: 5%;
+    margin-top: 1%; */
+    font-family: 'kanit',sans-serif;
+    /* outline-style: solid;
+    outline-color: #29A8AB;
+    outline-width: 3px;  */
+   }
+
+.sticker td, .sticker th{
+  border: 1px solid #ddd;
+  padding: 15px;  
+ 
+  }
+
+  .sticker tr:nth-child(even){
+    background-color: #eeeeee;
+  }

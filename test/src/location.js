@@ -12,12 +12,13 @@ class Location extends Component {
     locationName: "",
     locationCode: "",
     location: [],
-    openDelete: false,
+    sticker:[],
+    openDelete: false
   };
 
   getData() {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
     fetch("http://localhost:5000/location/" + organizationIDTk)
       .then(response => {
         return response.json();
@@ -25,6 +26,15 @@ class Location extends Component {
       .then(location => {
         // console.log(myJson)
         this.setState({ location });
+        // console.log("location", this.state.location);
+      });
+      fetch("http://localhost:5000/stickerTable/" + organizationIDTk)
+      .then(response => {
+        return response.json();
+      })
+      .then(sticker => {
+        // console.log(myJson)
+        this.setState({ sticker });
         // console.log("location", this.state.location);
       });
   }
@@ -73,7 +83,7 @@ class Location extends Component {
   componentDidMount() {
     this.getData();
   }
-  
+
   onOpenDeleteModalLocation = locationID => e => {
     this.setState({
       openDelete: true,
@@ -114,7 +124,6 @@ class Location extends Component {
     return this.state.location.map(location => {
       const {
         locationName,
-        locationCode,
         locationID,
         colorOfSticker
       } = location;
@@ -157,6 +166,22 @@ class Location extends Component {
     });
   }
 
+  stickerTable() {
+    return this.state.sticker.map(sticker => {
+      const {
+        typeOfSticker,
+        colorOfSticker
+      } = sticker;
+      return (
+        <tr>
+          <td>{typeOfSticker}</td>
+          <td>{colorOfSticker}</td>
+        </tr>
+      );
+    });
+  }
+
+
   componentDidUpdate(nextState) {
     if (nextState !== this.state.location) {
       this.componentDidMount();
@@ -173,8 +198,10 @@ class Location extends Component {
         <Header />
         <Navibar />
         <MapContainer location={this.state.locationName} />
-        <h2 className="Table-header">สถานที่จอดรถ <img src={map} className="Headicon"/></h2>
-        
+        <h2 className="Table-header">
+          สถานที่จอดรถ <img src={map} className="Headicon" />
+        </h2>
+        <div className="tableAll">
         <table class="locationtable">
           <tbody className="location">
             <th>ชื่อสถานที่</th>
@@ -182,8 +209,14 @@ class Location extends Component {
             {this.locationTable()}
           </tbody>
         </table>
-
-       
+        <table className="stickerTable">
+          <tbody className="sticker">
+            <th>สีสติ๊กเกอร์</th>
+            <th>รายละเอียด</th>
+            {this.stickerTable()}
+          </tbody>
+        </table>
+      </div>
       </div>
     );
   }
