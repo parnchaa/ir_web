@@ -99,10 +99,10 @@ class Rule extends Component {
       //   errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
       //   break;
       case "typeOfSticker":
-        errors.typeOfSticker = value.length < 2 ? "กรุณากรอกชื่อสติกเกอร์" : "";
+        errors.typeOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียดสติ๊กเกอร์" : "";
         break;
       case "colorOfSticker":
-        errors.colorOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียด" : "";
+        errors.colorOfSticker = value.length < 2 ? "กรุณากรอกสีสติ๊กเกอร์" : "";
         break;
     }
     this.setState({ errors, [name]: value }, () => {

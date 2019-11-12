@@ -38,19 +38,18 @@ class Staff extends Component {
         staffPassword: ""
       },
       spinner: false,
-      role:'',
+      role: ""
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
       console.log("SUCESDSADF");
-      
     }
   }
 
   getData() {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
-    fetch("http://localhost:5000/staff/"+organizationIDTk)
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
+    fetch("http://localhost:5000/staff/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -58,7 +57,7 @@ class Staff extends Component {
         this.setState({ staff });
         console.log("staff1", this.state.staff);
       });
-    fetch("http://localhost:5000/securityguard/"+organizationIDTk)
+    fetch("http://localhost:5000/securityguard/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -69,13 +68,12 @@ class Staff extends Component {
   }
 
   checkToken = () => {
-    
-    let userData = JSON.parse(localStorage.getItem("tk"))
-    let tkRole = userData[0].staffRole
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let tkRole = userData[0].staffRole;
 
     this.setState({
       role: tkRole
-    })
+    });
   };
 
   onOpenAddModal = () => {
@@ -203,8 +201,8 @@ class Staff extends Component {
   };
 
   onAfterInsertAdmin = () => {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
     const url = "http://localhost:5000/addstaff";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
@@ -234,9 +232,8 @@ class Staff extends Component {
   uploadImages = async (imageURL, imageName) => {
     const response = await fetch(imageURL);
     const blob = await response.blob();
-    
-    console.log(imageURL, imageName, " test");
 
+    console.log(imageURL, imageName, " test");
 
     var ref = firebase
       .storage()
@@ -273,8 +270,8 @@ class Staff extends Component {
   };
 
   fileSelectedHandler = event => {
-    let imageURL = URL.createObjectURL(event.target.files[0])
-    let imageName = event.target.files[0].name
+    let imageURL = URL.createObjectURL(event.target.files[0]);
+    let imageName = event.target.files[0].name;
     this.confirmUploadImage(imageURL, imageName);
   };
 
@@ -293,7 +290,7 @@ class Staff extends Component {
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      staffPassword !== "" 
+      staffPassword !== ""
       // securityguardImage !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
@@ -309,8 +306,8 @@ class Staff extends Component {
   };
 
   onAfterInsertSecurity = () => {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
     const url = "http://localhost:5000/addsecurityguard";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
@@ -384,14 +381,14 @@ class Staff extends Component {
           <td>{lastName}</td>
           <td>{staffEmail}</td>
           <td>{staffTel}</td>
-          
+
           {this.state.role === "Administrator" ? null : (
             <button
-            className="deleteModalButton"
-            onClick={this.onOpenDeleteModal(staffID)}
-          >
-            <img src={deletePic} className="deletePic" />
-          </button>
+              className="deleteModalButton"
+              onClick={this.onOpenDeleteModal(staffID)}
+            >
+              <img src={deletePic} className="deletePic" />
+            </button>
           )}
         </tr>
       );
@@ -541,6 +538,7 @@ class Staff extends Component {
               เลือกรูป
             </label>
             <input
+              className="photoinput"
               type="file"
               name="photo"
               id="upload-photo"
@@ -675,6 +673,7 @@ class Staff extends Component {
               เลือกรูป
             </label>
             <input
+              className="photoinput"
               type="file"
               name="photo"
               id="upload-photo"

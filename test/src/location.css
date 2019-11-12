@@ -150,6 +150,6 @@ h1{
  
   }
 
-  .sticker tr:nth-child(even){
+  /* .sticker tr:nth-child(even){
     background-color: #eeeeee;
-  }
+  } */

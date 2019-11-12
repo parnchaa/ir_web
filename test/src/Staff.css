@@ -154,10 +154,7 @@
 .formAdd input {
   position: absolute;
   left: 43%;
-  border-right: none;
-  border-left: none;
-  border-top: none;
-  border-bottom: solid #29A8AB 1px;
+
 }
 
 .formAdd input:focus{
@@ -199,10 +196,7 @@
 .formAddSecure input {
   position: absolute;
   left: 43%;
-  border-right: none;
-  border-left: none;
-  border-top: none;
-  border-bottom: solid #29A8AB 1px;
+
 }
 
 .formAddSecure input:focus{
@@ -252,6 +246,10 @@
   margin-bottom: 0.4rem;
   color: #29A8AB;
   border:1px solid #bbbbbb;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid #29A8AB 1px;
 }
 
 .loader_spinner{
@@ -264,4 +262,8 @@
   position: absolute;
   left: 49%;
   bottom: 12.5%;
+}
+
+.photoinput{
+  margin-top: 0.4rem;
 }

@@ -211,3 +211,11 @@
     margin-bottom: 2rem;
     padding: 0.5rem;
 }
+
+.noValue{
+    font-family: 'kanit',sans-serif;  
+    font-size: 3rem;
+    color: #969696;
+    text-align: center;
+    margin-top: 2%;
+}

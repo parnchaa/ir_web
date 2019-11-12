@@ -4,10 +4,9 @@ import Navibar from "./Navibar";
 import "./SearchSticker.css";
 import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
-import moment from 'moment'
+import moment from "moment";
 import folder from "./picture/folder.png";
 import edit from "./picture/edit.png";
-
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -20,7 +19,8 @@ class SearchSticker extends Component {
       openExtend: false,
       searchValue: "",
       pageStatus: "",
-      selectExtendValue:"1",
+      selectExtendValue: "1",
+      checkSearch: "",
       // organizationID:'',
       errors: {
         carOwnerFirstName: "",
@@ -36,7 +36,7 @@ class SearchSticker extends Component {
   //   let userData = JSON.parse(localStorage.getItem('tk'));
 
   //   let organizationIDTk = userData[0].organizationID
-  
+
   //   this.setState({
   //     organizationID: organizationIDTk
   //   })
@@ -44,10 +44,10 @@ class SearchSticker extends Component {
   // }
 
   getData() {
-    let userData = JSON.parse(localStorage.getItem('tk'));
+    let userData = JSON.parse(localStorage.getItem("tk"));
 
-    let organizationIDTk = userData[0].organizationID
-    fetch("http://localhost:5000/carOwner/"+ organizationIDTk)
+    let organizationIDTk = userData[0].organizationID;
+    fetch("http://localhost:5000/carOwner/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -58,15 +58,25 @@ class SearchSticker extends Component {
   }
 
   getSearchValue() {
-    let userData = JSON.parse(localStorage.getItem('tk'));
+    let userData = JSON.parse(localStorage.getItem("tk"));
 
-    let organizationIDTk = userData[0].organizationID
-    fetch("http://localhost:5000/getSearchValue/" + this.state.searchValue +  "/" +organizationIDTk)
+    let organizationIDTk = userData[0].organizationID;
+    fetch(
+      "http://localhost:5000/getSearchValue/" +
+        this.state.searchValue +
+        "/" +
+        organizationIDTk
+    )
       .then(response => {
         return response.json();
       })
       .then(responseJson => {
+        if (responseJson.length === 0) {
+          this.setState({ checkSearch: "nodata" });
+        }
         console.log(responseJson, "responseJson");
+        console.log(this.state.checkSearch, "check");
+
         this.setState({ searchCarOwner: responseJson });
       })
       .catch(error => {
@@ -111,9 +121,7 @@ class SearchSticker extends Component {
 
   validateForm = errors => {
     let valid = true;
-    Object.values(errors).forEach(
-      val => val.length > 0 && (valid = false)
-    );
+    Object.values(errors).forEach(val => val.length > 0 && (valid = false));
     return valid;
   };
 
@@ -183,36 +191,32 @@ class SearchSticker extends Component {
       .catch(error => {});
   };
 
-  handleSubmitExtend= event => {
-    const{expiredDate,selectExtendValue}= this.state
-    var ex = new Date(expiredDate)
-    var yyyy = ex.getFullYear(ex)
-    var mm = ex.getMonth(ex)+1
-    var dd = ex.getDate(ex)
-    var extended
-    if(selectExtendValue === "1"){
-      var extendedM= ex.setMonth(ex.getMonth()+6)
-      var extendedMonth = moment(extendedM).format()
-      extended = extendedMonth
-      this.onAfterExtendLicense(extended)
-      alert("คุณได้ต่อสัญญาสำเร็จ")
-      this.onCloseExtendModel()
+  handleSubmitExtend = event => {
+    const { expiredDate, selectExtendValue } = this.state;
+    var ex = new Date(expiredDate);
+    var yyyy = ex.getFullYear(ex);
+    var mm = ex.getMonth(ex) + 1;
+    var dd = ex.getDate(ex);
+    var extended;
+    if (selectExtendValue === "1") {
+      var extendedM = ex.setMonth(ex.getMonth() + 6);
+      var extendedMonth = moment(extendedM).format();
+      extended = extendedMonth;
+      this.onAfterExtendLicense(extended);
+      alert("คุณได้ต่อสัญญาสำเร็จ");
+      this.onCloseExtendModel();
+    } else if (selectExtendValue === "2") {
+      var extendedY = yyyy + 1;
+      var extendedYear = extendedY + "-" + mm + "-" + dd;
+      extended = extendedYear;
+      this.onAfterExtendLicense(extended);
+      alert("คุณได้ต่อสัญญาสำเร็จ");
+      this.onCloseExtendModel();
     }
-    else if(selectExtendValue === "2"){
-      var extendedY = yyyy+1
-      var extendedYear = extendedY+'-'+mm+'-'+dd
-      extended = extendedYear
-      this.onAfterExtendLicense(extended)
-      alert("คุณได้ต่อสัญญาสำเร็จ")
-      this.onCloseExtendModel()
-    }
-    
-  }
+  };
 
-  onAfterExtendLicense = (extended) => {
-    const {
-      openExtendId
-    } = this.state;
+  onAfterExtendLicense = extended => {
+    const { openExtendId } = this.state;
     const url = "http://localhost:5000/extendLicense";
     const bodyData = JSON.stringify({
       carOwnerID: openExtendId,
@@ -228,15 +232,15 @@ class SearchSticker extends Component {
     fetch(url, othepram)
       .then(data => console.log(data))
       .then(response => {
-          this.getData();
+        this.getData();
       })
       .catch(error => {});
   };
 
-  selectExtendValue(e){
+  selectExtendValue(e) {
     this.setState({
       selectExtendValue: e.target.value
-    })
+    });
   }
 
   onOpenEditModal = carOwnerID => e => {
@@ -292,6 +296,7 @@ class SearchSticker extends Component {
     if (event.key === "Enter") {
       console.log("Adding....");
       this.getSearchValue();
+      this.setState({ checkSearch: "" });
     }
   };
 
@@ -398,68 +403,78 @@ class SearchSticker extends Component {
           </form>
         </Modal>
 
-        <Modal 
+        <Modal
           classNames="ModalEditSicker"
           open={this.state.openExtend}
           onClose={this.onCloseExtendModel}
           center
         >
           <h2 className="titleEdit">ต่อสัญญาสติกเกอร์</h2>
-         <div>
-          <select className="SelectTime" onChange={e=>this.selectExtendValue(e)}>
-            <option value='1'>6 เดือน</option>
-            <option value='2'>1 ปี</option>
-          </select>
+          <div>
+            <select
+              className="SelectTime"
+              onChange={e => this.selectExtendValue(e)}
+            >
+              <option value="1">6 เดือน</option>
+              <option value="2">1 ปี</option>
+            </select>
           </div>
-          <button className="ButtonSubmit" onClick={event=>this.handleSubmitExtend(event)}>ยืนยัน</button>
+          <button
+            className="ButtonSubmit"
+            onClick={event => this.handleSubmitExtend(event)}
+          >
+            ยืนยัน
+          </button>
         </Modal>
 
         {tableData.map(tableData => {
-          if(tableData.carOwnerID === 1){
-            return null
-          }
-          else{
-          return (
-            <div className="carOwnerTask">
-              <div className="carOwnerName">
-                <div>ชื่อ : </div>
-                <div className="fieldName">{tableData.carOwnerFirstName}</div>
-                <div>นามสกุล : </div>
-                <div className="fieldName">{tableData.carOwnerLastName}</div>
-              </div>
-              <div className="carOwnerEmailTel">
-                <div>อีเมล์ : </div>
-                <div className="fieldName">{tableData.carOwnerEmail}</div>
-                <div>เบอร์โทรศัพท์ : </div>
-                <div className="fieldName">{tableData.carOwnerTel}</div>
-              </div>
-              <div className="carOwnerAddress">
-                <div>ที่อยู่ : </div>
-                <div className="fieldName">{tableData.carOwnerAddress}</div>
-              </div>
-              <div className="carOwnerDate">
-                <div>วันที่ต่อสัญญา : </div>
-                <div className="fieldName">
-                  {tableData.registerDate.substr(0, 10)}
+          if (tableData.carOwnerID === 1) {
+            return null;
+          } else {
+            return (
+              <div className="carOwnerTask">
+                <div className="carOwnerName">
+                  <div>ชื่อ : </div>
+                  <div className="fieldName">{tableData.carOwnerFirstName}</div>
+                  <div>นามสกุล : </div>
+                  <div className="fieldName">{tableData.carOwnerLastName}</div>
                 </div>
-                <div>วันหมดอายุ : </div>
-                <div className="fieldName">
-                  {tableData.expiredDate.substr(0, 10)}
+                <div className="carOwnerEmailTel">
+                  <div>อีเมล์ : </div>
+                  <div className="fieldName">{tableData.carOwnerEmail}</div>
+                  <div>เบอร์โทรศัพท์ : </div>
+                  <div className="fieldName">{tableData.carOwnerTel}</div>
+                </div>
+                <div className="carOwnerAddress">
+                  <div>ที่อยู่ : </div>
+                  <div className="fieldName">{tableData.carOwnerAddress}</div>
+                </div>
+                <div className="carOwnerDate">
+                  <div>วันที่ต่อสัญญา : </div>
+                  <div className="fieldName">
+                    {tableData.registerDate.substr(0, 10)}
+                  </div>
+                  <div>วันหมดอายุ : </div>
+                  <div className="fieldName">
+                    {tableData.expiredDate.substr(0, 10)}
+                  </div>
+                </div>
+                <div className="LineButton">
+                  <button
+                    className="RenewContractButton"
+                    onClick={this.onOpenExtendModel(tableData.carOwnerID)}
+                  >
+                    ต่อสัญญา
+                  </button>
+                  <button
+                    className="EditModalButton"
+                    onClick={this.onOpenEditModal(tableData.carOwnerID)}
+                  >
+                    แก้ไขข้อมูล
+                  </button>
                 </div>
               </div>
-             <div className="LineButton">
-              <button className="RenewContractButton" onClick={this.onOpenExtendModel(tableData.carOwnerID)}>
-                ต่อสัญญา
-              </button>
-              <button
-                className="EditModalButton"
-                onClick={this.onOpenEditModal(tableData.carOwnerID)}
-              >
-                แก้ไขข้อมูล
-              </button>
-              </div>
-                </div>
-          );
+            );
           }
         })}
       </div>
@@ -483,14 +498,22 @@ class SearchSticker extends Component {
           <img src={search} className="search" />
         </div>
 
-        <div className="Table-header">ข้อมูลผู้ขอสติกเกอร์<img src={folder} className='Headicon'/></div>
+        <div className="Table-header">
+          ข้อมูลผู้ขอสติกเกอร์
+          <img src={folder} className="Headicon" />
+        </div>
         <table className="table">
-          <tbody>{this.carOwnerTable()}</tbody>
+          <tbody>
+            {this.state.checkSearch !== "nodata" ? (
+              this.carOwnerTable()
+            ) : (
+              <div className="noValue">ไม่มีข้อมูลที่ค้นหา</div>
+            )}
+          </tbody>
         </table>
       </div>
     );
   }
 }
-
 
 export default SearchSticker;
