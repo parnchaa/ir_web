@@ -4,6 +4,7 @@ import Navibar from "./Navibar";
 import "./Addsticker.css";
 import plusButton from "./picture/plusButton.png";
 import adduser from "./picture/adduser.png";
+// import Select from "react-dropdown-select"
 
 class Addsticker extends Component {
   state = {
@@ -27,7 +28,9 @@ class Addsticker extends Component {
       carColor: "",
       brandCar: "",
       modelCar: ""
-    }
+    },
+    stickerID: 0,
+    province: ''
   };
 
   handleSubmit = event => {
@@ -99,7 +102,9 @@ class Addsticker extends Component {
       licensePlate,
       carColor,
       brandCar,
-      modelCar
+      modelCar,
+      stickerID,
+      province
     } = this.state;
     var today = new Date();
     var curDate = today.getDate() + 1;
@@ -132,13 +137,14 @@ class Addsticker extends Component {
           return response.json()
         })
         .then(ID =>{
-          console.log(ID);
           const bodyData2 = JSON.stringify({
             licensePlate: licensePlate,
+            province: province,
             carColor: carColor,
             brandCar: brandCar,
             modelCar: modelCar,
             carOwnerID: ID[0].lastID,
+            stickerID: stickerID,
             organizationID: organizationIDTk
           });
           const othepram2 = {
@@ -158,8 +164,11 @@ class Addsticker extends Component {
               licensePlate: "",
               carColor: "",
               brandCar: "",
-              modelCar: ""
+              modelCar: "",
+              stickerID: 0,
+              province: ""
             });
+            this.setDefaultSelect()
           });
         })
       }
@@ -226,16 +235,78 @@ class Addsticker extends Component {
     this.getSticker()
   }
 
+  createStickerOptions = () => {
+    let stickerOptions = []
+    let {sticker} = this.state
+
+    for (let i = 0; i < sticker.length; i++) {
+      stickerOptions.push(<option value = {sticker[i].stickerID}>{sticker[i].value}</option>)
+    }
+
+    return stickerOptions
+  }
+
+  getStickerID = () =>{
+    let sticker = document.getElementById('sticker')
+    let stickerID = sticker.value
+    this.setState({
+      stickerID: stickerID
+    })
+  }
+
+  createProvinceOptions = () => {
+    let provinces = [
+    { value: 'กระบี่'}, { value: 'กรุงเทพมหานคร'},{ value: 'กาญจนบุรี'}, { value: 'กาฬสินธุ์'}, { value: 'กำแพงเพชร'},
+    { value: 'ขอนแก่น'},
+    { value: 'จันทบุรี'},
+    { value: 'ฉะเชิงเทรา'},
+    { value: 'ชลบุรี'}, { value: 'ชัยนาท'}, { value: 'ชัยภูมิ'}, { value: 'ชุมพร'}, { value: 'เชียงราย'}, { value: 'เชียงใหม่'},
+    { value: 'ตรัง'}, { value: 'ตราด'}, { value: 'ตาก'},
+    { value: 'นครนายก'}, { value: 'นครปฐม'}, { value: 'นครพนม'}, { value: 'นครราชสีมา'}, { value: 'นครศรีธรรมราช'}, 
+    { value: 'นครสวรรค์'}, { value: 'นนทบุรี'}, { value: 'นราธิวาส'}, { value: 'น่าน'},
+    { value: 'บึงกาฬ'}, { value: 'บุรีรัมย์'},
+    { value: 'ปทุมธานี'}, { value: 'ประจวบคีรีขันธ์'}, { value: 'ปราจีนบุรี'}, { value: 'ปัตตานี'},
+    { value: 'พระนครศรีอยุธยา'}, { value: 'พะเยา'}, { value: 'พังงา'}, { value: 'พัทลุง'}, { value: 'พิจิตร'}, 
+    { value: 'พิษณุโลก'}, { value: 'เพชรบุรี'}, { value: 'เพชรบูรณ์'}, { value: 'แพร่'},
+    { value: 'ภูเก็ต'},
+    { value: 'มหาสารคาม'}, { value: 'มุกดาหาร'}, { value: 'แม่ฮ่องสอน'},
+    { value: 'ยโสธร'}, { value: 'ยะลา'},
+    { value: 'ร้อยเอ็ด'}, { value: 'ระนอง'}, { value: 'ระยอง'}, { value: 'ราชบุรี'},
+    { value: 'ลพบุรี'}, { value: 'ลำปาง'}, { value: 'ลำพูน'}, { value: 'เลย'},
+    { value: 'ศรีสะเกษ'},
+    { value: 'สกลนคร'}, { value: 'สงขลา'}, { value: 'สตูล'}, { value: 'สมุทรปราการ'}, { value: 'สมุทรสงคราม'}, 
+    { value: 'สมุทรสาคร'}, { value: 'สระแก้ว'}, { value: 'สระบุรี'}, { value: 'สิงห์บุรี'}, { value: 'สุโขทัย'}, { value: 'สุพรรณบุรี'}, 
+    { value: 'สุราษฎร์ธานี'}, { value: 'สุรินทร์'},
+    { value: 'หนองคาย'}, { value: 'หนองบัวลำภู'},
+    { value: 'อ่างทอง'}, { value: 'อำนาจเจริญ'}, { value: 'อุดรธานี'}, { value: 'อุตรดิตถ์'}, { value: 'อุทัยธานี'}, { value: 'อุบลราชธานี'}
+    ]
+    let provinceOptions = []
+
+    for (let i = 0; i < provinces.length; i++) {
+      provinceOptions.push(<option value = {provinces[i].value}>{provinces[i].value}</option>)
+    }
+
+    return provinceOptions
+  }
+
+  getProvince = () =>{
+    let provinceElement = document.getElementById('province')
+    let province = provinceElement.value
+    this.setState({
+      province: province
+    })
+  }
+
+  setDefaultSelect = () =>{
+    let sticker = document.getElementById('sticker')
+    sticker.value = "สีสติ๊กเกอร์"
+    let provinceElement = document.getElementById('province')
+    provinceElement.value = "จังหวัด..."
+
+  }
+
   render() {
     const { errors } = this.state;
-    let options = this.state.sticker.map((sticker) =>
-                <option 
-                    key={sticker.stickerID}
-                    value={sticker.stickerID}
-                >
-                    {sticker.typeOfSticker}
-                </option>
-            );
 
     return (
       <div>
@@ -391,12 +462,20 @@ class Addsticker extends Component {
               </div>
             </div>
             <div>
-              <label>เลือกสติ๊กเกอร์:</label>
+              <label>สีสติ๊กเกอร์:</label>
               <div>
-                <select>
-                {options}
+                <select id="sticker" onChange={this.getStickerID}>
+                  <option selected  disabled>สีสติ๊กเกอร์</option>
+                  {this.createStickerOptions()}
                 </select>
               </div>
+            </div>
+            <div>
+              <label>จังหวัดของป้ายทะเบียน:</label>
+              <select id="province" onChange={this.getProvince}>
+                <option selected  disabled>จังหวัด...</option>
+                  {this.createProvinceOptions()}
+              </select>
             </div>
             <button
               className="buttonAddsticker"
