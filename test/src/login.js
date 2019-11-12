@@ -19,18 +19,12 @@ class login extends Component {
     const { name, value } = event.target;
     let errors = this.state.errors;
     const validEmailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    // const strongRegex = /^(?=.*[a-z])(?=.*[0-9])(?=.{8,})/i;
     switch (name) {
       case "staffEmail":
         errors.staffEmail = validEmailRegex.test(value)
           ? ""
           : "กรุณากรอกอีเมล์ให้ถูกต้อง";
         break;
-      // case "staffPassword":
-      //   errors.staffPassword = strongRegex.test(value)
-      //     ? ""
-      //     : "กรุณากรอกรหัสให้ถูกต้อง";
-      //   break;
     }
     this.setState({ errors, [name]: value });
   };
@@ -94,7 +88,6 @@ class login extends Component {
     const { errors } = this.state;
     return (
       <div className='login'>
-      {/* <div className='Loginpage'> */}
         <img src={irbackground} className="bg"/>
         <div className="boxLogin">
         <div>
@@ -131,7 +124,6 @@ class login extends Component {
         </button>
         </div>
         </div>
-      {/* </div> */}
       </div>
     );
   }

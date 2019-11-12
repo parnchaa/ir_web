@@ -10,18 +10,9 @@ import Modal from "react-responsive-modal";
 import "./MapContainer.css";
 import map from "./picture/map.png";
 
-// import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
-
 const {
   DrawingManager
 } = require("react-google-maps/lib/components/drawing/DrawingManager");
-
-// var triangleCoords = [
-//   { lat: 25.774, lng: -80.19 },
-//   { lat: 18.466, lng: -66.118 },
-//   { lat: 32.321, lng: -64.757 },
-//   { lat: 25.774, lng: -80.19 }
-// ];
 
 const MapWithADrawingManager = compose(
   withProps({
@@ -49,7 +40,6 @@ const MapWithADrawingManager = compose(
   <GoogleMap
     defaultZoom={20}
     defaultCenter={new google.maps.LatLng(13.652507, 100.493619)}
-    // defaultCenter={new google.maps.LatLng(25.774, -80.19)}
   >
     {/* {showPolygon()} */}
     <DrawingManager

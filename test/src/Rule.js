@@ -16,12 +16,10 @@ class Rule extends Component {
       openEdit: false,
       openAdd: false,
       openAddS: false,
-
       errors: {
         ruleName: "",
         maxWarning: "",
         price: "",
-        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       },
@@ -37,7 +35,6 @@ class Rule extends Component {
       })
       .then(rule => {
         this.setState({ rule });
-        console.log("rule", this.state.rule);
       });
   }
 
@@ -62,7 +59,6 @@ class Rule extends Component {
       ruleName: eachRuleID.ruleName,
       maxWarning: eachRuleID.maxWarning,
       price: eachRuleID.price,
-      // ruleDetails: eachRuleID.ruleDetails
     });
   };
 
@@ -95,9 +91,6 @@ class Rule extends Component {
           ? ""
           : "จำนานครั้งที่เตือนต้องเป็นตัวเลข";
         break;
-      // case "ruleDetails":
-      //   errors.ruleDetails = value.length < 5 ? "กรุณากรอกรายละเอียด" : "";
-      //   break;
       case "typeOfSticker":
         errors.typeOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียดสติ๊กเกอร์" : "";
         break;
@@ -105,11 +98,7 @@ class Rule extends Component {
         errors.colorOfSticker = value.length < 2 ? "กรุณากรอกสีสติ๊กเกอร์" : "";
         break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
-    console.log("rr", name);
-    console.log("rr", value);
+    this.setState({ errors, [name]: value });
   };
 
   handleEditRule = event => {
@@ -122,14 +111,9 @@ class Rule extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterEditRule();
-        console.log("Valid Form");
         this.onCloseEditModal();
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
+      } 
+    } 
   };
 
   onAfterEditRule = () => {
@@ -140,9 +124,7 @@ class Rule extends Component {
       ruleName: ruleName,
       maxWarning: maxWarning,
       price: price,
-      // ruleDetails: ruleDetails
     });
-    console.log(bodyData, "bodyData");
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -151,11 +133,9 @@ class Rule extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
+      .then(() => {
         this.getData();
       })
-      .catch(error => {});
   };
 
   onCloseEditModal = () => {
@@ -165,7 +145,6 @@ class Rule extends Component {
         ruleName: "",
         maxWarning: "",
         price: "",
-        // ruleDetails: "",
         typeOfSticker: "",
         colorOfSticker: ""
       }
@@ -193,7 +172,6 @@ class Rule extends Component {
     const bodyData = JSON.stringify({
       ruleID: this.state.openRuleID
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -201,13 +179,10 @@ class Rule extends Component {
       body: bodyData,
       method: "POST"
     };
-    console.log("aaa", othepram);
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
+      .then(() => {
         this.getData();
       })
-      .catch(error => {});
   };
 
   handleAddRule = event => {
@@ -220,14 +195,9 @@ class Rule extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddRule();
-        console.log("Valid Form");
         this.onCloseAddModal();
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
+      } 
+    } 
   };
 
   onAfterAddRule = () => {
@@ -240,7 +210,6 @@ class Rule extends Component {
       maxWarning: this.state.maxWarning,
       organizationID: organizationIDTk
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -249,11 +218,9 @@ class Rule extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
+      .then(() => {
         this.getData();
       })
-      .catch(error => {});
   };
 
   onOpenAddModal = () => {
@@ -284,14 +251,8 @@ class Rule extends Component {
     if (typeOfSticker !== "" && colorOfSticker !== "") {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
-        console.log("Valid Form");
-        // this.onCloseAddStickerModal();
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
+      } 
+    } 
   };
 
   onAfterAddSticker = () => {
@@ -310,7 +271,6 @@ class Rule extends Component {
         organizationID: organizationIDTk,
         ruleID: ruleID[0].ruleID
       });
-      console.log(bodyData);
       const othepram = {
         headers: {
           "content-type": "application/json; charset=UTF-8"
@@ -319,8 +279,7 @@ class Rule extends Component {
         method: "POST"
       };
       fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
+      .then(() => {
         this.onCloseAddStickerModal()
         this.getData();
       })
@@ -408,19 +367,6 @@ class Rule extends Component {
               {errors.price.length > 0 && (
                 <p className="error">{errors.price}</p>
               )}
-              {/* <div className="editModal">
-                <p>รายละเอียดกฎ:</p>
-                <input
-                  className="inputModal"
-                  type="text"
-                  name="ruleDetails"
-                  onChange={event => this.handleChange(event)}
-                  value={this.state.ruleDetails}
-                />
-              </div>
-              {errors.ruleDetails.length > 0 && (
-                <p className="error">{errors.ruleDetails}</p>
-              )} */}
             </form>
             <button
               className="buttonUpdate"
@@ -470,13 +416,11 @@ class Rule extends Component {
                 <p className="price">ค่าปรับ {rule.price}</p>
                 <p>จำนานครั้งที่เตือน {rule.maxWarning}</p>
               </div>
-              {/* <div className="detail">{rule.ruleDetails}</div> */}
               <div className="ruleButton">
                 <button
                   className="editButton"
                   onClick={this.onOpenEditModal(rule.ruleID)}
                 >
-                  {/* <img src={edit} className='iconleftButton'/> */}
                   แก้ไข
                 </button>
                 <button

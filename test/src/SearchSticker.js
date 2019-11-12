@@ -6,7 +6,6 @@ import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
 import moment from "moment";
 import folder from "./picture/folder.png";
-// import edit from "./picture/edit.png";
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -21,7 +20,6 @@ class SearchSticker extends Component {
       pageStatus: "",
       selectExtendValue: "1",
       checkSearch: "",
-      // organizationID:'',
       errors: {
         carOwnerFirstName: "",
         carOwnerLastName: "",

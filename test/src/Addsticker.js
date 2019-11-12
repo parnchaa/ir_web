@@ -4,7 +4,6 @@ import Navibar from "./Navibar";
 import "./Addsticker.css";
 import plusButton from "./picture/plusButton.png";
 import adduser from "./picture/adduser.png";
-// import Select from "react-dropdown-select"
 
 class Addsticker extends Component {
   state = {

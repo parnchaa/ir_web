@@ -11,7 +11,6 @@ import securityguard from "./picture/securityguard.png";
 import Loader from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-// import addButton from "./picture/plus.png";
 
 class Staff extends Component {
   constructor(props) {
@@ -28,7 +27,6 @@ class Staff extends Component {
       openAddSecurityguard: false,
       openDelete: false,
       securityguardImage: "",
-      securityguardImages: "",
       securityguardImageName: "",
       errors: {
         firstName: "",
@@ -61,7 +59,6 @@ class Staff extends Component {
       })
       .then(securityguard => {
         this.setState({ securityguard });
-  
       });
   }
 
@@ -171,7 +168,6 @@ class Staff extends Component {
       lastName,
       staffEmail,
       staffTel,
-      securityguardImage,
       staffPassword
     } = this.state;
     if (
@@ -179,7 +175,6 @@ class Staff extends Component {
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      // securityguardImage !== "" &&
       staffPassword !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
@@ -258,7 +253,6 @@ class Staff extends Component {
       staffEmail,
       staffTel,
       staffPassword,
-      securityguardImage
     } = this.state;
     if (
       firstName !== "" &&
@@ -266,7 +260,6 @@ class Staff extends Component {
       staffEmail !== "" &&
       staffTel !== "" &&
       staffPassword !== ""
-      // securityguardImage !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertSecurity();
@@ -412,7 +405,6 @@ class Staff extends Component {
           )}
         </div>
         <Modal
-          // className="Modal"
           open={this.state.openDelete}
           onClose={this.onCloseDeleteModal}
           center
@@ -494,7 +486,6 @@ class Staff extends Component {
                 className="inputModal"
                 type="password"
                 name="staffPassword"
-                // placeholder="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว"
                 onChange={event => this.handleChange(event)}
                 value={this.state.staffPassword}
               />
@@ -628,7 +619,6 @@ class Staff extends Component {
                 className="inputModal"
                 type="password"
                 name="staffPassword"
-                // placeholder="รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว"
                 onChange={event => this.handleChange(event)}
                 value={this.state.staffPassword}
               />
