@@ -6,7 +6,7 @@ import Modal from "react-responsive-modal";
 import search from "./picture/search.png";
 import moment from "moment";
 import folder from "./picture/folder.png";
-import edit from "./picture/edit.png";
+// import edit from "./picture/edit.png";
 
 class SearchSticker extends Component {
   constructor(props) {
@@ -32,17 +32,6 @@ class SearchSticker extends Component {
     };
   }
 
-  //   getUserData = () =>{
-  //   let userData = JSON.parse(localStorage.getItem('tk'));
-
-  //   let organizationIDTk = userData[0].organizationID
-
-  //   this.setState({
-  //     organizationID: organizationIDTk
-  //   })
-  //   console.log(this.state.organizationID,"oo")
-  // }
-
   getData() {
     let userData = JSON.parse(localStorage.getItem("tk"));
 
@@ -53,7 +42,6 @@ class SearchSticker extends Component {
       })
       .then(carOwner => {
         this.setState({ carOwner });
-        console.log(carOwner, "cc");
       });
   }
 
@@ -74,8 +62,6 @@ class SearchSticker extends Component {
         if (responseJson.length === 0) {
           this.setState({ checkSearch: "nodata" });
         }
-        console.log(responseJson, "responseJson");
-        console.log(this.state.checkSearch, "check");
 
         this.setState({ searchCarOwner: responseJson });
       })
@@ -114,9 +100,7 @@ class SearchSticker extends Component {
           value.length < 10 ? "กรุณาใส่ที่อยู่ให้ถูกต้อง" : "";
         break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
+    this.setState({ errors, [name]: value });
   };
 
   validateForm = errors => {
@@ -144,14 +128,9 @@ class SearchSticker extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterEditCarOwner();
-        console.log("Valid Form");
         this.onCloseEditModal();
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
+      } 
+    } 
   };
 
   onAfterEditCarOwner = () => {
@@ -180,15 +159,13 @@ class SearchSticker extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
+      .then(() => {
         if (this.state.searchValue === "") {
           this.getData();
         } else if (this.state.searchValue !== "") {
           this.getSearchValue();
         }
       })
-      .catch(error => {});
   };
 
   handleSubmitExtend = event => {
@@ -230,12 +207,8 @@ class SearchSticker extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        this.getData();
-      })
-      .catch(error => {});
-  };
+      .then(this.getData())
+  }
 
   selectExtendValue(e) {
     this.setState({
@@ -294,7 +267,6 @@ class SearchSticker extends Component {
 
   onKeyPress = event => {
     if (event.key === "Enter") {
-      console.log("Adding....");
       this.getSearchValue();
       this.setState({ checkSearch: "" });
     }
@@ -304,7 +276,6 @@ class SearchSticker extends Component {
     this.setState({
       searchValue: event.target.value
     });
-    console.log(this.state.searchValue, "kkk");
   };
 
   carOwnerTable() {
@@ -507,7 +478,7 @@ class SearchSticker extends Component {
             {this.state.checkSearch !== "nodata" ? (
               this.carOwnerTable()
             ) : (
-              <div className="noValue">ไม่มีข้อมูลที่ค้นหา</div>
+              <div className="noValue">ไม่พบข้อมูลที่ค้นหา</div>
             )}
           </tbody>
         </table>

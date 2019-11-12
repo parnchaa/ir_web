@@ -56,7 +56,6 @@ class App extends Component {
     const bodyData = JSON.stringify({
       problemID: this.state.openProblemID
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -64,13 +63,8 @@ class App extends Component {
       body: bodyData,
       method: "POST"
     };
-    console.log("aaa", othepram);
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        this.getData();
-      })
-      .catch(error => {});
+      .then(this.getData())
   };
 
   onCloseDeleteModal = () => {
@@ -102,7 +96,6 @@ class App extends Component {
       openProblemID: problemID,
       evidenceImage: eachproblemID.evidenceImage
     });
-    console.log(this.state.evidenceImage,'evidenceImage')
   };
 
   problemTable() {

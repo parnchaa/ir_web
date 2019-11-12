@@ -32,9 +32,7 @@ class login extends Component {
       //     : "กรุณากรอกรหัสให้ถูกต้อง";
       //   break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
+    this.setState({ errors, [name]: value });
   };
 
   handlelogin = event => {
@@ -46,12 +44,7 @@ class login extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterLogin();
-        console.log("Valid Form");
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
+      } 
     }
   };
 
@@ -70,7 +63,6 @@ class login extends Component {
         staffEmail: this.state.staffEmail,
         staffPassword: this.state.staffPassword,
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"

@@ -70,31 +70,6 @@ const MapWithADrawingManager = compose(
   </GoogleMap>
 ));
 
-// function showPolygon() {
-//   fetch("http://localhost:5000/locationCode")
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then(response => {
-//       var oldPolygon = response;
-//       console.log(oldPolygon, "oldPolygon");
-//       return oldPolygon.map(oldPolygon => {
-//         return (
-//           <Polygon
-//             paths={oldPolygon}
-//             strokeColor="#F5B041"
-//             strokeOpacity={1}
-//             strokeWeight={1}
-//             fillColor="#F9E79F"
-//             fillOpacity={0.5}
-//           ></Polygon>
-//         );
-//       });
-      
-//     });
-// }
-
-
 let location = []
 
 function getPaths(polygon) {
@@ -204,7 +179,7 @@ export class MapContainer extends Component {
       };
 
       fetch(url, othepram)
-        .then(data => console.log(data))
+      
     }
     
     location = []
@@ -222,7 +197,7 @@ export class MapContainer extends Component {
 
     return (
       <div>
-        <h2 className="Table-header">บันทึกสถานที่ <img src={map} className="Headicon"/></h2>
+        <h2 className="Table-header">บันทึกสถานที่จอดรถ <img src={map} className="Headicon"/></h2>
         <div className="chooseStickerColor">
           <h4 className="titleChooseSticker">เลือกสีสติ๊กเกอร์</h4>
           <p className="Subtext">โปรดเลือกสีของสติ๊กเกอร์ให้ตรงสถานที่ และกฎขององค์กรที่กำหนดไว้</p>

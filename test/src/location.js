@@ -24,18 +24,14 @@ class Location extends Component {
         return response.json();
       })
       .then(location => {
-        // console.log(myJson)
         this.setState({ location });
-        // console.log("location", this.state.location);
       });
       fetch("http://localhost:5000/stickerTable/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
       .then(sticker => {
-        // console.log(myJson)
         this.setState({ sticker });
-        // console.log("location", this.state.location);
       });
   }
 
@@ -45,40 +41,7 @@ class Location extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-    console.log("rr", event.target.name);
-    console.log("rr", event.target.value);
   };
-
-  // handleSubmit = event => {
-  //   event.preventDefault();
-  //   this.onAfterInsertRow();
-  //   this.setState({
-  //     locationName: "",
-  //     locationCode: ""
-  //   });
-  // };
-
-  // onAfterInsertRow = () => {
-  //   const url = "http://localhost:5000/addlocation";
-  //   const bodyData = JSON.stringify({
-  //     locationName: this.state.locationName,
-  //     locationCode: this.state.locationCode
-  //   });
-  //   console.log(bodyData);
-  //   const othepram = {
-  //     headers: {
-  //       "content-type": "application/json; charset=UTF-8"
-  //     },
-  //     body: bodyData,
-  //     method: "POST"
-  //   };
-  //   fetch(url, othepram)
-  //     .then(data => console.log(data))
-  //     .then(response => {
-  //       this.getData();
-  //     })
-  //     .catch(error => {});
-  // };
 
   componentDidMount() {
     this.getData();
@@ -104,7 +67,6 @@ class Location extends Component {
     const bodyData = JSON.stringify({
       locationID: this.state.openLocationID
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -112,14 +74,10 @@ class Location extends Component {
       body: bodyData,
       method: "POST"
     };
-    console.log("aaa", othepram);
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        this.getData();
-      })
-      .catch(error => {});
-  };
+      .then(this.getData())
+  }
+  
   locationTable() {
     return this.state.location.map(location => {
       const {
@@ -199,7 +157,7 @@ class Location extends Component {
         <Navibar />
         <MapContainer location={this.state.locationName} />
         <h2 className="Table-header">
-          สถานที่จอดรถ <img src={map} className="Headicon" />
+          รายละเอียดที่จอดรถ <img src={map} className="Headicon" />
         </h2>
         <div className="tableAll">
         <table class="locationtable">

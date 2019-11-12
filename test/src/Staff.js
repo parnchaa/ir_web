@@ -42,7 +42,6 @@ class Staff extends Component {
     };
     if (!firebase.apps.length) {
       firebase.initializeApp(ApiKeys.FirebaseConfig);
-      console.log("SUCESDSADF");
     }
   }
 
@@ -55,7 +54,6 @@ class Staff extends Component {
       })
       .then(staff => {
         this.setState({ staff });
-        console.log("staff1", this.state.staff);
       });
     fetch("http://localhost:5000/securityguard/" + organizationIDTk)
       .then(response => {
@@ -63,7 +61,7 @@ class Staff extends Component {
       })
       .then(securityguard => {
         this.setState({ securityguard });
-        console.log("securityguard", this.state.securityguard);
+  
       });
   }
 
@@ -154,11 +152,7 @@ class Staff extends Component {
           : "รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวและต้องมีตัวเลขอย่างน้อย 1 ตัว";
         break;
     }
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
-    console.log("rr", name);
-    console.log("rr", value);
+    this.setState({ errors, [name]: value })
   };
 
   validateForm = errors => {
@@ -190,14 +184,9 @@ class Staff extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertAdmin();
-        console.log("Valid Form");
         this.onCloseAddModal();
-      } else {
-        console.error("Invalid Form");
       }
-    } else {
-      console.log("pls fill");
-    }
+    } 
   };
 
   onAfterInsertAdmin = () => {
@@ -213,7 +202,6 @@ class Staff extends Component {
       staffImages: this.state.securityguardImage,
       organizationID: organizationIDTk
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -222,18 +210,12 @@ class Staff extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        this.getData();
-      })
-      .catch(error => {});
+      .then(this.getData())
   };
 
   uploadImages = async (imageURL, imageName) => {
     const response = await fetch(imageURL);
     const blob = await response.blob();
-
-    console.log(imageURL, imageName, " test");
 
     var ref = firebase
       .storage()
@@ -244,7 +226,6 @@ class Staff extends Component {
 
   confirmUploadImage = (imageURL, imageName) => {
     this.setState({ spinner: true });
-    console.log(imageURL, imageName, "test2");
     this.uploadImages(imageURL, imageName)
       .then(() => {
         firebase
@@ -258,15 +239,9 @@ class Staff extends Component {
             });
             if (this.state.securityguardImage != "") {
               this.setState({ spinner: false });
-              console.log("imageURL: " + this.state.securityguardImage);
-            } else {
-              console.log("upload failed");
             }
           });
       })
-      .catch(error => {
-        console.log("Fail to upload" + error);
-      });
   };
 
   fileSelectedHandler = event => {
@@ -295,14 +270,9 @@ class Staff extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertSecurity();
-        console.log("Valid Form");
         this.onCloseAddSecurityguardModal();
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
+      } 
+    } 
   };
 
   onAfterInsertSecurity = () => {
@@ -318,7 +288,6 @@ class Staff extends Component {
       staffImages: this.state.securityguardImage,
       organizationID: organizationIDTk
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -327,11 +296,7 @@ class Staff extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        this.getData();
-      })
-      .catch(error => {});
+      .then(this.getData())
   };
 
   onOpenDeleteModal = staffID => e => {
@@ -355,7 +320,6 @@ class Staff extends Component {
     const bodyData = JSON.stringify({
       staffID: this.state.openStaffID
     });
-    console.log(bodyData);
     const othepram = {
       headers: {
         "content-type": "application/json; charset=UTF-8"
@@ -363,13 +327,8 @@ class Staff extends Component {
       body: bodyData,
       method: "POST"
     };
-    console.log("aaa", othepram);
     fetch(url, othepram)
-      .then(data => console.log(data))
-      .then(response => {
-        this.getData();
-      })
-      .catch(error => {});
+      .then(this.getData())
   };
 
   staffTable() {
@@ -421,6 +380,13 @@ class Staff extends Component {
     });
   }
 
+  changeStyle = () =>{
+     let button_add = document.getElementById('button-add').style
+     button_add.paddingBottom = 0
+     button_add.paddingTop = 0
+
+  }
+
   componentDidMount() {
     this.getData();
     this.checkToken();
@@ -436,8 +402,10 @@ class Staff extends Component {
           แอดมิน
           <img src={admin} className="Headicon" />
         </div>
-        <div className="button-add">
-          {this.state.role === "Administrator" ? null : (
+        <div id="button-add">
+          {this.state.role === "Administrator" ? 
+            this.changeStyle()
+          : (
             <button className="addStaffButton" onClick={this.onOpenAddModal}>
               เพิ่มแอดมิน
             </button>

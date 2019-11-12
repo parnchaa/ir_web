@@ -60,13 +60,8 @@ class Addsticker extends Component {
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddCarOwner();
-        console.log("Valid Form");
-      } else {
-        console.error("Invalid Form");
-      }
-    } else {
-      console.log("pls fill");
-    }
+      } 
+    } 
   };
 
   validateForm = errors => {
@@ -225,9 +220,7 @@ class Addsticker extends Component {
         break;
     }
 
-    this.setState({ errors, [name]: value }, () => {
-      console.log(errors);
-    });
+    this.setState({ errors, [name]: value });
   };
 
   componentDidMount() {
@@ -247,7 +240,8 @@ class Addsticker extends Component {
     return stickerOptions;
   };
 
-  getStickerID = () => {
+  getStickerID = (param) => {
+    param.target.style.color = '#29A8AB'
     let sticker = document.getElementById("sticker");
     let stickerID = sticker.value;
     this.setState({
@@ -346,7 +340,8 @@ class Addsticker extends Component {
     return provinceOptions;
   };
 
-  getProvince = () => {
+  getProvince = (param) => {
+    param.target.style.color = '#29A8AB'
     let provinceElement = document.getElementById("province");
     let province = provinceElement.value;
     this.setState({
@@ -452,19 +447,6 @@ class Addsticker extends Component {
                 <p className="error">{errors.carOwnerAddress}</p>
               )}
             </div>
-            <div className="eachField">
-                <label>จังหวัด:</label>
-                <select
-                  id="province"
-                  className="selectProvince"
-                  onChange={this.getProvince}
-                >
-                  <option selected disabled>
-                    จังหวัด...
-                  </option>
-                  {this.createProvinceOptions()}
-                </select>
-              </div>
             <div className="formRow">
               <div className="eachField">
                 <label>ทะเบียนรถ:</label>
@@ -529,6 +511,19 @@ class Addsticker extends Component {
                 </div>
               </div>
             </div>
+            <div className="eachField province">
+                <label>จังหวัดป้ายทะเบียน:</label>
+                <select
+                  id="province"
+                  className="selectProvince"
+                  onChange={(param) => this.getProvince(param)}
+                >
+                  <option selected disabled>
+                    จังหวัด...
+                  </option>
+                  {this.createProvinceOptions()}
+                </select>
+              </div>
             <div className="formRow">
               <div className="eachField">
                 <label>สีสติ๊กเกอร์:</label>
@@ -536,7 +531,7 @@ class Addsticker extends Component {
                   <select
                     id="sticker"
                     className="selectSticker"
-                    onChange={this.getStickerID}
+                    onChange={(param) => this.getStickerID(param)}
                   >
                     <option selected disabled>
                       สีสติ๊กเกอร์

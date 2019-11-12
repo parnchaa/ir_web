@@ -71,7 +71,7 @@ componentDidMount(){
               <td className='profileInfo'>
                 <tr>{firstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lastName}</tr>
                 <tr className="role">{role}</tr>
-                <tr>องค์กร: {organizationName}</tr>
+                <tr>{organizationName}</tr>
               </td>
             </table>
             <button className='logout' onClick={this.confirmLogout}><img src={logout} className='logoutIcon' alt="ออกจากระบบ" /></button>
