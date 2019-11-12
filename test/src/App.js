@@ -5,8 +5,6 @@ import Navibar from "./Navibar";
 import deletePic from "./picture/delete.png";
 import ImgPic from "./picture/more.png";
 import Modal from "react-responsive-modal";
-import {Link,Switch,Route} from 'react-router-dom'
-
 
 
 class App extends Component {
@@ -20,21 +18,11 @@ class App extends Component {
     };
   }
 
-  // getUserData = () =>{
-  //   let userData = JSON.parse(localStorage.getItem('tk'));
-
-  //   let organizationIDTk = userData[0].organizationID
-  
-  //   this.setState({
-  //     organizationID: organizationIDTk
-  //   })
-  // }
-
   getData() {
     let userData = JSON.parse(localStorage.getItem('tk'));
 
     let organizationIDTk = userData[0].organizationID
-    fetch("http://localhost:5000/problem/"+organizationIDTk,
+    fetch("http://localhost:5000/problem/" + organizationIDTk,
     {
       method: 'GET',
     })
@@ -64,7 +52,7 @@ class App extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(this.getData())
+      .then(() => this.getData())
   };
 
   onCloseDeleteModal = () => {
@@ -76,7 +64,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    // this.getUserData()
     this.getData();
   }
 
@@ -112,7 +99,6 @@ class App extends Component {
       } = pro;
       return (
         <tr key={problemID} className="eachRowTable">
-          {/* <td>{problemID}</td> */}
           <td id="dateColumn">{dateOfProblem.substr(0, 10)}</td>
           <td>{timeOfProblem}</td>
           <td>{scene}</td>
@@ -120,7 +106,6 @@ class App extends Component {
           <td>{ruleName}</td>
           <td>{firstName}</td>
           <td>{problemDetails}</td>
-          {/* <td><img src={evidenceImage} className='evidenceImg'></img></td> */}
           <td>
             <button
               className="evidenceImageButton"
@@ -153,7 +138,7 @@ class App extends Component {
 
   render() {
     return (
-           <div className="App">
+      <div className="App">
             
         <Header />
         <Navibar />
@@ -187,7 +172,6 @@ class App extends Component {
 
         <p className="Table-header">เหตุการณ์</p>
         <table className="eventTable">
-          {/* <th>ลำดับ</th> */}
           <th>วัน</th>
           <th>เวลา</th>
           <th>สถานที่</th>

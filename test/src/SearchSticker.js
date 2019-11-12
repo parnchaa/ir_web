@@ -207,7 +207,7 @@ class SearchSticker extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(this.getData())
+      .then(() => this.getData())
   }
 
   selectExtendValue(e) {

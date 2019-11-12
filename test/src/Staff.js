@@ -210,7 +210,7 @@ class Staff extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(this.getData())
+      .then(() => this.getData())
   };
 
   uploadImages = async (imageURL, imageName) => {
@@ -296,7 +296,7 @@ class Staff extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(this.getData())
+      .then(() => this.getData())
   };
 
   onOpenDeleteModal = staffID => e => {
@@ -328,7 +328,7 @@ class Staff extends Component {
       method: "POST"
     };
     fetch(url, othepram)
-      .then(this.getData())
+      .then(() => this.getData())
   };
 
   staffTable() {
