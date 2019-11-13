@@ -89,7 +89,7 @@ componentDidMount(){
               </button>
               <button
                 className="ButtonCancel"
-                onClick={this.onCloseDeleteModalLocation}
+                onClick={this.onCloseConfirmLogout}
               >
                 ยกเลิก
               </button>

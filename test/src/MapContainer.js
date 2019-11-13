@@ -203,7 +203,7 @@ export class MapContainer extends Component {
         onClose={this.onCloseCheck}
         center
       >
-        <p className= "checkSticker" >โปรดเลือกสีของสติ๊กเกอร์ก่อนเลือกพื้นที่!</p>
+        <p className= "checkSticker" >โปรดเลือกสีของสติ๊กเกอร์!</p>
       </Modal>
       </div>
     }
