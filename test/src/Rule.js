@@ -198,6 +198,9 @@ class Rule extends Component {
         this.onCloseAddModal();
       } 
     } 
+    else{
+      alert("กรุณากรอกข้อมูลให้ครบ")
+    }
   };
 
   onAfterAddRule = () => {
@@ -226,33 +229,41 @@ class Rule extends Component {
   onOpenAddModal = () => {
     this.setState({
       openAdd: true,
-      errors: {
-        ruleName: "",
-        maxWarning: "",
-        price: "",
-        typeOfSticker: "",
-        colorOfSticker: ""
-      }
-    });
-  };
-
-  onCloseAddModal = () => {
-    this.setState({
-      openAdd: false,
       ruleName: "",
       maxWarning: "",
       price: ""
     });
   };
 
+  onCloseAddModal = () => {
+    this.setState({
+      errors: {
+        ruleName: "",
+        maxWarning: "",
+        price: "",
+        typeOfSticker: "",
+        colorOfSticker: ""
+      },
+      openAdd: false,
+      
+    });
+  };
+
   handleAddSticker = event => {
     event.preventDefault();
     const { typeOfSticker, colorOfSticker } = this.state;
-    if (typeOfSticker !== "" && colorOfSticker !== "") {
+    if (typeOfSticker !== undefined && colorOfSticker !== undefined)
+     {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
+        this.onCloseAddStickerModal()
       } 
     } 
+    else{
+      alert("กรุณากรอกข้อมูลให้ครบ")
+    } 
+    console.log(typeOfSticker,'typeOfSticker');
+    
   };
 
   onAfterAddSticker = () => {
@@ -280,7 +291,7 @@ class Rule extends Component {
       };
       fetch(url, othepram)
       .then(() => {
-        this.onCloseAddStickerModal()
+        // this.onCloseAddStickerModal()
         this.getData();
       })
       .catch(error => {});

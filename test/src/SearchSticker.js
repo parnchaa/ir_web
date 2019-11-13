@@ -130,6 +130,9 @@ class SearchSticker extends Component {
         this.onCloseEditModal();
       } 
     } 
+    else{
+      alert("กรุณากรอกข้อมูลให้ครบ")
+    }
   };
 
   onAfterEditCarOwner = () => {

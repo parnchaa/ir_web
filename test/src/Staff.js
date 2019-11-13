@@ -169,20 +169,25 @@ class Staff extends Component {
       lastName,
       staffEmail,
       staffTel,
-      staffPassword
+      staffPassword,
+      securityguardImage
     } = this.state;
     if (
       firstName !== "" &&
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      staffPassword !== ""
+      staffPassword !== "" &&
+      securityguardImage !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertAdmin();
         this.onCloseAddModal();
       }
     } 
+    else{
+      alert("กรุณากรอกข้อมูลให้ครบ")
+    }
   };
 
   onAfterInsertAdmin = () => {
@@ -254,19 +259,24 @@ class Staff extends Component {
       staffEmail,
       staffTel,
       staffPassword,
+      securityguardImage
     } = this.state;
     if (
       firstName !== "" &&
       lastName !== "" &&
       staffEmail !== "" &&
       staffTel !== "" &&
-      staffPassword !== ""
+      staffPassword !== "" &&
+      securityguardImage !==""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterInsertSecurity();
         this.onCloseAddSecurityguardModal();
       } 
     } 
+    else{
+      alert("กรุณากรอกข้อมูลให้ครบ")
+    }
   };
 
   onAfterInsertSecurity = () => {

@@ -66,7 +66,7 @@ class Addsticker extends Component {
       } 
     }
     else{
-      alert("กรุณากรอกให้ครบ")
+      alert("กรุณากรอกข้อมูลให้ครบ")
     } 
   };
 
