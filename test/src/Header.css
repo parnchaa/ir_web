@@ -76,3 +76,35 @@
     height:18px;
     padding-right: 5px;
 }
+
+.logoutModal{
+    text-align: center;
+    color: #29a8ab;
+    font-family: "kanit", sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 15pt;
+    display: block; 
+    width: 350px; 
+}
+
+.logoutButton{
+    text-align: center;
+    color: white;
+    font-family: "kanit", sans-serif;
+    font-size: 16pt;
+    display: block;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 1.5rem;
+    background-color: red;
+    border-radius: 6px;
+    border: none;
+}
+
+.logoutButton:focus{
+    outline: none;
+}

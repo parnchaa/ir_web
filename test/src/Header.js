@@ -80,18 +80,12 @@ componentDidMount(){
               onClose={this.onCloseConfirmLogout}
               center
             >
-            <div className="ModalDelete">
+            <div className="logoutModal">
               <h4>คุณต้องการออกจากระบบหรือไม่</h4>
               <button
-                className="ButtonDelete"
+                className="logoutButton"
                 onClick={this.logout} >
                 ออกจากระบบ
-              </button>
-              <button
-                className="ButtonCancel"
-                onClick={this.onCloseConfirmLogout}
-              >
-                ยกเลิก
               </button>
             </div>
             </Modal>
