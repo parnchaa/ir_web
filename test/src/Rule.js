@@ -75,7 +75,7 @@ class Rule extends Component {
     event.preventDefault();
     const { name, value } = event.target;
     let errors = this.state.errors;
-    const checkNum = /^(?=.*[0-9])(?=.{1,})/i;
+    const checkNum = /^[0-9]{1,}/i;
     switch (name) {
       case "ruleName":
         errors.ruleName =

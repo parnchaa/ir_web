@@ -176,15 +176,16 @@ class Addsticker extends Component {
     const phoneno = /^0[0-9]{8,9}$/i;
     const checkLicensePlate = /^([ก-ฮ]{2})+([0-9]{1,4})$/i;
     const checkLicensePlate2 = /^([0-9]{1})+([ก-ฮ]{2})([0-9]{1,4})$/i;
+    const FLname = /^[a-zA-Zก-ฮะ-์]{2,}$/i;
 
     switch (name) {
       case "carOwnerFname":
         errors.carOwnerFname =
-          value.length < 2 ? "กรุณากรอกชื่อ เช่น สมชาย" : "";
+        FLname.test(value) ? "" : "กรุณากรอกชื่อ เช่น สมชาย";
         break;
       case "carOwnerLname":
         errors.carOwnerLname =
-          value.length < 2 ? "กรุณากรอกนามสกุล เช่น ใจดี " : "";
+        FLname.test(value) ? "" : "กรุณากรอกนามสกุล เช่น ใจดี ";
         break;
       case "carOwnerTel":
         errors.carOwnerTel = phoneno.test(value)

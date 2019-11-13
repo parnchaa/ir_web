@@ -88,7 +88,8 @@ export class MapContainer extends Component {
       stickerColor: [],
       stickerID: 0,
       stickerText:'',
-      openSave: true
+      openSave: true,
+      openCheck: true
     };
   }
 
@@ -142,6 +143,8 @@ export class MapContainer extends Component {
       stickerID: stickerID,
       stickerText: stickerText
     })
+    console.log(this.state.stickerID,'ppp');
+    
   }
 
   recordLocation = () => {
@@ -149,15 +152,17 @@ export class MapContainer extends Component {
     let locationNameReceive = location[0].locationName,
     locationCodeReceive = location[0].locationCode,
     stickerIDForUse = this.state.stickerID;
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
     
-    
-    if (location.length !== 0 ) {
+    if (location.length !== 0) {
       const url = "http://localhost:5000/addLocationLabel";
 
       const bodyData = JSON.stringify({
         locationName: locationNameReceive ,
         locationCode: locationCodeReceive,
-        stickerID: stickerIDForUse
+        stickerID: stickerIDForUse,
+        organizationID: organizationIDTk
       });
 
       const othepram = {
@@ -183,6 +188,48 @@ export class MapContainer extends Component {
     })
   }
 
+  onCloseCheck = ()=>{
+    this.setState({
+      openCheck: false
+    })
+  }
+
+  showModal(){
+    if(location.length !== 0 && this.state.stickerID === 0){
+      return <div>
+      <Modal 
+        className="modalLocation"
+        open={this.state.openCheck}
+        onClose={this.onCloseCheck}
+        center
+      >
+        <p className= "checkSticker" >โปรดเลือกสีของสติ๊กเกอร์ก่อนเลือกพื้นที่!</p>
+      </Modal>
+      </div>
+    }
+    else if(location.length !== 0 && this.state.stickerID !==0){
+      return <div>
+      <Modal 
+        className="modalLocation"
+        open={this.state.openSave}
+        onClose={this.onCloseSave}
+        center
+      >
+        <p className="titleChooseSticker" >ยืนยันการบันทึกสถานที่</p>
+        <div className="TitletextModal">
+          <p>ชื่อสถานที่ : </p>
+          <p>{location[0].locationName}</p>
+        </div>
+        <div className="TitletextModal">
+          <p>สีสติ๊กเกอร์ : </p>
+          <p>{this.state.stickerText}</p>
+        </div>
+        <button className="buttonModal" onClick={this.recordLocation}>บันทึกสถานที่</button>
+      </Modal>
+      </div>
+    }
+  }
+
   render() {
 
     return (
@@ -200,7 +247,8 @@ export class MapContainer extends Component {
           isMarkerShown={this.state.isMarkerShown}
           onMarkerClick={this.handleMarkerClick}
         />
-        {location.length == 0 ?
+        {this.showModal()}
+        {/* {location.length === 0?
           null
           :<div>
           <Modal 
@@ -221,7 +269,8 @@ export class MapContainer extends Component {
             <button className="buttonModal" onClick={this.recordLocation}>บันทึกสถานที่</button>
           </Modal>
           </div>
-        }
+        } */}
+        
       </div>
     );
   }

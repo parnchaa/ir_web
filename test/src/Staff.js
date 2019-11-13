@@ -126,12 +126,13 @@ class Staff extends Component {
     const validEmailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     const phoneno = /^0[0-9]{8,9}$/i;
     const strongRegex = /^(?=.*[a-z])(?=.*[0-9])(?=.{8,})/i;
+    const FLname = /^[a-zA-Zก-ฮะ-์]{2,}$/i;
     switch (name) {
       case "firstName":
-        errors.firstName = value.length < 2 ? "กรุณากรอกชื่อ เช่น สมชาย" : "";
+        errors.firstName = FLname.test(value) ? "" : "กรุณากรอกชื่อ เช่น สมชาย";
         break;
       case "lastName":
-        errors.lastName = value.length < 2 ? "กรุณากรอกนามสกุล เช่น ใจดี " : "";
+        errors.lastName = FLname.test(value)? "" : "กรุณากรอกนามสกุล เช่น ใจดี ";
         break;
       case "staffEmail":
         errors.staffEmail = validEmailRegex.test(value)

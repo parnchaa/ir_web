@@ -81,3 +81,11 @@
     font-size: 26pt;
     margin: 8rem;
 }
+
+.checkSticker{
+    text-align: center;
+    margin: 2rem;
+    color: #696969;
+    font-family: 'kanit',sans-serif;
+    font-size: 24pt;
+}
