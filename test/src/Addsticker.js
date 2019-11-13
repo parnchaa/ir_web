@@ -43,7 +43,9 @@ class Addsticker extends Component {
       licensePlate,
       carColor,
       brandCar,
-      modelCar
+      modelCar,
+      stickerID,
+      province
     } = this.state;
 
     if (
@@ -55,11 +57,16 @@ class Addsticker extends Component {
       licensePlate !== "" &&
       carColor !== "" &&
       brandCar !== "" &&
-      modelCar !== ""
+      modelCar !== "" &&
+      stickerID !== 0 &&
+      province !== ""
     ) {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddCarOwner();
       } 
+    }
+    else{
+      alert("กรุณากรอกให้ครบ")
     } 
   };
 
