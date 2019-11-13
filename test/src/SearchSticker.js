@@ -63,7 +63,7 @@ class SearchSticker extends Component {
 
         this.setState({ searchCarOwner: responseJson });
       })
-      .catch(error => {
+      .then(() => {
         this.getData();
       });
   }
