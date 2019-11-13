@@ -351,8 +351,10 @@ class Addsticker extends Component {
   setDefaultSelect = () => {
     let sticker = document.getElementById("sticker");
     sticker.value = "สีสติ๊กเกอร์";
+    sticker.style.color = "#969696"
     let provinceElement = document.getElementById("province");
     provinceElement.value = "จังหวัด...";
+    provinceElement.style.color = "#969696"
   };
 
   render() {
