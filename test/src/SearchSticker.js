@@ -34,7 +34,7 @@ class SearchSticker extends Component {
     let userData = JSON.parse(localStorage.getItem("tk"));
 
     let organizationIDTk = userData[0].organizationID;
-    fetch("http://localhost:5000/carOwner/" + organizationIDTk)
+    fetch("https://irweb-api.herokuapp.com/carOwner/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -48,7 +48,7 @@ class SearchSticker extends Component {
 
     let organizationIDTk = userData[0].organizationID;
     fetch(
-      "http://localhost:5000/getSearchValue/" +
+      "https://irweb-api.herokuapp.com/getSearchValue/" +
         this.state.searchValue +
         "/" +
         organizationIDTk
@@ -144,7 +144,7 @@ class SearchSticker extends Component {
       carOwnerTel,
       carOwnerAddress
     } = this.state;
-    const url = "http://localhost:5000/editCarOwner";
+    const url = "https://irweb-api.herokuapp.com/editCarOwner";
     const bodyData = JSON.stringify({
       carOwnerID: openCarOwnerID,
       carOwnerFirstName: carOwnerFirstName,
@@ -196,7 +196,7 @@ class SearchSticker extends Component {
 
   onAfterExtendLicense = extended => {
     const { openExtendId } = this.state;
-    const url = "http://localhost:5000/extendLicense";
+    const url = "https://irweb-api.herokuapp.com/extendLicense";
     const bodyData = JSON.stringify({
       carOwnerID: openExtendId,
       expiredDate: extended

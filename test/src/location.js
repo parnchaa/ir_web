@@ -19,14 +19,14 @@ class Location extends Component {
   getData() {
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
-    fetch("http://localhost:5000/location/" + organizationIDTk)
+    fetch("https://irweb-api.herokuapp.com/location/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
       .then(location => {
         this.setState({ location });
       });
-      fetch("http://localhost:5000/stickerTable/" + organizationIDTk)
+      fetch("https://irweb-api.herokuapp.com/stickerTable/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -63,7 +63,7 @@ class Location extends Component {
   };
 
   deleteFetch = () => {
-    const url = "http://localhost:5000/deleteLocation";
+    const url = "https://irweb-api.herokuapp.com/deleteLocation";
     const bodyData = JSON.stringify({
       locationID: this.state.openLocationID
     });
@@ -132,8 +132,8 @@ class Location extends Component {
       } = sticker;
       return (
         <tr>
-          <td>{typeOfSticker}</td>
           <td>{colorOfSticker}</td>
+          <td>{typeOfSticker}</td>
         </tr>
       );
     });

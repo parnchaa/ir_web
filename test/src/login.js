@@ -52,7 +52,7 @@ class login extends Component {
   };
 
   onAfterLogin = () => {
-    const url = "http://localhost:5000/login";
+    const url = "https://irweb-api.herokuapp.com/login";
     const bodyData = JSON.stringify({
         staffEmail: this.state.staffEmail,
         staffPassword: this.state.staffPassword,
@@ -70,7 +70,7 @@ class login extends Component {
       if(token === "wrong"){
         alert("อีเมล์หรือรหัสผ่านไม่ถูกต้อง")
       }else{
-        fetch("http://localhost:5000/userData/" + this.state.staffEmail,
+        fetch("https://irweb-api.herokuapp.com/userData/" + this.state.staffEmail,
         {
           method: 'GET',
           headers:{ 'Authorization': token }

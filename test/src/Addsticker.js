@@ -79,7 +79,7 @@ class Addsticker extends Component {
   getSticker() {
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
-    fetch("http://localhost:5000/stickerName/" + organizationIDTk, {
+    fetch("https://irweb-api.herokuapp.com/stickerName/" + organizationIDTk, {
       method: "GET"
     })
       .then(response => {
@@ -130,9 +130,9 @@ class Addsticker extends Component {
       body: bodyData,
       method: "POST"
     };
-    fetch("http://localhost:5000/addCarowner", othepram).then(data => {
+    fetch("https://irweb-api.herokuapp.com/addCarowner", othepram).then(data => {
       if (data != null) {
-        fetch("http://localhost:5000/lastCarOwnerId/" + organizationIDTk)
+        fetch("https://irweb-api.herokuapp.com/lastCarOwnerId/" + organizationIDTk)
           .then(response => {
             return response.json();
           })
@@ -154,7 +154,7 @@ class Addsticker extends Component {
               body: bodyData2,
               method: "POST"
             };
-            fetch("http://localhost:5000/addCar", othepram2).then(response => {
+            fetch("https://irweb-api.herokuapp.com/addCar", othepram2).then(response => {
               this.setState({
                 carOwnerFname: "",
                 carOwnerLname: "",

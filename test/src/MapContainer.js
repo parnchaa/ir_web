@@ -112,7 +112,7 @@ export class MapContainer extends Component {
   getColorOfSticker = () =>{
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
-    fetch("http://localhost:5000/stickerColor/" + organizationIDTk)
+    fetch("https://irweb-api.herokuapp.com/stickerColor/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -143,7 +143,6 @@ export class MapContainer extends Component {
       stickerID: stickerID,
       stickerText: stickerText
     })
-    console.log(this.state.stickerID,'ppp');
     
   }
 
@@ -151,12 +150,12 @@ export class MapContainer extends Component {
     
     let locationNameReceive = location[0].locationName,
     locationCodeReceive = location[0].locationCode,
-    stickerIDForUse = this.state.stickerID;
+    stickerIDForUse = document.getElementById('sticker').value;
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
     
     if (location.length !== 0) {
-      const url = "http://localhost:5000/addLocationLabel";
+      const url = "https://irweb-api.herokuapp.com/addLocationLabel";
 
       const bodyData = JSON.stringify({
         locationName: locationNameReceive ,

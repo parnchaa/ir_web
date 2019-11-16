@@ -29,7 +29,7 @@ class Rule extends Component {
   getData() {
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
-    fetch("http://localhost:5000/rule/"+ organizationIDTk)
+    fetch("https://irweb-api.herokuapp.com/rule/"+ organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -118,7 +118,7 @@ class Rule extends Component {
 
   onAfterEditRule = () => {
     const { openRuleID, ruleName, maxWarning, price } = this.state;
-    const url = "http://localhost:5000/editRule";
+    const url = "https://irweb-api.herokuapp.com/editRule";
     const bodyData = JSON.stringify({
       ruleID: openRuleID,
       ruleName: ruleName,
@@ -168,7 +168,7 @@ class Rule extends Component {
   };
 
   deleteFetch = () => {
-    const url = "http://localhost:5000/deleteRule";
+    const url = "https://irweb-api.herokuapp.com/deleteRule";
     const bodyData = JSON.stringify({
       ruleID: this.state.openRuleID
     });
@@ -206,7 +206,7 @@ class Rule extends Component {
   onAfterAddRule = () => {
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
-    const url = "http://localhost:5000/addrule";
+    const url = "https://irweb-api.herokuapp.com/addrule";
     const bodyData = JSON.stringify({
       ruleName: this.state.ruleName,
       price: this.state.price,
@@ -252,7 +252,7 @@ class Rule extends Component {
   handleAddSticker = event => {
     event.preventDefault();
     const { typeOfSticker, colorOfSticker } = this.state;
-    if (typeOfSticker !== undefined && colorOfSticker !== undefined)
+    if (typeOfSticker !== "" && colorOfSticker !== "")
      {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
@@ -261,8 +261,7 @@ class Rule extends Component {
     } 
     else{
       alert("กรุณากรอกข้อมูลให้ครบ")
-    } 
-    console.log(typeOfSticker,'typeOfSticker');
+    }
     
   };
 
@@ -270,12 +269,12 @@ class Rule extends Component {
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
     
-    fetch("http://localhost:5000/ruleId/"+organizationIDTk)
+    fetch("https://irweb-api.herokuapp.com/ruleId/"+organizationIDTk)
     .then(response => {
       return response.json()
     })
     .then(ruleID=>{
-      const url = "http://localhost:5000/addSticker";
+      const url = "https://irweb-api.herokuapp.com/addSticker";
       const bodyData = JSON.stringify({
         typeOfSticker: this.state.typeOfSticker,
         colorOfSticker: this.state.colorOfSticker,
@@ -291,8 +290,8 @@ class Rule extends Component {
       };
       fetch(url, othepram)
       .then(() => {
-        // this.onCloseAddStickerModal()
         this.getData();
+        
       })
       .catch(error => {});
     })
@@ -302,6 +301,14 @@ class Rule extends Component {
   onOpenAddStickerModal = () => {
     this.setState({
       openAddS: true,
+      typeOfSticker: "",
+      colorOfSticker: ""
+    });
+  };
+
+  onCloseAddStickerModal = () => {
+    this.setState({
+      openAddS: false,
       errors: {
         ruleName: "",
         maxWarning: "",
@@ -309,14 +316,6 @@ class Rule extends Component {
         typeOfSticker: "",
         colorOfSticker: ""
       }
-    });
-  };
-
-  onCloseAddStickerModal = () => {
-    this.setState({
-      openAddS: false,
-      typeOfSticker: "",
-      colorOfSticker: ""
     });
   };
 
@@ -509,7 +508,7 @@ class Rule extends Component {
 
         <Modal
           open={this.state.openAddS}
-          onClose={this.onCloseAddStickerModal}
+          onClose={this.onCloseAddStickerModal2}
           center
         >
           <p className="modalTitle">เพิ่มสติกเกอร์</p>
