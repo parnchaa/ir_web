@@ -29,7 +29,7 @@ class Rule extends Component {
   getData() {
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
-    fetch("https://irweb-api.herokuapp.com/rule/"+ organizationIDTk)
+    fetch("https://irweb-api.tech/rule/"+ organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -118,7 +118,7 @@ class Rule extends Component {
 
   onAfterEditRule = () => {
     const { openRuleID, ruleName, maxWarning, price } = this.state;
-    const url = "https://irweb-api.herokuapp.com/editRule";
+    const url = "https://irweb-api.tech/editRule";
     const bodyData = JSON.stringify({
       ruleID: openRuleID,
       ruleName: ruleName,
@@ -168,7 +168,7 @@ class Rule extends Component {
   };
 
   deleteFetch = () => {
-    const url = "https://irweb-api.herokuapp.com/deleteRule";
+    const url = "https://irweb-api.tech/deleteRule";
     const bodyData = JSON.stringify({
       ruleID: this.state.openRuleID
     });
@@ -206,7 +206,7 @@ class Rule extends Component {
   onAfterAddRule = () => {
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
-    const url = "https://irweb-api.herokuapp.com/addrule";
+    const url = "https://irweb-api.tech/addrule";
     const bodyData = JSON.stringify({
       ruleName: this.state.ruleName,
       price: this.state.price,
@@ -269,12 +269,12 @@ class Rule extends Component {
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
     
-    fetch("https://irweb-api.herokuapp.com/ruleId/"+organizationIDTk)
+    fetch("https://irweb-api.tech/ruleId/"+organizationIDTk)
     .then(response => {
       return response.json()
     })
     .then(ruleID=>{
-      const url = "https://irweb-api.herokuapp.com/addSticker";
+      const url = "https://irweb-api.tech/addSticker";
       const bodyData = JSON.stringify({
         typeOfSticker: this.state.typeOfSticker,
         colorOfSticker: this.state.colorOfSticker,

@@ -46,14 +46,14 @@ class Staff extends Component {
   getData() {
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
-    fetch("https://irweb-api.herokuapp.com/staff/" + organizationIDTk)
+    fetch("https://irweb-api.tech/staff/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
       .then(staff => {
         this.setState({ staff });
       });
-    fetch("https://irweb-api.herokuapp.com/securityguard/" + organizationIDTk)
+    fetch("https://irweb-api.tech/securityguard/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -193,7 +193,7 @@ class Staff extends Component {
   onAfterInsertAdmin = () => {
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
-    const url = "https://irweb-api.herokuapp.com/addstaff";
+    const url = "https://irweb-api.tech/addstaff";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -282,7 +282,7 @@ class Staff extends Component {
   onAfterInsertSecurity = () => {
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
-    const url = "https://irweb-api.herokuapp.com/addsecurityguard";
+    const url = "https://irweb-api.tech/addsecurityguard";
     const bodyData = JSON.stringify({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -320,7 +320,7 @@ class Staff extends Component {
   };
 
   deleteFetch = () => {
-    const url = "https://irweb-api.herokuapp.com/deleteStaff";
+    const url = "https://irweb-api.tech/deleteStaff";
     const bodyData = JSON.stringify({
       staffID: this.state.openStaffID
     });

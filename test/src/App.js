@@ -26,7 +26,7 @@ class App extends Component {
     let userData = JSON.parse(localStorage.getItem('tk'));
 
     let organizationIDTk = userData[0].organizationID
-    fetch("https://irweb-api.herokuapp.com/problem/" + organizationIDTk,
+    fetch("https://irweb-api.tech/problem/" + organizationIDTk,
     {
       method: 'GET',
     })
@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   deleteFetch = () => {
-    const url = "https://irweb-api.herokuapp.com/deleteEvent";
+    const url = "https://irweb-api.tech/deleteEvent";
     const bodyData = JSON.stringify({
       problemID: this.state.openProblemID
     });
@@ -95,7 +95,7 @@ class App extends Component {
 
     let organizationIDTk = userData[0].organizationID;
     fetch(
-      "https://irweb-api.herokuapp.com/getSearchLicensePlate/" +
+      "https://irweb-api.tech/getSearchLicensePlate/" +
         this.state.searchValue +
         "/" +
         organizationIDTk
