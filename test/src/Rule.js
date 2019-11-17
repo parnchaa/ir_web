@@ -23,13 +23,13 @@ class Rule extends Component {
         typeOfSticker: "",
         colorOfSticker: ""
       },
-      role: ''
+      role: ""
     };
   }
   getData() {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
-    fetch("https://irweb-api.tech/rule/"+ organizationIDTk)
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
+    fetch("https://irweb-api.tech/rule/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -39,14 +39,12 @@ class Rule extends Component {
   }
 
   checkToken = () => {
-    
-    let userData = JSON.parse(localStorage.getItem("tk"))
-    let tkRole = userData[0].staffRole
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let tkRole = userData[0].staffRole;
 
     this.setState({
       role: tkRole
-    })
-
+    });
   };
 
   onOpenEditModal = ruleID => e => {
@@ -58,7 +56,7 @@ class Rule extends Component {
       openRuleID: ruleID,
       ruleName: eachRuleID.ruleName,
       maxWarning: eachRuleID.maxWarning,
-      price: eachRuleID.price,
+      price: eachRuleID.price
     });
   };
 
@@ -92,7 +90,8 @@ class Rule extends Component {
           : "จำนานครั้งที่เตือนต้องเป็นตัวเลข";
         break;
       case "typeOfSticker":
-        errors.typeOfSticker = value.length < 2 ? "กรุณากรอกรายละเอียดสติ๊กเกอร์" : "";
+        errors.typeOfSticker =
+          value.length < 2 ? "กรุณากรอกรายละเอียดสติ๊กเกอร์" : "";
         break;
       case "colorOfSticker":
         errors.colorOfSticker = value.length < 2 ? "กรุณากรอกสีสติ๊กเกอร์" : "";
@@ -104,16 +103,12 @@ class Rule extends Component {
   handleEditRule = event => {
     event.preventDefault();
     const { ruleName, maxWarning, price } = this.state;
-    if (
-      ruleName !== "" &&
-      maxWarning !== "" &&
-      price !== ""
-    ) {
+    if (ruleName !== "" && maxWarning !== "" && price !== "") {
       if (this.validateForm(this.state.errors)) {
         this.onAfterEditRule();
         this.onCloseEditModal();
-      } 
-    } 
+      }
+    }
   };
 
   onAfterEditRule = () => {
@@ -123,7 +118,7 @@ class Rule extends Component {
       ruleID: openRuleID,
       ruleName: ruleName,
       maxWarning: maxWarning,
-      price: price,
+      price: price
     });
     const othepram = {
       headers: {
@@ -132,10 +127,9 @@ class Rule extends Component {
       body: bodyData,
       method: "POST"
     };
-    fetch(url, othepram)
-      .then(() => {
-        this.getData();
-      })
+    fetch(url, othepram).then(() => {
+      this.getData();
+    });
   };
 
   onCloseEditModal = () => {
@@ -179,33 +173,27 @@ class Rule extends Component {
       body: bodyData,
       method: "POST"
     };
-    fetch(url, othepram)
-      .then(() => {
-        this.getData();
-      })
+    fetch(url, othepram).then(() => {
+      this.getData();
+    });
   };
 
   handleAddRule = event => {
     event.preventDefault();
     const { ruleName, price, maxWarning } = this.state;
-    if (
-      ruleName !== "" &&
-      price !== "" &&
-      maxWarning !== ""
-    ) {
+    if (ruleName !== "" && price !== "" && maxWarning !== "") {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddRule();
         this.onCloseAddModal();
-      } 
-    } 
-    else{
-      alert("กรุณากรอกข้อมูลให้ครบ")
+      }
+    } else {
+      alert("กรุณากรอกข้อมูลให้ครบ");
     }
   };
 
   onAfterAddRule = () => {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
     const url = "https://irweb-api.tech/addrule";
     const bodyData = JSON.stringify({
       ruleName: this.state.ruleName,
@@ -220,10 +208,9 @@ class Rule extends Component {
       body: bodyData,
       method: "POST"
     };
-    fetch(url, othepram)
-      .then(() => {
-        this.getData();
-      })
+    fetch(url, othepram).then(() => {
+      this.getData();
+    });
   };
 
   onOpenAddModal = () => {
@@ -244,58 +231,52 @@ class Rule extends Component {
         typeOfSticker: "",
         colorOfSticker: ""
       },
-      openAdd: false,
-      
+      openAdd: false
     });
   };
 
   handleAddSticker = event => {
     event.preventDefault();
     const { typeOfSticker, colorOfSticker } = this.state;
-    if (typeOfSticker !== "" && colorOfSticker !== "")
-     {
+    if (typeOfSticker !== "" && colorOfSticker !== "") {
       if (this.validateForm(this.state.errors)) {
         this.onAfterAddSticker();
-        this.onCloseAddStickerModal()
-      } 
-    } 
-    else{
-      alert("กรุณากรอกข้อมูลให้ครบ")
+        this.onCloseAddStickerModal();
+      }
+    } else {
+      alert("กรุณากรอกข้อมูลให้ครบ");
     }
-    
   };
 
   onAfterAddSticker = () => {
-    let userData = JSON.parse(localStorage.getItem('tk'));
-    let organizationIDTk = userData[0].organizationID
-    
-    fetch("https://irweb-api.tech/ruleId/"+organizationIDTk)
-    .then(response => {
-      return response.json()
-    })
-    .then(ruleID=>{
-      const url = "https://irweb-api.tech/addSticker";
-      const bodyData = JSON.stringify({
-        typeOfSticker: this.state.typeOfSticker,
-        colorOfSticker: this.state.colorOfSticker,
-        organizationID: organizationIDTk,
-        ruleID: ruleID[0].ruleID
-      });
-      const othepram = {
-        headers: {
-          "content-type": "application/json; charset=UTF-8"
-        },
-        body: bodyData,
-        method: "POST"
-      };
-      fetch(url, othepram)
-      .then(() => {
-        this.getData();
-        
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
+
+    fetch("https://irweb-api.tech/ruleId/" + organizationIDTk)
+      .then(response => {
+        return response.json();
       })
-      .catch(error => {});
-    })
-    
+      .then(ruleID => {
+        const url = "https://irweb-api.tech/addSticker";
+        const bodyData = JSON.stringify({
+          typeOfSticker: this.state.typeOfSticker,
+          colorOfSticker: this.state.colorOfSticker,
+          organizationID: organizationIDTk,
+          ruleID: ruleID[0].ruleID
+        });
+        const othepram = {
+          headers: {
+            "content-type": "application/json; charset=UTF-8"
+          },
+          body: bodyData,
+          method: "POST"
+        };
+        fetch(url, othepram)
+          .then(() => {
+            this.getData();
+          })
+          .catch(error => {});
+      });
   };
 
   onOpenAddStickerModal = () => {
@@ -321,8 +302,7 @@ class Rule extends Component {
 
   componentDidMount() {
     this.getData();
-    this.checkToken()
-
+    this.checkToken();
   }
 
   ruleTable() {
@@ -493,17 +473,17 @@ class Rule extends Component {
             {errors.maxWarning.length > 0 && (
               <p className="error">{errors.maxWarning}</p>
             )}
-            <button
-              className="modalAdd"
-              onClick={event => this.handleAddRule(event)}
-              type="submit"
-            >
-              เพิ่ม
-            </button>
-            <button className="modalcancel" onClick={this.onCloseAddModal}>
-              ยกเลิก
-            </button>
           </form>
+          <button
+            className="modalAdd"
+            onClick={event => this.handleAddRule(event)}
+            type="submit"
+          >
+            เพิ่ม
+          </button>
+          <button className="modalcancel" onClick={this.onCloseAddModal}>
+            ยกเลิก
+          </button>
         </Modal>
 
         <Modal
@@ -539,44 +519,39 @@ class Rule extends Component {
             {errors.typeOfSticker.length > 0 && (
               <p className="error">{errors.typeOfSticker}</p>
             )}
-
-            <button
-              className="modalAdd"
-              onClick={event => this.handleAddSticker(event)}
-              type="submit"
-            >
-              เพิ่ม
-            </button>
-            <button
-              className="modalcancel"
-              onClick={this.onCloseAddStickerModal}
-            >
-              ยกเลิก
-            </button>
           </form>
+          <button
+            className="modalAdd"
+            onClick={event => this.handleAddSticker(event)}
+            type="submit"
+          >
+            เพิ่ม
+          </button>
+          <button className="modalcancel" onClick={this.onCloseAddStickerModal}>
+            ยกเลิก
+          </button>
         </Modal>
 
         <div>
           <p className="Table-header">
             กฎองค์กร <img src={amonestation} className="Headicon" />
-            </p>
+          </p>
 
-            <div className="buttonAddStick">
+          <div className="buttonAddStick">
             <button className="addRuleButton" onClick={this.onOpenAddModal}>
               เพิ่มกฏ
             </button>
-            {this.state.role === "Administrator" ? null : 
+            {this.state.role === "Administrator" ? null : (
               <button
                 className="addRuleButton"
                 onClick={this.onOpenAddStickerModal}
               >
                 เพิ่มสติ๊กเกอร์
               </button>
-            }
-            </div>
+            )}
+          </div>
           <div className="ruleTable">{this.ruleTable()}</div>
-        
-      </div>
+        </div>
       </div>
     );
   }
