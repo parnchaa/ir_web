@@ -1,0 +1,91 @@
+.map Map{
+    display: block;
+    width: 50%;
+    height: 80%;
+}
+
+.titleChooseSticker{
+    text-align: center;
+    color: #29A8AB;
+    font-family: 'kanit',sans-serif;
+    font-size: 26pt;
+}
+
+.Subtext{
+    font-family: 'kanit',sans-serif;
+    color:#29A8AB;
+    text-align: center;
+    font-size: 16pt;
+    
+}
+.chooseStickerColor{
+    margin-bottom: 20px;
+    border: 1px solid #29A8AB;
+    border-radius: 0.9rem;
+    padding: 40px;
+    width: 50%;
+    display: block;
+    margin: 20px auto 20px auto;
+}
+.SelectSticker{
+    font-family: 'kanit',sans-serif;
+    color:#29A8AB;
+    text-align: center;
+    font-size: 1.2rem;
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #29A8AB 1px;
+    border-top: none;
+}
+
+.SelectSticker:focus{
+    outline: none;
+}
+
+.modalLocation{
+    width:fit-content;
+    height: fit-content;
+}
+.buttonModal{
+ background-color: #29A8AB;
+ color:white;
+ border: none;
+ border-radius: 8px;
+ text-align: center;   
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
+ padding: 8px;
+ font-family: 'kanit',sans-serif;
+
+}
+.TitletextModal{
+    font-family: 'kanit',sans-serif;
+    font-weight: 400;
+    color:#29A8AB;
+    text-align: center;
+    font-size: 16pt;
+    display: flex; 
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.titleSave{
+    text-align: center;
+    color: #29A8AB;
+    font-family: 'kanit',sans-serif;
+    font-size: 26pt;
+    margin: 8rem;
+}
+
+.checkSticker{
+    text-align: center;
+    margin: 2rem;
+    color: #696969;
+    font-family: 'kanit',sans-serif;
+    font-size: 24pt;
+}

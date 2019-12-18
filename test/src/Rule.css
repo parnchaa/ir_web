@@ -1,5 +1,103 @@
-Form{
- margin-top: 20px;
- margin-left: 10%
+.ruleCard{
+    border: none;
+    border: 0.3rem solid #29A8AB;
+    margin-left: 40%;
+    padding: 0.7rem 0.7rem;
+    margin-bottom: 1rem;
+    font-family: 'kanit',sans-serif;
+    border-radius: 0.9rem;
 }
 
+.Title{
+    font-size: 2.4rem;
+    color: #29A8AB;
+    font-weight: bold;
+}
+
+.priceMaxWarning{
+    display: flex;
+    font-size: 1.4rem;
+    color:  #a1a0a0;
+    font-weight: bold;
+}
+
+.price{
+    margin-right: 2rem;
+}
+
+.ruleTable{
+    width: 70%;
+}
+
+.detail{
+    font-size: 1.1rem;
+    color: #a1a0a0;
+    margin-bottom: 1rem;
+}
+
+.deletePic{
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.deleteModalButton{
+    background:#ffffff;
+    border: none;
+    border-radius: 6px;
+    width: auto;
+    padding: 0.2rem 0.2rem;
+    margin: 50%;
+}
+
+.ruleButton{
+    display: flex;
+    width: 7%;
+    margin-left: 75%;
+}
+
+.editButton{
+  color: white;
+    font-size: 1.2rem;
+    background-color: #29A8AB;
+    border: 1px solid white;
+    border-radius: 4px;
+    width: auto;
+    margin: auto;
+    padding: 8px 10px 8px 10px;
+}
+
+.eachEditInput{
+    display: flex;
+}
+.addRuleButton{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border: none;
+    border-color: #ffffff;
+    font-size: 15pt;
+    display: block;
+    padding: 13px;
+    margin-right: 10px;
+    margin-bottom: 3rem;
+}
+
+
+.buttonAddStick{
+    display: flex;
+    margin-left: 70%;
+
+}
+
+.inputModalSticker{
+    display: flex;
+    margin-left: 8%;
+    color: #29A8AB;
+    font-family: 'kanit',sans-serif;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #29A8AB 1px;
+    border-top: none;
+}

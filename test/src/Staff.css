@@ -1,6 +1,270 @@
-h2{
-    text-align: center;
-    color: #29A8AB;
-    margin-bottom: 30px;
-    font-family: 'kanit',sans-serif;
+.title_haeder{
+  margin-bottom: -1.5%;
+}
+
+.title-haeder{
+  margin-top: 3%;
+}
+
+.staffTable {
+  text-align: left;
+  color: #29a8ab;
+  border: 1px solid white;
+  border-collapse: collapse;
+  width: fit-content;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "kanit", sans-serif;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3%;
+}
+
+.staffTable th {
+  font-family: "kanit", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  color: #29a8ab;
+  margin: 2.5rem 2rem;
+  font-family: "kanit", sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.staffTable td,
+.staffTable th {
+  border: 1px solid #ddd;
+  padding: 15px;
+}
+
+#button-add{
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.button-add{
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+.addStaffButton {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #29a8ab;
+  border-radius: 8px;
+  position: absolute;
+  right: 10%;
+  padding: 1%;
+  border: none;
+}
+
+.modalTitle {
+  text-align: center;
+  color: #29a8ab;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 30px;
+  font-family: "kanit", sans-serif;
+}
+
+.addSecurityguard {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #29a8ab;
+  border-radius: 8px;
+  border-color: #ffffff;
+  position: absolute;
+  right: 10%;
+  padding: 1%;
+  border: none;
+}
+
+.tableModal {
+  font-family: "kanit", sans-serif;
+  border: "0";
+  width: "100%";
+  padding: 90%;
+}
+
+.modalAdd {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #29a8ab;
+  border-radius: 8px;
+  border: none;
+  border-color: #ffffff;
+  width: 75px;
+  height: 40px;
+  margin-left: 30%;
+  font-size: 15pt;
+}
+.modalcancel {
+  text-align: center;
+  color: #ffffff;
+  font-family: "kanit", sans-serif;
+  background-color: #cd5c5c;
+  border-radius: 8px;
+  border: none;
+  border-color: #ffffff;
+  width: 75px;
+  height: 40px;
+  margin-left: 7%;
+  font-size: 15pt;
+}
+
+.modalAdd:hover {
+  background-color: white;
+  border: 2px solid #29a8ab;
+  color: #29a8ab;
+}
+
+.modalcancel:hover {
+  background-color: white;
+  border: 2px solid #cd5c5c;
+  color: #cd5c5c;
+}
+
+#Modal {
+  padding: 100px;
+  width: 100%;
+  margin: 100px;
+}
+
+.addModal {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+
+.addModal input {
+  height: 2.3rem;
+}
+
+.formAdd {
+  width: 450px;
+}
+
+.formAdd input {
+  position: absolute;
+  left: 43%;
+
+}
+
+.formAdd input:focus{
+  outline: none;
+}
+
+.formAdd button {
+  margin-top: 13px;
+}
+
+.ModalName {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalName input {
+  height: 2.3rem;
+}
+.ModalSurname {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalSurname input {
+  height: 2.3rem;
+}
+.ModalEmail {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalEmail input {
+  height: 2.3rem;
+}
+.ModalTel {
+  display: flex;
+  margin-bottom: 0.4rem;
+}
+.ModalTel input {
+  height: 2.3rem;
+}
+.formAddSecure input {
+  position: absolute;
+  left: 43%;
+
+}
+
+.formAddSecure input:focus{
+  outline: none;
+}
+
+
+.modalButton {
+  padding: 0.5rem 20%;
+}
+
+.ModalDelete{
+  text-align: center;
+  color: #29a8ab;
+  font-family: "kanit", sans-serif;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  font-size: 15pt;
+  display: block; 
+  width: 350px; 
+}
+.ModalDelete button{
+  text-align: center;
+  font-family: "kanit", sans-serif;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  border-color: #ffffff;
+  font-size: 15pt;
+}
+.ButtonDelete{
+  background-color: #29a8ab;
+  color: #ffffff; 
+}
+.ButtonCancel{
+  background-color: #CD5C5C;
+  color: #ffffff; 
+}
+.inputModal{
+  height: 2.3rem;
+  font-family: 'kanit',sans-serif;
+  margin-bottom: 0.4rem;
+  color: #29A8AB;
+  border:1px solid #bbbbbb;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: solid #29A8AB 1px;
+}
+
+.loader_spinner{
+  position: relative;
+  left: 43%;
+}
+
+.loader_waiting{
+  color: #29A8AB;
+  position: absolute;
+  left: 49%;
+  bottom: 12.5%;
+}
+
+.photoinput{
+  margin-top: 0.4rem;
+  
 }

@@ -1,103 +1,182 @@
-import React, { Component } from 'react';
-import Header from './Header';
-import Navibar from './Navibar';
-import './Area.css'
-import LT from './LocationTable'
-
-var locationdata = [];
+import React, { Component } from "react";
+import Header from "./Header";
+import Navibar from "./Navibar";
+import MapContainer from "./MapContainer";
+import "./location.css";
+import deletePic from "./picture/delete.png";
+import Modal from "react-responsive-modal";
+import map from "./picture/map.png";
 
 class Location extends Component {
+  state = {
+    locationName: "",
+    locationCode: "",
+    location: [],
+    sticker:[],
+    openDelete: false
+  };
 
-    state =
-        {
-            
-            locationName: '',
-            locationCode: '',
-            location1:[]
-        }
+  getData() {
+    let userData = JSON.parse(localStorage.getItem("tk"));
+    let organizationIDTk = userData[0].organizationID;
+    fetch("https://irweb-api.tech/location/" + organizationIDTk)
+      .then(response => {
+        return response.json();
+      })
+      .then(location => {
+        this.setState({ location });
+      });
+      fetch("https://irweb-api.tech/stickerTable/" + organizationIDTk)
+      .then(response => {
+        return response.json();
+      })
+      .then(sticker => {
+        this.setState({ sticker });
+      });
+  }
+
+  handleChange = event => {
+    event.preventDefault();
+
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  onOpenDeleteModalLocation = locationID => e => {
+    this.setState({
+      openDelete: true,
+      openLocationID: locationID
+    });
+  };
+  onCloseDeleteModalLocation = () => {
+    this.setState({ openDelete: false });
+  };
+
+  submitDeleteTaskLocation = () => {
+    this.deleteFetch();
+    this.onCloseDeleteModalLocation();
+  };
+
+  deleteFetch = () => {
+    const url = "https://irweb-api.tech/deleteLocation";
+    const bodyData = JSON.stringify({
+      locationID: this.state.openLocationID
+    });
+    const othepram = {
+      headers: {
+        "content-type": "application/json; charset=UTF-8"
+      },
+      body: bodyData,
+      method: "POST"
+    };
+    fetch(url, othepram)
+      .then(() => this.getData())
+  }
+  
+  locationTable() {
+    return this.state.location.map(location => {
+      const {
+        locationName,
+        locationID,
+        colorOfSticker
+      } = location;
+      return (
+        <tr>
+          <td>{locationName}</td>
+          <td>{colorOfSticker}</td>
+          <Modal
+            open={this.state.openDelete}
+            onClose={this.onCloseDeleteModalLocation}
+            center
+          >
+            <div className="ModalDelete">
+              <h2>ลบสถานที่</h2>
+              <div>ยืนยันการลบ</div>
+              <button
+                className="ButtonDelete"
+                onClick={event => {
+                  this.submitDeleteTaskLocation(this.state.openLocationID);
+                }}
+              >
+                ลบ
+              </button>
+              <button
+                className="ButtonCancel"
+                onClick={this.onCloseDeleteModalLocation}
+              >
+                ยกเลิก
+              </button>
+            </div>
+          </Modal>
+          <button
+            className="deleteModalButton"
+            onClick={this.onOpenDeleteModalLocation(locationID)}
+          >
+            <img src={deletePic} className="deletePic" />
+          </button>
+        </tr>
+      );
+    });
+  }
+
+  stickerTable() {
+    return this.state.sticker.map(sticker => {
+      const {
+        typeOfSticker,
+        colorOfSticker
+      } = sticker;
+      return (
+        <tr>
+          <td>{colorOfSticker}</td>
+          <td>{typeOfSticker}</td>
+        </tr>
+      );
+    });
+  }
 
 
-    componentDidMount(){
-        fetch('http://54.169.164.58:5000/location')
-            .then((response) => {
-                return response.json();
-            })
-            .then((myJson) => {
-                // console.log(myJson)
-                this.setState({ location1: myJson })
-                console.log("location1", this.state.location1)
-            });
+  componentDidUpdate(nextState) {
+    if (nextState !== this.state.location) {
+      this.componentDidMount();
     }
-    handleChange = (event) => {
-        event.preventDefault();
-        console.log(event.target.name);
-        console.log(event.target.value);
-        this.setState({
-            [event.target.name]: event.target.value
+  }
 
-        })
-    }
+  render() {
+    const options = {
+      afterInsertRow: this.onAfterInsertRow
+    };
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.onAfterInsertRow();
-        this.setState({
-           
-            locationName: '',
-            locationCode: ''
-        })
-    }
-
-    onAfterInsertRow = () => {
-        const url = 'http://localhost:5000/addlocation';
-        const bodyData = JSON.stringify({
-            
-            locationName: this.state.locationName,
-            locationCode: this.state.locationCode
-        });
-        console.log(bodyData)
-        const othepram = {
-            headers: {
-                "content-type": "application/json; charset=UTF-8"
-            },
-            body: bodyData,
-            method: "POST"
-        };
-        fetch(url, othepram)
-            .then(data => console.log(data))
-    }
-    render() {
-        const options = {
-            afterInsertRow: this.onAfterInsertRow
-        };
-        
-        return (
-            <div>
-                <Header />
-                <Navibar />
-                <div className="wrapper">
-                    <div className="form-wrapper">
-                        <form onSubmit={this.handlesubmit}  options={options}>
-                            <h1>เพิ่มพื้นที่</h1>
-                            <div className="locationName">
-                                <label htmlFor="locationName">พื้นที่: </label>
-                            </div>
-                            <input type="text" placeholder="พื้นที่" name='locationName' onChange={event => this.handleChange(event)} value={this.state.locationName}/>
-                            <div className="locationCode">
-                                <label htmlFor="locationCode">โค้ด: </label>
-                            </div>
-                            <input type="text" placeholder="โค้ด" name='locationCode' onChange={event => this.handleChange(event)} value={this.state.locationCode}/>
-                            <div className="addarea">
-                                <button onClick={event => this.handleSubmit(event)} type="submit">เพิ่มพื้นที่</button>
-                            </div>
-                        </form>
-                       
-                    </div>
-                </div>
-                <LT locationdata={this.state.location1}/>
-                
-            </div >
-        );
-    }
+    return (
+      <div>
+        <Header />
+        <Navibar />
+        <MapContainer location={this.state.locationName} />
+        <h2 className="Table-header">
+          รายละเอียดที่จอดรถ <img src={map} className="Headicon" />
+        </h2>
+        <div className="tableAll">
+        <table class="locationtable">
+          <tbody className="location">
+            <th>ชื่อสถานที่</th>
+            <th>สีสติ๊กเกอร์</th>
+            {this.locationTable()}
+          </tbody>
+        </table>
+        <table className="stickerTable">
+          <tbody className="sticker">
+            <th>สีสติ๊กเกอร์</th>
+            <th>รายละเอียด</th>
+            {this.stickerTable()}
+          </tbody>
+        </table>
+      </div>
+      </div>
+    );
+  }
 }
 export default Location;

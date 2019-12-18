@@ -1,0 +1,106 @@
+.addStickerForm{
+    border: 1px solid #29A8AB;    
+    border-radius: 0.9rem;
+    padding: 40px;
+    margin-bottom: 3%;
+}
+
+.formRow{
+    display: flex;
+}
+
+.eachField{
+    display: flex;
+    margin-right: 2rem;
+    margin: 0.5rem 1rem;
+}
+
+.eachField label{
+    width: 160px;
+}
+
+.eachField input{
+    padding: 0.3rem 0.3rem;
+    margin: 0.3rem 0rem;
+    border-radius: 4px;
+    border: 1px solid rgba(177, 173, 173,0.8);
+    font-family: 'kanit',sans-serif;
+    color: #29A8AB;
+}
+
+.province label{
+    width: 200px;
+}
+
+.addressInput{
+    height: 5rem;
+    width: 40%;
+    display: flex;
+    align-items: flex-start;
+    word-wrap: break-word; 
+    border-radius: 4px;
+    color: #29A8AB;
+    padding: 0.3rem 0.3rem;
+    margin: 0.3rem 0rem;
+    border: 1px solid rgba(177, 173, 173,0.8);
+    font-family: 'kanit',sans-serif;
+    color: #29A8AB;
+}
+
+.addressInput::placeholder{
+    color: #969696;
+    font-size: 1.2rem;
+}
+
+.addSticker{
+    display: flex;
+    justify-content: center;
+    font-family: 'kanit',sans-serif;
+}
+.buttonAddsticker{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border: none;
+    border-color: #ffffff;
+    height: 50px;
+    font-size: 15pt;
+    width: 12%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+.error{
+    color: red;
+    font-family: 'kanit',sans-serif;
+    font-size: 10pt;
+
+}
+
+.selectSticker{
+    font-family: 'kanit',sans-serif;  
+    font-size: 1.2rem;
+    color: #969696;
+    border: 1px solid rgba(177, 173, 173,0.8);
+    border-radius: 4px;
+    width: 150px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.selectProvince{
+    font-family: 'kanit',sans-serif;  
+    font-size: 1.2rem;
+    color: #969696;
+    border: 1px solid rgba(177, 173, 173,0.8);
+    border-radius: 4px;
+    margin-left: 20px;
+    width: 200px;
+}
+
+.selectSticker:focus, .selectProvince:focus{
+    outline: none;
+}

@@ -1,56 +1,100 @@
 import React, { Component } from 'react';
-import { Container, Row, Col } from 'react-grid-system';
-import irp from './ir-parking.jpg';
-import { Table } from 'reactstrap';
-import profile from './ceo.png';
+import irp from './picture/ir-parking.jpg';
+import profile from './picture/ceo.png';
+import logout from './picture/exit.png'
+import './Header.css'
+// import { url } from 'inspector';
+import Modal from "react-responsive-modal";
 
 class Header extends Component{
-    
-    render() {
-
-      var name={
-        fontSize:60,
-        
-      }
-      var pro={
-        fontSize:20,
-        color:'#29A8AB'
-      }
-      var head={
-        backgroundColor:'#DDDDDD',
-        color: '#29A8AB', 
-        fontFamily: 'kanit',
-        paddingTop:30
-      }
-      var logout={
-        color:'red'
-      }
-      
-      
-      return (
-        <Container style={head} fluid>
-          <Row>
-            <Col md={1} ><img src={irp} width="90" height="90" /></Col> 
-            <Col md={3} style={name}>IR-Parking</Col>
-            <Col md={4}></Col> 
-            <Col md={4}>
-                <Table id="prof">
-                  
-                    <tr>
-                      <th rowSpan="2"> <img src={profile} width="70" height="70"/></th>
-                      <th colSpan="2" style={pro}>nutchaphon phutthisophin</th>
-                    </tr>
-                    <tr>
-                      <th style={pro}>student</th>
-                      <th style={logout}>ออกจากระบบ</th>
-                    </tr>
-                  
-                </Table>
-            </Col>
-          </Row>
-        </Container>
-      );
+  constructor(props){
+    super(props);
+    this.state = {
+      logout: false,
+      firstName: '',
+      lastName: '',
+      role:'',
+      staffImages:''
     }
   }
+  
+
+setProflie = () => {
+
+  let userData = JSON.parse(localStorage.getItem('tk'));
+
+  let tkFirstName = userData[0].firstName
+  let tkLastName = userData[0].lastName
+  let tkRole = userData[0].staffRole
+  let tkImages = userData[0].staffImages
+  let tkorganizationName = userData[0].organizationName
+
+  this.setState({
+    firstName: tkFirstName,
+    lastName: tkLastName,
+    role: tkRole,
+    staffImages: tkImages,
+    organizationName: tkorganizationName
+  })
+  
+}
+
+confirmLogout = () =>{
+  this.setState({logout: true})
+}
+
+onCloseConfirmLogout = () =>{
+  this.setState({logout: false})
+}
+
+logout(){
+  localStorage.removeItem('tk')
+  window.location.href="/"
+}
+
+componentDidMount(){
+  this.setProflie()
+}
+
+    render() {
+      let { firstName, lastName , role , staffImages,organizationName } = this.state
+        return (
+          <div className='header'>
+            <div>
+              <img src={irp} className='logo'></img>
+            </div>
+            <div className='irName'>IR-Parking</div>
+            <table className='profile'>
+              <td className='profilePicBox'>
+              <img src={staffImages} className='profilePic'></img>
+              </td>
+              <td className='profileInfo'>
+                <tr>{firstName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{lastName}</tr>
+                <tr className="role">{role}</tr>
+                <tr>{organizationName}</tr>
+              </td>
+            </table>
+            <button className='logout' onClick={this.confirmLogout}><img src={logout} className='logoutIcon' alt="ออกจากระบบ" /></button>
+            <Modal
+              open={this.state.logout}
+              onClose={this.onCloseConfirmLogout}
+              center
+            >
+            <div className="logoutModal">
+              <h4>คุณต้องการออกจากระบบหรือไม่</h4>
+              <button
+                className="logoutButton"
+                onClick={this.logout} >
+                ออกจากระบบ
+              </button>
+            </div>
+            </Modal>
+          </div>
+        );
+      }
+      
+    }
+  
+  
 
   export default Header;

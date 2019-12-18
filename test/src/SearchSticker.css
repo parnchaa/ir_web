@@ -1,0 +1,215 @@
+.editModal{
+    display: flex;
+    font-family: 'kanit',sans-serif;
+    margin-bottom: 0.4rem;
+    color: #29A8AB;
+}
+
+.editModal input{
+    height: 2.3rem;
+    font-family: 'kanit',sans-serif;
+    margin-bottom: 0.5rem;
+    color: #29A8AB;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #29A8AB 1px;
+    position: absolute;
+    left: 35%;
+}
+
+.editModal input:focus{
+    outline: none;
+}
+
+.editModal textarea{
+    height: 2.3rem;
+    font-family: 'kanit',sans-serif;
+    margin-bottom: 0.5rem;
+    color: #29A8AB;
+    border: solid #29A8AB 1px;
+    position: absolute;
+    left: 35%;
+    height: 60px;
+}
+
+.editModal textarea:focus{
+    outline: none;
+}
+
+.carOwnerTask{
+    width: 60%;
+    padding: 1rem;
+    border: 0.3rem solid #29A8AB;
+    border-radius: 0.9rem;
+    margin-bottom: 0.7rem;
+    font-family: 'kanit',sans-serif;
+    color: #29A8AB;
+    font-size: 1.3rem;
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.carOwnerTask div{
+    margin: 0.3rem;
+}
+
+.carOwnerAddress{
+    display: flex;
+    font-weight:600;
+
+}
+
+.carOwnerName{
+    display: flex;
+    font-weight:600;
+}
+
+.carOwnerEmailTel{
+    display: flex;
+    font-weight:600;
+
+}
+
+.carOwnerDate{
+    display: flex;
+    font-weight:600;
+
+}
+
+.EditModalButton{
+    color: white;
+    font-size: 1.2rem;
+    background-color: #29A8AB;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+.buttonUpdate{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color: #29A8AB;
+    border-radius: 8px;
+    border: none;
+    border-color: #ffffff;
+    width: 75px;
+    height: 40px;
+    margin-left: 25%;
+    font-size: 15pt;
+    margin-top: 2rem;
+}
+.buttonCancel{
+    text-align: center;
+    color: #ffffff;
+    font-family: 'kanit',sans-serif;
+    background-color:#CD5C5C	;
+    border-radius: 8px;
+    border: none;
+    border-color: #ffffff;
+    width: 75px;
+    height: 40px;
+    margin-left: 7%;
+    font-size: 15pt;
+    margin-top: 2rem;
+}
+
+.formAddEdit{
+    width: 400px;
+}
+.titleEdit{
+    text-align: center;
+    color: #29A8AB;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    font-family: 'kanit',sans-serif;
+    font-size: 32pt;
+}
+.fieldName{
+    font-family: 'kanit',sans-serif;
+    color:#29A8AB;
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+.ModalEditSicker{
+    width: fit-content;
+    height: fit-content;
+}
+.InputSearch{
+    font-family: 'kanit',sans-serif;
+    margin-left: 75%;
+    color: #29A8AB;
+    outline: none;
+    width: 20%;
+    padding: 10px;
+    padding-left: 35px;
+    border: 1.5px solid #29A8AB;
+    border-radius: 8px;
+
+}
+
+.search{
+    width: 22px;
+    position: relative;
+    right: 19.5%;
+    bottom: 2px;
+}
+.RenewContractButton{
+    color: white;
+    font-size: 1.2rem;
+    background-color: #29A8AB;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+.LineButton{
+    display: flex;
+    position: relative;
+    left: 70%;
+}
+
+.SelectTime{
+    font-family: 'kanit',sans-serif;  
+    font-size: 1.2rem;
+    color: #29A8AB;
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid #29A8AB 1px;
+    border-top: none;
+}
+
+.SelectTime:focus{
+    outline: none;
+}
+
+.ButtonSubmit{
+    font-family: 'kanit',sans-serif;  
+    color: white;
+    font-size: 1.1rem;
+    background-color: #29A8AB;
+    border: 1px solid white;
+    border-radius: 4px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+}
+
+.noValue{
+    font-family: 'kanit',sans-serif;  
+    font-size: 3rem;
+    color: #969696;
+    text-align: center;
+    margin-top: 2%;
+}

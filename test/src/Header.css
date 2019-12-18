@@ -1,0 +1,110 @@
+.header{
+    background-color: #DDDDDD;
+    display: flex;
+    font-family: 'kanit',sans-serif;
+}
+
+.logo{
+    width: 6rem;
+    height: 6rem;
+    margin-left: 40%;
+    margin-top: 1rem;
+    padding: 0.4rem 0rem;
+}
+
+.irName{
+    position: relative;
+    font-size: 3rem;
+    padding-top:1.3rem; 
+    margin-left: 3rem;
+    margin-bottom: 1.4rem;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+    color: #29A8AB;
+}
+
+.profile{
+    position: absolute;
+    right: 100px;
+    color: #29A8AB;
+    font-family: 'kanit',sans-serif;
+}
+
+.profilePic{
+    width: 6rem;
+    height: 6rem;
+    border-radius: 9rem;
+    margin-right: 20px;
+    margin-top: 15px;
+}
+
+.profileInfo{
+    font-size: 1.2rem;
+    position: relative;
+    bottom: 1.3rem;
+    
+}
+
+.profileInfo tr.role{
+    font-weight: 900;
+}
+
+.logout {
+    border: none;
+    background: transparent;
+    position: absolute;
+    right: 20px;
+    top: 50px;
+}
+
+.logoutIcon{
+    width: 32px;
+}
+
+.Headicon{
+    width: 65px;
+    height: 55px;
+    padding-left: 10px;
+}
+.iconButton{
+    width: 20px;
+    height:18px;
+    padding-left: 5px;
+}
+.iconleftButton{
+    width: 20px;
+    height:18px;
+    padding-right: 5px;
+}
+
+.logoutModal{
+    text-align: center;
+    color: #29a8ab;
+    font-family: "kanit", sans-serif;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 15pt;
+    display: block; 
+    width: 350px; 
+}
+
+.logoutButton{
+    text-align: center;
+    color: white;
+    font-family: "kanit", sans-serif;
+    font-size: 16pt;
+    display: block;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 1.5rem;
+    background-color: red;
+    border-radius: 6px;
+    border: none;
+}
+
+.logoutButton:focus{
+    outline: none;
+}
