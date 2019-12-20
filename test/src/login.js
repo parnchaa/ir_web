@@ -52,7 +52,7 @@ class login extends Component {
   };
 
   onAfterLogin = () => {
-    const url = "https://irweb-api.tech/login";
+    const url = "http://localhost:5000/login";
     const bodyData = JSON.stringify({
         staffEmail: this.state.staffEmail,
         staffPassword: this.state.staffPassword,
@@ -70,15 +70,19 @@ class login extends Component {
       if(token === "wrong"){
         alert("อีเมล์หรือรหัสผ่านไม่ถูกต้อง")
       }else{
-        fetch("https://irweb-api.tech/userData/" + this.state.staffEmail,
+        fetch("http://localhost:5000/userData/" + this.state.staffEmail,
         {
           method: 'GET',
           headers:{ 'Authorization': token }
         })
         .then(res=>res.json())
         .then((result) => {
-          localStorage.setItem('tk',JSON.stringify(result))
-          window.location.href="/Event"
+          if (result[0].staffRole === "Security Guard") {
+            alert("อีเมล์หรือรหัสผ่านไม่ถูกต้อง")
+          } else {
+            localStorage.setItem('tk',JSON.stringify(result))
+            window.location.href="/Event"
+          }
         })
       }
     })

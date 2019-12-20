@@ -26,7 +26,7 @@ class App extends Component {
     let userData = JSON.parse(localStorage.getItem('tk'));
 
     let organizationIDTk = userData[0].organizationID
-    fetch("https://irweb-api.tech/problem/" + organizationIDTk,
+    fetch("http://localhost:5000/problem/" + organizationIDTk,
     {
       method: 'GET',
     })
@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   deleteFetch = () => {
-    const url = "https://irweb-api.tech/deleteEvent";
+    const url = "http://localhost:5000/deleteEvent";
     const bodyData = JSON.stringify({
       problemID: this.state.openProblemID
     });
@@ -95,7 +95,7 @@ class App extends Component {
 
     let organizationIDTk = userData[0].organizationID;
     fetch(
-      "https://irweb-api.tech/getSearchLicensePlate/" +
+      "http://localhost:5000/getSearchLicensePlate/" +
         this.state.searchValue +
         "/" +
         organizationIDTk

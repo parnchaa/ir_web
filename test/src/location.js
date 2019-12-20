@@ -19,14 +19,14 @@ class Location extends Component {
   getData() {
     let userData = JSON.parse(localStorage.getItem("tk"));
     let organizationIDTk = userData[0].organizationID;
-    fetch("https://irweb-api.tech/location/" + organizationIDTk)
+    fetch("http://localhost:5000/location/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
       .then(location => {
         this.setState({ location });
       });
-      fetch("https://irweb-api.tech/stickerTable/" + organizationIDTk)
+      fetch("http://localhost:5000/stickerTable/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -63,7 +63,7 @@ class Location extends Component {
   };
 
   deleteFetch = () => {
-    const url = "https://irweb-api.tech/deleteLocation";
+    const url = "http://localhost:5000/deleteLocation";
     const bodyData = JSON.stringify({
       locationID: this.state.openLocationID
     });

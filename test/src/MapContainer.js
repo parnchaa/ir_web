@@ -112,7 +112,7 @@ export class MapContainer extends Component {
   getColorOfSticker = () =>{
     let userData = JSON.parse(localStorage.getItem('tk'));
     let organizationIDTk = userData[0].organizationID
-    fetch("https://irweb-api.tech/stickerColor/" + organizationIDTk)
+    fetch("http://localhost:5000/stickerColor/" + organizationIDTk)
       .then(response => {
         return response.json();
       })
@@ -155,7 +155,7 @@ export class MapContainer extends Component {
     let organizationIDTk = userData[0].organizationID;
     
     if (location.length !== 0) {
-      const url = "https://irweb-api.tech/addLocationLabel";
+      const url = "http://localhost:5000/addLocationLabel";
 
       const bodyData = JSON.stringify({
         locationName: locationNameReceive ,
