@@ -40,7 +40,12 @@ class SearchSticker extends Component {
       })
       .then(carOwner => {
         this.setState({ carOwner });
-      });
+        if(this.state.carOwner !== null){
+          this.checkExpriedDate()
+        }
+      })
+
+
   }
 
   getSearchValue() {
@@ -216,6 +221,22 @@ class SearchSticker extends Component {
     this.setState({
       selectExtendValue: e.target.value
     });
+  }
+
+  checkExpriedDate = () =>{
+
+    var fullDate = new Date()
+    var year = fullDate.getFullYear()
+    var date = fullDate.getDate()
+    var month = fullDate.getMonth()+1;
+    var currentDate = year + "-" + month + "-" + date;   
+
+    for (let i = 0; i < this.state.carOwner.length; i++) {
+      if (this.state.carOwner[i].expiredDate.substr(0, 10) == currentDate) {
+        // this.state.carOwner[i]
+        console.log(this.state.carOwner[i]);
+      }
+    }
   }
 
   onOpenEditModal = carOwnerID => e => {
@@ -455,6 +476,7 @@ class SearchSticker extends Component {
   }
 
   render() {
+    
     return (
       <div>
         <Header />
